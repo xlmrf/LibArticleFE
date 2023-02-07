@@ -4,6 +4,10 @@ import axios from "axios";
 export default {
     state() {
         return {
+            document:{
+               
+            },
+
             last_documents:[],
             info: '',
             categories:[],
@@ -82,6 +86,9 @@ export default {
         },
         getLastDocuments(ctx){
             return ctx.last_documents
+        },
+        getDocument(ctx){
+            return ctx.document
         }
     },
 

@@ -5,7 +5,6 @@ export default {
     state(){
         return{
             documents:[],
-            document:{},
             filter:{},
             info:''
         }
@@ -63,9 +62,6 @@ export default {
         },
         getFilter(ctx){
             return ctx.filter
-        },
-        getDocument(ctx) {
-            return ctx.document
         }
     }
 }
