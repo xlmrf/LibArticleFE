@@ -1,3 +1,4 @@
+
 <template v-cloak>
   <div class="window">
     <div class="city">
@@ -14,6 +15,7 @@ import {mapActions, mapGetters, mapMutations} from "vuex";
 import Supplement from "./components/footer/FooterComponent"
 
 export default {
+  //Lexa
   name: 'App',
   components: {Supplement},
   mounted() {
