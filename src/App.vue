@@ -3,6 +3,9 @@
   <div class="window">
     <div class="city">
       <h2>City</h2>
+      <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+        Ab aliquid doloremque ea est, fugiat officiis quisquam
+        recusandae rerum sunt ullam.</div>
       <router-view/>
     </div>
     <!--    <supplement class="subway"></supplement>-->
