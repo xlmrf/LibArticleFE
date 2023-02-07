@@ -1,8 +1,11 @@
-
 <template v-cloak>
   <div class="window">
     <div class="city">
       <h2>City</h2>
+      <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab ad debitis id, neque nesciunt quae quia
+        reiciendis rerum. At atque ducimus eius eligendi harum id nesciunt nihil, quia saepe vero.
+        t atque ducimus eius eligendi harum id nesciunt nihil, quia saepe vero.
+      </div>
       <router-view/>
     </div>
     <!--    <supplement class="subway"></supplement>-->
