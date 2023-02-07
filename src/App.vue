@@ -2,6 +2,7 @@
 <template v-cloak>
   <div class="window">
     <div class="city">
+      <h2>City</h2>
       <router-view/>
     </div>
     <!--    <supplement class="subway"></supplement>-->

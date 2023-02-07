@@ -5,7 +5,7 @@ export default {
     state() {
         return {
             document:{
-               
+
             },
 
             last_documents:[],
