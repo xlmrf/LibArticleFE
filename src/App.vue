@@ -16,7 +16,7 @@ import {mapActions, mapGetters, mapMutations} from "vuex";
 import Supplement from "./components/footer/FooterComponent"
 
 export default {
-  //Lexa
+  //Lexa1
   name: 'App',
   components: {Supplement},
   mounted() {
