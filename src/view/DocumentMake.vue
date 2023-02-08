@@ -21,7 +21,7 @@ export default {
   },
   methods: {
     ...mapActions(['createDocument']),
-    next(){
+    next() {
       this.stage = !this.stage
       this.createDocument(this.getDocument)
     }

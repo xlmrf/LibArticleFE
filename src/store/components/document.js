@@ -4,15 +4,13 @@ import axios from "axios";
 export default {
     state() {
         return {
-            document:{
+            document: {},
 
-            },
-
-            last_documents:[],
+            last_documents: [],
             info: '',
-            categories:[],
-            author_fn:{},
-            newDocumentId:null,
+            categories: [],
+            author_fn: {},
+            newDocumentId: null,
             uncompletedDocument: ''
         }
     },
@@ -20,28 +18,31 @@ export default {
         updateDocument(ctx, data) {
             console.log('vuex upload document data:', data);
             let id = router.currentRoute.value.params.id
-            axios.patch('http://libarticle.loc/api/v1/document/'+id, {data: data}).then(response => {
+            axios.patch('http://libarticle.loc/api/v1/document/' + id, {data: data}).then(response => {
                 ctx.commit('uploadResult', response.data)
             }, err => {
                 console.log('error info -', err.message);
                 ctx.commit('setInfo', err)
             })
         },
-        requestCategories(ctx){
+        requestCategories(ctx) {
             axios.get('http://libarticle.loc/api/v1/document-categories').then(response => {
                 ctx.commit('categories', response.data)
             })
         },
-        findAuthor(ctx,email){
+        findAuthor(ctx, email) {
             console.log(email);
-            axios.post('http://libarticle.loc/api/v1/author',{data:email}).then(response => {
+            axios.post('http://libarticle.loc/api/v1/author', {data: email}).then(response => {
                 ctx.commit('upAuthor', response.data)
-            }).catch(err => {console.log(err.response)})
+            }).catch(err => {
+                console.log(err.response)
+            })
         },
-        createDocument(ctx,data){
-            axios.post('http://libarticle.loc/api/v1/documents', {data:data}).then(response => {
+        createDocument(ctx, data) {
+            axios.post('http://libarticle.loc/api/v1/documents', {data: data}).then(response => {
                 // ctx.commit('documentCreated', response.data)
-                console.log('wef',response.data);
+                console.log('wef', response.data);
+                ctx.commit('updateDocument', response.data)
                 // localStorage.setItem('not_finished_document', JSON.stringify(response.data))
                 // router.push('new_document/'+response.data.id).catch(err => console.log('to new document:',err));
             }, err => {
@@ -50,44 +51,49 @@ export default {
             })
         },
 
-        lastDocuments(ctx){
+        lastDocuments(ctx) {
             axios.get('http://libarticle.loc/api/v1/last-documents').then(response => {
                 ctx.commit('mutateLastDocuments', response.data)
             })
         }
     },
     mutations: {
+        updateDocument(state, data) {
+            router.push('/document/make/' + data.id)
+            state.document = {...state.document, ...data}
+        },
+
         uploadResult(state, data) {
             state.info = data
         },
-        categories(state,data){
+        categories(state, data) {
             state.categories = data
         },
-        upAuthor(ctx,data){
+        upAuthor(ctx, data) {
             ctx.author_fn = data
         },
-        mutateLastDocuments(ctx,data){
+        mutateLastDocuments(ctx, data) {
             ctx.last_documents = data
         }
     },
     getters: {
-        getUncompletedDocument(ctx){
+        getUncompletedDocument(ctx) {
             return ctx.uncompletedDocument
         },
-        getCategories(ctx){
+        getCategories(ctx) {
             // console.log('ctx:', ctx.categories);
             return ctx.categories
         },
-        getFullNameAuthor(ctx){
+        getFullNameAuthor(ctx) {
             return ctx.author_fn
         },
-        getNewDocumentId(ctx){
+        getNewDocumentId(ctx) {
             return ctx.newDocumentId
         },
-        getLastDocuments(ctx){
+        getLastDocuments(ctx) {
             return ctx.last_documents
         },
-        getDocument(ctx){
+        getDocument(ctx) {
             return ctx.document
         }
     },
