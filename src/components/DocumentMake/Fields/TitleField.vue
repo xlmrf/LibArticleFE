@@ -8,8 +8,6 @@
 import {mapGetters} from "vuex";
 
 export default {
-  inject: ['DocumentData'],
-
   computed: {
     ...mapGetters(['getDocument'])
   },

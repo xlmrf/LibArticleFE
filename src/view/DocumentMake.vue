@@ -3,13 +3,13 @@
     {{ getDocument }}
     <h3>Main</h3>
     <input type="checkbox" name="" id="" v-model="stage">
-    <first-stage v-if="stage"/>
+    <first-stage v-if="stage" @next="next"/>
     <second-stage v-else/>
   </div>
 </template>
 
 <script>
-import {mapState, mapGetters} from "vuex"
+import {mapState, mapGetters, mapActions} from "vuex"
 import FirstStage from "@/components/DocumentMake/FirstStageDocument";
 import SecondStage from "@/components/DocumentMake/SecondStageDocument";
 
@@ -19,14 +19,12 @@ export default {
       stage: true
     }
   },
-  provide() {
-    // use function syntax so that we can access `this`
-    return {
-      DocumentData: this.data
-    }
-  },
   methods: {
-    ...mapState(['new_document'])
+    ...mapActions(['createDocument']),
+    next(){
+      this.stage = !this.stage
+      this.createDocument(this.getDocument)
+    }
   },
   computed: {
     ...mapGetters(['getDocument'])

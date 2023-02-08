@@ -1,5 +1,6 @@
 <template>
   <div>
+    <small>pages</small>
     <input type="text" name="" id="">
   </div>
 </template>

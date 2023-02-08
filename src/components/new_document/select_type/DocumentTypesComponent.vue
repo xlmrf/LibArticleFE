@@ -335,6 +335,7 @@ export default {
   outline: none;
   position: relative;
   display: flex;
+  width: 30%;
   /*border: 1px solid orangered;*/
 }
 .author-list-item >:first-child{

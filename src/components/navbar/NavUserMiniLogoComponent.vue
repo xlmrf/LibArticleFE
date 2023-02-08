@@ -10,7 +10,7 @@
         <li><router-link class="menu-link-item" :to="'/profile/'+getUser.id">
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#212121" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
           Акаунт</router-link></li>
-        <li><router-link class="menu-link-item" :to="isDocument ? '/new_document/'+isDocument.id : '/new_document'">
+        <li><router-link class="menu-link-item" :to="isDocument ? '/document/make/'+isDocument.id : '/document/make'">
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#212121" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11.08V8l-6-6H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h6"/><path d="M14 3v5h5M18 21v-6M15 18h6"/></svg>
           Додати</router-link></li>
         <li><router-link class="menu-link-item" to="/library">

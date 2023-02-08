@@ -42,8 +42,8 @@ export default {
             axios.post('http://libarticle.loc/api/v1/documents', {data:data}).then(response => {
                 // ctx.commit('documentCreated', response.data)
                 console.log('wef',response.data);
-                localStorage.setItem('not_finished_document', JSON.stringify(response.data))
-                router.push('new_document/'+response.data.id).catch(err => console.log('to new document:',err));
+                // localStorage.setItem('not_finished_document', JSON.stringify(response.data))
+                // router.push('new_document/'+response.data.id).catch(err => console.log('to new document:',err));
             }, err => {
                 console.log('error info -', err.message);
                 ctx.commit('setInfo', err)
