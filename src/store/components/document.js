@@ -18,7 +18,7 @@ export default {
         updateDocument(ctx, data) {
             console.log('vuex upload document data:', data);
             let id = router.currentRoute.value.params.id
-            axios.patch('http://libarticle.loc/api/v1/document/' + id, {data: data}).then(response => {
+            axios.patch(ctx.api_url_v1+'/document/' + id, {data: data}).then(response => {
                 ctx.commit('uploadResult', response.data)
             }, err => {
                 console.log('error info -', err.message);
@@ -26,20 +26,20 @@ export default {
             })
         },
         requestCategories(ctx) {
-            axios.get('http://libarticle.loc/api/v1/document-categories').then(response => {
+            axios.get(ctx.api_url_v1+'/document-categories').then(response => {
                 ctx.commit('categories', response.data)
             })
         },
         findAuthor(ctx, email) {
             console.log(email);
-            axios.post('http://libarticle.loc/api/v1/author', {data: email}).then(response => {
+            axios.post(ctx.api_url_v1+'/author', {data: email}).then(response => {
                 ctx.commit('upAuthor', response.data)
             }).catch(err => {
                 console.log(err.response)
             })
         },
         createDocument(ctx, data) {
-            axios.post('http://libarticle.loc/api/v1/documents', {data: data}).then(response => {
+            axios.post(ctx.api_url_v1+'/documents', {data: data}).then(response => {
                 // ctx.commit('documentCreated', response.data)
                 console.log('wef', response.data);
                 ctx.commit('updateDocument', response.data)
@@ -52,7 +52,7 @@ export default {
         },
 
         lastDocuments(ctx) {
-            axios.get('http://libarticle.loc/api/v1/last-documents').then(response => {
+            axios.get(ctx.api_url_v1+'/last-documents').then(response => {
                 ctx.commit('mutateLastDocuments', response.data)
             })
         }
