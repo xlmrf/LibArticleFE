@@ -17,7 +17,7 @@ export default {
     actions: {
         requestAuthor(ctx){
             let id = router.currentRoute.value.params.id
-            axios.get('http://libarticle.loc/api/v1/profile/'+id)
+            axios.get(ctx.api_url_v1+'/profile/'+id)
                 .then(res => {
                     ctx.commit('updateAuthor', res.data)
                     // ctx.commit('userMessages', res.statusText)
@@ -28,7 +28,7 @@ export default {
                 })
         },
         requestUserInfo(ctx){
-            axios.get('http://libarticle.loc/api/v1/user-info')
+            axios.get(ctx.api_url_v1+'/user-info')
                 .then(res => {
                     ctx.commit('updateUserInfo', res.data)
                     // ctx.commit('userMessages', res.statusText)
@@ -39,7 +39,7 @@ export default {
                 })
         },
         async requestUser(ctx) {
-           await axios.get('http://libarticle.loc/api/v1/user')
+           await axios.get(ctx.api_url_v1+'/user')
                 .then(res => {
                     ctx.commit('updateUser', res.data)
                     ctx.commit('userMessages', res.statusText)
@@ -51,7 +51,7 @@ export default {
                 })
         },
         requestUniversity(ctx){
-            axios.get('http://libarticle.loc/api/v1/universities').then(response => {
+            axios.get(ctx.api_url_v1+'/universities').then(response => {
                 ctx.commit('universities', response.data)
             })
         },

@@ -24,7 +24,8 @@ export default createStore({
         photo,
     },
     state: {
-        message: {}
+        message: {},
+        api_url_v1:'https://libarticle.polidar.in.ua/api/v1'
     },
     mutations: {
         pageMessage(ctx, data) {

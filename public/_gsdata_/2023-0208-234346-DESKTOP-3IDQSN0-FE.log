@@ -1,0 +1,16 @@
+2023-02-08 23:43:47: -- Analysis Started by User
+2023-02-08 23:43:47: Слева: State file does not exist: C:/lifestyle/LibArticleFE/public/_gsdata_/_file_state_v4._gs
+2023-02-08 23:43:47: Справа: State file does not exist: ftp://polidar.in.ua/main/public/_gsdata_/_file_state_v4._gs
+2023-02-08 23:43:47: /index.html: Внимание: Новый файл заменяется старым
+2023-02-08 23:43:47: Изменений: 3, Конфликтов: 0, Копий Времени: 0, Копий Состояния: 0/0, Ошибок: 0, All: 3
+2023-02-08 23:43:47: Left to Right: Copy File: 2 Delete File: 1 
+2023-02-08 23:43:47: ----- Анализ завершён. Время 00:00:01, Скорость: 3 файлов/сек -----
+2023-02-08 23:43:47: 
+2023-02-08 23:43:52: === User Changed Action from 'COPY_LEFT_TO_RIGHT' to 'NO_COPY' on item /index.php
+2023-02-08 23:43:52: Done.
+2023-02-08 23:44:00: New _gsdata_ folder(s) created, so rescan all job folders for their ghosts
+2023-02-08 23:44:00: == Sync Started by User
+2023-02-08 23:44:01: Скопирован новый 'C:/lifestyle/LibArticleFE/public/favicon.ico' -> 'ftp://polidar.in.ua/main/public/favicon.ico'
+2023-02-08 23:44:02: Скопировано поверх 'C:/lifestyle/LibArticleFE/public/index.html' -> 'ftp://polidar.in.ua/main/public/index.html'
+2023-02-08 23:44:03: ===== Синхронизация завершена. Время 00:00:04, Скорость: 1,72 КБ/s файлов/сек =====, Синхронизировано: 2, Ошибок: 0
+2023-02-08 23:44:03: 
