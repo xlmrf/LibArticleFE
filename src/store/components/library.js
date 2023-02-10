@@ -13,7 +13,7 @@ export default {
     actions:{
         DocumentSearcher(ctx,data) {
             let link = '?'+Object.entries(data).join('&').split(',').join('=');
-            axios.get(ctx.api_url_v1+'/documents' + link).then(response => {
+            axios.get(ctx.rootState.api_url_v1+'/documents' + link).then(response => {
                 ctx.commit('DocumentsMutate', response.data)
             }).catch(err => {
                 ctx.commit('errorsDocument', err.response)
@@ -21,7 +21,7 @@ export default {
         },
         FilterDocuments(ctx,data){
             let link = '?'+Object.entries(data).join('&').split(',').join('=');
-            axios.get(ctx.api_url_v1+'/filter-documents' + link).then(response => {
+            axios.get(ctx.rootState.api_url_v1+'/filter-documents' + link).then(response => {
                 ctx.commit('FilterMutate', response.data)
             }).catch(err => {
                 ctx.commit('errorsDocument', err.response)
@@ -30,7 +30,7 @@ export default {
         reviseDocument(ctx) {
             // console.log("in js, id:", ctx);
             let id = router.currentRoute.value.params.id
-            axios.get(ctx.api_url_v1+'/document/' + id).then(response => {
+            axios.get(ctx.rootState.api_url_v1+'/document/' + id).then(response => {
                 ctx.commit('DocumentMutate', response.data);
                 console.log('revise:',response.data);
             }).catch(err => {

@@ -4,7 +4,7 @@ import router from "./../../../router"
 export default {
 
     recoveryPass(ctx, data) {
-        axios.post(ctx.api_url_v1+'/recovery-password', data).then(res => {
+        axios.post(ctx.rootState.api_url_v1+'/recovery-password', data).then(res => {
                 ctx.commit('userMessages', {agree: 'На вказаний email прийшла анкета для відновлення паролю', date: Date.now()})
             },
             err => {
@@ -13,7 +13,7 @@ export default {
             })
     },
     createPass(ctx, data) {
-        axios.post(ctx.api_url_v1+'/reset-password/'+data.token, data).then(res => {
+        axios.post(ctx.rootState.api_url_v1+'/reset-password/'+data.token, data).then(res => {
                 ctx.commit('requestPasswordCreate', res.data)
             },
             err => {
@@ -24,7 +24,7 @@ export default {
     verifyEmail(ctx) {
         let params = router.currentRoute.value.query
         console.log('params', params);
-        axios.get(ctx.api_url_v1+'/confirm-email', {params: params}).then(response => {
+        axios.get(ctx.rootState.api_url_v1+'/confirm-email', {params: params}).then(response => {
             console.log('verify js response', response);
             ctx.commit('updateUser', response.data)
             ctx.commit('pageMessage',{status:response.status,message:'verified'})
@@ -43,7 +43,7 @@ export default {
     // },
     registrationUser(ctx, data) {
         console.log('auth data ->', data);
-        axios.post(ctx.api_url_v1+'/registration', data).then(res => {
+        axios.post(ctx.rootState.api_url_v1+'/registration', data).then(res => {
                 // ctx.commit('updateUser', res.data)
                 ctx.commit('userMessages', {agree: 'На вказаний email прийшло повідомлення з підтвердженням акаунту', date: Date.now()})
                 console.log('registration user axios response: ', res.data);
@@ -55,8 +55,7 @@ export default {
             })
     },
     login(ctx, data) {
-        console.log('auth data ->', data);
-        axios.post(ctx.api_url_v1+'/login', data).then(res => {
+        axios.post(ctx.rootState.api_url_v1+'/login', data).then(res => {
                 ctx.commit('updateUser', res.data)
                 console.log('auth response', res);
                 ctx.commit('setAT', res.data.api_token);
@@ -69,7 +68,7 @@ export default {
 
     },
     logout(ctx) {
-        axios.post(ctx.api_url_v1+'/logout').then(res => {
+        axios.post(ctx.rootState.api_url_v1+'/logout').then(res => {
             ctx.commit('updateUser', null)
             // localStorage.removeItem('X-XSRF-TOKEN')
             router.push('login')
