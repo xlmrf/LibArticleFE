@@ -195,19 +195,19 @@ routes
 router.beforeEach((to,from,next)=>{
     let token = localStorage.getItem('access_token')
     console.log(to.name);
-    if (!token){
-        if (to.name !== 'login' && to.name !== 'registration' && to.name !== 'forget-password' && to.name !== 'reset-password' && to.name !== 'verify'){
-            return next({
-                name: 'login'
-            })
-        }
-    }
-    else{
-        console.log(token);
-        if (to.name === 'login' || to.name === 'registration' || to.name === 'forget-password' || to.name === 'reset-password' || to.name === 'verify'){
-            return next({name:'stat'})
-        }
-    }
+    // if (!token){
+    //     if (to.name !== 'login' && to.name !== 'registration' && to.name !== 'forget-password' && to.name !== 'reset-password' && to.name !== 'verify'){
+    //         return next({
+    //             name: 'login'
+    //         })
+    //     }
+    // }
+    // else{
+    //     console.log(token);
+    //     if (to.name === 'login' || to.name === 'registration' || to.name === 'forget-password' || to.name === 'reset-password' || to.name === 'verify'){
+    //         return next({name:'stat'})
+    //     }
+    // }
 return next();
 })
 export default router

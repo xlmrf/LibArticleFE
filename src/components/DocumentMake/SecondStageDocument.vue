@@ -26,7 +26,7 @@
 import AuthorsField from "@/components/DocumentMake/Fields/AuthorsField";
 import KeywordsField from "@/components/DocumentMake/Fields/KeywordsField";
 import PagesField from "@/components/DocumentMake/Fields/PagesField";
-import YearField from "@/components/DocumentMake/Fields/YearField";
+import YearField from "@/components/DocumentMake/Fields/DateField";
 import {mapGetters} from "vuex";
 import loader from "@/components/additional/LoaderComponent";
 export default {

@@ -1,5 +1,6 @@
 <template>
-  <div v-if="getUser.id">
+  <div >
+<!--    v-if="getUser.id"-->
     <navbar-menu class="nav-over"></navbar-menu>
     <div class="main">
       <router-view>
