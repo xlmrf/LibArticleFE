@@ -6,52 +6,53 @@ import settings from "./settings";
 
 export default {
     state: {
-        user:{},
-        author:{},
+        user: {},
+        author: {},
         token: '',
         info: {},
-        user_info:{},
-        universities:[]
+        errors: [],
+        user_info: {},
+        universities: []
 
     },
     actions: {
-        requestAuthor(ctx){
+        requestAuthor(ctx) {
             let id = router.currentRoute.value.params.id
-            axios.get(ctx.rootState.api_url_v1+'/profile/'+id)
+            axios.get(ctx.rootState.api_url_v1 + '/profile/' + id)
                 .then(res => {
                     ctx.commit('updateAuthor', res.data)
                     // ctx.commit('userMessages', res.statusText)
                     console.log("author info", res);
                 }, error => {
-                    ctx.commit('makeErrors',error)
+                    ctx.commit('makeErrors', error)
                     ctx.commit('userMessages', error)
                 })
         },
-        requestUserInfo(ctx){
-            axios.get(ctx.rootState.api_url_v1+'/user-info')
+        requestUserInfo(ctx) {
+            axios.get(ctx.rootState.api_url_v1 + '/user-info')
                 .then(res => {
                     ctx.commit('updateUserInfo', res.data)
                     // ctx.commit('userMessages', res.statusText)
                     console.log("author info", res);
                 }, error => {
-                    ctx.commit('makeErrors',error)
+                    ctx.commit('makeErrors', error)
                     ctx.commit('userMessages', error)
                 })
         },
         async requestUser(ctx) {
-           await axios.get(ctx.rootState.api_url_v1+'/user')
+            await axios.get(ctx.rootState.api_url_v1 + '/user')
                 .then(res => {
                     ctx.commit('updateUser', res.data)
                     ctx.commit('userMessages', res.statusText)
                     console.log("user info", res);
                 }, error => {
                     console.log("user info");
-                    ctx.commit('makeErrors',error)
+                    ctx.commit('makeErrors', error)
                     ctx.commit('userMessages', error)
                 })
         },
-        requestUniversity(ctx){
-            axios.get(ctx.rootState.api_url_v1+'/universities').then(response => {
+        requestUniversity(ctx) {
+            axios.get(ctx.rootState.api_url_v1 + '/universities').then(response => {
                 ctx.commit('universities', response.data)
             })
         },
@@ -59,20 +60,21 @@ export default {
         ...settings
     },
     mutations: {
-        updateAuthor(ctx, data){
+        updateAuthor(ctx, data) {
             ctx.author = data
         },
-        updateUserInfo(ctx,data){
+        updateUserInfo(ctx, data) {
             ctx.user_info = data
         },
         updateUser(ctx, data) {
             ctx.user = data
         },
         userMessages(ctx, data) {
-            ctx.info = data
-            localStorage.setItem('message', data)
+            ctx.info = data;
+            // ctx.errors = data;
+
         },
-        universities(ctx, data){
+        universities(ctx, data) {
             ctx.universities = data
         },
         setAT(ctx, data) {
@@ -89,16 +91,16 @@ export default {
         getUserMessage(state) {
             return state.info
         },
-        getAuthor(state){
+        getAuthor(state) {
             return state.author
         },
-        getToken(state){
+        getToken(state) {
             return state.token
         },
-        getUniversities(state){
+        getUniversities(state) {
             return state.universities
         },
-        getUserInfo(state){
+        getUserInfo(state) {
             return state.user_info
         }
     }

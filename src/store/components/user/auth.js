@@ -62,7 +62,7 @@ export default {
                 router.push('/')
             },
             err => {
-                ctx.commit('userMessages', {message: err.response.data, date: Date.now(), status:err.response.status})
+                ctx.commit('userMessages', err.response.data)
                 console.log('auth error', err.response);
             })
 

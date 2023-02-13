@@ -24,7 +24,7 @@ try {
 window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-window.axios.defaults.withCredentials = true;
+// window.axios.defaults.withCredentials = true;
 const token = localStorage.getItem('access_token');
 console.log("token: ",token);
 if (token) {
