@@ -32,7 +32,7 @@ import AdvancedSettings from "./components/settings/AdvancedSettingsComponent"
 import DocumentMake from "@/view/DocumentMake";
 
 
-// import confirmEmail from "./components/auth/ConfirmationEmailComponent";
+import confirmEmail from "./components/auth/ConfirmEmail";
 
 const routes = [
     {
@@ -65,7 +65,13 @@ const routes = [
                 path: '/registration',
                 name: 'registration',
                 component: registration
-            }
+            },
+            {
+                path: '/confirmEmail',
+                name: 'ConfirmEmail',
+                component: confirmEmail
+            },
+
         ]
     },
     {

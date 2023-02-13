@@ -1,7 +1,13 @@
 <template>
   <div>
-    Your new email confirmed!
-    <div>{{getPageMessage}}</div>
+<!--    Your new email confirmed!-->
+<!--    <div>{{getPageMessage}}</div>-->
+
+    На вказаний email прийшло повідомлення з підтвердженням акаунту
+
+    <router-link to="/login">Login</router-link>
+
+
   </div>
 </template>
 
@@ -14,7 +20,7 @@ export default {
   },
   mounted() {
     console.log("verify mounted");
-    this.verifyEmail
+    // this.verifyEmail
   }
 }
 </script>
