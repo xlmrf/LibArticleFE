@@ -96,7 +96,7 @@ export default {
     }
   },
   computed:{
-    ...mapGetters(['getAuthor'])
+    ...mapGetters(['getAuthor','getDocument'])
   },
   methods:{
     ...mapActions(['findAuthor']),

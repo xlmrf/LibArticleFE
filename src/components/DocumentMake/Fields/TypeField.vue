@@ -1,22 +1,21 @@
 <template>
-<!--  <div>-->
-<!--    <input type="text" name="" id="" v-model="getDocument.type">-->
-<!--  </div>-->
-
   <div class="document-types">
     <div>
       <h3>Категорії</h3>
       <div class="files-tape">
-        <div v-for="(category,key) in getCategories"
-             :class="['file-name',{'category-active':getDocument.category ? getDocument.category.id === category.id: ''}]"
-             @click="getDocument.category = category">{{category.name}}</div>
+        <div v-for="(type,key) in getTypes" :key="key"
+             :class="['file-name',{'category-active':getTypes?getTypes.find(type => type.id === getDocument.type_id):''}]"
+             @click="getDocument.type_id = type.id">{{ type.name }}
+        </div>
       </div>
     </div>
+    {{}}
     <div class="type-description">
       <h3>Поля для заповнення</h3>
-      <ul class="item-category-collection" v-if="getDocument.category">
-        <li class="manual-item" v-for="item in getCategories[getDocument.category.id-1]['fields']">
-          {{translateAreas(item)}}</li>
+      <ul class="item-category-collection" v-if="getDocument.type_id">
+        <li class="manual-item" v-for="(item, key) in getTypes.find(type => type.id === getDocument.type_id)['fields']" :key="key">
+          {{ translateAreas(item) }}
+        </li>
       </ul>
       <span class="category-not-chosen" v-else>Оберіть категорію</span>
     </div>
@@ -27,17 +26,20 @@
 import {mapActions, mapGetters} from "vuex";
 
 export default {
-  mixins:['translate'],
+  mixins: ['translate'],
   computed: {
-    ...mapGetters(['getDocument','getCategories']),
-    ...mapActions(['requestCategories'])
+    ...mapGetters(['getDocument', 'getTypes']),
+    ...mapActions(['requestTypes'])
   },
   mounted() {
-    this.requestCategories
+    this.requestTypes
   }
 }
 </script>
 
 <style scoped>
-
+.files-tape {
+  float: left;
+  width: 300px;
+}
 </style>

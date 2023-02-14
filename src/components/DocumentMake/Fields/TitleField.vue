@@ -1,6 +1,7 @@
 <template>
   <div>
-    Title:<input type="text" name="" id="" v-model="getDocument.title">
+    <h3>Назва</h3>
+    <input type="text" name="" id="" v-model="getDocument.title">
   </div>
 </template>
 

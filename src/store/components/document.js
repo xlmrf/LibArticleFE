@@ -8,7 +8,7 @@ export default {
 
             last_documents: [],
             info: '',
-            categories: [],
+            types: [],
             author_fn: {},
             newDocumentId: null,
             uncompletedDocument: ''
@@ -18,28 +18,28 @@ export default {
         updateDocument(ctx, data) {
             console.log('vuex upload document data:', data);
             let id = router.currentRoute.value.params.id
-            axios.patch(ctx.rootState.api_url_v1+'/document/' + id, {data: data}).then(response => {
+            axios.patch(ctx.rootState.api_url_v1 + '/document/' + id, data).then(response => {
                 ctx.commit('uploadResult', response.data)
             }, err => {
                 console.log('error info -', err.message);
                 ctx.commit('setInfo', err)
             })
         },
-        requestCategories(ctx) {
-            axios.get(ctx.rootState.api_url_v1+'/document-categories').then(response => {
-                ctx.commit('categories', response.data)
+        requestTypes(ctx) {
+            axios.get(ctx.rootState.api_url_v1 + '/document-types').then(response => {
+                ctx.commit('types', response.data)
             })
         },
         findAuthor(ctx, email) {
             console.log(email);
-            axios.post(ctx.rootState.api_url_v1+'/author', {data: email}).then(response => {
+            axios.post(ctx.rootState.api_url_v1 + '/author', {data: email}).then(response => {
                 ctx.commit('upAuthor', response.data)
             }).catch(err => {
                 console.log(err.response)
             })
         },
         createDocument(ctx, data) {
-            axios.post(ctx.rootState.api_url_v1+'/documents', {data: data}).then(response => {
+            axios.post(ctx.rootState.api_url_v1 + '/documents', {data: data}).then(response => {
                 // ctx.commit('documentCreated', response.data)
                 console.log('wef', response.data);
                 ctx.commit('updateDocument', response.data)
@@ -51,8 +51,19 @@ export default {
             })
         },
 
+        getDocumentById(ctx, id) {
+            axios.get(ctx.rootState.api_url_v1 + '/document/'+id).then(response => {
+                console.log('wef', response.data);
+                ctx.commit('updateDocument', response.data)
+            }, err => {
+                console.log('error info -', err.message);
+                ctx.commit('setInfo', err)
+            })
+        },
+
+
         lastDocuments(ctx) {
-            axios.get(ctx.rootState.api_url_v1+'/last-documents').then(response => {
+            axios.get(ctx.rootState.api_url_v1 + '/last-documents').then(response => {
                 ctx.commit('mutateLastDocuments', response.data)
             })
         }
@@ -66,8 +77,8 @@ export default {
         uploadResult(state, data) {
             state.info = data
         },
-        categories(state, data) {
-            state.categories = data
+        types(state, data) {
+            state.types = data
         },
         upAuthor(ctx, data) {
             ctx.author_fn = data
@@ -80,9 +91,9 @@ export default {
         getUncompletedDocument(ctx) {
             return ctx.uncompletedDocument
         },
-        getCategories(ctx) {
+        getTypes(ctx) {
             // console.log('ctx:', ctx.categories);
-            return ctx.categories
+            return ctx.types;
         },
         getFullNameAuthor(ctx) {
             return ctx.author_fn

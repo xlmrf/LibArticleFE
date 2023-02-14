@@ -43,7 +43,7 @@ export default {
         if (this.error) {
           this.error = ''
         }
-        if (this.getDocument.keywords === undefined) {
+        if (this.getDocument.keywords === undefined||this.getDocument.keywords === null) {
           this.getDocument.keywords = [];
         }
         this.getDocument.keywords.push(this.keyword)

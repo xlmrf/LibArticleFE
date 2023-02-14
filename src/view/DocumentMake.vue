@@ -1,15 +1,14 @@
 <template>
   <div>
     {{ getDocument }}
-    <h3>Main</h3>
-    <input type="checkbox" name="" id="" v-model="stage">
+    <h3 align="center">Створити новий документ</h3>
     <first-stage v-if="stage" @next="next"/>
     <second-stage v-else/>
   </div>
 </template>
 
 <script>
-import {mapState, mapGetters, mapActions} from "vuex"
+import {mapGetters, mapActions} from "vuex"
 import FirstStage from "@/components/DocumentMake/FirstStageDocument";
 import SecondStage from "@/components/DocumentMake/SecondStageDocument";
 
@@ -20,16 +19,22 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['createDocument']),
+    ...mapActions(['createDocument', 'getDocumentById']),
     next() {
       this.stage = !this.stage
-      this.createDocument(this.getDocument)
+      if (this.$route.params.id === '') {
+        this.createDocument(this.getDocument)
+      }
     }
   },
   computed: {
     ...mapGetters(['getDocument'])
   },
   mounted() {
+
+    if (this.$route.params.id !== '') {
+      this.getDocumentById(this.$route.params.id);
+    }
 
   },
   name: "DocumentMake",

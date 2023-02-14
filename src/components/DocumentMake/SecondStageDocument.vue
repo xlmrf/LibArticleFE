@@ -1,24 +1,19 @@
 <template>
-  <div class="middle-spinner" v-if="!getDocument.category">
+  <div class="middle-spinner" v-if="!getDocument.id">
     <span><loader width="4" radius="20"></loader></span>
   </div>
   <div v-else>
     <h4>stage 2</h4>
-<!--    <div v-for="item in fields[getDocument.type]">-->
-<!--    </div>-->
-    <div class="form-item"
-         v-for="(item,idx) in getDocument.category.fields"
-    >
-      <label :for="item">{{translateAreas(item)}}</label>
-      <component :is="item+'-field'"></component>
 
-<!--      <div class="author-fill-list" v-if="item === 'authors'">-->
-<!--        <author-field @newAuthor="setAuthors"></author-field>-->
-<!--      </div>-->
+    <div class="form-item" v-for="(item,idx) in getTypes.find(type => type.id === getDocument.type_id).fields"
+         :key="idx">
+      <label :for="item">{{ translateAreas(item) }}</label>
+      <component :is="item+'-field'"></component>
     </div>
-<!--    <author-field />-->
-<!--    <keywords-field />-->
-<!--    <year-field />-->
+
+    <button @click="updateDocument(getDocument)">
+      Update
+    </button>
   </div>
 </template>
 
@@ -27,24 +22,24 @@ import AuthorsField from "@/components/DocumentMake/Fields/AuthorsField";
 import KeywordsField from "@/components/DocumentMake/Fields/KeywordsField";
 import PagesField from "@/components/DocumentMake/Fields/PagesField";
 import YearField from "@/components/DocumentMake/Fields/DateField";
-import {mapGetters} from "vuex";
+import {mapActions, mapGetters} from "vuex";
 import loader from "@/components/additional/LoaderComponent";
+
 export default {
-  mixins:['translate'],
-  data(){
-    return {
-      fields:{Article:[AuthorsField,KeywordsField,YearField]}
-    }
+  mixins: ['translate'],
+  data() {
+    return {}
   },
-  methods:{
-    setAuthors(value){
+  methods: {
+    ...mapActions(['updateDocument']),
+    setAuthors(value) {
       this.document.authors = value
     },
   },
   computed: {
-    ...mapGetters(['getDocument','getCategories'])
+    ...mapGetters(['getDocument', 'getTypes'])
   },
-  components: {loader, YearField, KeywordsField, AuthorsField,PagesField}
+  components: {loader, YearField, KeywordsField, AuthorsField, PagesField}
 }
 </script>
 
