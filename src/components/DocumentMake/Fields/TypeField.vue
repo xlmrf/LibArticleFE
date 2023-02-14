@@ -1,15 +1,14 @@
 <template>
-  <div class="document-types">
+  <div class="document-types" v-if="getTypes.length > 0">
     <div>
       <h3>Категорії</h3>
       <div class="files-tape">
         <div v-for="(type,key) in getTypes" :key="key"
-             :class="['file-name',{'category-active':getTypes?getTypes.find(type => type.id === getDocument.type_id):''}]"
+             :class="['file-name',{'category-active':getTypes?getTypes.find(e => e.id === getDocument.type_id):''}]"
              @click="getDocument.type_id = type.id">{{ type.name }}
         </div>
       </div>
     </div>
-    {{}}
     <div class="type-description">
       <h3>Поля для заповнення</h3>
       <ul class="item-category-collection" v-if="getDocument.type_id">

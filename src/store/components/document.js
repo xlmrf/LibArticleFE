@@ -60,8 +60,13 @@ export default {
                 ctx.commit('setInfo', err)
             })
         },
-
-
+        deleteAuthor(ctx,data){
+            axios.delete(ctx.rootState.api_url_v1 + '/document/'+data.document_id+'/author/'+data.author_id).then(res => {
+                console.log('author was delete', res.status)
+            },err => {
+                console.log('error delete author', err.response.data)
+            })
+        },
         lastDocuments(ctx) {
             axios.get(ctx.rootState.api_url_v1 + '/last-documents').then(response => {
                 ctx.commit('mutateLastDocuments', response.data)

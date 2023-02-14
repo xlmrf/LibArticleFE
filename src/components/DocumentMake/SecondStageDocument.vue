@@ -28,7 +28,9 @@ import loader from "@/components/additional/LoaderComponent";
 export default {
   mixins: ['translate'],
   data() {
-    return {}
+    return {
+
+    }
   },
   methods: {
     ...mapActions(['updateDocument']),
