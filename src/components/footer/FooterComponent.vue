@@ -1,16 +1,16 @@
 <template>
   <div class="subway-list">
     <div class="subway-tutorial">
-      <span class="manual-item">@ 2022 LibArticle</span>
-<!--      <router-link to="/tutorial" class="manual-item">-->
-<!--        <span>Документація</span>-->
-<!--      </router-link>-->
-<!--      <router-link to="/support" class="manual-item">-->
-<!--        <span>Підтримка</span>-->
-<!--      </router-link>-->
-<!--      <router-link to="/rules" class="manual-item">-->
-<!--        <span>Правила</span>-->
-<!--      </router-link>-->
+<!--      <span class="manual-item">2022</span>-->
+      <router-link to="/tutorial" class="manual-item">
+        <span>Документація</span>
+      </router-link>
+      <router-link to="/support" class="manual-item">
+        <span>Підтримка</span>
+      </router-link>
+      <router-link to="/rules" class="manual-item">
+        <span>Правила</span>
+      </router-link>
     </div>
 <!--    <div class="subway-info">-->
 <!--      <small>&copy; 2022</small>-->
@@ -47,24 +47,39 @@ span{
   position:relative;
   border: none;
   outline: none;
-  color: #212121
+  color: #525252
 }
-.manual-item::after{
-  content:'';
-  position:absolute;
-  width:100%;
-  height:0.1rem;
-  left:0;
-  bottom:5px;
-  background: #141414;
+.manual-item > span{
+  cursor: pointer;
 }
+.manual-item:hover{
+  color: #141414;
+}
+/*.manual-item::after{*/
+/*  content:'';*/
+/*  position:absolute;*/
+/*  */
+/*  !*--horizontal--*!*/
+/*  width:100%;*/
+/*  height:0.1rem;*/
+/*  left:0;*/
+/*  bottom:5px;*/
+/*  background: #141414;*/
+/*  */
+/*  !*--vertical--*!*/
+/*  !*width:0.05rem;*!*/
+/*  !*height:50%;*!*/
+/*  !*left:0;*!*/
+/*  !*bottom:20%;*!*/
+/*  !*background: #a9a9a9;*!*/
+/*}*/
 .manual-item{
   overflow:hidden;
 }
-.manual-item::after{
-  transform:scale(0,1);
-  transition: transform 0.22s ease;
-}
+/*.manual-item::after{*/
+/*  transform:scale(0,1);*/
+/*  transition: transform 0.22s ease;*/
+/*}*/
 .manual-item:hover::after{
   transform:scale(1,1);
 }

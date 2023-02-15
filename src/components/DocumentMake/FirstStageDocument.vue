@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h4>stage 1</h4>
     <title-field/>
     <type-field />
     <div style="clear: both">

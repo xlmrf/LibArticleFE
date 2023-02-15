@@ -1,13 +1,9 @@
 <template>
-  <div >
 <!--    v-if="getUser.id"-->
     <navbar-menu class="nav-over"></navbar-menu>
     <div class="main">
-      <router-view>
-        
-      </router-view>
+      <router-view />
     </div>
-  </div>
 </template>
 
 <script>
@@ -30,15 +26,17 @@ export default {
 <style scoped>
 .main {
   border: 2px solid pink;
-  height: calc(100% - 56px);
-  overflow: scroll;
-  overflow-y: auto;
-  overflow-x: hidden;
+  min-height: calc(100vh - 90px);
+  /*overflow: scroll;*/
+  /*overflow-y: auto;*/
+  /*overflow-x: hidden;*/
+  margin-top: 56px;
 }
 
 .nav-over {
   min-height: 55px;
-  /*position: relative;*/
+  position: fixed;
+  width: 100%;
   z-index: 999;
   background: #fff;
 }

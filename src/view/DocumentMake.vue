@@ -1,6 +1,6 @@
 <template>
-  <div>
-    {{ getDocument }}
+  <div class="document-make-body">
+    <small v-if="getDocument.type_id">{{ getDocument }}</small>
     <h3 align="center">Створити новий документ</h3>
     <first-stage v-if="stage" @next="next"/>
     <second-stage v-else/>
@@ -44,4 +44,8 @@ export default {
 
 <style scoped>
 
+.document-make-body{
+  height: 100%;
+  border:1px solid #0d2839;
+}
 </style>

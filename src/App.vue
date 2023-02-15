@@ -1,9 +1,9 @@
 <template v-cloak>
   <div class="window">
     <div class="city">
-      <router-view/>
+      <router-view />
     </div>
-    <!--    <supplement class="subway"></supplement>-->
+    <supplement class="subway"></supplement>
   </div>
   <!--  <loader v-else class="page-loader" width="3" radius="15"></loader>-->
 </template>
@@ -55,13 +55,14 @@ body {
 
 .subway {
   min-height: 22px;
+  height: 100px;
   display: block;
 }
 
 .city {
   flex: 1;
   /*background: #f1f1f1;*/
-  min-height: 450px;
+  /*min-height: 450px;*/
 }
 
 input {
