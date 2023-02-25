@@ -10,7 +10,8 @@ import registration from "./components/auth/RegistrationComponent"
 import setNewPassword from "./components/auth/ReplacePasswordComponent";
 import NewDocument from "./components/new_document/select_type/NewDocumentBaseComponent"
 import NewDocumentFields from "./components/new_document/select_type/DocumentTypesComponent"
-import library from "./components/library/LibraryBaseComponent";
+// import library from "./components/library/LibraryBaseComponent";
+import documents from "./view/Documents";
 import document from "./components/document/DocumentBaseComponent"
 
 import profileStatistic from "./components/profile/content_items/StatisticInfoComponent"
@@ -97,9 +98,9 @@ const routes = [
             //     component: NewDocument
             // },
             {
-                path:'/library',
-                name:'library',
-                component: library
+                path:'/documents',
+                name:'documents',
+                component: documents
             },
             {
                 path:'/document/:id',

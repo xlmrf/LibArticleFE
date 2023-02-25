@@ -37,7 +37,7 @@
   <label>month</label>
   <br />
   <select v-model="month">
-    <option v-for="m in 12" :key="m" :value="m - 1">
+    <option v-for="m in 12" :key="m" :value="String(m).length>1?m-1:'0'+m">
       {{ m }}
     </option>
   </select>
@@ -51,15 +51,13 @@
     </option>
   </select>
 </div>
+  <input type="checkbox" :value="dateExist" @change="CheckDate">
 </div>
-</template><style scoped>
-#date-picker {
-  display: flex;
-}#date-picker div {
-   margin-right: 10px;
- }
-</style><script>
+</template>
+
+<script>
 import moment from "moment";
+import {mapGetters} from "vuex";
 
 export default {
   name: "DatePicker",
@@ -68,30 +66,42 @@ export default {
   },
   data() {
     return {
+      dateExist:true,
       years: [],
       year: new Date().getFullYear(),
       month: 0,
-      day: 1,
+      day: 1
     };
   },
   methods: {
+    CheckDate(){
+      if (!this.dateExist){
+        this.getDocument.publication_date = null
+      }
+      else{
+        this.getDocument.publication_date = `${this.year}-${this.month}-${this.day}`
+      }
+    },
     emitDate() {
       const { year, month, day } = this;
-      this.$emit("update:modelValue", new Date(year, month, day).toString());
-    },
+      this.getDocument.publication_date = `${this.year}-${this.month}-${this.day}`
+
+      console.log(new Date(year, month, day).toString())
+    }
   },
   watch: {
-    year() {
+    year(){
       this.emitDate();
     },
-    month() {
+    month(){
       this.emitDate();
     },
-    day() {
+    day(){
       this.emitDate();
-    },
+    }
   },
   computed: {
+    ...mapGetters(['getDocument']),
     maxDate() {
       const { month } = this;
       if ([0, 2, 4, 6, 7, 9, 11].includes(month)) {
@@ -101,6 +111,9 @@ export default {
       }
       return 28;
     },
+  },
+  mounted() {
+    this.emitDate();
   },
   beforeMount() {
     const currentYear = new Date().getFullYear();
@@ -114,3 +127,12 @@ export default {
   },
 };
 </script>
+
+
+<style scoped>
+#date-picker {
+  display: flex;
+}#date-picker div {
+   margin-right: 10px;
+ }
+</style>

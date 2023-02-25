@@ -251,7 +251,7 @@ export default {
   color: #212121
 }
 .card-top h2{
-  margin-bottom: 0.5rem;
+  /*margin-bottom: 0.5rem;*/
 }
 
 .card-top h2, .card-top h4{
@@ -275,6 +275,21 @@ export default {
 .card-top::after{
   transform:scale(1,1);
   transition: transform 0.22s ease;
+}
+
+.card-top svg:hover{
+  stroke: #212121;
+}
+
+.card-top{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-top > h2{
+  width: 80%;
+/*  text-align: center;*/
 }
 
 .wrapper{
@@ -335,7 +350,8 @@ export default {
   outline: none;
   position: relative;
   display: flex;
-  width: 30%;
+  width: 90%;
+  margin: 0.3rem 0;
   /*border: 1px solid orangered;*/
 }
 .author-list-item >:first-child{
@@ -347,20 +363,27 @@ export default {
 .author-list-item > div{
   margin: 2px;
 }
-.user-remove-btn{
-  /*display: flex;*/
-  margin-top: auto;
-  /*align-self: center;*/
-  /*top: 40%;*/
-  position: relative;
-  /*right: -30px;*/
-  cursor: pointer;
-  /*border: 1px solid black;*/
-}
-.user-remove-btn:hover{
-  stroke: #525252;
-  /*border: 1px solid black;*/
-}
+
+/*.author-list-item >:last-child{*/
+/*  border: 1px solid red;*/
+/*  !*flex-wrap: wrap;*!*/
+/*}*/
+
+/*.user-remove-btn{*/
+/*  !*display: flex;*!*/
+/*  margin-top: auto;*/
+/*  !*align-self: center;*!*/
+/*  top: 45%;*/
+/*  right: -5%;*/
+/*  position: absolute;*/
+/*  !*right: -30px;*!*/
+/*  cursor: pointer;*/
+/*  !*border: 1px solid black;*!*/
+/*}*/
+/*.user-remove-btn:hover{*/
+/*  stroke: #525252;*/
+/*  !*border: 1px solid black;*!*/
+/*}*/
 .author-fill-list > span{
   display: flex;
   align-items: center;
@@ -560,10 +583,13 @@ export default {
 
 .rename-title-btn{
   position: absolute;
-  top: 30%;
+  top: calc(50% - 16px);
   right: 2rem;
   /*margin: 0 0.4rem;*/
   cursor: pointer;
+  width: 32px;
+  height: 32px;
+
 }
 .main-card svg:hover{
   stroke: #525252;

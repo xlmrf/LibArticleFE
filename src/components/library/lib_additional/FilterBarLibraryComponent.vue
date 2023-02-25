@@ -66,6 +66,7 @@ export default {
   },
   methods:{
     ...mapActions(['DocumentSearcher','requestCategories','FilterDocuments']),
+
     query(data) {
       let query = Object.assign({}, this.$route.query);
       if (query.search){
@@ -131,10 +132,6 @@ export default {
 .filter-bar > div > span{
   /*display: none;*/
   margin: 0 0.8rem;
-}
-
-.years-panel{
-
 }
 
 .years-panel > input{

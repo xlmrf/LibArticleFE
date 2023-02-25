@@ -2,7 +2,7 @@
   <div class="complex-item-control">
     <span>
       <input type="text" class="inp-e" v-model="reference" @keypress.enter="addKeyword">
-       <small @click="deleteReferenceIntup()" v-if="reference!==''">
+       <small @click="deleteReferenceIntup()" class="delete-ref-btn delete-item" v-if="reference!==''">
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
                stroke="#9A9A9A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -11,20 +11,23 @@
         </small>
       <span class="add-keyword-btn" @click="addKeyword">{{ edit ? "Зберегти" : 'Додати' }}</span>
     </span>
-    <ol>
-      <li v-for="(el,idx) in getDocument.references.filter(item=>!item.delete)" :key="idx">
-        <span @dblclick="editRef(el)" :class="{'italic':el.edit}">{{
-            idx + 1
-          }}. {{ el.bibliographic_description }}</span>
-        <small @click="deleteKeyword(idx,el)">
+    <span v-for="(el,idx) in getDocument.references.filter(item=>!item.delete)" :key="idx">
+      <span @dblclick="editRef(el)" :class="{'italic':el.edit}">{{
+        idx + 1
+      }}. {{ el.bibliographic_description }}</span>
+        <small @click="deleteKeyword(idx,el)" class="delete-item">
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
                stroke="#9A9A9A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <line x1="18" y1="6" x2="6" y2="18"></line>
             <line x1="6" y1="6" x2="18" y2="18"></line>
           </svg>
         </small>
-      </li>
-    </ol>
+    </span>
+<!--    <ol>-->
+<!--      <li v-for="(el,idx) in getDocument.references.filter(item=>!item.delete)" :key="idx">-->
+
+<!--      </li>-->
+<!--    </ol>-->
     <small>{{ error }}</small>
   </div>
   <!--  <div>-->
@@ -107,7 +110,19 @@ export default {
 </script>
 
 <style scoped>
+.complex-item-control > span{
+  position: relative;
+}
+.delete-ref-btn{
+  right: 30%;
+  top: 25%;
+  position: absolute;
+}
 .italic {
+  hyphens: auto;
   font-style: italic;
+}
+li{
+  position: relative;
 }
 </style>

@@ -9,7 +9,7 @@ export default {
             last_documents: [],
             info: '',
             types: [],
-            author_fn: {},
+            propose_authors: [],
             newDocumentId: null,
             uncompletedDocument: ''
         }
@@ -30,10 +30,9 @@ export default {
                 ctx.commit('types', response.data)
             })
         },
-        findAuthor(ctx, email) {
-            console.log(email);
-            axios.post(ctx.rootState.api_url_v1 + '/author', {data: email}).then(response => {
-                ctx.commit('upAuthor', response.data)
+        findAuthor(ctx, data) {
+            axios.get(ctx.rootState.api_url_v1 + '/author?email=' + data.email,).then(response => {
+                ctx.commit('upAuthor', {res:response.data,idx:data.idx})
             }).catch(err => {
                 console.log(err.response)
             })
@@ -52,7 +51,7 @@ export default {
         },
 
         getDocumentById(ctx, id) {
-            axios.get(ctx.rootState.api_url_v1 + '/document/'+id).then(response => {
+            axios.get(ctx.rootState.api_url_v1 + '/document/' + id).then(response => {
                 console.log('wef', response.data);
                 ctx.commit('updateDocument', response.data)
             }, err => {
@@ -60,10 +59,10 @@ export default {
                 ctx.commit('setInfo', err)
             })
         },
-        deleteAuthor(ctx,data){
-            axios.delete(ctx.rootState.api_url_v1 + '/document/'+data.document_id+'/author/'+data.author_id).then(res => {
+        deleteAuthor(ctx, data) {
+            axios.delete(ctx.rootState.api_url_v1 + '/document/' + data.document_id + '/author/' + data.author_id).then(res => {
                 console.log('author was delete', res.status)
-            },err => {
+            }, err => {
                 console.log('error delete author', err.response.data)
             })
         },
@@ -86,7 +85,7 @@ export default {
             state.types = data
         },
         upAuthor(ctx, data) {
-            ctx.author_fn = data
+            ctx.propose_authors[data.idx] = data.res
         },
         mutateLastDocuments(ctx, data) {
             ctx.last_documents = data
@@ -100,8 +99,8 @@ export default {
             // console.log('ctx:', ctx.categories);
             return ctx.types;
         },
-        getFullNameAuthor(ctx) {
-            return ctx.author_fn
+        getProposeAuthors(ctx) {
+            return ctx.propose_authors
         },
         getNewDocumentId(ctx) {
             return ctx.newDocumentId

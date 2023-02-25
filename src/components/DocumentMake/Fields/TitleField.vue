@@ -31,16 +31,13 @@ export default {
 <style scoped>
 .top h2{
   font-size: 28px;
-  /*font-weight: normal;*/
-  /*margin-bottom: 1rem;*/
-  /*text-align: center;*/
+  text-align: center;
   color: #212121;
   width: 100%;
 }
 .top{
   display: flex;
   flex-flow: column;
-  /*flex-wrap: wrap;*/
   align-items: center;
   justify-content: center;
   position: relative;

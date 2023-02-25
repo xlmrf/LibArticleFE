@@ -16,7 +16,7 @@
 <style scoped>
 h2{
     margin: 0;
-    position: absolute;
+    /*position: absolute;*/
     top: 40%;
     left: 50%;
     margin-right: -50%;

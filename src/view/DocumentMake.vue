@@ -1,9 +1,8 @@
 <template>
   <div class="document-make-body">
-    <small v-if="getDocument.type_id">{{ getDocument }}</small>
-    <h3 align="center">Створити новий документ</h3>
-    <first-stage v-if="stage" @next="next"/>
-    <second-stage v-else/>
+<!--    <small v-if="getDocument.type_id">{{ getDocument }}</small>-->
+    <first-stage v-if="prev_stage" @next="next"/>
+    <second-stage @prev="prev" v-else/>
   </div>
 </template>
 
@@ -15,28 +14,57 @@ import SecondStage from "@/components/DocumentMake/SecondStageDocument";
 export default {
   data() {
     return {
-      stage: true
+      prev_stage: true
     }
   },
   methods: {
     ...mapActions(['createDocument', 'getDocumentById']),
     next() {
-      this.stage = !this.stage
-      if (this.$route.params.id === '') {
+      this.prev_stage = !this.prev_stage
+      if (!this.$route.params.id) {
         this.createDocument(this.getDocument)
       }
+    },
+    prev(){
+      this.prev_stage = true
     }
   },
   computed: {
     ...mapGetters(['getDocument'])
   },
-  mounted() {
+  watch:{
+    '$route.params': {
+        handler(item){
+          // if (!(item.id && this.stage === true)){
+          //     this.stage = true
+          // }
+          // else {
+          //   this.stage = false
+          // }
 
+          if(!item.id){
+            this.prev_stage=true
+          }
+          else {
+            this.prev_stage=false
+          }
+        }
+    },
+  },
+  mounted() {
     if (this.$route.params.id !== '') {
       this.getDocumentById(this.$route.params.id);
+      this.prev_stage = false
     }
-
   },
+  updated() {
+    // if (this.$route.params.id !== ''&&!this.getDocument.id) {
+    //   console.log('beforeUpdate');
+    //   this.getDocumentById(this.$route.params.id);
+    //   this.prev_stage = false
+    // }
+  },
+
   name: "DocumentMake",
   components: {SecondStage, FirstStage}
 }
@@ -46,6 +74,6 @@ export default {
 
 .document-make-body{
   height: 100%;
-  border:1px solid #0d2839;
+  /*border:1px solid #0d2839;*/
 }
 </style>

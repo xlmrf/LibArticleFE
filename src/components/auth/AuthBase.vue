@@ -59,9 +59,9 @@ export default {
 }
 h2{
   cursor: default;
-  position: absolute;
+  /*position: absolute;*/
   color: #212121;
-  padding: 1rem;
+  /*padding: 1rem;*/
   /*text-align: center;*/
   font-size: 28px;
 }

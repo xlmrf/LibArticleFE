@@ -106,4 +106,18 @@ input {
   cursor: pointer;
 }
 
+.delete-item{
+  cursor: pointer;
+  color: rgba(229, 50, 45, 0.8);
+}
+.delete-item > svg:hover{
+  stroke: rgba(229, 50, 45, 0.8);
+}
+.button{
+  background: white;
+  cursor: pointer;
+  border: 1px solid #222222;
+  padding: 3px 5px;
+}
+
 </style>

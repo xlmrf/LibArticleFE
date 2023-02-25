@@ -1,19 +1,32 @@
 <template>
-  <div class="middle-spinner" v-if="!getDocument.id">
+  <div class="middle-spinner" v-if="watcher">
     <span><loader width="4" radius="20"></loader></span>
   </div>
   <div v-else>
-    <h4>stage 2</h4>
 
-    <div class="form-item" v-for="(item,idx) in getTypes.find(type => type.id === getDocument.type_id).fields"
-         :key="idx">
-      <label :for="item">{{ translateAreas(item) }}</label>
-      <component :is="setFields(item)" :field="item"></component>
+    <div class="card-top">
+      {{getDocument}}
+      <h2 :style="{ 'font-size': '22px' }" ref="refTitle">{{ getDocument.title }}</h2>
+      <h4>{{ getTypes.find(type => type.id === getDocument.type_id).name }}</h4>
+      <!--      <h4>{{getDocument}}</h4>-->
+      <span class="rename-title-btn" @click="$emit('prev')">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#BBBBBB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="14 2 18 6 7 17 3 17 3 13 14 2"></polygon><line x1="3" y1="22" x2="21" y2="22"></line></svg></span>
     </div>
 
-    <button @click="updateDocument(getDocument)">
-      Update
-    </button>
+    <div class="fill-areas-document">
+      <files-frame-component/>
+
+      <div>
+        <div class="form-item" v-for="(item,idx) in getTypes.find(type => type.id === getDocument.type_id).fields"
+             :key="idx">
+          <label :for="item">{{ translateAreas(item) }}</label>
+          <component :is="setFields(item)"></component>
+        </div>
+        <button class="button conclusion-btn" @click="updateDocument(getDocument)">
+          Update
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -27,8 +40,10 @@ import UniversalField from "@/components/DocumentMake/Fields/UniversalField";
 import DescriptionField from "@/components/DocumentMake/Fields/DescriptionField";
 import {mapActions, mapGetters} from "vuex";
 import loader from "@/components/additional/LoaderComponent";
+import FilesFrameComponent from "@/components/DocumentMake/Fields/FilesFrameComponent";
 
 export default {
+  emits: ['prev'],
   mixins: ['translate'],
   data() {
     return {}
@@ -44,14 +59,44 @@ export default {
     setAuthors(value) {
       this.document.authors = value
     },
+    fontSize(e, text) {
+      if (e.refTitle != undefined) {
+        console.log(text.length);
+        console.log(e.refTitle.clientWidth);
+      }
+      // console.log(this.$el.contains(e.target))
+      return '22px';
+    }
   },
   computed: {
-    ...mapGetters(['getDocument', 'getTypes'])
+    ...mapGetters(['getDocument', 'getTypes']),
+    watcher(){
+      return !(this.getDocument.id && this.getTypes[0]);
+    },
+    resetDocument() {
+
+      // let document = JSON.parse(localStorage.getItem('not_finished_document'))
+      // let new_document = Object.assign(document,this.document)
+      // localStorage.setItem('reset_document',JSON.stringify(new_document))
+    },
   },
-  components: {loader, YearField, KeywordsField, AuthorsField, PagesField, ReferencesField, UniversalField, DescriptionField}
+  components: {
+    FilesFrameComponent,
+    loader, YearField, KeywordsField, AuthorsField, PagesField, ReferencesField, UniversalField, DescriptionField
+  }
 }
 </script>
 
 <style scoped>
+.fill-areas-document {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.fill-areas-document > div {
+  flex: 1 400px;
+  margin: 0 1.3rem;
+}
 
 </style>

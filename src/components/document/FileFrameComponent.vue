@@ -1,16 +1,16 @@
 <template>
 <!--  <div class="document-files-wrapper">-->
       <div class="files-roll-manager" >
-        <div v-if="getFiles.length !== 0" >
+        <div v-if="Files.length !== 0" >
           <div class="files-tape">
-            <span :class="['item', key === file_id ? 'active' : 'inactive']" v-for="(file, key) in getFiles" @click="file_id = key">{{file.originalNameFile}}</span>
+            <span :class="['item', key === file_id ? 'active' : 'inactive']" v-for="(file, key) in Files" @click="file_id = key">{{file.originalNameFile}}</span>
           </div>
         </div>
         <div class="box-frame" v-else>
-          <iframe :src="getFiles[file_id].url" v-if="getFiles[file_id].typeFile === 'pdf'" frameborder="0">Не вийшло завантажити файл</iframe>
-          <iframe :src="'https://view.officeapps.live.com/op/embed.aspx?src='+getFiles[file_id].url" v-else-if="getFiles[file_id].typeFile === 'doc'" frameborder="0">Не вийшло завантажити файл</iframe>
+          <iframe :src="Files[file_id].url" v-if="Files[file_id].typeFile === 'pdf'" frameborder="0">Не вийшло завантажити файл</iframe>
+          <iframe :src="'https://view.officeapps.live.com/op/embed.aspx?src='+Files[file_id].url" v-else-if="Files[file_id].typeFile === 'doc'" frameborder="0">Не вийшло завантажити файл</iframe>
         </div>
-        <div class="wrapper-ground" v-if="getFiles.length !== 0">
+        <div class="wrapper-ground" v-if="Files.length !== 0">
           <small>{{checkSize(getFiles[file_id].sizeFile)}}</small>
         </div>
   </div>
@@ -18,6 +18,11 @@
 
 <script>
 export default {
+  data(){
+    return{
+      Files:[]
+    }
+  }
 
 }
 </script>

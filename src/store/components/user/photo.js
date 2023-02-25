@@ -41,14 +41,14 @@ export default {
     mutations:{
         updatePhoto(ctx,data){
             data === 'not_found' ?
-                ctx.userPhoto = require(ctx.altPhoto)
-                :ctx.userPhoto = 'http://192.168.0.102/api/image/'+data
+                ctx.userPhoto = ctx.altPhoto :
+                ctx.userPhoto = ctx.rootState.api_url_v1+'/image/'+data
         },
-        updateAuthorPhoto(ctx,data){
-            data === 'not_found' ?
-                ctx.authorPhoto = require(ctx.altPhoto)
-                :ctx.authorPhoto = 'http://192.168.0.102/api/image/'+data.nameFile
-        }
+        // updateAuthorPhoto(ctx,data){
+        //     data === 'not_found' ?
+        //         ctx.authorPhoto = require(ctx.altPhoto)
+        //         :ctx.authorPhoto = ctx.rootState.api_url_v1+'/image/'+data.nameFile
+        // }
     },
     getters:{
         getPhoto(ctx){

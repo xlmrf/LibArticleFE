@@ -1,6 +1,6 @@
 <template>
   <div>
-    <input type="text" name="" id="" v-model="getDocument[field]">
+    <input type="text" class="inp-e" name="" id="" v-model="getDocument[field]">
   </div>
 </template>
 

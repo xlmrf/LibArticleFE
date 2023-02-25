@@ -3,8 +3,8 @@
   <div class="navbar">
     <div class="logo"><span @click="$router.push('/')">LibArticle</span></div>
     <div class="manual">
-      <input type="text" name="search" id="search" class="input searcher" required v-model="keywords" @keydown.enter="query({search: keywords})" >
-      <span class="search-icon" @click="query({search: keywords})"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#B2B2B2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></span>
+      <input type="text" name="search" id="search" class="input searcher" required v-model="keywords" @keydown.enter="query({q: keywords})" >
+      <span class="search-icon" @click="query({q: keywords})"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#B2B2B2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></span>
       <small class="title-error" v-if="false">Введите полный адрес</small>
 <!--      <button :class="['btn search-btn',{'valid-btn':keyword}]" >Пошук</button>-->
       <label v-if="mistake" >{{mistake}}</label>
@@ -40,7 +40,7 @@ import {mapActions, mapGetters, mapMutations} from "vuex";
 export default {
   data(){
     return{
-      keywords:'',
+      keywords: this.$route.query.q ? this.$route.query.q : '',
       mistake: '',
     }
   },
@@ -51,14 +51,14 @@ export default {
     ...mapMutations(['updateUser']),
     query(data) {
       let query = Object.assign({}, this.$route.query);
-      if (this.keywords == '' && query.search){
-        delete query.search
+      if (this.keywords == '' && query.q){
+        delete query.q
       }
 
       delete query.page;
 
       this.$router.push({
-        name: 'library',
+        name: 'documents',
         query: {...query, ...data}
       })
     }

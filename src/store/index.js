@@ -4,7 +4,7 @@ import user from './components/user/user'
 import searcher from "./components/searcher"
 import loader from "./components/loader"
 import comment from "./components/comment"
-import library from "./components/library"
+import library from "./components/documents"
 import authorization from './components/user/auth'
 import filesManager from './components/filesManager'
 import photo from './components/user/photo'

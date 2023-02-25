@@ -6,14 +6,16 @@ export default {
         return{
             documents:[],
             filter:{},
+            authors:[],
+            years: {},
             info:''
         }
     },
 
     actions:{
         DocumentSearcher(ctx,data) {
-            let link = '?'+Object.entries(data).join('&').split(',').join('=');
-            axios.get(ctx.rootState.api_url_v1+'/documents' + link).then(response => {
+            // let link = '?'+Object.entries(data).join('&').split(',').join('=');
+            axios.get(ctx.rootState.api_url_v1+'' + data).then(response => {
                 ctx.commit('DocumentsMutate', response.data)
             }).catch(err => {
                 ctx.commit('errorsDocument', err.response)
@@ -25,6 +27,22 @@ export default {
                 ctx.commit('FilterMutate', response.data)
             }).catch(err => {
                 ctx.commit('errorsDocument', err.response)
+            })
+        },
+        AuthorsFilter(ctx,data){
+            axios.get(ctx.rootState.api_url_v1+'/authors' + data).then(response => {
+                ctx.commit('AuthorsFilterMutate', response.data)
+            }).catch(err => {
+                console.log('authors error:', err.response)
+                // ctx.commit('errorsDocument', err.response)
+            })
+        },
+        YearsFilter(ctx,data){
+            axios.get(ctx.rootState.api_url_v1+'/documents-year' + data).then(response => {
+                ctx.commit('YearsFilterMutate', response.data)
+            }).catch(err => {
+                console.log('authors error:', err.response)
+                // ctx.commit('errorsDocument', err.response)
             })
         },
         reviseDocument(ctx) {
@@ -44,6 +62,12 @@ export default {
         FilterMutate(state,data){
             state.filter = data
         },
+        AuthorsFilterMutate(state,data){
+            state.authors = data
+        },
+        YearsFilterMutate(state,data){
+            state.years = data
+        },
         DocumentsMutate(state, data) {
             state.documents = data
         },
@@ -58,10 +82,16 @@ export default {
 
     getters:{
         getDocuments(ctx) {
-            return ctx.info ? ctx.info : ctx.documents
+            return ctx.documents
         },
         getFilter(ctx){
             return ctx.filter
+        },
+        getAuthors(ctx){
+            return ctx.authors
+        },
+        getYears(ctx){
+            return ctx.years
         }
     }
 }
