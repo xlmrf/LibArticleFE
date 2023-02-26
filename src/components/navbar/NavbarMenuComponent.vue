@@ -1,33 +1,42 @@
 <template>
-<!--  navbar-->
+  <!--  navbar-->
   <div class="navbar">
     <div class="logo"><span @click="$router.push('/')">LibArticle</span></div>
     <div class="manual">
-      <input type="text" name="search" id="search" class="input searcher" required v-model="keywords" @keydown.enter="query({q: keywords})" >
-      <span class="search-icon" @click="query({q: keywords})"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#B2B2B2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></span>
+      <input type="text" name="search" id="search" class="input searcher" required v-model="keywords"
+             @keydown.enter="query(keywords)">
+      <span class="search-icon" @click="query(keywords)">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"
+             viewBox="0 0 24 24" fill="none" stroke="#B2B2B2"
+             stroke-width="2" stroke-linecap="round"
+             stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </span>
       <small class="title-error" v-if="false">Введите полный адрес</small>
-<!--      <button :class="['btn search-btn',{'valid-btn':keyword}]" >Пошук</button>-->
-      <label v-if="mistake" >{{mistake}}</label>
+      <!--      <button :class="['btn search-btn',{'valid-btn':keyword}]" >Пошук</button>-->
+      <label v-if="mistake">{{ mistake }}</label>
 
-<!--      <router-link to="/profile" class="manual-item">-->
-<!--        <span>Акаунт</span>-->
-<!--      </router-link>-->
-<!--      <router-link to="/library" class="manual-item">-->
-<!--        <span>Документи</span>-->
-<!--      </router-link>-->
-<!--      <router-link to="/new_document" class="manual-item">-->
-<!--        <span>Додати</span>-->
-<!--      </router-link>-->
-<!--      <router-link to="/history" class="manual-item">-->
-<!--        <span>Історія</span>-->
-<!--      </router-link>-->
+      <!--      <router-link to="/profile" class="manual-item">-->
+      <!--        <span>Акаунт</span>-->
+      <!--      </router-link>-->
+      <!--      <router-link to="/library" class="manual-item">-->
+      <!--        <span>Документи</span>-->
+      <!--      </router-link>-->
+      <!--      <router-link to="/new_document" class="manual-item">-->
+      <!--        <span>Додати</span>-->
+      <!--      </router-link>-->
+      <!--      <router-link to="/history" class="manual-item">-->
+      <!--        <span>Історія</span>-->
+      <!--      </router-link>-->
 
     </div>
     <div class="user-icon">
       <user-notices></user-notices>
-      <user-logo ></user-logo>
+      <user-logo></user-logo>
     </div>
-<!--    <new-document v-if="door" class="new-document-template"></new-document>-->
+    <!--    <new-document v-if="door" class="new-document-template"></new-document>-->
   </div>
 </template>
 
@@ -38,30 +47,33 @@ import UserNotices from "./UserNotificationsComponent"
 import {mapActions, mapGetters, mapMutations} from "vuex";
 
 export default {
-  data(){
-    return{
+  data() {
+    return {
       keywords: this.$route.query.q ? this.$route.query.q : '',
       mistake: '',
     }
   },
-  computed:{
-
-  },
-  methods:{
+  computed: {},
+  methods: {
     ...mapMutations(['updateUser']),
-    query(data) {
-      let query = Object.assign({}, this.$route.query);
-      if (this.keywords == '' && query.q){
-        delete query.q
-      }
+    query(keywords) {
+
+      const {...query} = this.$route.query;
 
       delete query.page;
+      delete query.q;
 
+      let data = {};
+      if (keywords !== '') {
+        data = {q: keywords};
+      }
+      console.log(data)
       this.$router.push({
         name: 'documents',
         query: {...query, ...data}
       })
     }
+
   },
   created() {
 
@@ -73,17 +85,17 @@ export default {
 
   },
   mounted() {
-    if (this.$route.query.search){
+    if (this.$route.query.search) {
       this.keywords = this.$route.query.search
     }
 
   },
-  components:{UserLogo,UserNotices,NewDocument}
+  components: {UserLogo, UserNotices, NewDocument}
 }
 </script>
 
 <style scoped>
-.search-icon{
+.search-icon {
   position: relative;
   display: flex;
   align-self: center;
@@ -91,9 +103,11 @@ export default {
   color: rgba(33, 33, 33, 0.65);
   cursor: pointer;
 }
-.search-icon svg:hover{
+
+.search-icon svg:hover {
   stroke: #222222;
 }
+
 /*.new-document-template{*/
 /*  background: rgba(241, 241, 241, 0.88);*/
 /*  position: absolute;*/
@@ -105,7 +119,7 @@ export default {
 /*  transform: translate(-50%, -50%);*/
 /*  z-index: 999;*/
 /*}*/
-.navbar{
+.navbar {
   font-size: 18px;
   padding: 0 2rem;
   align-items: center;
@@ -115,37 +129,44 @@ export default {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
 }
-.user-icon{
+
+.user-icon {
   display: flex;
   justify-self: right;
   align-items: center;
   max-width: 150px;
   grid-column-end: -1;
 }
-.user-icon > svg{
+
+.user-icon > svg {
   cursor: pointer;
 }
-.navbar > div{
+
+.navbar > div {
   height: auto;
 }
-.manual{
+
+.manual {
   display: flex;
 }
-.dropdown-content > span{
+
+.dropdown-content > span {
   color: black;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
 }
-.nav-notice svg:hover{
-  fill:#1535a5;
+
+.nav-notice svg:hover {
+  fill: #1535a5;
 }
-.nav-library svg:hover{
-  fill:#1535a5;
+
+.nav-library svg:hover {
+  fill: #1535a5;
 }
 
 
-.btn{
+.btn {
   color: rgba(33, 33, 33, 0.56);
   position: relative;
   place-content: center;
@@ -161,14 +182,17 @@ export default {
   background: #fff;
   transition: all 0.22s;
 }
-.search-btn:hover{
+
+.search-btn:hover {
   color: #0d2839;
   border: 1px solid #0d2839;
 }
-.search-btn{
- margin-left: 15px;
+
+.search-btn {
+  margin-left: 15px;
 }
-.searcher{
+
+.searcher {
   border: 1px solid #ccc;
   padding: 0.5rem 1.5rem;
   border-radius: 3px;
@@ -183,24 +207,27 @@ export default {
   transition: all .3s ease-out
   /*min-width: 200px;*/
 }
+
 .searcher:valid,
-.searcher:focus{
+.searcher:focus {
   border: 1px solid #212121;
 }
+
 .searcher:focus,
-.searcher:hover{
+.searcher:hover {
   border: 1px solid #419FD9;
 }
-.valid-btn{
+
+.valid-btn {
   border: 1px solid #212121;
   color: #212121;
 }
-.logo span{
+
+.logo span {
   font-size: 20px;
   text-transform: uppercase;
   cursor: pointer;
 }
-
 
 
 /*.manual-item{*/
