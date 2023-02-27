@@ -25,6 +25,8 @@ export default {
 <style>
 
 .filter-title{
+  display: flex;
+  align-items: center;
   cursor: pointer;
 }
 

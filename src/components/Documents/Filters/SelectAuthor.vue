@@ -1,63 +1,24 @@
 <template>
   <div class="author-filter">
     <span class="filter-title authors-title-filter" @click="AuthorsFilterOpen = !AuthorsFilterOpen">
-      Authors
+      Authors <tumbler-filter-button :toggle="AuthorsFilterOpen"/>
     </span>
     <div :class="['filter-area',{filter_open:AuthorsFilterOpen}]" v-if="getAuthors.data">
-      <label class="save-session" v-for="(author,idx) in chosen">
-        <input type="checkbox" :value="author" v-model="chosen" id="test">
-        <span class="label">{{ author.first_name }} {{ author.last_name }}</span>
-      </label>
       <input type="text" v-model="search">
-      {{ chosen }}
-      <label class="save-session" v-for="(author,idx) in getAuthors.data.filter(item=>chosen.find(i=>i===item)?false:true)" >
+      <label class="save-session" v-for="(author,idx) in getAuthors.data" >
         <input type="checkbox" :value="author" v-model="chosen" id="test">
         <span class="label">{{ author.first_name }} {{ author.last_name }}</span>
       </label>
-
-
     </div>
-
-
-    <!--    <select v-model="getDocument.year">-->
-    <!--      <option v-for=" in years" :key="y">-->
-    <!--        {{ y }}-->
-    <!--      </option>-->
-    <!--    </select>-->
-
-    <!--    <form>-->
-    <!--      <div class="multiselect">-->
-    <!--        <div class="selectBox" @click="expanded = !expanded">-->
-    <!--          <select>-->
-    <!--            <option>Select an option</option>-->
-    <!--          </select>-->
-    <!--          <div class="overSelect"></div>-->
-    <!--        </div>-->
-    <!--        <div id="checkboxes">-->
-    <!--          <label for="one">-->
-    <!--            <input type="checkbox" id="one" />First checkbox</label>-->
-    <!--          <label for="two">-->
-    <!--            <input type="checkbox" id="two" />Second checkbox</label>-->
-    <!--          <label for="three">-->
-    <!--            <input type="checkbox" id="three" />Third checkbox</label>-->
-    <!--        </div>-->
-    <!--      </div>-->
-    <!--    </form>-->
-
-    <!--    <input type="text" list="cars" />-->
-    <!--    <datalist id="cars">-->
-    <!--      <label for="one">-->
-    <!--        <input type="checkbox" id="one" />First checkbox</label>-->
-    <!--              <input type="checkbox" id="three" />-->
-    <!--            </datalist>-->
   </div>
 </template>
 
 <script>
 import {mapActions, mapGetters} from "vuex";
+import TumblerFilterButton from "@/components/additional/TumblerFilterButton";
 
 export default {
-
+  components: {TumblerFilterButton},
   data() {
     return {
       AuthorsFilterOpen: false,
@@ -92,21 +53,16 @@ export default {
     '$route.query.publication_date': {
       handler(){
         this.findAuthor();
-      }
-    }
-    ,
-    search() {
-      // this.findAuthor
-
-      this.findAuthor()
-
-      // let q = Object.entries(this.$route.query).join('&').split(',').join('=')
-      // let link = '?'+ (q ?q+'&': '');
-      // link += "authors="+this.search
-      //
-      // this.AuthorsFilter(link)
+      },
     },
-    // <!--    /authors?q=Test&authors[0]['lastname']=Morozov&authors[0]['first']=PAvel-->
+    '$route.query.type_id': {
+      handler() {
+        this.findAuthor();
+      }
+    },
+    search(){
+      this.findAuthor();
+    },
     chosen() {
 
       const {...query} = this.$route.query;
@@ -128,6 +84,8 @@ export default {
         query: {...query, ...authors}
       })
 
+      // this.findAuthor()
+
     }
   },
   computed: {
@@ -141,7 +99,15 @@ export default {
       // this.search.push(author)
     },
     findAuthor() {
-      let q = Object.entries(this.$route.query).join('&').split(',').join('=')
+      const {...query} = this.$route.query;
+      delete query.page;
+      Object.keys(query).forEach(function (key) {
+        if (key.indexOf('authors') !== -1) {
+          delete query[key];
+        }
+      })
+
+      let q = Object.entries(query).join('&').split(',').join('=')
       let link = q ? '?' + q : '';//'?' + (q ? q + '&' : '');
       if (this.search !== '') {
         link += link ? "&authors=" + this.search : "&authors=" + this.search
@@ -183,26 +149,6 @@ export default {
       }
     })
 
-    // console.log();
-    // let query = this.$route.query;
-    // console.log(query);
-    // delete query.page;
-    // delete query.authors;
-    // // Object.keys(query).forEach(function (key, index) {
-    // //   if (key.indexOf('authors') !== '-1') {
-    // //     delete query[key];
-    // //   }
-    // // })
-    // // delete query.authors[0];
-    // // delete query['authors[*][first_name]'];
-    // console.log(query);
-
-    // let query = Object.assign({}, this.$route.query);
-    // console.log('author query:',this.$route.query)
-    // this.chosen = [{
-    //   first_name: 'Igor3',
-    //   last_name: 'Special'
-    // }]
     this.findAuthor()
   }
 }

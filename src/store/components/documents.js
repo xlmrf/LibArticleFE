@@ -8,6 +8,7 @@ export default {
             filter:{},
             authors:[],
             years: {},
+            filter_types: [],
             info:''
         }
     },
@@ -30,7 +31,7 @@ export default {
             })
         },
         AuthorsFilter(ctx,data){
-            axios.get(ctx.rootState.api_url_v1+'/authors' + data).then(response => {
+            axios.get(ctx.rootState.api_url_v1+'/filter-authors' + data).then(response => {
                 ctx.commit('AuthorsFilterMutate', response.data)
             }).catch(err => {
                 console.log('authors error:', err.response)
@@ -38,8 +39,16 @@ export default {
             })
         },
         YearsFilter(ctx,data){
-            axios.get(ctx.rootState.api_url_v1+'/documents-year' + data).then(response => {
+            axios.get(ctx.rootState.api_url_v1+'/filter-years' + data).then(response => {
                 ctx.commit('YearsFilterMutate', response.data)
+            }).catch(err => {
+                console.log('authors error:', err.response)
+                // ctx.commit('errorsDocument', err.response)
+            })
+        },
+        TypesFilter(ctx,data){
+            axios.get(ctx.rootState.api_url_v1+'/filter-types' + data).then(response => {
+                ctx.commit('TypesFilterMutate', response.data)
             }).catch(err => {
                 console.log('authors error:', err.response)
                 // ctx.commit('errorsDocument', err.response)
@@ -68,14 +77,17 @@ export default {
         YearsFilterMutate(state,data){
             state.years = data
         },
-        DocumentsMutate(state, data) {
+        DocumentsMutate(state, data){
             state.documents = data
         },
-        DocumentMutate(state, data) {
+        TypesFilterMutate(state,data){
+            state.filter_types = data
+        },
+        DocumentMutate(state, data){
             // console.log("Document update in mutations =>", data);
             state.document = data
         },
-        errorsDocument(state, data) {
+        errorsDocument(state, data){
             state.info = data
         },
     },
@@ -92,6 +104,9 @@ export default {
         },
         getYears(ctx){
             return ctx.years
+        },
+        getFilterTypes(ctx){
+            return ctx.filter_types
         }
     }
 }
