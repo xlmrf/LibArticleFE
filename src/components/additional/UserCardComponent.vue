@@ -4,13 +4,13 @@
       <!--            <router-link class="nav-name link" to="/user/settings">{{user.name}}</router-link>-->
       <span class="user-nickname">{{user.name}}</span>
     </div>
-    <div :class="['dropdown-content', {'drop-vision' : !dropToggle}]">
-      <router-link class="drop-list-item link" :to="'/document/make'">Новый документ</router-link>
-      <router-link class="drop-list-item link" :to="'/library'">Библиотека</router-link>
-      <router-link class="drop-list-item link" to="/story">История</router-link>
-      <router-link class="drop-list-item link" to="/settings">Настройки</router-link>
-      <span class="drop-list-item link" @click="alert = true">Выйти</span>
-    </div>
+<!--    <div :class="['dropdown-content', {'drop-vision' : !dropToggle}]">-->
+<!--      <router-link class="drop-list-item link" :to="'/document/make'">Новый документ</router-link>-->
+<!--      <router-link class="drop-list-item link" :to="'/library'">Библиотека</router-link>-->
+<!--      <router-link class="drop-list-item link" to="/story">История</router-link>-->
+<!--      <router-link class="drop-list-item link" to="/settings">Настройки</router-link>-->
+<!--      <span class="drop-list-item link" @click="alert = true">Выйти</span>-->
+<!--    </div>-->
   </div>
   <teleport to="body" v-if="alert">
     <div class="exit-alert modal" v-if="!loader">

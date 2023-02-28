@@ -12,7 +12,7 @@ import NewDocument from "./components/new_document/select_type/NewDocumentBaseCo
 import NewDocumentFields from "./components/new_document/select_type/DocumentTypesComponent"
 // import library from "./components/library/LibraryBaseComponent";
 import documents from "./view/Documents";
-import document from "./components/document/DocumentBaseComponent"
+import document from "./view/Document"
 
 import profileStatistic from "./components/profile/content_items/StatisticInfoComponent"
 // import userCard from "./components/user/UserCardComponent"
@@ -100,6 +100,11 @@ const routes = [
             {
                 path:'/documents',
                 name:'documents',
+                component: documents
+            },
+            {
+                path:'/my-documents',
+                name:'my-documents',
                 component: documents
             },
             {

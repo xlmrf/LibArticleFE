@@ -1,5 +1,8 @@
 <template>
   <div v-if="documents.data">
+    <div class="documents-header">
+      Знайдено документів {{documents.total}}
+    </div>
     <document-item :document="document" v-for="document in documents.data" />
     <pagination :paginate="paginate(documents)"/>
   </div>

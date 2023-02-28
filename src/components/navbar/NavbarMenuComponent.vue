@@ -68,8 +68,13 @@ export default {
         data = {q: keywords};
       }
       console.log(data)
+      let name = 'documents';
+      if (this.$route.name === 'my-documents') {
+        name = 'my-documents';
+      }
+
       this.$router.push({
-        name: 'documents',
+        name: name,
         query: {...query, ...data}
       })
     }

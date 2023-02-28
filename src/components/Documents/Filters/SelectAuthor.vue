@@ -67,18 +67,17 @@ export default {
 
       const {...query} = this.$route.query;
       delete query.page;
-
-      Object.keys(query).forEach(function (key) {
-        if (key.indexOf('authors') !== -1) {
-          delete query[key];
-        }
-      })
+      delete query.authors;
 
       let authors = {};
-      this.chosen.forEach((item, key) => {
-        authors[`authors[${key}][last_name]`] = item.last_name;
-        authors[`authors[${key}][first_name]`] = item.first_name;
-      })
+      if(this.chosen.length!==0){
+        authors = {authors:JSON.stringify(this.chosen)};
+      }
+
+      // this.chosen.forEach((item, key) => {
+      //   authors[`authors[${key}][last_name]`] = item.last_name;
+      //   authors[`authors[${key}][first_name]`] = item.first_name;
+      // })
       this.$router.replace({
         name: 'documents',
         query: {...query, ...authors}
@@ -101,13 +100,16 @@ export default {
     findAuthor() {
       const {...query} = this.$route.query;
       delete query.page;
-      Object.keys(query).forEach(function (key) {
-        if (key.indexOf('authors') !== -1) {
-          delete query[key];
-        }
-      })
+      // delete query.authors;
+      // Object.keys(query).forEach(function (key) {
+      //   if (key.indexOf('authors') !== -1) {
+      //     delete query[key];
+      //   }
+      // })
 
-      let q = Object.entries(query).join('&').split(',').join('=')
+      let q = '';
+      if (this.$route.fullPath.split("?")[1] !== undefined)
+        q = this.$route.fullPath.split("?")[1]
       let link = q ? '?' + q : '';//'?' + (q ? q + '&' : '');
       if (this.search !== '') {
         link += link ? "&authors=" + this.search : "&authors=" + this.search

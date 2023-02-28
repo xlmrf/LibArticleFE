@@ -16,7 +16,7 @@ export default {
     actions:{
         DocumentSearcher(ctx,data) {
             // let link = '?'+Object.entries(data).join('&').split(',').join('=');
-            axios.get(ctx.rootState.api_url_v1+'' + data).then(response => {
+            axios.get(ctx.rootState.api_url_v1+'/documents' + data).then(response => {
                 ctx.commit('DocumentsMutate', response.data)
             }).catch(err => {
                 ctx.commit('errorsDocument', err.response)

@@ -1,6 +1,6 @@
 <template>
-  <div class="documents-wrapper" v-if="getDocuments">
-    <filter-options />
+  <div class="documents-wrapper" v-if="getDocuments && getTypes">
+    <filter-options/>
     <documents-list :documents="getDocuments"/>
   </div>
 </template>
@@ -11,56 +11,53 @@ import {mapActions, mapGetters} from "vuex";
 import DocumentsList from "@/components/Documents/DocumentsList";
 
 export default {
-  data(){
-    return{
-      query:''
+  data() {
+    return {
+      query: ''
     }
   },
   name: "Documents",
-  watch:{
+  watch: {
     '$route.fullPath': {
-      handler(item){
-        // if (!(item.id && this.stage === true)){
-        //     this.stage = true
-        // }
-        // else {
-        //   this.stage = false
-        // }
-        // this.query='?'+item.split('?')[1];
-
-
-        // let link = '?'+Object.entries(this.query).join('&').split(',').join('=');
-        this.DocumentSearcher(item);
-
-        console.log('watch query:',this.query)
+      handler(item) {
+        let q = '';
+        if (this.$route.fullPath.split('?')[1]) {
+          q = '?' + this.$route.fullPath.split('?')[1];
         }
+        this.DocumentSearcher(q);
       }
+    }
   },
   methods: {
-    ...mapActions(['DocumentSearcher'])
+    ...mapActions(['DocumentSearcher', 'requestTypes'])
   },
   computed: {
-    ...mapGetters(['getDocuments'])
+    ...mapGetters(['getDocuments', 'getTypes'])
   },
-  components:{DocumentsList, FilterOptions},
+  components: {DocumentsList, FilterOptions},
   mounted() {
-    // let link = '?'+Object.entries(this.query).join('&').split(',').join('=');
-    // let query='?'+this.query.split('?')[1];
     console.log(this.$route.fullPath)
-    this.DocumentSearcher(this.$route.fullPath);
+    let q = '';
+    if (this.$route.fullPath.split('?')[1]) {
+      q = '?' + this.$route.fullPath.split('?')[1];
+    }
+    this.DocumentSearcher(q);
+    this.requestTypes()
   }
 }
 </script>
 
 <style scoped>
 
-.documents-wrapper{
+.documents-wrapper {
   display: flex;
 }
-.documents-wrapper >:first-child{
+
+.documents-wrapper > :first-child {
   flex: 1;
 }
-.documents-wrapper >:last-child{
+
+.documents-wrapper > :last-child {
   flex: 4;
 }
 

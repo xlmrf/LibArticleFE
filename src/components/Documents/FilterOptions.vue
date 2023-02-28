@@ -5,7 +5,7 @@
     <select-author />
     <range-year />
     <select-type />
-    <select-keywords />
+<!--    <select-keywords />-->
   </div>
 </template>
 

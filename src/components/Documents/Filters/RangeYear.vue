@@ -7,11 +7,11 @@
     <div :class="['filter-area years-panel',{filter_open:YearsFilterOpen}]" v-if="getYears">
       <span>
         <label for="min-year">min year</label>
-        <input type="text" name="min-year" id="min-year" v-model="getYears.from_year">
+        <input type="text" name="min-year" id="min-year" v-model="getYears.from_year" @keyup="key()">
       </span>
       <span>
         <label for="max-year">max year</label>
-        <input type="text" name="max-year" id="max-year" v-model="getYears.to_year">
+        <input type="text" name="max-year" id="max-year" v-model="getYears.to_year" @keyup="key()">
       </span>
     </div>
   </div>
@@ -31,40 +31,57 @@ export default {
     }
   },
   methods:{
-    ...mapActions(['YearsFilter'])
+    ...mapActions(['YearsFilter']),
+    key(){
+      if(this.getYears.from_year !== null && this.getYears.from_year.length === 4&&this.getYears.to_year !== null && this.getYears.to_year.length === 4){
+        this.findDocumentsOfYears
+      }
+    }
   },
   watch:{
-    'getYears.from_year':{
-      handler(newVal, oldVal){
-        if(this.getYears.from_year !== null && this.getYears.from_year.length === 4 && oldVal!== undefined){
-          this.findYears
-        }
+
+    '$route.query.q': {
+      handler() {
+        this.findYears;
       }
     },
-    'getYears.to_year': {
-      handler(newVal, oldVal) {
-        if (this.getYears.to_year !== null && this.getYears.to_year.length === 4 && oldVal!== undefined) {
-          this.findYears
-        }
+    '$route.query.type_id': {
+      handler() {
+        this.findYears;
+      }
+    },
+    "$route.query.authors": {
+      handler(key) {
+        this.findYears;
+        console.log('query change', key)
+
       }
     }
   },
   computed:{
     ...mapGetters(['getYears']),
-    findYears(){
+    findDocumentsOfYears(){
       let query = Object.assign({}, this.$route.query);
       delete query.page;
       this.$router.push({
         name: 'documents',
         query: {...query, ...{publication_date:this.getYears.from_year+'_'+this.getYears.to_year}}
       })
+    },
+
+
+    findYears() {
+      let q = '';
+      if (this.$route.fullPath.split("?")[1] !== undefined)
+        q = this.$route.fullPath.split("?")[1]
+      let link = '?'+ (q ?q: '');
+      this.YearsFilter(link)
     }
 
-  },
+
+    },
   mounted() {
-    let q = Object.entries(this.$route.query).join('&').split(',').join('=')
-    let link = '?'+ (q ?q+'&': '');
-    return this.YearsFilter(link)
+   this.findYears
   },
   name: "RangeYear"
 }

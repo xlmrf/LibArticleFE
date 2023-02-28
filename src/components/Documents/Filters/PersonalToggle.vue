@@ -16,8 +16,17 @@
 export default {
   data(){
     return{
-      only_own: this.$route.query.my ? this.$route.query.my : false,
+      only_own: false,
     }
+  },
+  watch:{
+    // '$route.query':{
+    //   handler(k){
+    //     if (!k.my){
+    //
+    //     }
+    //   }
+    // }
   },
   methods:{
     query(data) {
@@ -31,6 +40,11 @@ export default {
         query: {...query, ...data}
       })
     },
+  },
+  mounted() {
+    if(this.$route.query.my!=undefined){
+      this.only_own = this.$route.query.my;
+    }
   }
 }
 </script>

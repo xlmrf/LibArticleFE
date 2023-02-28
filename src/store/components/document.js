@@ -4,11 +4,11 @@ import axios from "axios";
 export default {
     state() {
         return {
-            document: {},
+            document: null,
 
             last_documents: [],
             info: '',
-            types: [],
+            types: null,
             propose_authors: [],
             newDocumentId: null,
             uncompletedDocument: ''
@@ -50,12 +50,11 @@ export default {
             })
         },
 
-        getDocumentById(ctx, id) {
+        requestDocument(ctx, id) {
+
             axios.get(ctx.rootState.api_url_v1 + '/document/' + id).then(response => {
-                console.log('wef', response.data);
-                ctx.commit('updateDocument', response.data)
+                ctx.commit('DocumentMutate', response.data)
             }, err => {
-                console.log('error info -', err.message);
                 ctx.commit('setInfo', err)
             })
         },
@@ -76,6 +75,9 @@ export default {
         updateDocument(state, data) {
             router.push('/document/make/' + data.id)
             state.document = {...state.document, ...data}
+        },
+        DocumentMutate(state,data){
+            state.document = data
         },
 
         uploadResult(state, data) {

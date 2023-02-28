@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="getTypes">
     <span class="filter-title authors-title-filter" @click="TypesFilterOpen = !TypesFilterOpen">
       Types <tumbler-filter-button :toggle="TypesFilterOpen"/>
     </span>
@@ -26,15 +26,23 @@ export default {
   },
 
   methods: {
-    ...mapActions(['requestTypes', 'TypesFilter']),
+    ...mapActions(['TypesFilter']),
 
     findTypes() {
       if (this.$route.query.type_id) {
         this.chosen = this.$route.query.type_id.split(',')
       }
-      let q = Object.entries(this.$route.query).join('&').split(',').join('=')
-      let link = '?' + (q ? q + '&' : '');
+      let q = '';
+      if (this.$route.fullPath.split("?")[1] !== undefined)
+        q = this.$route.fullPath.split("?")[1]
+      let link = '?' + (q ? q : '');
       this.TypesFilter(link)
+    },
+    checkAuthors() {
+
+      // for (let author in this.$route.query){
+      //   console.log('query route',this.$route.query[author])
+      // }
     }
   },
   watch: {
@@ -49,8 +57,15 @@ export default {
     '$route.query.publication_date': {
       handler() {
         this.findTypes();
-      },
+      }
     },
+    "$route.query.authors": {
+      handler(key) {
+        this.findTypes();
+        console.log('query change', key)
+
+      }
+    }
   },
   computed: {
     ...mapGetters(['getTypes', 'getFilterTypes']),
@@ -79,9 +94,8 @@ export default {
     }
   },
   mounted() {
-    this.requestTypes();
     this.findTypes();
-    console.log(this.$route.query);
+    this.checkAuthors()
   },
   components: {TumblerFilterButton}
 }

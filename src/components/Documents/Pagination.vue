@@ -1,33 +1,32 @@
 <template>
   <div class="paginate" v-if="paginate">
-    <span class="page_tumbler" v-if="paginate.current_page !== 1"><router-link :to="thePath(1)">1</router-link></span>
-    <!--    <span class="page_tumbler">{{ // Page }}</span>-->
-    <!--    <span class="page_tumbler"><router-link :to="thePath('back')"-->
-    <!--    >&lt</router-link></span>-->
-    <span v-if="paginate.current_page-1!==1&&paginate.current_page-1!==0&& paginate.current_page-2!==1">...</span>
+    <div>
+<!--      first page-->
+      <span class="page_tumbler" v-if="paginate.current_page !== 1"><router-link :to="thePath(1)">1</router-link></span>
+<!--      between-->
+      <span v-if="paginate.current_page-1!==1&&paginate.current_page-1!==0&& paginate.current_page-2!==1">...</span>
+<!--      previous page-->
+      <span class="page_tumbler " v-if="paginate.current_page-1!==1&&paginate.current_page-1!==0">
+        <router-link :to="thePath(paginate.current_page-1)">{{ paginate.current_page - 1 }}</router-link>
+      </span>
+<!--      current page-->
+      <span class="page_tumbler current-page-pagination"><router-link
+          :to="thePath(paginate.current_page)">{{ paginate.current_page }} </router-link>
+      </span>
+<!--      next page-->
+      <span class="page_tumbler ">
+        <router-link v-if="paginate.current_page+1!==paginate.last_page&&paginate.current_page+1!==paginate.last_page+1"
+                     :to="thePath(paginate.current_page+1)">
+          {{ paginate.current_page + 1 }} </router-link>
+      </span>
+<!--      between -->
+      <span v-if="paginate.current_page+2!==paginate.last_page&&paginate.current_page+1!==paginate.last_page&&paginate.current_page+1!==paginate.last_page+1">...</span>
 
-    <span class="page_tumbler " v-if="paginate.current_page-1!==1&&paginate.current_page-1!==0">
-      <router-link :to="thePath(paginate.current_page-1)">{{ paginate.current_page - 1 }} </router-link></span>
-
-
-    <span class="page_tumbler current-page-pagination"><router-link
-        :to="thePath(paginate.current_page)">{{ paginate.current_page }} </router-link></span>
-    <!--    <span class="page_tumbler"><router-link v-if="paginate.current_page !== paginate" :to="thePath('next')">></router-link></span>-->
-
-
-    <span class="page_tumbler ">
-      <router-link v-if="paginate.current_page+1!==paginate.last_page&&paginate.current_page+1!==paginate.last_page+1"
-                   :to="thePath(paginate.current_page+1)">
-        {{ paginate.current_page + 1 }} </router-link>
-    </span>
-
-    <span v-if="paginate.current_page+2!==paginate.last_page&&paginate.current_page+1!==paginate.last_page&&paginate.current_page+1!==paginate.last_page+1">...</span>
-
-
-    <span class="page_tumbler"><router-link v-if="paginate.current_page !== paginate.last_page"
-                                            :to="thePath(paginate.last_page)"
-    >{{ paginate.last_page }}</router-link></span>
-
+<!--      last page-->
+      <span class="page_tumbler" v-if="paginate.current_page !== paginate.last_page">
+        <router-link :to="thePath(paginate.last_page)">{{ paginate.last_page }}</router-link>
+      </span>
+    </div>
   </div>
 </template>
 
@@ -79,9 +78,31 @@ export default {
 
 .paginate {
   display: flex;
+  justify-content: center;
   border: 2px solid cyan;
+  height: 80px;
+  align-items: center;
 }
+.paginate span, .paginate a{
+  text-decoration: none;
+  color: #222222;
+  /*margin: 0 0.5rem;*/
+  /*padding: 4px;*/
 
+  border-radius: 10%;
+}
+.paginate a{
+  border: 1px solid darkslateblue;
+  width: 100%;
+}
+.paginate span{
+  border: 1px solid fuchsia;
+
+}
+.paginate a{
+  width: 40px;
+  height: 40px;
+}
 .current-page-pagination {
   font-weight: bold;
 }
