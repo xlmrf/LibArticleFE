@@ -1,6 +1,6 @@
 <template>
   <div class="documents-filter">
-    filter
+<!--    filter-->
     <PersonalToggle></PersonalToggle>
     <select-author />
     <range-year />
@@ -39,7 +39,27 @@ export default {
 }
 
 .documents-filter{
-  border: 1px solid blue;
+  padding: 0.3rem;
+}
+.documents-filter > div{
+  display: flex;
+  flex-flow: column;
+  align-self: center;
+  position: relative;
+  /*cursor: pointer;*/
+  /*margin: 0 5%;*/
+  padding: 20px;
+  overflow:hidden;
+  outline: none;
+}
+.documents-filter > div:after{
+  content:'';
+  position:absolute;
+  width:100%;
+  height:0.06rem;
+  left:0;
+  bottom:2px;
+  background: rgba(191, 191, 191, 0.3);
 }
 .documents-filter > div{
   padding: 0.2rem;

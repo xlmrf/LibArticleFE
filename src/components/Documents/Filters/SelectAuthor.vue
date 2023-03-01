@@ -154,10 +154,6 @@ export default {
 
 <style scoped>
 
-.author-filter {
-  border: 1px solid darkslateblue;
-}
-
 .multiselect {
   width: 200px;
 }

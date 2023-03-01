@@ -32,16 +32,24 @@
         <router-link :to="thePath(paginate.last_page)">{{ paginate.last_page }}</router-link>
       </span>
     <span class="page_tumbler " :class="{disable_link:paginate.current_page === paginate.last_page}">
-        <router-link :to="thePath(paginate.current_page+1)">
+        <router-link :to="thePath(paginate.current_page+1)" v-if="paginate.current_page !== paginate.last_page">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(16, 89, 255, 0.75)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </router-link>
+      <svg xmlns="http://www.w3.org/2000/svg" v-else width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(16, 89, 255, 0.75)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
       </span>
+    <button @click="scrollToTop">BOOM</button>
   </div>
 </template>
 
 <script>
 
 export default {
+  data(){
+    return{
+      scTimer: 0,
+      scY: 0,
+    }
+  },
   name: "Documents",
   props: ['paginate'],
   methods: {
@@ -63,11 +71,32 @@ export default {
       // else if(page === 'next'){
       //   url+='page='+(paginate.current_page+1)
       // }
-
       return url;
       // '/documents?page='+getDocuments.last_page
 
-    }
+    },
+    scrollToTop() {
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+
+    },
+    handleScroll() {
+
+      const scrollBtn = this.$refs.scrollTopButton;
+
+
+
+      if (window.scrollY > 0) {
+
+        scrollBtn.classList.remove("invisible");
+
+      } else {
+
+        scrollBtn.classList.add("invisible");
+
+      }
+
+    },
 
 
   },
@@ -78,8 +107,15 @@ export default {
     }
   },
   mounted() {
-    console.log('p', this.paginate);
-  }
+
+    window.addEventListener("scroll", this.handleScroll);
+
+  },
+  beforeUnmount() {
+
+    window.removeEventListener("scroll", this.handleScroll);
+
+  },
 }
 </script>
 
