@@ -60,6 +60,14 @@ export default {
         this.findAuthor();
       }
     },
+    '$route.query.authors': {
+      handler(key) {
+        if (key !== undefined)
+          this.chosen = JSON.parse(key);
+        else
+          this.chosen=[]
+      }
+    },
     search(){
       this.findAuthor();
     },

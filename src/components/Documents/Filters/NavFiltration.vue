@@ -1,12 +1,12 @@
 <template>
   <div class="used-filters">
-<!--        Застосовані фільтри:-->
-<!--    {{checkQuery()}}-->
+    <!--        Застосовані фільтри:-->
+    <!--    {{checkQuery()}}-->
     <span v-for="(item,k) in $route.query">
-      {{associateFiltersName[k]}};
-      <span v-for="el in textFilter(item, k)">
-      {{el}}
-          <small @click="deleteFilter(k)" class="delete-item">
+      {{ associateFiltersName[k] }}:
+      <span v-for="(el, i) in textFilter(item, k)">
+      {{ el }}
+          <small @click="deleteFilter(k,i)" class="delete-item">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
                  stroke="#9A9A9A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -29,13 +29,14 @@ export default {
         authors: 'Автори',
         type_id: 'Тип',
         publication_date: 'Дата публікації'
-      }
+      },
+      filters: []
     }
   },
-  computed:{
+  computed: {
     ...mapGetters(['getTypes']),
   },
-  methods:{
+  methods: {
     checkQuery() {
       let {...query} = this.$route.query;
     },
@@ -43,40 +44,61 @@ export default {
     textFilter(item, k) {
       let arr = []
       // let text = this.associateFiltersName[k] + ':';
-      console.log('item', item,'k',k)
+      console.log('item', item, 'k', k)
       if (k === 'type_id') {
         item.split(',').map(i => {
-          arr.push(i)
-          console.log('item', item)
-          // return this.getTypes.find(ite => ite.id == item).name
-        })
+          arr.push(this.getTypes.find(e => e.id === parseInt(i)).name);
+        });
       }
       if (k === 'publication_date') {
-        item.split('_').map(i => {
-          arr.push(i)
-          // return this.getTypes.find(ite => ite.id == item).name
-        });
+        let from = item.split('_')[0];
+        let to = item.split('_')[1];
+        if (from === to)
+          arr.push(`${from}р.`)
+        else
+          arr.push(`від ${from}р. до ${to}р.`)
       }
       if (k === 'authors') {
         JSON.parse(item).map(i => {
-          arr.push(i.last_name+' '+i.first_name)
-          // return this.getTypes.find(ite => ite.id == item).name
+          arr.push((i.last_name ? i.last_name + ' ' : '') + '' + (i.first_name ? i.first_name : ''))
         });
         // arr=JSON.parse(item);
-          // console.log(Array.from(item))
-          // return this.getTypes.find(ite => ite.id == item).name
+        // console.log(Array.from(item))
+        // return this.getTypes.find(ite => ite.id == item).name
       }
       return arr
     },
-    deleteFilter(q) {
+    deleteFilter(q, i) {
       const {...query} = this.$route.query;
-      delete query[q];
+      if (q === 'authors') {
+        query[q] = JSON.parse(query[q]);
+        query[q].splice(i, 1)
+        if (!query[q].length) {
+          delete query[q];
+        } else {
+          query[q] = JSON.stringify(query[q])
+        }
+      } else if (q === 'type_id') {
+        query[q] = query[q].split(',')
+        query[q].splice(i, 1)
+        if (!query[q].length) {
+          delete query[q];
+        } else {
+          query[q] = query[q].join(',')
+        }
+      } else {
+        delete query[q];
+      }
 
       this.$router.replace({
         name: 'documents',
         query: {...query}
       })
     }
+  },
+
+  mounted() {
+
   }
 
 }
@@ -86,11 +108,15 @@ export default {
 
 .used-filters {
   margin-top: 1rem;
-  display: flex;
+  /*display: flex;*/
 }
 
-.used-filters span >span {
-  display: flex;
+.used-filters > span {
+
+}
+
+.used-filters span > span {
+  /*display: flex;*/
   cursor: default;
   width: fit-content;
   /*font-size: 1em;*/

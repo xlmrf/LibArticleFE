@@ -65,6 +65,16 @@ export default {
         console.log('query change', key)
 
       }
+    },
+    "$route.query.type_id": {
+      handler(key) {
+        // console.log("key::",key)
+        if (key !== undefined)
+          this.chosen = key.split(',');
+        else
+          this.chosen=[]
+
+      }
     }
   },
   computed: {
