@@ -40,6 +40,28 @@ export default {
 .document-item{
   display: flex;
   flex-flow: column;
-  border: 1px solid red;
+  align-self: center;
+  position: relative;
+  /*cursor: pointer;*/
+  /*margin: 0 5%;*/
+  padding: 20px;
+  overflow:hidden;
+  outline: none;
+}
+.document-item:after{
+  content:'';
+  position:absolute;
+  width:100%;
+  height:0.05rem;
+  left:0;
+  bottom:3px;
+  background: #bfbfbf;
+}
+.document-item a:visited{
+  color: #222222;
+}
+.document-item a{
+  text-decoration: none;
+  color: #0F0F0F;
 }
 </style>

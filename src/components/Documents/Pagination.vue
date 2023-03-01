@@ -1,6 +1,11 @@
 <template>
   <div class="paginate" v-if="paginate">
-    <div>
+      <span class="page_tumbler " :class="{disable_link:paginate.current_page-1===0}">
+        <router-link :to="thePath(paginate.current_page-1)" v-if="paginate.current_page-1!==0">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(16, 89, 255, 0.75)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </router-link>
+        <svg xmlns="http://www.w3.org/2000/svg" v-else width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(16, 89, 255, 0.75)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </span>
 <!--      first page-->
       <span class="page_tumbler" v-if="paginate.current_page !== 1"><router-link :to="thePath(1)">1</router-link></span>
 <!--      between-->
@@ -26,7 +31,11 @@
       <span class="page_tumbler" v-if="paginate.current_page !== paginate.last_page">
         <router-link :to="thePath(paginate.last_page)">{{ paginate.last_page }}</router-link>
       </span>
-    </div>
+    <span class="page_tumbler " :class="{disable_link:paginate.current_page === paginate.last_page}">
+        <router-link :to="thePath(paginate.current_page+1)">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(16, 89, 255, 0.75)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </router-link>
+      </span>
   </div>
 </template>
 
@@ -79,7 +88,6 @@ export default {
 .paginate {
   display: flex;
   justify-content: center;
-  border: 2px solid cyan;
   height: 80px;
   align-items: center;
 }
@@ -92,18 +100,31 @@ export default {
   border-radius: 10%;
 }
 .paginate a{
-  border: 1px solid darkslateblue;
-  width: 100%;
-}
-.paginate span{
-  border: 1px solid fuchsia;
-
+  padding: 0.4rem 0.8rem;
+  /*width: 1rem;*/
+  /*height: 1rem;*/
+  /*width: 100%;*/
 }
 .paginate a{
-  width: 40px;
-  height: 40px;
+  padding: 0.4rem 0.8rem;
+  /*width: 1rem;*/
+  /*height: 1rem;*/
+  /*width: 100%;*/
 }
-.current-page-pagination {
+.paginate span{
+  /*border: 1px solid fuchsia;*/
+  margin: 0.3rem;
+}
+.page_tumbler{
+  /*border: 1px solid red;*/
+  /*padding: 10px;*/
+}
+.current-page-pagination > a{
+  background: rgba(16, 89, 255, 0.75);
+  color: #f1f1f1;
   font-weight: bold;
+}
+.disable_link svg{
+  stroke: #bbbbbb;
 }
 </style>

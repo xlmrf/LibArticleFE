@@ -74,10 +74,6 @@ export default {
         authors = {authors:JSON.stringify(this.chosen)};
       }
 
-      // this.chosen.forEach((item, key) => {
-      //   authors[`authors[${key}][last_name]`] = item.last_name;
-      //   authors[`authors[${key}][first_name]`] = item.first_name;
-      // })
       this.$router.replace({
         name: 'documents',
         query: {...query, ...authors}
