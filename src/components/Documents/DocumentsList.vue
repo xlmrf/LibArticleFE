@@ -39,7 +39,7 @@ export default {
     pagination
   },
   mounted() {
-    let i = Object.assign({}, this.documents)
+    let i = Object.assign({},this.documents)
     // i.splice(i.indexOf(i.data), 1);
     console.log('i', i);
   }
