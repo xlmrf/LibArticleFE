@@ -39,7 +39,7 @@ export default {
 }
 
 .documents-filter{
-  padding: 0.3rem;
+  padding: 1rem;
 }
 .documents-filter > div{
   display: flex;
@@ -48,7 +48,7 @@ export default {
   position: relative;
   /*cursor: pointer;*/
   /*margin: 0 5%;*/
-  padding: 20px;
+  padding: 2rem;
   overflow:hidden;
   outline: none;
 }
