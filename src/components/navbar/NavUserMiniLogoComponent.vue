@@ -85,11 +85,10 @@ export default {
   display: inherit;
 }
 .nav-menu{
-  /*box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;*/
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px;
   position: absolute;
-  margin-top: 52px;
-  left: -7.5rem;
+  margin-top: 32px;
+  left: -8.5rem;
   display: none;
   min-width: auto;
   border-radius: 5px;

@@ -130,7 +130,7 @@ export default {
   align-items: center;
   height: 56px;
   /*border-bottom: 1px solid ;*/
-  box-shadow: rgba(0, 0, 0, 0.18) 0 1px 3px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 1px 1px;
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
 }

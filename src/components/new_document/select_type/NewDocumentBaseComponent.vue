@@ -31,7 +31,7 @@
 </template>
 <script>
 import {mapActions, mapGetters, mapMutations} from "vuex";
-import loader from "../../additional/LoaderComponent"
+import loader from "../../additional/loader"
 export default {
   mixins:['translate'],
   data(){

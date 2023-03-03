@@ -52,7 +52,7 @@
 
 <script>
 import {mapGetters, mapActions, mapMutations} from 'vuex'
-import Loader from "../../additional/LoaderComponent";
+import Loader from "../../additional/loader";
 import FilesFrame from "../write/FilesFrameComponent";
 import DocumentTypes from "./NewDocumentBaseComponent"
 import AuthorFields from "../write/AuthorFieldsComponent"

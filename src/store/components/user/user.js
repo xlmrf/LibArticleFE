@@ -8,6 +8,7 @@ export default {
     state: {
         user: {},
         author: {},
+        profile:null,
         token: '',
         info: {},
         errors: [],
@@ -16,11 +17,11 @@ export default {
 
     },
     actions: {
-        requestAuthor(ctx) {
+        requestProfile(ctx) {
             let id = router.currentRoute.value.params.id
             axios.get(ctx.rootState.api_url_v1 + '/profile/' + id)
                 .then(res => {
-                    ctx.commit('updateAuthor', res.data)
+                    ctx.commit('updateProfile', res.data)
                     // ctx.commit('userMessages', res.statusText)
                     console.log("author info", res);
                 }, error => {
@@ -60,8 +61,8 @@ export default {
         ...settings
     },
     mutations: {
-        updateAuthor(ctx, data) {
-            ctx.author = data
+        updateProfile(ctx, data) {
+            ctx.profile = data
         },
         updateUserInfo(ctx, data) {
             ctx.user_info = data
@@ -91,8 +92,8 @@ export default {
         getUserMessage(state) {
             return state.info
         },
-        getAuthor(state) {
-            return state.author
+        getProfile(state) {
+            return state.profile
         },
         getToken(state) {
             return state.token

@@ -14,7 +14,7 @@
 <script>
 import TitleField from "@/components/DocumentMake/Fields/TitleField";
 import TypeField from "@/components/DocumentMake/Fields/TypeField";
-import Loader from "@/components/additional/LoaderComponent"
+import Loader from "@/components/additional/loader"
 import {mapGetters} from "vuex";
 export default {
   data(){

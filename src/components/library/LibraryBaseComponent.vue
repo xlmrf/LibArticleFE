@@ -41,7 +41,7 @@
 import {mapGetters, mapActions} from 'vuex'
 import FilterBar from "./lib_additional/FilterBarLibraryComponent";
 import ListItemDocument from "./ItemListDocumentComponent";
-import loader from "../additional/LoaderComponent";
+import loader from "../additional/loader";
 
 export default {
   components: {ListItemDocument, FilterBar,loader},

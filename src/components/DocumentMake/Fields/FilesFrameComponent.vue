@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import loader from "../../additional/LoaderComponent";
+import loader from "../../additional/loader";
 import {mapActions, mapGetters,mapMutations} from "vuex";
 // import axios from "axios";
 

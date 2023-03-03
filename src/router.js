@@ -13,10 +13,11 @@ import NewDocumentFields from "./components/new_document/select_type/DocumentTyp
 // import library from "./components/library/LibraryBaseComponent";
 import documents from "./view/Documents";
 import document from "./view/Document"
+import profile from "./view/Profile"
 
-import profileStatistic from "./components/profile/content_items/StatisticInfoComponent"
+import profileStatistic from "./components/profile/old/content_items/StatisticInfoComponent"
 // import userCard from "./components/user/UserCardComponent"
-import UserMain from "./components/profile/UserMainComponent"
+import UserMain from "./components/profile/old/UserMainComponent"
 
 import tutorial from "./components/fallback/TutorialComponent"
 import support from "./components/additional/UnknownPageComponent"
@@ -115,7 +116,7 @@ const routes = [
             {
                 path:'/profile/:id',
                 name:'profile',
-                component: UserMain,
+                component: profile,
                 // children:[
                 //     {
                 //         path:'/statistics',

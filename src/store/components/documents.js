@@ -83,10 +83,6 @@ export default {
         TypesFilterMutate(state,data){
             state.filter_types = data
         },
-        DocumentMutate(state, data){
-            // console.log("Document update in mutations =>", data);
-            state.document = data
-        },
         errorsDocument(state, data){
             state.info = data
         },

@@ -38,7 +38,7 @@
 
 <script>
 import {mapActions, mapGetters, mapMutations} from "vuex";
-import Loader from "../additional/LoaderComponent";
+import Loader from "../additional/loader";
 import axios from "axios";
 
 export default {

@@ -1,6 +1,7 @@
 <template>
-  <div class="document-make-body">
-<!--    <small v-if="getDocument.type_id">{{ getDocument }}</small>-->
+  <div class="document-make-body" v-if="getDocument&&getTypes">
+    <!--    <small v-if="getDocument.type_id">{{ getDocument }}</small>-->
+
     <first-stage v-if="prev_stage" @next="next"/>
     <second-stage @prev="prev" v-else/>
   </div>
@@ -18,44 +19,44 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['createDocument', 'getDocumentById']),
+    ...mapActions(['createDocument', 'requestDocument', 'requestTypes']),
     next() {
       this.prev_stage = !this.prev_stage
       if (!this.$route.params.id) {
         this.createDocument(this.getDocument)
       }
     },
-    prev(){
+    prev() {
       this.prev_stage = true
     }
   },
   computed: {
-    ...mapGetters(['getDocument'])
+    ...mapGetters(['getDocument', 'getTypes'])
   },
-  watch:{
+  watch: {
     '$route.params': {
-        handler(item){
-          // if (!(item.id && this.stage === true)){
-          //     this.stage = true
-          // }
-          // else {
-          //   this.stage = false
-          // }
+      handler(item) {
+        // if (!(item.id && this.stage === true)){
+        //     this.stage = true
+        // }
+        // else {
+        //   this.stage = false
+        // }
 
-          if(!item.id){
-            this.prev_stage=true
-          }
-          else {
-            this.prev_stage=false
-          }
+        if (!item.id) {
+          this.prev_stage = true
+        } else {
+          this.prev_stage = false
         }
+      }
     },
   },
   mounted() {
     if (this.$route.params.id !== '') {
-      this.getDocumentById(this.$route.params.id);
+      this.requestDocument(this.$route.params.id);
       this.prev_stage = false
     }
+    this.requestTypes();
   },
   updated() {
     // if (this.$route.params.id !== ''&&!this.getDocument.id) {
@@ -72,7 +73,7 @@ export default {
 
 <style scoped>
 
-.document-make-body{
+.document-make-body {
   height: 100%;
   /*border:1px solid #0d2839;*/
 }

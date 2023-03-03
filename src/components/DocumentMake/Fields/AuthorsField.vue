@@ -10,7 +10,7 @@
       </label>
       <span class="new-author-btn" @click="addAuthor">Додати автора</span>
     </span>
-  <div v-for="(author,idx) in getDocument.authors" :key="idx" v-if="!author.delete" class="author-list-item">
+  <div v-for="(author,idx) in getDocument.authors.filter(item=>!item.delete)" :key="idx" class="author-list-item">
     <div>
       <label for="author_email">Email</label>
       <input type="text" :disabled="idx === 0 ? coAuthor : false" name="author_email" id="author_email" required

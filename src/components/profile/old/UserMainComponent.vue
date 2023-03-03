@@ -3,19 +3,22 @@
     <span><loader width="4" radius="20"></loader></span>
   </div>
   <div class="card-profile" v-else>
-    <user-card :getUser="getAuthor" class="user-card-component"></user-card>
+<!--    <user-card :getUser="getAuthor" class="user-card-component"></user-card>-->
     <div class="profile-content">
       <div class="content-list">
         <li v-for="item in items">{{item}}</li>
       </div>
     </div>
+
+
   </div>
 </template>
 
 <script>
 import UserCard from './UserCardComponent'
-import DocumentItem from '../library/ItemListDocumentComponent'
-import loader from "../../components/additional/LoaderComponent";
+import DocumentItem from '../../library/ItemListDocumentComponent'
+import loader from "../../additional/loader";
+import Documents from "@/view/Documents";
 import {mapActions, mapGetters} from "vuex";
 export default {
   data(){
@@ -33,11 +36,12 @@ export default {
     ...mapActions(['requestAuthor','requestAuthorPhoto']),
     ...mapGetters(['getUser','getUniversities','getAuthor'])
   },
+
   mounted() {
     this.requestAuthor
     // this.requestAuthorPhoto
   },
-  components:{UserCard,DocumentItem,loader}
+  components:{UserCard,DocumentItem,loader,Documents}
 }
 </script>
 

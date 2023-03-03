@@ -21,6 +21,7 @@ export default {
 /*left: 50%;*/
 /*  margin: -25px 0 0 -25px;*/
   width: 50px;
+  margin: 25%;
   /*height: 50px;*/
 }
 .spinner .path {

@@ -25,7 +25,6 @@ export default {
 
 <style scoped>
 .main {
-  border: 2px solid pink;
   min-height: calc(100vh - 90px);
   /*overflow: scroll;*/
   /*overflow-y: auto;*/

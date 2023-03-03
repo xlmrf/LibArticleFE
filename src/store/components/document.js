@@ -55,7 +55,7 @@ export default {
             axios.get(ctx.rootState.api_url_v1 + '/document/' + id).then(response => {
                 ctx.commit('DocumentMutate', response.data)
             }, err => {
-                ctx.commit('setInfo', err)
+                ctx.commit('catchInfo', err)
             })
         },
         deleteAuthor(ctx, data) {
@@ -72,16 +72,20 @@ export default {
         }
     },
     mutations: {
+        catchInfo(ctx,data){
+            ctx.info = data
+        },
+        uploadResult(state, data){
+           // state.document = data
+            router.push('/document/' + data.id)
+
+        },
         updateDocument(state, data) {
             router.push('/document/make/' + data.id)
             state.document = {...state.document, ...data}
         },
         DocumentMutate(state,data){
             state.document = data
-        },
-
-        uploadResult(state, data) {
-            state.info = data
         },
         types(state, data) {
             state.types = data

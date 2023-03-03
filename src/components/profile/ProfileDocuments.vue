@@ -1,22 +1,15 @@
 <template>
-  <div class="documents-wrapper" v-if="getDocuments && getTypes">
-    <filter-options/>
+  <div>
     <documents-list :documents="getDocuments"/>
+
   </div>
 </template>
 
 <script>
-import FilterOptions from "@/components/Documents/FilterOptions"
 import {mapActions, mapGetters} from "vuex";
 import DocumentsList from "@/components/Documents/DocumentsList";
 
 export default {
-  data() {
-    return {
-      query: ''
-    }
-  },
-  name: "Documents",
   watch: {
     '$route.fullPath': {
       handler(item) {
@@ -24,6 +17,9 @@ export default {
         if (this.$route.fullPath.split('?')[1]) {
           q = '?' + this.$route.fullPath.split('?')[1];
         }
+        q+=q?'&user_id='+this.$route.params.id:'?user_id='+this.$route.params.id
+        q+='&author=true'
+
         this.DocumentSearcher(q);
       }
     }
@@ -34,7 +30,7 @@ export default {
   computed: {
     ...mapGetters(['getDocuments', 'getTypes'])
   },
-  components: {DocumentsList, FilterOptions},
+  components: {DocumentsList},
   mounted() {
     console.log(this.$route)
 
@@ -44,6 +40,7 @@ export default {
     }
     if(this.$route.name==='profile'){
       q+=q?'&user_id='+this.$route.params.id:'?user_id='+this.$route.params.id
+      q+='&author=true'
     }
     this.DocumentSearcher(q);
     this.requestTypes()
@@ -52,17 +49,5 @@ export default {
 </script>
 
 <style scoped>
-
-.documents-wrapper {
-  display: flex;
-}
-
-.documents-wrapper > :first-child {
-  flex: 1;
-}
-
-.documents-wrapper > :last-child {
-  flex: 4;
-}
 
 </style>

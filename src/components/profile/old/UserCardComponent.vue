@@ -19,7 +19,7 @@
 
 <script>
 import {mapActions, mapGetters, mapMutations} from "vuex";
-import Loader from "../../components/additional/LoaderComponent";
+import Loader from "../../additional/loader";
 
 export default {
   props:['getUser'],

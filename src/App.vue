@@ -14,7 +14,6 @@ import {mapActions, mapGetters, mapMutations} from "vuex";
 import Supplement from "./components/footer/FooterComponent"
 
 export default {
-  //Lexa1
   name: 'App',
   components: {Supplement},
   mounted() {
@@ -30,7 +29,8 @@ export default {
   padding: 0;
   margin: 0;
   border: 0;
-  font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Apple Color Emoji", "Segoe UI", Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-family: 'Manrope Var','Manrope','Inter Var','Inter',Arial,sans-serif;
+  /*font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Apple Color Emoji", "Segoe UI", Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;*/
 }
 
 [v-cloak] {
@@ -39,7 +39,7 @@ export default {
 
 .window {
   /*overflow: scroll;*/
-  overflow-x: hidden;
+  /*overflow-x: hidden;*/
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -74,7 +74,7 @@ input {
 
 .middle-spinner {
   justify-content: center;
-  background: #f1f1f1;
+  /*background: rgba(222, 222, 222, 0.38);*/
   border-radius: 5px;
   width: 100px;
   height: 100px;

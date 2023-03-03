@@ -20,7 +20,7 @@
         <div class="form-item" v-for="(item,idx) in getTypes.find(type => type.id === getDocument.type_id).fields"
              :key="idx">
           <label :for="item">{{ translateAreas(item) }}</label>
-          <component :is="setFields(item)"></component>
+          <component :is="setFields(item)" :field="item"></component>
         </div>
         <button class="button conclusion-btn" @click="updateDocument(getDocument)">
           Update
@@ -39,7 +39,7 @@ import ReferencesField from "@/components/DocumentMake/Fields/ReferencesField";
 import UniversalField from "@/components/DocumentMake/Fields/UniversalField";
 import DescriptionField from "@/components/DocumentMake/Fields/DescriptionField";
 import {mapActions, mapGetters} from "vuex";
-import loader from "@/components/additional/LoaderComponent";
+import loader from "@/components/additional/loader";
 import FilesFrameComponent from "@/components/DocumentMake/Fields/FilesFrameComponent";
 
 export default {
@@ -71,7 +71,7 @@ export default {
   computed: {
     ...mapGetters(['getDocument', 'getTypes']),
     watcher(){
-      return !(this.getDocument.id && this.getTypes[0]);
+      return !(this.getDocument && this.getTypes);
     },
     resetDocument() {
 
