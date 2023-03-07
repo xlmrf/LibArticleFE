@@ -7,7 +7,7 @@
     </h3>
     <div>
       <span>
-        {{getTypes.find(item => item.id === document.type_id).name}}
+        {{getTypes.find(item => item.id === document.type_id)?.name}}
       </span>
     </div>
     <div>

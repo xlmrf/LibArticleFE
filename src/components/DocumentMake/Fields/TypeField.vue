@@ -1,5 +1,5 @@
 <template>
-  <div class="document-types" v-if="getTypes.length > 0">
+  <div class="document-types" >
     <div>
       <h3>Категорії</h3>
       <div class="files-tape">
@@ -12,7 +12,7 @@
     <div class="type-description">
       <h3>Поля для заповнення</h3>
       <ul class="item-category-collection" v-if="getDocument.type_id">
-        <li class="manual-item" v-for="(item, key) in getTypes.find(type => type.id === getDocument.type_id)['fields']" :key="key">
+        <li class="manual-item" v-for="(item, key) in getTypes?.find(type => type.id === getDocument.type_id)['fields']" :key="key">
           {{ translateAreas(item) }}
         </li>
       </ul>
@@ -31,7 +31,7 @@ export default {
     ...mapActions(['requestTypes'])
   },
   mounted() {
-    this.requestTypes
+    // this.requestTypes
   }
 }
 </script>

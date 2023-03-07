@@ -10,7 +10,7 @@
       </label>
       <span class="new-author-btn" @click="addAuthor">Додати автора</span>
     </span>
-  <div v-for="(author,idx) in getDocument.authors.filter(item=>!item.delete)" :key="idx" class="author-list-item">
+  <div v-for="(author,idx) in getDocument.authors?.filter(item=>!item.delete)" :key="idx" class="author-list-item">
     <div>
       <label for="author_email">Email</label>
       <input type="text" :disabled="idx === 0 ? coAuthor : false" name="author_email" id="author_email" required
@@ -30,7 +30,7 @@
              v-model="author.first_name"
              class='inp-e required-area'>
     </div>
-    <span class="user-remove-btn" v-if="getDocument.authors.filter(item=>!item.delete).length>1"
+    <span class="user-remove-btn" v-if="getDocument.authors?.filter(item=>!item.delete).length>1"
           @click="removeAuthor(idx, author)">
         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
              stroke="#9A9A9A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -122,7 +122,7 @@ export default {
     },
   },
   mounted() {
-    if (!this.getDocument.authors || !this.getDocument.authors[0]) {
+    if (this.getDocument.authors===undefined || !this.getDocument.authors || !this.getDocument.authors[0]) {
       console.log('push');
       this.getDocument.authors = []
       this.getDocument.authors.push({})

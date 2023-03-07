@@ -5,9 +5,8 @@
   <div v-else>
 
     <div class="card-top">
-      {{getDocument}}
       <h2 :style="{ 'font-size': '22px' }" ref="refTitle">{{ getDocument.title }}</h2>
-      <h4>{{ getTypes.find(type => type.id === getDocument.type_id).name }}</h4>
+      <h4>{{ getTypes.find(type => type.id === getDocument.type_id)?.name }}</h4>
       <!--      <h4>{{getDocument}}</h4>-->
       <span class="rename-title-btn" @click="$emit('prev')">
         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#BBBBBB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="14 2 18 6 7 17 3 17 3 13 14 2"></polygon><line x1="3" y1="22" x2="21" y2="22"></line></svg></span>
@@ -17,7 +16,7 @@
       <files-frame-component/>
 
       <div>
-        <div class="form-item" v-for="(item,idx) in getTypes.find(type => type.id === getDocument.type_id).fields"
+        <div class="form-item" v-for="(item,idx) in getTypes.find(type => type.id === getDocument.type_id)?.fields"
              :key="idx">
           <label :for="item">{{ translateAreas(item) }}</label>
           <component :is="setFields(item)" :field="item"></component>
@@ -34,7 +33,7 @@
 import AuthorsField from "@/components/DocumentMake/Fields/AuthorsField";
 import KeywordsField from "@/components/DocumentMake/Fields/KeywordsField";
 import PagesField from "@/components/DocumentMake/Fields/PagesField";
-import YearField from "@/components/DocumentMake/Fields/DateField";
+import Publication_dateField from "@/components/DocumentMake/Fields/DateField";
 import ReferencesField from "@/components/DocumentMake/Fields/ReferencesField";
 import UniversalField from "@/components/DocumentMake/Fields/UniversalField";
 import DescriptionField from "@/components/DocumentMake/Fields/DescriptionField";
@@ -71,7 +70,7 @@ export default {
   computed: {
     ...mapGetters(['getDocument', 'getTypes']),
     watcher(){
-      return !(this.getDocument && this.getTypes);
+      return !this.getDocument.id;
     },
     resetDocument() {
 
@@ -82,7 +81,7 @@ export default {
   },
   components: {
     FilesFrameComponent,
-    loader, YearField, KeywordsField, AuthorsField, PagesField, ReferencesField, UniversalField, DescriptionField
+    loader, Publication_dateField, KeywordsField, AuthorsField, PagesField, ReferencesField, UniversalField, DescriptionField
   }
 }
 </script>

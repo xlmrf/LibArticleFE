@@ -75,6 +75,6 @@ export default {
   flex-flow: column;
   /*border: 1px solid green;*/
   /*padding: 20px;*/
-  min-height: 9rem;
+  /*min-height: 9rem;*/
 }
 </style>

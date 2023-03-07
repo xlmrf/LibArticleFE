@@ -17,7 +17,6 @@ import SelectType from "@/components/Documents/Filters/SelectType";
 import SelectKeywords from "@/components/Documents/Filters/SelectKeywords";
 
 export default {
-
   components:{SelectKeywords, SelectType, RangeYear, PersonalToggle,SelectAuthor}
 }
 </script>

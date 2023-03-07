@@ -1,58 +1,39 @@
-<!--<template>-->
-<!--  <div>-->
-<!--    <input type="date" name="" id="" v-model="getDocument.year">-->
-<!--  </div>-->
-<!--</template>-->
-
-<!--<script>-->
-<!--import {mapGetters} from "vuex";-->
-
-<!--export default {-->
-
-<!--  computed:{-->
-<!--    ...mapGetters(['getDocument'])-->
-<!--  },-->
-<!--  methods:{-->
-
-<!--  }-->
-<!--}-->
-<!--</script>-->
-
-<!--<style scoped>-->
-
-<!--</style>-->
-
 <template>
-<div id="date-picker">
-<div>
-  <label>year</label>
-  <br />
-  <select v-model="year">
-    <option v-for="y in years" :key="y">
-      {{ y }}
-    </option>
-  </select>
-</div>
-<div>
-  <label>month</label>
-  <br />
-  <select v-model="month">
-    <option v-for="m in 12" :key="m" :value="String(m).length>1?m-1:'0'+m">
-      {{ m }}
-    </option>
-  </select>
-</div>
-<div>
-  <label>day</label>
-  <br />
-  <select v-model="day">
-    <option v-for="d in maxDate" :key="d">
-      {{ d }}
-    </option>
-  </select>
-</div>
-  <input type="checkbox" :value="dateExist" @change="CheckDate">
-</div>
+  <div> Формат дати:
+    повна дата <input type="radio" v-model="formatDate" value="date">;
+    рік <input type="radio" v-model="formatDate" value="year">;
+    без дати <input type="radio" v-model="formatDate" value="null">.
+  </div>
+
+  <div id="date-picker" v-if="formatDate==='date'||formatDate==='year'">
+    <div>
+      <label>year</label>
+      <br/>
+      <select v-model="year">
+        <option v-for="y in years" :key="y">
+          {{ y }}
+        </option>
+      </select>
+    </div>
+    <div v-if="formatDate==='date'">
+      <label>month</label>
+      <br/>
+      <select v-model="month">
+        <option v-for="m in 12" :key="m" :value="String(m).length>1?m:'0'+m">
+          {{ m }}
+        </option>
+      </select>
+    </div>
+    <div v-if="formatDate==='date'">
+      <label>day</label>
+      <br/>
+      <select v-model="day">
+        <option v-for="d in maxDate" :key="d" :value="String(d).length>1?d:'0'+d">
+          {{ d }}
+        </option>
+      </select>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -61,12 +42,10 @@ import {mapGetters} from "vuex";
 
 export default {
   name: "DatePicker",
-  props: {
-    modelValue: Date,
-  },
   data() {
     return {
-      dateExist:true,
+      formatDate: 'date',
+      dateExist: true,
       years: [],
       year: new Date().getFullYear(),
       month: 0,
@@ -74,57 +53,70 @@ export default {
     };
   },
   methods: {
-    CheckDate(){
-      if (!this.dateExist){
-        this.getDocument.publication_date = null
-      }
-      else{
-        this.getDocument.publication_date = `${this.year}-${this.month}-${this.day}`
-      }
-    },
+    // CheckDate(){
+    //   if (this.dateExist){
+    //     this.getDocument.publication_date = null
+    //   }
+    //   else{
+    //     this.getDocument.publication_date = `${this.year}-${this.month}-${this.day}`
+    //   }
+    // },
     emitDate() {
-      const { year, month, day } = this;
-      this.getDocument.publication_date = `${this.year}-${this.month}-${this.day}`
-
+      const {year, month, day} = this;
+      this.getDocument.publication_date = `${year}-${month}-${day}`
       console.log(new Date(year, month, day).toString())
     }
   },
   watch: {
-    year(){
+    formatDate() {
+      if (this.formatDate === 'date') {
+        this.getDocument.publication_date = `${this.year}-${this.month}-${this.day}`
+      } else if (this.formatDate === 'year') {
+        this.getDocument.publication_date = `${this.year}-01-01`
+      } else {
+        this.getDocument.publication_date = null
+      }
+    },
+    year() {
       this.emitDate();
     },
-    month(){
+    month() {
       this.emitDate();
     },
-    day(){
+    day() {
       this.emitDate();
     }
   },
   computed: {
     ...mapGetters(['getDocument']),
     maxDate() {
-      const { month } = this;
-      if ([0, 2, 4, 6, 7, 9, 11].includes(month)) {
+      const {month} = this;
+      if (['01', '03', '05', '07', '08', '10', '12'].includes(month)) {
         return 31;
-      } else if ([3, 5, 8, 10].includes(month)) {
+      } else if (['04', '06', '09', '11'].includes(month)) {
         return 30;
       }
       return 28;
     },
   },
   mounted() {
-    this.emitDate();
-  },
-  beforeMount() {
+
+    this.dateExist = !this.getDocument.publication_date;
+
     const currentYear = new Date().getFullYear();
     for (let i = -100; i <= 0; i++) {
       this.years.push(currentYear + i);
     }
-    const d = moment(this.modelValue);
-    this.year = +d.format("YYYY");
-    this.month = +d.format("MM") - 1;
-    this.day = +d.format("DD");
-  },
+
+    const d = moment(this.getDocument.publication_date || new Date());
+    this.year = d.format("YYYY");
+    this.month = d.format("MM");
+    console.log(this.month);
+    this.day = d.format("DD");
+    console.log(this.day);
+
+    this.emitDate();
+  }
 };
 </script>
 
@@ -132,7 +124,9 @@ export default {
 <style scoped>
 #date-picker {
   display: flex;
-}#date-picker div {
-   margin-right: 10px;
- }
+}
+
+#date-picker div {
+  margin-right: 10px;
+}
 </style>

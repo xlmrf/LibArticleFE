@@ -3,7 +3,7 @@
     <!--        Застосовані фільтри:-->
     <!--    {{checkQuery()}}-->
     <span v-for="(item,k) in $route.query">
-      {{ associateFiltersName[k] }}:
+      {{ translateFilters(k) }}
       <span v-for="(el, i) in textFilter(item, k)">
       {{ el }}
           <small @click="deleteFilter(k,i)" class="delete-item">
@@ -22,14 +22,9 @@
 import {mapGetters} from "vuex";
 
 export default {
+  mixins:['translate'],
   data() {
     return {
-      associateFiltersName: {
-        my: 'Мої документи',
-        authors: 'Автори',
-        type_id: 'Тип',
-        publication_date: 'Дата публікації'
-      },
       filters: []
     }
   },
@@ -47,7 +42,7 @@ export default {
       console.log('item', item, 'k', k)
       if (k === 'type_id') {
         item.split(',').map(i => {
-          arr.push(this.getTypes.find(e => e.id === parseInt(i)).name);
+          arr.push(this.getTypes.find(e => e.id === parseInt(i))?.name);
         });
       }
       if (k === 'publication_date') {

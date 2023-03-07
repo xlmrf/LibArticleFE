@@ -1,8 +1,7 @@
 <template>
   <div>
     <span class="filter-title" @click="YearsFilterOpen = !YearsFilterOpen">
-      Years <tumbler-filter-button :toggle="YearsFilterOpen"/>
-
+      Роки публікації <tumbler-filter-button :toggle="YearsFilterOpen"/>
     </span>
     <div :class="['filter-area years-panel',{filter_open:YearsFilterOpen}]" v-if="getYears">
       <span>

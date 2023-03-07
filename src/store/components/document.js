@@ -4,11 +4,11 @@ import axios from "axios";
 export default {
     state() {
         return {
-            document: null,
+            document: {},
 
             last_documents: [],
             info: '',
-            types: null,
+            types: [],
             propose_authors: [],
             newDocumentId: null,
             uncompletedDocument: ''

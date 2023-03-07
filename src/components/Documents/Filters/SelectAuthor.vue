@@ -1,7 +1,7 @@
 <template>
   <div class="author-filter">
     <span class="filter-title authors-title-filter" @click="AuthorsFilterOpen = !AuthorsFilterOpen">
-      Authors <tumbler-filter-button :toggle="AuthorsFilterOpen"/>
+      Автори <tumbler-filter-button :toggle="AuthorsFilterOpen"/>
     </span>
     <div :class="['filter-area',{filter_open:AuthorsFilterOpen}]" v-if="getAuthors.data">
       <input type="text" v-model="search">

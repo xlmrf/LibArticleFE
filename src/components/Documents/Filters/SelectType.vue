@@ -1,12 +1,12 @@
 <template>
   <div>
     <span class="filter-title authors-title-filter" @click="TypesFilterOpen = !TypesFilterOpen">
-      Types <tumbler-filter-button :toggle="TypesFilterOpen"/>
+      Типи<tumbler-filter-button :toggle="TypesFilterOpen"/>
     </span>
     <div :class="['filter-area',{filter_open:TypesFilterOpen}]" v-if="getTypes">
       <label class="save-session" v-for="(id,idx) in getFilterTypes">
         <input type="checkbox" :value="id" v-model="chosen" id="test" @change="pushTypes">
-        <span class="label">{{ getTypes.find(item => item.id === id).name }}</span>
+        <span class="label">{{ getTypes.find(item => item.id === id)?.name }}</span>
       </label>
     </div>
   </div>

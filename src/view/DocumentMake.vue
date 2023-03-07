@@ -1,7 +1,7 @@
 <template>
-  <div class="document-make-body" v-if="getDocument&&getTypes">
+  <div class="document-make-body">
     <!--    <small v-if="getDocument.type_id">{{ getDocument }}</small>-->
-
+    {{getDocument}}
     <first-stage v-if="prev_stage" @next="next"/>
     <second-stage @prev="prev" v-else/>
   </div>
