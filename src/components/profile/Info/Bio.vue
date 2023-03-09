@@ -1,6 +1,8 @@
 <template>
   <div>
-    <p>Bio</p>
+    <p>
+      My bio is Hello world
+    </p>
   </div>
 </template>
 

@@ -49,7 +49,7 @@ export default {
   display: flex;
 }
 .user-card-component{
-  margin: 10px 20px;
+  /*margin: 10px 20px;*/
   height: 100%;
   min-width: 25%;
 }
@@ -57,10 +57,25 @@ export default {
 
 .profile-card{
   display: flex;
+  /*margin-top: 1rem;*/
+  border: 1px solid red;
+}
+
+.profile-card >:nth-child(1){
+  flex: 2;
+}
+
+.profile-card >:nth-child(2){
+  flex: 4;
+}
+
+.profile-card >:nth-child(3){
+  flex: 2;
 }
 
 .profile-card > div{
   border: 1px solid;
+  padding: 1rem;
 }
 
 
