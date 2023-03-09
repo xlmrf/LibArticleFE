@@ -1,6 +1,6 @@
 <template>
   <div class="document-wrapper" v-if="getDocument && getTypes">
-    <span class="document-type">{{getTypes.find(item => item.id === getDocument.type_id).name}}</span>
+    <span class="document-type">{{getTypes.find(item => item.id === getDocument.type_id)?.name}}</span>
     <router-link :to="'/document/make/'+$route.params.id" >Remake</router-link>
 
     <h3 class="document-title">{{ getDocument.title }}</h3>
@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import {mapActions, mapGetters} from "vuex";
+import {mapActions, mapGetters, mapMutations} from "vuex";
 import info from "@/components/document/info";
 import files from "@/components/document/files";
 import comment from "@/components/document/comment";
@@ -40,6 +40,7 @@ import Authors from "@/components/document/authors";
 export default {
   methods:{
     ...mapActions(['requestDocument','requestTypes']),
+    ...mapMutations(['DocumentMutate'])
   },
   computed: {
     ...mapGetters(['getDocument','getTypes'])
@@ -48,6 +49,9 @@ export default {
   mounted() {
     this.requestDocument(this.$route.params.id)
     this.requestTypes()
+  },
+  beforeUnmount() {
+    this.DocumentMutate({})
   }
 }
 </script>

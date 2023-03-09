@@ -31,6 +31,13 @@ export default {
       ]
     }
   },
+  watch: {
+    '$route.params.id': {
+      handler(item) {
+        this.requestProfile
+      }
+    }
+  },
   computed:{
     ...mapActions(['requestProfile']),
     ...mapGetters(['getUniversities','getProfile'])
@@ -57,8 +64,7 @@ export default {
 
 .profile-card{
   display: flex;
-  /*margin-top: 1rem;*/
-  border: 1px solid red;
+  padding-top: 1rem;
 }
 
 .profile-card >:nth-child(1){
@@ -74,7 +80,6 @@ export default {
 }
 
 .profile-card > div{
-  border: 1px solid;
   padding: 1rem;
 }
 

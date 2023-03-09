@@ -38,6 +38,7 @@ export default {
 <style scoped>
 
 .document-item{
+  border: 1px solid black;
   display: flex;
   flex-flow: column;
   align-self: center;

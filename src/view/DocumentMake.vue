@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import {mapGetters, mapActions} from "vuex"
+import {mapGetters, mapActions, mapMutations} from "vuex"
 import FirstStage from "@/components/DocumentMake/FirstStageDocument";
 import SecondStage from "@/components/DocumentMake/SecondStageDocument";
 
@@ -19,6 +19,7 @@ export default {
     }
   },
   methods: {
+    ...mapMutations(['DocumentMutate']),
     ...mapActions(['createDocument', 'requestDocument', 'requestTypes']),
     next() {
       this.prev_stage = !this.prev_stage
@@ -52,6 +53,7 @@ export default {
     },
   },
   mounted() {
+    this.DocumentMutate({})
     if (this.$route.params.id !== '') {
       this.requestDocument(this.$route.params.id);
       this.prev_stage = false

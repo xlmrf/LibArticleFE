@@ -1,12 +1,31 @@
 <template>
   <div>
-    <p>Topics Publication</p>
+    <p>Популярні напрямки</p>
+    <span></span>
   </div>
 </template>
 
 <script>
-export default {
+import {mapGetters} from "vuex";
 
+export default {
+  data(){
+    return{
+
+    }
+  },
+  methods:{
+    getReportDocCounts(){
+      // axios.get(this.rootState.api_url_v1 + '/document-types')
+    }
+  },
+  computed:{
+    ...mapGetters(['getRouteV1'])
+  },
+  mounted() {
+    console.log(this.getRouteV1)
+    // this.getReportDocCounts()
+  }
 }
 </script>
 

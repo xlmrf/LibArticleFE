@@ -1,9 +1,9 @@
 <template>
   <div>
-    <bio />
     <topics-publication />
     <topics-document />
     <co-authors />
+    <bio />
   </div>
 </template>
 

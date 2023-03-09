@@ -2,6 +2,7 @@
   <div class="settings-sidebar-list">
     <span><router-link to="/settings/profile">Акаунт</router-link></span>
     <span><router-link to="/settings/privacy">Приватність</router-link></span>
+    <span><router-link to="/settings/security">Безпека</router-link></span>
 <!--    <span><router-link to="/settings/advanced">Інші</router-link></span>-->
   </div>
 </template>

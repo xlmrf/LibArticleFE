@@ -29,7 +29,7 @@ export default {
   /*overflow: scroll;*/
   /*overflow-y: auto;*/
   /*overflow-x: hidden;*/
-  margin-top: 56px;
+  margin: 56px 5rem 0;
 }
 
 .nav-over {

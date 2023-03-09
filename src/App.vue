@@ -69,6 +69,14 @@ input {
   border: 1px solid #bbb;
 }
 
+.w-70{
+  width: 70%;
+}
+
+.w-40{
+  width: 40%;
+}
+
 /*others*/
 
 

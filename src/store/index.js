@@ -45,6 +45,9 @@ export default createStore({
     getters: {
         getPageMessage(ctx) {
             return ctx.message
+        },
+        getRouteV1(ctx){
+            ctx.api_url_v1
         }
     }
 })
