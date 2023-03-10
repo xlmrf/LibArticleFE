@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import NavbarMenu from "./navbar/NavbarMenuComponent";
+import NavbarMenu from "../view/Navbar";
 import {mapActions, mapGetters} from "vuex";
 
 export default {
@@ -26,10 +26,14 @@ export default {
 <style scoped>
 .main {
   min-height: calc(100vh - 90px);
+  max-width: 1280px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 56px;
   /*overflow: scroll;*/
   /*overflow-y: auto;*/
   /*overflow-x: hidden;*/
-  margin: 56px 5rem 0;
+  /*margin: 56px 5rem 0;*/
 }
 
 .nav-over {

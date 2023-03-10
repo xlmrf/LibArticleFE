@@ -41,9 +41,9 @@
 </template>
 
 <script>
-import NewDocument from "../new_document/select_type/NewDocumentBaseComponent"
-import UserLogo from "./NavUserMiniLogoComponent"
-import UserNotices from "./UserNotificationsComponent"
+import NewDocument from "../components/new_document/select_type/NewDocumentBaseComponent"
+import UserLogo from "../components/navbar/NavUserMiniLogo"
+import UserNotices from "../components/navbar/UserNotifications"
 import {mapActions, mapGetters, mapMutations} from "vuex";
 
 export default {

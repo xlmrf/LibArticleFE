@@ -4,7 +4,7 @@
       <span>Знайдено документів: {{ documents.total }}</span>
       <nav-filtration />
     </div>
-    <document-item :document="document" v-for="document in documents.data"/>
+    <document-item class="item-underline" :document="document" v-for="document in documents.data"/>
     <pagination :paginate="paginate(documents)"/>
   </div>
 </template>

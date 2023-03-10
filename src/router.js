@@ -27,10 +27,10 @@ import activity from "./components/activity/MainActivity"
 import notices from "./components/activity/MessagesActivityComponent"
 import story from "./components/activity/StoryActivityComponent"
 
-import settings from "./components/settings/MainSettingsComponent"
-import ProfileSettings from "./components/settings/AccountSettingsComponent"
-import PrivacySettings from "./components/settings/PrivacySettingsComponent"
-import AdvancedSettings from "./components/settings/AdvancedSettingsComponent"
+import settings from "./view/UserSettings"
+import ProfileSettings from "./components/settings/Account"
+import PrivacySettings from "./components/settings/Privacy"
+import AdvancedSettings from "./components/settings/Security"
 import DocumentMake from "@/view/DocumentMake";
 
 

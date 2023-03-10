@@ -14,8 +14,12 @@
       <span>
         <label for="last_name">Прізвище</label>
         <input class="inp-e" type="text" name="" id="last_name" v-model="data.info.last_name">
+      </span>
+      <span>
         <label for="first_name">Ім'я</label>
         <input class="inp-e" type="text" name="" id="first_name" v-model="data.info.first_name">
+      </span>
+      <span>
         <label for="middle_name">По батькові</label>
         <input class="inp-e" type="text" name="" id="middle_name" v-model="data.info.middle_name">
       </span>
@@ -198,6 +202,10 @@ export default {
   overflow: hidden;
   outline: none;
   width: 40%;
+}
+
+.about-user > span{
+  margin: 0.3rem 0;
 }
 
 .about-user > button {

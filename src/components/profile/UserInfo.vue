@@ -2,7 +2,7 @@
   <div>
     <topics-publication />
     <topics-document />
-    <co-authors />
+<!--    <co-authors />-->
     <bio />
   </div>
 </template>

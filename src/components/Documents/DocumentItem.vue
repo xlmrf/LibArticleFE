@@ -38,7 +38,6 @@ export default {
 <style scoped>
 
 .document-item{
-  border: 1px solid black;
   display: flex;
   flex-flow: column;
   align-self: center;
@@ -49,15 +48,7 @@ export default {
   overflow:hidden;
   outline: none;
 }
-.document-item:after{
-  content:'';
-  position:absolute;
-  width:100%;
-  height:0.05rem;
-  left:0;
-  bottom:3px;
-  background: #bfbfbf;
-}
+
 .document-item a:visited{
   color: #222222;
 }

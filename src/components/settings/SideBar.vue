@@ -25,16 +25,27 @@ a{
   /*position: fixed;*/
   /*flex-flow: column;*/
   padding: 1rem;
-  border: 1px solid #bbbbbb;
+  position: relative;
   border-radius: 5px;
   width: 15%;
+}
+
+.settings-sidebar-list:after{
+  content: '';
+  position:absolute;
+  width:0.05rem;
+  height:100%;
+  /*left:0;*/
+  right: 1px;
+  bottom:0;
+  background: #bfbfbf;
 }
 
 .settings-sidebar-list > span{
   display: flex;
   /*padding: 5px 10px;*/
   margin: 5px 0;
-  border: 1px solid #419FD9;
+
   border-radius: 4px;
 }
 .settings-sidebar-list >span > a{

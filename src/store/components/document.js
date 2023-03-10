@@ -18,7 +18,7 @@ export default {
         updateDocument(ctx, data) {
             console.log('vuex upload document data:', data);
             let id = router.currentRoute.value.params.id
-            axios.patch(ctx.rootState.api_url_v1 + '/document/' + id, data).then(response => {
+            axios.patch(ctx.rootState.api_url_v1 + '/document/make/' + id, data).then(response => {
                 ctx.commit('uploadResult', response.data)
             }, err => {
                 console.log('error info -', err.message);
@@ -38,7 +38,7 @@ export default {
             })
         },
         createDocument(ctx, data) {
-            axios.post(ctx.rootState.api_url_v1 + '/documents', {data: data}).then(response => {
+            axios.post(ctx.rootState.api_url_v1 + '/document/make', {data: data}).then(response => {
                 // ctx.commit('documentCreated', response.data)
                 console.log('wef', response.data);
                 ctx.commit('updateDocument', response.data)

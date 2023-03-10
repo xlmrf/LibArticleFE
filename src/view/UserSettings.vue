@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import SideBar from "./SideBarSettingsComponent"
+import SideBar from "../components/settings/SideBar"
 export default {
 
   components:{SideBar}
@@ -17,7 +17,7 @@ export default {
 
 <style scoped>
 .main-card{
-  background: #F1F1F1;
+  /*background: #F1F1F1;*/
   height: auto;
   flex-direction: row;
   padding: 1rem;
@@ -32,22 +32,8 @@ export default {
   margin: 0 5%;
   padding: 10px;
   width: 60%;
-  border: 1px solid #bbb;
   border-radius: 5px;
 }
-.inp-e{
-  border: 1px solid #CCCCCC;
-  padding: 0.3rem 0.5rem;
-  border-radius: 3px;
-  font-size: 16px;
-  resize: none;
-  outline: none;
-  width: 100%;
-  -webkit-transition: all .3s ease-out;
-  -moz-transition: all .3s ease-out;
-  -ms-transition: all .3s ease-out;
-  -o-transition: all .3s ease-out;
-  transition: all .3s ease-out
-}
+
 
 </style>

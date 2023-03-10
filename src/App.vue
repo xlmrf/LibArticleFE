@@ -61,7 +61,6 @@ body {
 
 .city {
   flex: 1;
-  /*background: #f1f1f1;*/
   /*min-height: 450px;*/
 }
 
@@ -75,6 +74,27 @@ input {
 
 .w-40{
   width: 40%;
+}
+
+.item-underline{
+  position: relative;
+  overflow:hidden;
+  outline: none;
+}
+
+.item-underline:after{
+  content:'';
+  position:absolute;
+  width:100%;
+  height:0.05rem;
+  left:0;
+  bottom:3px;
+  background: #bfbfbf;
+}
+
+.user-avatar-cycle{
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 /*others*/

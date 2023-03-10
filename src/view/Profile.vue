@@ -68,7 +68,7 @@ export default {
 }
 
 .profile-card >:nth-child(1){
-  flex: 2;
+  flex: 1;
 }
 
 .profile-card >:nth-child(2){
@@ -76,7 +76,7 @@ export default {
 }
 
 .profile-card >:nth-child(3){
-  flex: 2;
+  flex: 1;
 }
 
 .profile-card > div{
