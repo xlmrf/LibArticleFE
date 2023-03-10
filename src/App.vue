@@ -97,6 +97,12 @@ input {
   border-radius: 50%;
 }
 
+.chapter-header{
+  color: #222222;
+  margin: 10px;
+}
+
+
 /*others*/
 
 

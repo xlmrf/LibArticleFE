@@ -1,18 +1,23 @@
 <template>
   <div class="user-state-panel item-underline">
-    <div class="state-upload">
-      <span class="state-count">9</span>
-      <span class="sub-name-state">Завантажено документів</span>
-    </div>
-    <div class="state-citation">
-      <span class="state-count">2</span>
-      <span class="sub-name-state">Процитовано</span>
-    </div>
-    <div class="state-views">
-      <span class="state-count">277</span>
-      <span class="sub-name-state">Переглядів</span>
-    </div>
-
+    <router-link class="state-link" to="">
+      <div class="state-upload">
+        <span class="state-count">9</span>
+        <span class="sub-name-state">Завантажено документів</span>
+      </div>
+    </router-link>
+    <router-link class="state-link" to="">
+      <div class="state-citation">
+        <span class="state-count">2</span>
+        <span class="sub-name-state">Процитовано</span>
+      </div>
+    </router-link>
+    <router-link class="state-link" to="">
+      <div class="state-views">
+        <span class="state-count">277</span>
+        <span class="sub-name-state">Переглядів</span>
+      </div>
+    </router-link>
 
 
 <!-------old------>
@@ -53,23 +58,25 @@ export default {
   flex-flow: row;
   position: relative;
 }
-.user-state-panel > div{
+.state-link > div{
   /*border:  1px solid red;*/
   height: auto;
-  margin: 0.5rem;
-  display: inherit;
+  display: flex;
   flex-flow: column;
   align-items: center;
+}
+.state-link{
+  text-decoration: none;
+  margin: 1rem 1.5rem;
 }
 .state-count{
   font-size: 28px;
   color: #525252;
   margin: 0.5rem;
-  flex: 3;
+  flex: 1;
 }
 .sub-name-state{
   white-space: nowrap;
-  margin: 0.5rem;
   font-size: 0.9em;
   color: #2a2a2a;
 }

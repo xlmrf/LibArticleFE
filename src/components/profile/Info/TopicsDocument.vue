@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>Популярні публікації</p>
+    <p class="chapter-header">Популярні публікації</p>
     <div class="document-topics">
       <document-item class="s-document" v-for="item in data" :document="item"/>
 <!--       <router-link :to="'/document/'+item.id">{{item.title}} </router-link> - {{item.views}}-->
@@ -44,11 +44,12 @@ export default {
 
 <style scoped>
 p{
-  margin: 10px;
+
 }
 .s-document{
   font-size: 0.8em;
-  border: 1px solid #525252;
+  border: 1px solid #9A9A9A;
+  color: #9A9A9A;
   border-radius: 5px;
   margin: 5px;
   width: 48%;

@@ -20,6 +20,7 @@
         {{keyword}};
       </span>
     </span>
+    <span>seen: {{document.views}}</span>
     {{document.publication_date}}
   </div>
 </template>
@@ -47,7 +48,9 @@ export default {
   overflow:hidden;
   outline: none;
 }
+h3{
 
+}
 .document-item a:visited{
   color: #222222;
 }
