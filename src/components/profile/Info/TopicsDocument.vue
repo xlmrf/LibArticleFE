@@ -1,8 +1,8 @@
 <template>
   <div>
     <p>Популярні публікації</p>
-    <div class="document-topics" v-for="item in data">
-      <document-item class="s-document" :document="item"/>
+    <div class="document-topics">
+      <document-item class="s-document" v-for="item in data" :document="item"/>
 <!--       <router-link :to="'/document/'+item.id">{{item.title}} </router-link> - {{item.views}}-->
     </div>
   </div>
@@ -43,10 +43,19 @@ export default {
 </script>
 
 <style scoped>
+p{
+  margin: 10px;
+}
 .s-document{
   font-size: 0.8em;
+  border: 1px solid #525252;
+  border-radius: 5px;
+  margin: 5px;
+  width: 48%;
+  flex: auto;
 }
 .document-topics{
   display: flex;
+  flex-flow: row wrap;
 }
 </style>

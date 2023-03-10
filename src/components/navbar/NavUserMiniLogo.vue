@@ -148,6 +148,7 @@ span{
   cursor: pointer;
 }
 span::after{
+  font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Apple Color Emoji", "Segoe UI", Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   content: "›";
   margin-left: 5px;
   height:20px;
@@ -159,7 +160,7 @@ span::after{
   position:relative;
 }
 .active-nav-menu::after{
-  right:5px;
+  right:8px;
   transform: rotate(-90deg);
   color: #1360b6;
 }

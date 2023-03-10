@@ -40,11 +40,10 @@ export default {
 .document-item{
   display: flex;
   flex-flow: column;
-  align-self: center;
   position: relative;
   /*cursor: pointer;*/
   /*margin: 0 5%;*/
-  padding: 20px;
+  padding: 10px;
   overflow:hidden;
   outline: none;
 }

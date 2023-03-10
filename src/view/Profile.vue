@@ -6,7 +6,7 @@
   <div class="profile-card" v-else>
     <user-card :getUser="getProfile" class="user-card-component"></user-card>
     <user-info />
-    <statistic />
+<!--    <statistic />-->
   </div>
 
 </template>
@@ -75,9 +75,9 @@ export default {
   flex: 4;
 }
 
-.profile-card >:nth-child(3){
-  flex: 1;
-}
+/*.profile-card >:nth-child(3){*/
+/*  flex: 1;*/
+/*}*/
 
 .profile-card > div{
   padding: 1rem;

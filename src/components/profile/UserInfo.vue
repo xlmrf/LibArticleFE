@@ -1,9 +1,10 @@
 <template>
   <div>
-    <topics-publication />
+    <statistic />
+<!--    <topics-publication />-->
     <topics-document />
 <!--    <co-authors />-->
-    <bio />
+<!--    <bio />-->
   </div>
 </template>
 
@@ -12,8 +13,9 @@ import Bio from "@/components/profile/Info/Bio";
 import TopicsPublication from "@/components/profile/Info/TopicsPublication";
 import TopicsDocument from "@/components/profile/Info/TopicsDocument";
 import CoAuthors from "@/components/profile/Info/CoAuthors";
+import Statistic from "@/components/profile/Statistic";
 export default {
-  components: {CoAuthors, TopicsDocument, TopicsPublication, Bio}
+  components: {Statistic, CoAuthors, TopicsDocument, TopicsPublication, Bio}
 }
 </script>
 

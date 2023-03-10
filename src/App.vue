@@ -29,8 +29,8 @@ export default {
   padding: 0;
   margin: 0;
   border: 0;
-  font-family: 'Manrope Var','Manrope','Inter Var','Inter',Arial,sans-serif;
-  /*font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Apple Color Emoji", "Segoe UI", Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;*/
+  /*font-family: 'Manrope Var','Manrope','Inter Var','Inter',Arial,sans-serif;*/
+  font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Apple Color Emoji", "Segoe UI", Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
 
 [v-cloak] {
