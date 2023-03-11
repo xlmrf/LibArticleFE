@@ -67,7 +67,12 @@ export default {
 }
 .state-link{
   text-decoration: none;
-  margin: 1rem 1.5rem;
+  margin: 0.5rem 1rem;
+  padding: 0.5rem;
+}
+.state-link:hover{
+  background: rgba(241, 241, 241, 0.75);
+  border-radius: 5px;
 }
 .state-count{
   font-size: 28px;
