@@ -1,8 +1,8 @@
 <template>
   <div v-if="documents.data&&getTypes">
     <div class="documents-header">
-      <span>Знайдено документів: {{ documents.total }}</span>
-      <nav-filtration />
+      <span>Показано{{ documents.per_page*(documents.current_page-1)+1 }} - {{ documents.per_page*(documents.current_page-1)+documents.data.length }} документи із {{ documents.total }} знайдених</span>
+      <nav-filtration v-if="$route.query" />
     </div>
     <document-item class="item-underline" :document="document" v-for="document in documents.data"/>
     <pagination :paginate="paginate(documents)"/>
@@ -22,7 +22,6 @@ export default {
       type: Object
     }
   },
-
   computed: {
     ...mapGetters(['getTypes']),
   },
@@ -69,11 +68,21 @@ export default {
   text-decoration: none;
 }
 
+.nav-filtration{
+
+  margin: 0.5rem 0;
+}
+
 .documents-header {
-  margin: 1rem;
+  margin: 1rem 0.5rem;
+  padding: 1rem;
   display: flex;
   flex-flow: column;
-  /*border: 1px solid green;*/
+  border: 1px solid #bbb;
+  font-size: 18px;
+  color: #24292F;
+  font-weight: bold;
+  border-radius: 5px;
   /*padding: 20px;*/
   /*min-height: 9rem;*/
 }
