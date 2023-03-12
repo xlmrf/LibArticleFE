@@ -4,7 +4,7 @@
       Типи<tumbler-filter-button :toggle="TypesFilterOpen"/>
     </span>
     <div :class="['filter-area',{filter_open:TypesFilterOpen}]" v-if="getTypes">
-      <label class="save-session" v-for="(id,idx) in getFilterTypes">
+      <label class="save-session filter-checkbox select-type-checkbox" v-for="(id,idx) in getFilterTypes">
         <input type="checkbox" :value="id" v-model="chosen" id="test" @change="pushTypes">
         <span class="label">{{ getTypes.find(item => item.id === id)?.name }}</span>
       </label>

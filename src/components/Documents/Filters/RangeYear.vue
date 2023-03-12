@@ -5,11 +5,12 @@
     </span>
     <div :class="['filter-area years-panel',{filter_open:YearsFilterOpen}]" v-if="getYears">
       <span>
-        <label for="min-year">min year</label>
+<!--        <label for="min-year">від</label>-->
         <input type="text" name="min-year" id="min-year" v-model="getYears.from_year" @keyup="key()">
       </span>
+      <span class="year-separate-line">-</span>
       <span>
-        <label for="max-year">max year</label>
+<!--        <label for="max-year">max year</label>-->
         <input type="text" name="max-year" id="max-year" v-model="getYears.to_year" @keyup="key()">
       </span>
     </div>
@@ -87,11 +88,23 @@ export default {
 </script>
 
 <style scoped>
+
+.years-panel{
+  /*display: flex;*/
+  flex-flow: row;
+  align-items: center;
+}
+.year-separate-line{
+  font-size: 28px;
+}
 .years-panel > span{
   margin: 10px;
 }
 .years-panel input{
+  font-size: 20px;
+  border-radius: 2px;
   margin-left: 5px;
   padding: 5px;
+  width: 60px;
 }
 </style>

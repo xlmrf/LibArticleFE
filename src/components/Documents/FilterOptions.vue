@@ -37,6 +37,17 @@ export default {
   display: flex;
 }
 
+/*.filter-checkbox{*/
+/*  padding: 0.2rem;*/
+/*  margin: 0.1rem;*/
+/*}*/
+
+.filter-checkbox{
+  padding: 0.2rem;
+  cursor: pointer;
+}
+
+
 .documents-filter{
   padding: 1rem;
 }
@@ -47,7 +58,7 @@ export default {
   position: relative;
   /*cursor: pointer;*/
   /*margin: 0 5%;*/
-  padding: 2rem;
+  padding: 0.8rem;
   overflow:hidden;
   outline: none;
 }
@@ -59,8 +70,5 @@ export default {
   left:0;
   bottom:2px;
   background: rgba(191, 191, 191, 0.3);
-}
-.documents-filter > div{
-  padding: 0.2rem;
 }
 </style>

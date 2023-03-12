@@ -297,44 +297,6 @@ input:valid ~ .marker {
   color: red;
 }
 
-.save-session > input {
-  opacity: 0;
-  position: absolute;
-  z-index: -1;
-}
-
-.save-session > span {
-  display: inline-flex;
-  align-items: center;
-  user-select: none;
-  font-size: 16px;
-}
-
-.save-session > span::before {
-  content: '';
-  display: inline-block;
-  width: 1em;
-  height: 1em;
-  flex-shrink: 0;
-  flex-grow: 0;
-  border: 1px solid #adb5bd;
-  border-radius: 0.25em;
-  margin-right: 0.5em;
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: 50% 50%;
-}
-
-.save-session > input:not(:disabled):not(:checked) + span:hover::before {
-  border-color: #4E5477;
-}
-
-.save-session > input:checked + span::before {
-  border-color: #1059FF;
-  background-color: #1059FF;
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
-}
-
 .load {
   cursor: default;
   border: 1px solid #717171;

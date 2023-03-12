@@ -1,7 +1,12 @@
 <template>
   <div v-if="documents.data&&getTypes">
     <div class="documents-header">
-      <span>Показано{{ documents.per_page*(documents.current_page-1)+1 }} - {{ documents.per_page*(documents.current_page-1)+documents.data.length }} документи із {{ documents.total }} знайдених</span>
+      <div class="sort-filter">
+        <div>Показано <span>{{ documents.per_page*(documents.current_page-1)+1 }}</span> - <span>{{ documents.per_page*(documents.current_page-1)+documents.data.length }}</span> документи із <span>{{ documents.total }}</span> знайдених</div>
+        <div class="nav-filter-items">
+<!--            <span>Завантажувати</span>-->
+        </div>
+      </div>
       <nav-filtration v-if="$route.query" />
     </div>
     <document-item class="item-underline" :document="document" v-for="document in documents.data"/>
@@ -78,12 +83,21 @@ export default {
   padding: 1rem;
   display: flex;
   flex-flow: column;
-  border: 1px solid #bbb;
+  /*border: 1px solid #bbb;*/
   font-size: 18px;
   color: #24292F;
-  font-weight: bold;
+  /*font-weight: bold;*/
   border-radius: 5px;
   /*padding: 20px;*/
   /*min-height: 9rem;*/
+}
+.sort-filter{
+  display: flex;
+}
+.sort-filter >:nth-child(1) > span{
+  font-weight: bold;
+}
+.nav-filter-items{
+  justify-self: right;
 }
 </style>
