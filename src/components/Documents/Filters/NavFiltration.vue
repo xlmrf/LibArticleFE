@@ -1,7 +1,5 @@
 <template>
-  <div class="used-filters">
-    <!--        Застосовані фільтри:-->
-    <!--    {{checkQuery()}}-->
+  <div class="used-filters" v-if="JSON.stringify(checkFilter) !== '{}'">
     Увімкнені фільтри:
     <span class="filter-panel" v-for="(item,k) in checkFilter">
       {{ translateFilters(k) }}
@@ -27,7 +25,7 @@ export default {
   data() {
     return {
       filter_keys:['authors','type_id','publication_date'],
-      filter: []
+      filter: {}
     }
   },
   computed: {
