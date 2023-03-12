@@ -10,7 +10,7 @@ export default {
     actions:{
         // console.log('files in js -', data); http://s1.libarticle.polidar.in.ua/api/upload-file
         pushFile(ctx,data){
-            axios.post('http://s1.libarticle.loc/api/file', data, {
+            axios.post('https://s1.libarticle.polidar.in.ua/api/v1/file', data, {
                 onUploadProgress: progressEvent => {
                     if (progressEvent.lengthComputable){
                         ctx.commit('updateProgress',(progressEvent.loaded / progressEvent.total) * 100)
