@@ -147,7 +147,7 @@ export default {
 }
 
 .current-page-pagination > a {
-  background: rgba(16, 89, 255, 0.75);
+  background: #369add;
   color: #f1f1f1;
   font-weight: bold;
 }

@@ -1,8 +1,7 @@
 <template>
-  <div class="used-filters">
-    <!--        Застосовані фільтри:-->
-    <!--    {{checkQuery()}}-->
-    <span v-for="(item,k) in $route.query">
+  <div class="used-filters" v-if="JSON.stringify(checkFilter) !== '{}'">
+    Увімкнені фільтри:
+    <span class="filter-panel" v-for="(item,k) in checkFilter">
       {{ translateFilters(k) }}
       <span v-for="(el, i) in textFilter(item, k)">
       {{ el }}
@@ -25,17 +24,26 @@ export default {
   mixins:['translate'],
   data() {
     return {
-      filters: []
+      filter_keys:['authors','type_id','publication_date'],
+      filter: {}
     }
   },
   computed: {
     ...mapGetters(['getTypes']),
+    checkFilter(){
+      this.filter = Object.assign({},this.$route.query)
+      for (let item in this.filter){
+        if (!this.filter_keys.includes(item)){
+          delete this.filter[item]
+        }
+      }
+      return this.filter
+    },
   },
   methods: {
     checkQuery() {
       let {...query} = this.$route.query;
     },
-
     textFilter(item, k) {
       let arr = []
       // let text = this.associateFiltersName[k] + ':';
@@ -106,25 +114,30 @@ export default {
   /*display: flex;*/
 }
 
-.used-filters > span {
-
+.filter-panel{
+  display: flex;
+  align-items: center;
 }
 
-.used-filters span > span {
-  /*display: flex;*/
+.filter-panel > span {
+  display: flex;
   cursor: default;
   width: fit-content;
   /*font-size: 1em;*/
   margin: 0 0.2rem;
-  padding: 4px 12px;
+  color: #20B2AA;
+  padding: 4px 8px;
   border-radius: 40px;
-  background: rgba(16, 89, 255, 0.25);
+  /*background: rgba(16, 89, 255, 0.25);*/
+  /*background: rgba(119, 169, 222, 0.59);*/
 }
 
 .delete-item {
+  position: relative;
+  top: 2px;
   margin-left: 0.1rem;
   cursor: pointer;
-  align-self: end;
+  align-self: center;
   height: 18px;
 }
 

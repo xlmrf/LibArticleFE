@@ -52,10 +52,11 @@ h3{
 
 }
 .document-item a:visited{
-  color: #222222;
+  color: #3684DD;
 }
 .document-item a{
   text-decoration: none;
-  color: #0F0F0F;
+  /*color: #0F0F0F;*/
+  color: #0969DA;
 }
 </style>
