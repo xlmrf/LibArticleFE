@@ -4,7 +4,7 @@ export default {
     state(){
         return{
             files: [],
-            progress: 0,
+            ProgressLoadingFile: 0,
         }
     },
     actions:{
@@ -13,7 +13,7 @@ export default {
             axios.post('https://s1.libarticle.polidar.in.ua/api/v1/file', data, {
                 onUploadProgress: progressEvent => {
                     if (progressEvent.lengthComputable){
-                        ctx.commit('updateProgress',(progressEvent.loaded / progressEvent.total) * 100)
+                        ctx.commit('mutateProgressLoadingFile',(progressEvent.loaded / progressEvent.total) * 100)
                         // console.log('progress:',ctx.progress);
                     }
                 }
@@ -36,8 +36,8 @@ export default {
         },
     },
     mutations:{
-        updateProgress(state, data){
-            state.progress = data
+        mutateProgressLoadingFile(state, data){
+            state.ProgressLoadingFile = data
             console.log('mutation process:', data)
         },
         FilePusher(state, data){
@@ -70,8 +70,8 @@ export default {
         }
     },
     getters:{
-        getProgress(ctx){
-            return ctx.progress
+        getProgressLoadingFile(ctx){
+            return ctx.ProgressLoadingFile
         },
         getFiles(ctx){
             return ctx.files

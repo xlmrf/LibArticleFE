@@ -639,6 +639,7 @@ export default {
 
 .conclusion-btn{
   /*text-transform: uppercase;*/
+  margin: 3px;
   font-size: 1em;
 }
 

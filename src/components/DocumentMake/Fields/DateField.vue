@@ -5,9 +5,9 @@
     без дати <input type="radio" v-model="formatDate" value="null">.
   </div>
 
-  <div id="date-picker" v-if="formatDate==='date'||formatDate==='year'">
+  <div class="date-picker" v-if="formatDate==='date'||formatDate==='year'">
     <div>
-      <label>year</label>
+      <label>Рік</label>
       <br/>
       <select v-model="year">
         <option v-for="y in years" :key="y">
@@ -16,7 +16,7 @@
       </select>
     </div>
     <div v-if="formatDate==='date'">
-      <label>month</label>
+      <label>Місяць</label>
       <br/>
       <select v-model="month">
         <option v-for="m in 12" :key="m" :value="String(m).length>1?m:'0'+m">
@@ -25,7 +25,7 @@
       </select>
     </div>
     <div v-if="formatDate==='date'">
-      <label>day</label>
+      <label>День</label>
       <br/>
       <select v-model="day">
         <option v-for="d in maxDate" :key="d" :value="String(d).length>1?d:'0'+d">
@@ -122,11 +122,24 @@ export default {
 
 
 <style scoped>
-#date-picker {
+.date-picker {
   display: flex;
 }
-
-#date-picker div {
-  margin-right: 10px;
+.date-picker > div{
+  display: inherit;
+  flex-flow: column;
+  margin-right: 0.5rem;
 }
+
+.date-picker select{
+  border: 1px solid #bbb;
+  border-radius: 3px;
+  padding: 0.25rem 0.5rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  line-height: 1.1;
+  background-color: #fff;
+}
+
+
 </style>

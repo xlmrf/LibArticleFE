@@ -8,6 +8,7 @@
              ref="files" multiple>
       <div class="document-files-wrapper">
         <div class="files-roll-manager">
+          progress:{{getProgressLoadingFile}}
           <div v-if="getFiles.length !== 0">
             <div class="files-tape">
               <span :class="['item', key === file_id ? 'active' : 'inactive']" v-for="(file, key) in getFiles"
@@ -25,10 +26,7 @@
         <div :class="['file-update-area',{valid}]" @click="addFile()" v-if="getFiles.length === 0">завантажити файл
         </div>
         <div class="box-frame" v-else>
-          <iframe
-              :src='frameUrl(getFiles[file_id])'
-              width='100%' height='100%' frameborder='0'>
-          </iframe>
+          <iframe :src='frameUrl(getFiles[file_id])+"#view=FitH"'></iframe>
           <!--          <iframe :src="getFiles[file_id].url" frameborder="0">Не вийшло завантажити файл</iframe>-->
           <!--        <iframe :src="'https://view.officeapps.live.com/op/embed.aspx?src='+getFiles[file_id].url" v-else-if="getFiles[file_id].typeFile === 'doc'" frameborder="0">Не вийшло завантажити файл</iframe>-->
         </div>
@@ -58,7 +56,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getProgress', 'getFiles']),
+    ...mapGetters(['getProgressLoadingFile', 'getFiles']),
     checkItem() {
       if (this.src[this.file_id] === undefined) {
         for (let i = 0; i < this.files.length; i++) {
@@ -593,6 +591,7 @@ body {
   height: 100%;
   display: block;
   box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+  margin-bottom: 30px;
 
 }
 

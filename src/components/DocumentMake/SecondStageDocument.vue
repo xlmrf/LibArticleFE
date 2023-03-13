@@ -15,14 +15,14 @@
     <div class="fill-areas-document">
       <files-frame-component/>
 
-      <div>
+      <div class="fill-areas">
         <div class="form-item" v-for="(item,idx) in getTypes.find(type => type.id === getDocument.type_id)?.fields"
              :key="idx">
           <label :for="item">{{ translateAreas(item) }}</label>
           <component :is="setFields(item)" :field="item"></component>
         </div>
         <button class="button conclusion-btn" @click="updateDocument(getDocument)">
-          Update
+          Зберегти документ
         </button>
       </div>
     </div>
@@ -87,10 +87,24 @@ export default {
 </script>
 
 <style scoped>
+.conclusion-btn{
+  border-radius: 3px;
+  border: 1px solid #525252;
+  color: #222222;
+  padding: 0.5rem 1rem;
+  margin-right: auto;
+  margin-left: auto;
+}
+
 .fill-areas-document {
   display: flex;
   flex-wrap: wrap;
   margin-top: 1rem;
+}
+
+.fill-areas{
+  display: flex;
+  flex-flow: column;
 }
 
 .fill-areas-document > div {
