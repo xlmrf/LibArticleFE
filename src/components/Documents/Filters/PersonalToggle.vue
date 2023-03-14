@@ -24,13 +24,13 @@ export default {
     }
   },
   watch: {
-    // '$route.query':{
-    //   handler(k){
-    //     if (!k.my){
-    //
-    //     }
-    //   }
-    // }
+    '$route.query':{
+      handler(k){
+        if (this.$route.query.my !== undefined&&this.$route.query.my==="true") {
+          this.only_own = 'my';
+        }
+      }
+    }
   },
   methods: {
     query(data) {

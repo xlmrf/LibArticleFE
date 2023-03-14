@@ -23,9 +23,9 @@ import tutorial from "./components/fallback/TutorialComponent"
 import support from "./components/additional/UnknownPageComponent"
 import rules from "./components/additional/UnknownPageComponent"
 
-import activity from "./components/activity/MainActivity"
-import notices from "./components/activity/MessagesActivityComponent"
-import story from "./components/activity/StoryActivityComponent"
+import actions from "./components/UserActions/MainActions"
+import notices from "./components/UserActions/Notices"
+import story from "./components/UserActions/StoryActions"
 
 import settings from "./view/UserSettings"
 import ProfileSettings from "./components/settings/Account"
@@ -146,9 +146,9 @@ const routes = [
                 component: rules
             },
             {
-                path:'/activity',
-                name:'activity',
-                component: activity,
+                path:'/UserActions',
+                name:'actions',
+                component: actions,
                 children:[
                     {
                         path:'/notices',
