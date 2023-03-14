@@ -8,7 +8,6 @@
              ref="files" multiple>
       <div class="document-files-wrapper">
         <div class="files-roll-manager">
-          progress:{{getProgressLoadingFile}}
           <div v-if="getFiles.length !== 0">
             <div class="files-tape">
               <span :class="['item', key === file_id ? 'active' : 'inactive']" v-for="(file, key) in getFiles"
@@ -23,6 +22,7 @@
           </div>
           <h4 v-else>Завантажте перший документ</h4>
         </div>
+        <hr :style="'width:'+getProgressLoadingFile+'%'">
         <div :class="['file-update-area',{valid}]" @click="addFile()" v-if="getFiles.length === 0">завантажити файл
         </div>
         <div class="box-frame" v-else>
@@ -37,6 +37,7 @@
         </div>
       </div>
     </form>
+    {{getFiles}}
   </div>
 </template>
 
@@ -174,6 +175,14 @@ export default {
 </script>
 
 <style scoped>
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 1em 0;
+  padding: 0;
+}
 .document-increment-label {
   position: relative;
   display: flex;
@@ -474,7 +483,7 @@ body {
 }
 
 .files-roll-manager {
-  border-bottom: 1px solid #BBBBBB;
+  /*border-bottom: 1px solid #BBBBBB;*/
   border-radius: 3px;
   width: 100%;
   padding: 0.3rem;

@@ -324,7 +324,7 @@ export default {
 }
 .form-item label{
   margin: 3px;
-  color: #525252;
+  color: #313131;
 }
 
 

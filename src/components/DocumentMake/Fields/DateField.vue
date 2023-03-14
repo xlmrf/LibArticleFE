@@ -1,8 +1,15 @@
 <template>
-  <div> Формат дати:
-    повна дата <input type="radio" v-model="formatDate" value="date">;
-    рік <input type="radio" v-model="formatDate" value="year">;
-    без дати <input type="radio" v-model="formatDate" value="null">.
+  <div class="date-format-block">
+    <span @click="this.$refs.full_date.click()" :class="{active_date_format:formatDate==='date'}">
+      повна дата <input type="radio" v-model="formatDate" ref="full_date" value="date">
+    </span>
+    <span @click="this.$refs.only_year.click()" :class="{active_date_format:formatDate==='year'}">
+      рік
+      <input type="radio" v-model="formatDate" ref="only_year" value="year">
+    </span>
+    <span @click="this.$refs.none_date.click()" :class="{active_date_format:formatDate==='null'}">
+      без дати <input type="radio" v-model="formatDate" ref="none_date" value="null">
+    </span>
   </div>
 
   <div class="date-picker" v-if="formatDate==='date'||formatDate==='year'">
@@ -122,6 +129,31 @@ export default {
 
 
 <style scoped>
+
+.date-format-block{
+  display: flex;
+}
+
+.date-format-block > span{
+  cursor: pointer;
+  padding: 5px 10px;
+  margin: 10px 5px 10px 0;
+
+  border: 1px solid #bbb;
+  border-radius: 6px;
+}
+
+.active_date_format{
+  /*background: rgba(9, 127, 218, 0.95);*/
+  background: #dedede;
+  /*background: #E3F1F9;*/
+  /*color: white;*/
+}
+
+.date-format-block input{
+  display: none;
+}
+
 .date-picker {
   display: flex;
 }

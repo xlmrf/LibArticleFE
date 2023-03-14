@@ -415,7 +415,7 @@ background: #75b800;
   cursor: pointer;
 }
 .files-roll-manager{
-  border-bottom: 1px solid #BBBBBB;
+  /*border-bottom: 1px solid #BBBBBB;*/
   border-radius: 3px;
   width: 100%;
   padding: 0.3rem;
