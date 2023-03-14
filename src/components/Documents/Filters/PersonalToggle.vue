@@ -1,18 +1,18 @@
 <template>
   <div class="select-search-area">
-    <h4>Вибрати документи:</h4>
-    <label class="save-session">
-      <input type="radio" v-model="only_own" :value="false" @change="query(only_own)" name="only_own">
+    <h4>Обрати:</h4>
+    <span @click="this.$refs.all.click()" :class="{active_date_format:only_own===false}">
+      <input type="radio" v-model="only_own" :value="false" @change="query(only_own)" name="all" ref="all">
       <span class="label">Всі</span>
-    </label>
-    <label class="save-session">
-      <input type="radio" v-model="only_own" value="my" @change="query(only_own)" name="only_own">
+    </span>
+    <span @click="this.$refs.only_own.click()" :class="{active_date_format:only_own==='my'}">
+      <input type="radio" v-model="only_own" value="my" @change="query(only_own)" name="only_own" ref="only_own">
       <span class="label">Тільки мої</span>
-    </label>
-    <label class="save-session">
-      <input type="radio" v-model="only_own" value="author" @change="query(only_own)" name="only_own">
+    </span >
+    <span @click="this.$refs.im_author.click()" :class="{active_date_format:only_own==='author'}">
+      <input type="radio" v-model="only_own" value="author" @change="query(only_own)" name="im_author" ref="im_author">
       <span class="label">Я автор</span>
-    </label>
+    </span>
   </div>
 </template>
 
@@ -66,5 +66,31 @@ export default {
 </script>
 
 <style scoped>
+.select-search-area{
+  display: flex;
+  /*background: #F0DDD1;*/
+}
 
+.select-search-area h4{
+  padding-bottom: 4px;
+  margin: 5px;
+  border-bottom: 1px solid #B2B2B2;
+}
+
+.select-search-area > span{
+  cursor: pointer;
+  padding: 5px 10px;
+  width: 150px;
+  border-radius: 6px;
+}
+
+.active_date_format{
+  /*background: rgba(9, 127, 218, 0.95);*/
+  background: #1C75DD;
+  color: #fff;
+}
+
+.select-search-area input{
+  display: none;
+}
 </style>
