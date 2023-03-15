@@ -1,9 +1,9 @@
 <template>
   <div>
-    <title-field/>
+    <title-field wrong-input=""/>
     <type-field />
     <div style="clear: both">
-      <button @click="$emit('next')" class="choose-type choose-btn-able" :class="['choose-type',{'disable-btn':loader}]" :disabled="loader">Обрати</button>
+      <button @click="$emit('next')" class="choose-type choose-btn-able" :class="['choose-type',{'disable-btn':loader||!BtnValid}]" :disabled="loader||!BtnValid">Обрати</button>
     </div>
     <div class="middle-spinner" v-if="loader">
       <span><loader width="4" radius="20"></loader></span>
@@ -54,7 +54,7 @@ export default {
   font-size: 16px;
   margin:2.5rem auto;
   align-self: end;
-  padding: 1rem 5rem;
+  padding: 1rem 4rem;
   border-radius: 4px;
   cursor: pointer;
   transition: 0.5s ease all;
@@ -62,15 +62,12 @@ export default {
   -webkit-transition: 0.5s ease all;
 }
 .choose-btn-able{
-  background-image: linear-gradient(to right, #77A1D3 0%, #79CBCA  51%, #77A1D3  100%);
+  /*background-image: linear-gradient(to right, #77A1D3 0%, #79CBCA  51%, #77A1D3  100%);*/
+  background: #0969DA;
 }
 .disable-btn{
-  background-image: linear-gradient(to right, rgba(129, 131, 132, 0.36) 0%, rgba(103, 116, 116, 0.33) 51%, rgba(129, 131, 132, 0.33) 100%);
+  /*background-image: linear-gradient(to right, rgba(129, 131, 132, 0.36) 0%, rgba(103, 116, 116, 0.33) 51%, rgba(129, 131, 132, 0.33) 100%);*/
+  background: rgba(129, 131, 132, 0.36);
   cursor: default;
-}
-.choose-btn-able:hover{
-  background-position: right center; /* change the direction of the change here */
-  color: #fff;
-  text-decoration: none;
 }
 </style>

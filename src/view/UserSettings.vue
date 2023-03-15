@@ -2,13 +2,14 @@
   <div class="main-card">
     <side-bar></side-bar>
     <div class="main-window">
-      <router-view></router-view>
+      <router-view ></router-view>
     </div>
   </div>
 </template>
 
 <script>
 import SideBar from "../components/settings/SideBar"
+import {mapActions, mapGetters} from "vuex";
 export default {
 
   components:{SideBar}

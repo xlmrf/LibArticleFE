@@ -1,7 +1,7 @@
 <template>
   <div class="document-types" >
     <div>
-      <h3>Категорії</h3>
+      <h3>Тип</h3>
       <div class="files-tape">
         <div v-for="(type,key) in getTypes" :key="key"
              :class="['file-name',{'category-active':getDocument.type_id-1 === key}]"
@@ -16,7 +16,7 @@
           {{ translateAreas(item) }}
         </li>
       </ul>
-      <span class="category-not-chosen" v-else>Оберіть категорію</span>
+      <span class="item-category-collection mid-title" v-else>Оберіть категорію</span>
     </div>
   </div>
 </template>
@@ -76,7 +76,7 @@ export default {
   margin:2.5rem auto 0 auto;
   height: 100%;
   min-height: 300px;
-  box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
+  /*box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;*/
 }
 .type-description{
   display: flex;
@@ -86,7 +86,7 @@ export default {
 }
 h3{
   height: 21px;
-  color: #656565;
+  color: #24292F;
   font-size: 1.1em;
   margin: 1rem 0;
   /*color: #212121;*/
@@ -97,7 +97,7 @@ h3{
   flex-flow: column wrap;
   align-content: flex-start;
   width: 100%;
-  border-radius: 6px;
+  border-radius: 2px;
   height: 220px;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
   position: relative;
@@ -114,21 +114,15 @@ h3{
   align-self: center;
 }
 
-.category-not-chosen{
-  display: inherit;
+.mid-title{
   justify-content: center;
-  align-items: center;
+  align-content: center;
   font-size: 1.3rem;
-  width: 100%;
-  border-radius: 6px;
-  height: 220px;
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
-
 }
 
 .files-tape{
   /*box-shadow: rgba(0, 0, 0, 0.35) 0px -8px 12px -8px inset;*/
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
+  /*box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;*/
   border-radius: 6px;
   align-self: center;
   display: flex;
@@ -219,7 +213,7 @@ h3{
   cursor: pointer;
   border: 2px solid transparent;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
-  border-radius: 3px;
+  border-radius: 1px;
   min-width: 175px;
   /*width: auto;*/
 }

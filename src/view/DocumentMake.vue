@@ -1,7 +1,7 @@
 <template>
   <div class="document-make-body">
     <!--    <small v-if="getDocument.type_id">{{ getDocument }}</small>-->
-    {{getDocument}}
+    <p class="code">{{getDocument}}</p>
     <first-stage v-if="prev_stage" @next="next"/>
     <second-stage @prev="prev" v-else/>
   </div>
@@ -74,6 +74,13 @@ export default {
 </script>
 
 <style scoped>
+.code{
+  border: 1px solid #bbb;
+  color: #0e710e;
+  border-radius: 2px;
+  padding: 5px;
+  margin: 5px;
+}
 
 .document-make-body {
   height: 100%;

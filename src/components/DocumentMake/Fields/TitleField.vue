@@ -2,7 +2,7 @@
   <div class="top">
     <h2>Назва документу</h2>
     <label for="title" v-if="wrongInput">{{wrongInput}}</label>
-    <input type="text" name="title" :class="['title-input',{'alert-input':wrongInput}]" id="title" placeholder="Навчальний посібник з дисципліни «Теорія ймовірностей, імовірнісні процеси та математична статистика». Курс лекцій" v-model="getDocument.title">
+    <input type="text" required name="title" :class="['title-input',{'alert-input':wrongInput}]" id="title" placeholder="Навчальний посібник з дисципліни «Теорія ймовірностей, імовірнісні процеси та математична статистика». Курс лекцій" v-model="getDocument.title">
   </div>
 </template>
 
@@ -10,11 +10,7 @@
 import {mapGetters} from "vuex";
 
 export default {
-  data(){
-    return{
-      wrongInput:''
-    }
-  },
+  props:['wrongInput'],
   watch:{
     'data.title':{
       handler(){
@@ -34,6 +30,7 @@ export default {
   text-align: center;
   color: #212121;
   width: 100%;
+  margin: 20px;
 }
 .top{
   display: flex;
@@ -66,7 +63,10 @@ export default {
   -moz-transition: 0.3s ease all;
   -webkit-transition: 0.3s ease all;
 }
-.type-document-modal input:focus{
+input:focus{
+  border: 1px solid rgba(16, 89, 255, 0.9);
+}
+input:valid{
   border: 1px solid rgba(16, 89, 255, 0.9);
 }
 .alert-input{

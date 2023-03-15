@@ -1,4 +1,5 @@
 <template>
+  <div>{{getProfile}}</div>
   <div class="middle-spinner" v-if="!data">
     <span><loader width="4" radius="20"></loader></span>
   </div>
@@ -62,8 +63,8 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getUniversities', 'getPhoto', 'getUserInfo']),
-    ...mapActions(['requestUniversity', 'requestUserInfo']),
+    ...mapGetters(['getUniversities', 'getPhoto', 'getProfile']),
+    ...mapActions(['requestUniversity', 'requestProfile']),
     logout() {
       localStorage.removeItem('access_token')
       this.updateUser('')
@@ -72,9 +73,6 @@ export default {
     }
   },
   watch: {
-    getUserInfo() {
-      this.data = this.getUserInfo
-    },
     'data.info.university': {
       handler(key) {
         if (this.data.info && key !== null) {
@@ -127,7 +125,7 @@ export default {
     Loader
   },
   mounted() {
-    this.requestUserInfo
+    this.requestProfile
     this.requestUniversity
   }
 }
