@@ -18,7 +18,7 @@ h2{
     margin: 0;
     /*position: absolute;*/
     top: 40%;
-    left: 50%;
+    left: 60%;
     margin-right: -50%;
     transform: translate(-50%, -50%)
 }

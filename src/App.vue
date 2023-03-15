@@ -54,7 +54,7 @@ body {
 }
 
 .subway {
-  min-height: 22px;
+  min-height: 42px;
   height: 100px;
   display: block;
 }

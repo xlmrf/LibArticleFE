@@ -20,8 +20,8 @@ import profileStatistic from "./components/profile/old/content_items/StatisticIn
 import UserMain from "./components/profile/old/UserMainComponent"
 
 import tutorial from "./components/fallback/TutorialComponent"
-import support from "./components/additional/UnknownPageComponent"
-import rules from "./components/additional/UnknownPageComponent"
+import support from "./view/UnknownPage"
+import rules from "./view/UnknownPage"
 
 import actions from "./components/UserActions/MainActions"
 import notices from "./components/UserActions/Notices"
@@ -32,6 +32,7 @@ import ProfileSettings from "./components/settings/Account"
 import PrivacySettings from "./components/settings/Privacy"
 import AdvancedSettings from "./components/settings/Security"
 import DocumentMake from "@/view/DocumentMake";
+import UnknownPage from "@/view/UnknownPage"
 
 
 import confirmEmail from "./components/auth/ConfirmEmail";
@@ -82,6 +83,11 @@ const routes = [
         component: main,
         children: [
 
+            {
+                path: '/:any(.*)',
+                name: 'not-found',
+                component: UnknownPage
+            },
             {
                 path:'/',
                 name:'stat',
@@ -146,7 +152,7 @@ const routes = [
                 component: rules
             },
             {
-                path:'/UserActions',
+                path:'/actions',
                 name:'actions',
                 component: actions,
                 children:[

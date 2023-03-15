@@ -29,6 +29,10 @@ export default {
   background: #F7F7FB;
 }
 .subway-list{
+  display: inherit;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
   text-align: center;
 }
 

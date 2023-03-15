@@ -8,7 +8,7 @@
         <li v-for="notice in notificationMessages.slice(0,2)">
           <router-link :class="['menu-link-item',{'unread-notice':!notice.check}]" :to="'/profile/1'">{{notice.message+' '+myTruncate(this.title,15, '...')}}<span>{{ notice.date }}</span></router-link>
         </li>
-        <span class="menu-link-item " v-if="notificationMessages.length > 2">Переглянути всі <small>{{Object.values(notificationMessages).filter(item => item.check === true).length}}</small></span>
+        <span class="menu-link-item " @click="ShowNotices" v-if="notificationMessages.length > 2">Переглянути всі <small>{{Object.values(notificationMessages).filter(item => item.check === true).length}}</small></span>
         <span class="none-messages" v-if="!notificationMessages.length">Нових повідомлень немає</span>
       </ul>
     </nav>
@@ -60,7 +60,6 @@ export default {
     }
   },
   methods:{
-
     toggleDropdown(e) {
       this.notificationMessages.some(e => e.check)
       this.openNavMenu = !this.openNavMenu
@@ -73,7 +72,11 @@ export default {
     }
   },
   computed:{
-    ...mapGetters(['getUser'])
+    ...mapGetters(['getUser']),
+    ShowNotices(){
+      // console.log(this.$route.name);
+      this.$router.push('/actions/notices?from='+this.$route.name)
+    }
   },
   mounted() {
     document.addEventListener('click', this.close)
