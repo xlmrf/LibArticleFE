@@ -3,12 +3,11 @@ import axios from "axios";
 export default {
     state(){
         return{
-            files: [],
             ProgressLoadingFile: 0,
-            // files:{
-            //     main:{url:''},
-            //     add:[{},{}]
-            // }
+            files:{
+                main:{url:''},
+                add:[]
+            }
         }
     },
     actions:{
@@ -45,7 +44,13 @@ export default {
             state.ProgressLoadingFile = data
         },
         FilePusher(state, data){
-            state.files.push(data)
+            if (state.files.main.url === ''){
+                state.files.main = data
+            }
+            else {
+                state.files.add.push(data)
+            }
+
 
         },
         updateFiles(state,data){

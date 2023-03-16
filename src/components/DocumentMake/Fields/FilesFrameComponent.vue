@@ -1,40 +1,44 @@
 <template>
   <div>
-
-
     <form class="card" @submit.prevent enctype="multipart/form-data">
       <!--    enctype="multipart/form-data"-->
       <input class="form-control select-input" type="file" id="files" @change="selectedFiles()"
              ref="files" multiple>
       <div class="document-files-wrapper">
-        <div class="files-roll-manager">
-          <div v-if="getFiles.length !== 0">
-            <div class="files-tape">
-              <span :class="['item', key === file_id ? 'active' : 'inactive']" v-for="(file, key) in getFiles"
-                    @click="file_id = key">{{ file.originalNameFile }}</span>
-            </div>
-            <svg class="document-increment-label" @click="addFile()" xmlns="http://www.w3.org/2000/svg" width="28"
-                 height="28" viewBox="0 0 24 24" fill="none" stroke="#B2B2B2" stroke-width="2" stroke-linecap="round"
-                 stroke-linejoin="round">
-              <line x1="12" y1="5" x2="12" y2="19"></line>
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-            </svg>
-          </div>
-          <h4 v-else>Завантажте перший документ</h4>
-        </div>
+
+
+
+<!--        <div class="files-roll-manager">-->
+<!--          <div v-if="getFiles.length !== 0">-->
+<!--            <div class="files-tape">-->
+<!--              <span :class="['item', key === file_id ? 'active' : 'inactive']" v-for="(file, key) in getFiles"-->
+<!--                    @click="file_id = key">{{ file.originalNameFile }}</span>-->
+<!--            </div>-->
+<!--            <svg class="document-increment-label" @click="addFile()" xmlns="http://www.w3.org/2000/svg" width="28"-->
+<!--                 height="28" viewBox="0 0 24 24" fill="none" stroke="#B2B2B2" stroke-width="2" stroke-linecap="round"-->
+<!--                 stroke-linejoin="round">-->
+<!--              <line x1="12" y1="5" x2="12" y2="19"></line>-->
+<!--              <line x1="5" y1="12" x2="19" y2="12"></line>-->
+<!--            </svg>-->
+<!--          </div>-->
+<!--          <h4 v-else>Завантажте перший документ</h4>-->
+<!--        </div>-->
+
+
+
         <hr :style="'width:'+getProgressLoadingFile+'%'">
-        <div :class="['file-update-area',{valid}]" @click="addFile()" v-if="getFiles.length === 0">завантажити файл
+        <div :class="['file-update-area',{valid}]" @click="addFile()">завантажити файл
         </div>
-        <div class="box-frame" v-else>
-          <iframe :src='frameUrl(getFiles[file_id])+"#view=FitH"'></iframe>
-          <!--          <iframe :src="getFiles[file_id].url" frameborder="0">Не вийшло завантажити файл</iframe>-->
-          <!--        <iframe :src="'https://view.officeapps.live.com/op/embed.aspx?src='+getFiles[file_id].url" v-else-if="getFiles[file_id].typeFile === 'doc'" frameborder="0">Не вийшло завантажити файл</iframe>-->
-        </div>
-        <div class="wrapper-ground" v-if="getFiles.length !== 0">
-          <small>{{ checkSize(getFiles[file_id].sizeFile) }}</small>
-          <!--        <div :class="[{'loader-sprint':getProgress}]">{{getProgress}}</div>-->
-          <span @click="removeItem">Видалити файл</span>
-        </div>
+<!--        <div class="box-frame" v-else>-->
+<!--&lt;!&ndash;          <iframe :src='frameUrl(getFiles[file_id])+"#view=FitH"'></iframe>&ndash;&gt;-->
+<!--          &lt;!&ndash;          <iframe :src="getFiles[file_id].url" frameborder="0">Не вийшло завантажити файл</iframe>&ndash;&gt;-->
+<!--          &lt;!&ndash;        <iframe :src="'https://view.officeapps.live.com/op/embed.aspx?src='+getFiles[file_id].url" v-else-if="getFiles[file_id].typeFile === 'doc'" frameborder="0">Не вийшло завантажити файл</iframe>&ndash;&gt;-->
+<!--        </div>-->
+<!--        <div class="wrapper-ground" v-if="getFiles.length !== 0">-->
+<!--          <small>{{ checkSize(getFiles[file_id].sizeFile) }}</small>-->
+<!--          &lt;!&ndash;        <div :class="[{'loader-sprint':getProgress}]">{{getProgress}}</div>&ndash;&gt;-->
+<!--          <span @click="removeItem">Видалити файл</span>-->
+<!--        </div>-->
       </div>
     </form>
     {{getFiles}}
@@ -49,7 +53,9 @@ import {mapActions, mapGetters, mapMutations} from "vuex";
 export default {
   data() {
     return {
-      files: [],
+      // files: {
+      //
+      // },
       file_id: 0,
       valid: false,
       process: 0,
@@ -60,7 +66,7 @@ export default {
     ...mapGetters(['getProgressLoadingFile', 'getFiles']),
     checkItem() {
       if (this.src[this.file_id] === undefined) {
-        for (let i = 0; i < this.files.length; i++) {
+        for (let i = 0; i < this.getFiles.length; i++) {
           if (this.src[i] !== undefined) {
             return this.src[i]
           }
@@ -89,7 +95,7 @@ export default {
   },
   methods: {
     ...mapActions(['pushFile']),
-    ...mapMutations(['FilePusher', 'FileRemover', 'updateFiles']),
+    ...mapMutations(['FilePusher', 'updateFiles']),
     checkSize(item, type) {
       if (item > 1000) {
         type = 'KB'
@@ -103,12 +109,12 @@ export default {
         return item + " " + 'B'
       }
     },
-    frameUrl(file) {
-      if (file.typeFile === 'doc' || file.typeFile === 'docx')
-        return 'https://view.officeapps.live.com/op/embed.aspx?src=' + file.url;
-      else
-        return file.url;
-    },
+    // frameUrl(file) {
+    //   if (file.typeFile === 'doc' || file.typeFile === 'docx')
+    //     return 'https://view.officeapps.live.com/op/embed.aspx?src=' + file.url;
+    //   else
+    //     return file.url;
+    // },
     validate(valid) {
       // this.valid = valid
       let size = valid.size / 1024 / 1024
@@ -119,13 +125,13 @@ export default {
       // if (valid.type !== 'application/pdf' && valid.type !== 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' && valid.type !== 'application/msword') {
       //   return null
       // }
-      if (this.files.length === 0) {
+      if (this.getFiles.length === 0) {
         this.valid = true
       }
       return valid
     },
     next() {
-      console.log("validator", this.files.length);
+      console.log("validator", this.getFiles.length);
       this.uploadDocument(this.document)
     },
     addFile() {
@@ -133,7 +139,7 @@ export default {
       this.$refs.files.click()
     },
     removeItem() {
-      this.files.splice(this.file_id, 1)
+      this.getFiles.splice(this.file_id, 1)
       // this.src.splice(this.file_id, 1)
       // this.FileRemover(this.file_id)
       this.file_id = this.files.length - 1
@@ -152,21 +158,6 @@ export default {
         if (file !== null) {
           this.pushFile(formData)
         }
-      }
-    }
-  },
-  mounted() {
-    let document = JSON.parse(localStorage.getItem('not_finished_document'))
-    if (document) {
-      if (document.files) {
-        for (let file in document.files) {
-          // this.localFiles[file] = document.files[file]
-          this.files.push(document.files[file])
-        }
-        console.log('files', this.files);
-        console.log('getFiles', this.getFiles)
-        this.updateFiles(this.files)
-
       }
     }
   },
@@ -508,7 +499,7 @@ body {
   display: inherit;
   align-self: center;
   justify-content: center;
-  padding: 15% 20%;
+  padding: 15%;
   margin: 3rem 0;
   /*height: 50%;*/
   text-align: center;
