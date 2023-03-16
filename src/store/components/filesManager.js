@@ -5,7 +5,7 @@ export default {
         return{
             ProgressLoadingFile: 0,
             files:{
-                main:{url:''},
+                main:{},
                 add:[]
             }
         }
@@ -44,7 +44,7 @@ export default {
             state.ProgressLoadingFile = data
         },
         FilePusher(state, data){
-            if (state.files.main.url === ''){
+            if (Object.keys(state.files.main).length === 0){
                 state.files.main = data
             }
             else {
