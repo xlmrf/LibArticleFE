@@ -23,7 +23,7 @@ import tutorial from "./components/fallback/TutorialComponent"
 import support from "./view/UnknownPage"
 import rules from "./view/UnknownPage"
 
-import actions from "./components/UserActions/MainActions"
+import actions from "./view/UserActions"
 import notices from "./components/UserActions/Notices"
 import story from "./components/UserActions/StoryActions"
 

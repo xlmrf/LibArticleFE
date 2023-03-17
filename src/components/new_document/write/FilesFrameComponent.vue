@@ -439,7 +439,7 @@ background: #75b800;
   display: inherit;
   align-self: center;
   justify-content: center;
-  padding: 15% 20%;
+  padding: 15% 15%;
   margin: 3rem 0;
   /*height: 50%;*/
   text-align: center;
@@ -451,9 +451,6 @@ background: #75b800;
   position: relative;
   /*left: 20%;*/
   /*top: 10%;*/
-}
-.file-update-area svg{
-  position: absolute;
 }
 .valid{
     border: 1px dashed red;

@@ -16,7 +16,7 @@
         <li><router-link class="menu-link-item" to="/my-documents?my=true">
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#212121" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
           Документи</router-link></li>
-        <li><router-link class="menu-link-item" to="/activity">
+        <li><router-link class="menu-link-item" to="/actions">
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#212121" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
           Активність</router-link></li>
         <li><router-link class="menu-link-item settings-link" to="/settings">

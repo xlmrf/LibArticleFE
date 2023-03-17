@@ -1,5 +1,5 @@
 <template>
-  <div class="main-card">
+  <div class="main-card" v-if="getUser?.id">
     <side-bar></side-bar>
     <div class="main-window">
       <router-view ></router-view>
@@ -12,6 +12,15 @@ import SideBar from "../components/settings/SideBar"
 import {mapActions, mapGetters} from "vuex";
 export default {
 
+  methods:{
+    ...mapActions(['requestUser']),
+  },
+  computed:{
+    ...mapGetters(['getUser'])
+  },
+  mounted() {
+    this.requestUser()
+  },
   components:{SideBar}
 }
 </script>

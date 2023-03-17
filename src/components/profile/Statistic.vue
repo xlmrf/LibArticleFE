@@ -2,7 +2,7 @@
   <div class="user-state-panel item-underline">
     <router-link class="state-link" to="">
       <div class="state-upload">
-        <span class="state-count">9</span>
+        <span class="state-count">{{document_count}}</span>
         <span class="sub-name-state">Завантажено документів</span>
       </div>
     </router-link>
@@ -14,7 +14,7 @@
     </router-link>
     <router-link class="state-link" to="">
       <div class="state-views">
-        <span class="state-count">277</span>
+        <span class="state-count">{{ documents_views.views }}({{ documents_views.unique_views }})</span>
         <span class="sub-name-state">Переглядів</span>
       </div>
     </router-link>
@@ -45,8 +45,43 @@
 
 <script>
 
+import axios from "axios";
+
 export default {
 
+  // get: /report/documents-count/profile/{id}
+  // get: /report/documents-views/profile/{id}
+  // get: /report/documents-top/profile/{id}
+  // get: /report/co-author-top/profile/{id}
+  data(){
+    return{
+      document_count:0,
+      documents_views:{}
+    }
+  },
+  methods: {
+    getDocumentCount() {
+      axios.get('https://libarticle.polidar.in.ua/api/v1/report/documents-count/profile/' + this.$route.params.id).then(response => {
+        this.document_count = response.data.count;
+      }, err => {
+        console.log('error info -', err.message);
+        // ctx.commit('setInfo', err)
+      })
+    },
+    getDocumentsViews() {
+      axios.get('https://libarticle.polidar.in.ua/api/v1/report/documents-views/profile/' + this.$route.params.id).then(response => {
+        this.documents_views = response.data;
+      }, err => {
+        console.log('error info -', err.message);
+        // ctx.commit('setInfo', err)
+      })
+    },
+
+  },
+  mounted() {
+    this.getDocumentCount();
+    this.getDocumentsViews();
+  },
   components:{}
 
 }

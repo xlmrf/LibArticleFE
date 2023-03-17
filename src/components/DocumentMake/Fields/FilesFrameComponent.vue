@@ -3,7 +3,7 @@
     <form class="card" @submit.prevent enctype="multipart/form-data">
       <!--    enctype="multipart/form-data"-->
       <input class="form-control select-input" type="file" id="files" @change="selectedFiles()"
-             ref="files" multiple>
+             ref="files" :multiple="getFiles.main.url">
       <div class="document-files-wrapper">
 
 
@@ -27,7 +27,9 @@
 
 
         <hr :style="'width:'+getProgressLoadingFile+'%'">
-        <div :class="['file-update-area',{valid}]" @click="addFile()">завантажити файл
+        <div :class="['file-update-area',{valid}]" @click="addFile()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="#24292F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15v4c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-4M17 9l-5 5-5-5M12 12.8V2.5"/></svg>
+          <span>завантажити файл</span>
         </div>
 <!--        <div class="box-frame" v-else>-->
 <!--&lt;!&ndash;          <iframe :src='frameUrl(getFiles[file_id])+"#view=FitH"'></iframe>&ndash;&gt;-->
@@ -200,27 +202,6 @@ body {
 .progress-bar span {
   display: block;
 }
-
-.bar {
-  background: rgba(0, 0, 0, 0.075);
-}
-
-.progress {
-  animation: loader 0.1s ease infinite;
-  /*// Change the animation fill mode 'infinite' to 'forwards' to stop the animation from repeating.*/
-  background: #75b800;
-  color: #fff;
-  padding: 5px;
-  width: 20%;
-}
-
-/*.progress-bar {*/
-/*  left: 50%;*/
-/*  max-width: 50%;*/
-/*  position: absolute;*/
-/*  top: 50%;*/
-/*  transform: translate3d(-50%,-50%,0);*/
-/*}*/
 
 
 .rotate-shadows {
@@ -495,16 +476,20 @@ body {
 
 .file-update-area {
 
-  /*width: 60%;*/
   display: inherit;
-  align-self: center;
+  flex-flow: column;
+  align-items: center;
   justify-content: center;
-  padding: 15%;
-  margin: 3rem 0;
-  /*height: 50%;*/
-  text-align: center;
-  font-size: 24px;
-  text-decoration: underline;
+
+  /*margin-top: 1rem;*/
+  /*margin-left: auto;*/
+  /*margin-right: auto;*/
+  /*width: 40%;*/
+  height: 400px;
+  /*margin: 3rem 0;*/
+
+  font-size: 16px;
+  /*text-decoration: underline #00c7c5;*/
   cursor: pointer;
   border: 1px dashed #BBB;
   border-radius: 10px;
@@ -513,9 +498,11 @@ body {
   /*top: 10%;*/
 }
 
-.file-update-area svg {
-  position: absolute;
+.file-update-area > span{
+  margin-top: 30px;
+  color: #535353;
 }
+
 
 .valid {
   border: 1px dashed red;

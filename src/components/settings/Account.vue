@@ -5,7 +5,7 @@
   </div>
   <div class="user-card" v-else>
     <div class="avatar">
-      <img :class="['user-avatar']" :src="getPhoto" alt="">
+      <img :class="['user-avatar']" :src="getUser.info.image" alt="">
       <input class="photo-loader-input" type="file" id="files" @change="photoUpdate()" accept="image/jpeg,image/png"
              ref="image">
       <span @click="changePhoto()">change photo</span>
@@ -14,21 +14,22 @@
     <div class="about-user">
       <span>
         <label for="last_name">Прізвище</label>
-        <input class="inp-e" type="text" name="" id="last_name" v-model="data.info.last_name">
+        <input class="inp-e" type="text" name="" id="last_name" v-model="getUser.info.last_name">
       </span>
       <span>
         <label for="first_name">Ім'я</label>
-        <input class="inp-e" type="text" name="" id="first_name" v-model="data.info.first_name">
+        <input class="inp-e" type="text" name="" id="first_name" v-model="getUser.info.first_name">
       </span>
       <span>
         <label for="middle_name">По батькові</label>
-        <input class="inp-e" type="text" name="" id="middle_name" v-model="data.info.middle_name">
+        <input class="inp-e" type="text" name="" id="middle_name" v-model="getUser.info.middle_name">
       </span>
       <span>
         <label for="location">Місце проживання</label>
-        <input class="inp-e" type="text" name="" id="location" v-model="data.info.location">
+        <input class="inp-e" type="text" name="" id="location" v-model="getUser.info.location">
       </span>
       <span class="person-university">
+        {{getUniversities}}
         <label for="university">Університет</label>
         <select name="university" id="university" class="select-type" v-model="data.info.university">
           <option v-for="university in getUniversities" :value="university">{{ university.label }}</option>
@@ -63,8 +64,8 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getUniversities', 'getPhoto', 'getProfile']),
-    ...mapActions(['requestUniversity', 'requestProfile']),
+    ...mapGetters(['getUniversities', 'getUser']),
+    ...mapActions(['requestUniversity']),
     logout() {
       localStorage.removeItem('access_token')
       this.updateUser('')
@@ -82,7 +83,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['requestUser', 'setUser']),
+    ...mapActions(['setUser']),
     ...mapMutations(['updateUser']),
     photoUpdate() {
       let image = this.$refs.image.files;
@@ -113,10 +114,7 @@ export default {
       delete this.data.info.document_count
       this.setUser(this.data)
     },
-    cancelChanges() {
-      this.changes = false
-      this.requestUser()
-    },
+
     push() {
       this.photoUpdate = !this.photoUpdate
     }
@@ -125,7 +123,6 @@ export default {
     Loader
   },
   mounted() {
-    this.requestProfile
     this.requestUniversity
   }
 }
