@@ -43,7 +43,6 @@ export default {
 <style scoped>
 
 .choose-type{
-
   text-align: center;
   text-transform: uppercase;
   /*transition: 0.5s;*/

@@ -55,7 +55,7 @@ export default {
   height:0.1rem;
   left:0;
   bottom:3px;
-  background: #bfbfbf;
+  background: #1C75DD;
 }
 .manual-item::after{
   transform:scale(0.9,0.5);
@@ -99,7 +99,8 @@ h3{
   width: 100%;
   border-radius: 2px;
   height: 220px;
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
+  background: #f5f5f5;
+  /*box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;*/
   position: relative;
   z-index: 9;
 }
