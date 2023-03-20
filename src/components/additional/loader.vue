@@ -1,6 +1,6 @@
 <template>
     <div class="spinner-box">
-        <svg class="spinner" viewBox="0 0 50 50">
+        <svg class="spinner" :class="loader_class" viewBox="0 0 50 50">
             <circle class="path" cx="25" cy="25" :r="radius? radius : 8" fill="none" :stroke-width="width? width: 2"></circle>
         </svg>
     </div>
@@ -8,7 +8,7 @@
 
 <script>
 export default {
-    props:['radius', 'width']
+    props:['radius', 'width','loader_class']
 }
 </script>
 
@@ -17,12 +17,11 @@ export default {
   animation: rotate 2s linear infinite;
   z-index: 2;
   position: absolute;
-/*top: 50%;*/
-/*left: 50%;*/
-/*  margin: -25px 0 0 -25px;*/
   width: 50px;
-  margin: 25%;
-  /*height: 50px;*/
+  margin: 25px;
+}
+.mid-top{
+  left: 50%;
 }
 .spinner .path {
     stroke: hsla(280, 48%, 6%, 0.89);

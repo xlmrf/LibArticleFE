@@ -1,14 +1,16 @@
 <template>
   <div class="documents-wrapper" v-if="getDocuments && getTypes">
     <filter-options/>
-    <documents-list :documents="getDocuments"/>
+    <documents-list :documents="getDocuments" v-if="Object.keys(getDocuments).length > 0"/>
+    <loader :loader_class="['mid-top']" width="4" radius="20" v-else/>
   </div>
 </template>
 
 <script>
 import FilterOptions from "@/components/Documents/FilterOptions"
-import {mapActions, mapGetters} from "vuex";
+import {mapActions, mapGetters, mapMutations} from "vuex";
 import DocumentsList from "@/components/Documents/DocumentsList";
+import Loader from "@/components/additional/loader";
 
 export default {
   data() {
@@ -24,17 +26,19 @@ export default {
         if (this.$route.fullPath.split('?')[1]) {
           q = '?' + this.$route.fullPath.split('?')[1];
         }
+        this.DocumentsMutate({})
         this.DocumentSearcher(q);
       }
     }
   },
   methods: {
-    ...mapActions(['DocumentSearcher', 'requestTypes'])
+    ...mapActions(['DocumentSearcher', 'requestTypes']),
+    ...mapMutations(['DocumentsMutate'])
   },
   computed: {
     ...mapGetters(['getDocuments', 'getTypes'])
   },
-  components: {DocumentsList, FilterOptions},
+  components: {Loader, DocumentsList, FilterOptions},
   mounted() {
     console.log(this.$route)
 
