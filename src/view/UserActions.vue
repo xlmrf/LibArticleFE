@@ -1,5 +1,6 @@
 <template>
   <div class="main">
+    {{files}}
     <div
         class="dropzone-container"
         @dragover="dragover"

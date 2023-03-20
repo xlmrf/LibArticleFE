@@ -241,7 +241,7 @@ export default {
   display: flex;
   margin-top: auto;
   align-self: center;
-  /*top: 45%;*/
+  top: 38%;
   right: -5%;
   position: absolute;
   /*right: -30px;*/

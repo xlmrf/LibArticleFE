@@ -27,7 +27,11 @@
 
 
         <hr :style="'width:'+getProgressLoadingFile+'%'">
-        <div :class="['file-update-area',{valid}]" @click="addFile()">
+        <div :class="['file-update-area',{dragover:isDragging}]"
+             @dragover="dragover"
+             @dragleave="dragleave"
+             @drop="drop"
+             @click="addFile()">
           <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="#24292F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15v4c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-4M17 9l-5 5-5-5M12 12.8V2.5"/></svg>
           <span>завантажити файл</span>
         </div>
@@ -58,6 +62,7 @@ export default {
       // files: {
       //
       // },
+      isDragging:false,
       file_id: 0,
       valid: false,
       process: 0,
@@ -98,6 +103,21 @@ export default {
   methods: {
     ...mapActions(['pushFile']),
     ...mapMutations(['FilePusher', 'updateFiles']),
+
+    dragover(e) {
+      e.preventDefault();
+      this.isDragging = true;
+    },
+    dragleave() {
+      this.isDragging = false;
+    },
+    drop(e) {
+      e.preventDefault();
+      this.$refs.file.files = e.dataTransfer.files;
+      this.onChange();
+      this.isDragging = false;
+    },
+
     checkSize(item, type) {
       if (item > 1000) {
         type = 'KB'
@@ -203,6 +223,9 @@ body {
   display: block;
 }
 
+.dragover{
+  border: 1px solid #0969DA;
+}
 
 .rotate-shadows {
   width: 120px;
@@ -491,7 +514,8 @@ body {
   font-size: 16px;
   /*text-decoration: underline #00c7c5;*/
   cursor: pointer;
-  border: 1px dashed #BBB;
+  background: #f7fafc;
+  border: 1px solid #e2e8f0;
   border-radius: 10px;
   position: relative;
   /*left: 20%;*/
