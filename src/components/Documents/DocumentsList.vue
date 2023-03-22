@@ -3,8 +3,16 @@
     <div class="documents-header">
       <div class="sort-filter">
         <div>Показано <span>{{ documents.per_page*(documents.current_page-1)+1 }}</span> - <span>{{ documents.per_page*(documents.current_page-1)+documents.data.length }}</span> документи із <span>{{ documents.total }}</span> знайдених</div>
-        <div class="nav-filter-items">
-<!--            <span>Завантажувати</span>-->
+        <div class="page-counter-control">
+          <div>
+            <label>На сторінці</label>
+            <br/>
+            <select v-model="documents.per_page">
+              <option v-for="y in documents.per_page" :key="y">
+                {{ y }}
+              </option>
+            </select>
+          </div>
         </div>
       </div>
       <nav-filtration v-if="$route.query" />
@@ -93,6 +101,7 @@ export default {
 }
 .sort-filter{
   display: flex;
+  justify-content: space-between;
 }
 .sort-filter >:nth-child(1) > span{
   font-weight: bold;
@@ -100,4 +109,14 @@ export default {
 .nav-filter-items{
   justify-self: right;
 }
+.page-counter-control select{
+  border: 1px solid #bbb;
+  border-radius: 3px;
+  padding: 0.25rem 0.5rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  line-height: 1.1;
+  background-color: #fff;
+}
+
 </style>
