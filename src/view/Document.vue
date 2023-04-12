@@ -21,14 +21,24 @@
 
     <div><span>загрузчик документа</span><span>кількість переглядів документа</span> <span>кількість посилань на документ</span><span>скопіювати посилання</span></div>
 
-    <div>ключові слова</div>
+    <div>Ключові слова:
+      <span v-for="keyword in getDocument.keywords">{{keyword}}; </span>
+    </div>
 
     <div class="references-block">
       <h2>посилання данного файла</h2>
       <div v-for="(reference,idx) in getDocument.references">
         <span class="ref-body">{{idx+1}}. {{reference.bibliographic_description}}</span>
         <div class="ref-bottom">
-          <span><svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24" fill="none" stroke="#24292F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/><path d="M14 3v5h5M16 13H8M16 17H8M10 9H8"/></svg> copy</span>
+          <span>
+            <span @click="copy()" class="ref-copy-area">
+<!--              <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24" fill="none" stroke="#24292F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/><path d="M14 3v5h5M16 13H8M16 17H8M10 9H8"/></svg>-->
+              скопіювати як
+            </span>
+            <select class="select-cite-format">
+              <option value="apa">apa</option>
+            </select>
+          </span>
           <span>root</span>
         </div>
       </div>
@@ -59,7 +69,14 @@ import Authors from "@/components/document/authors";
 export default {
   methods:{
     ...mapActions(['requestDocument','requestTypes']),
-    ...mapMutations(['DocumentMutate'])
+    ...mapMutations(['DocumentMutate']),
+    async copy(){
+        try {
+          await navigator.clipboard.writeText(this.getDocument.title);
+        } catch (err) {
+          console.error('Failed to copy: ', err);
+        }
+      }
   },
   computed: {
     ...mapGetters(['getDocument','getTypes'])
@@ -82,6 +99,20 @@ export default {
   margin: 10px 0;
 }
 
+.ref-copy-area{
+  display: flex;
+  align-self: center;
+}
+
+.select-cite-format{
+  margin: 0 10px;
+  font-size: 1.2rem;
+  color: #212121;
+  padding: 5px;
+  background: transparent;
+  cursor: pointer;
+}
+
 .references-block{
   margin: 10px 0;
   border-top: 1px solid gray;
@@ -90,14 +121,10 @@ export default {
 
 .ref-bottom{
   display: flex;
-
-  border: 1px solid green;
 }
 .ref-bottom > span{
   /*color: #0969DA;*/
   display: inherit;
-  border: 1px solid red;
-
   margin: 5px 10px;
   cursor: pointer;
 }
