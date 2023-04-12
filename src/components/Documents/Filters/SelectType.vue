@@ -35,6 +35,18 @@ export default {
       let q = '';
       if (this.$route.fullPath.split("?")[1] !== undefined)
         q = this.$route.fullPath.split("?")[1]
+
+
+      // q=q.split('&')
+
+      let query = Object.assign({}, this.$route.query);
+      delete query.page;
+      delete query.type_id;
+      q='';
+      Object.keys(query).forEach(key=>{
+        q=key+'='+query[key]+'&'
+      });
+
       let link = '?' + (q ? q : '');
       this.TypesFilter(link)
     },

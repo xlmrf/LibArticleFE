@@ -186,4 +186,31 @@ input {
   padding: 3px 5px;
 }
 
+.author-item-link{
+  color: #0969DA;
+}
+.author-item-link:hover{
+  text-decoration: underline #3684DD;
+}
+.author-item{
+  position: relative;
+  padding: 10px;
+}
+.author-item:after{
+  content: "";
+  position: absolute;
+  background: rgba(154, 154, 154, 0.5);
+  width: 1px;
+  top: 25%;
+  right: 0;
+  height: 50%;
+}
+.author-item:last-child:after{
+  content: "";
+  background: transparent;
+}
+.authors{
+  margin: 10px 0;
+}
+
 </style>
