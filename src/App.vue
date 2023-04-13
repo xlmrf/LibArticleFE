@@ -38,8 +38,6 @@ export default {
 }
 
 .window {
-  /*overflow: scroll;*/
-  /*overflow-x: hidden;*/
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -49,19 +47,18 @@ export default {
 body {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
   margin: 0;
 }
 
 .subway {
+  margin-top: 50px;
   min-height: 42px;
-  height: 100px;
   display: block;
 }
 
 .city {
-  flex: 1;
-  /*min-height: 450px;*/
+/*  flex: 1;*/
+/*  !*min-height: 450px;*!*/
 }
 
 input {
@@ -86,7 +83,7 @@ input {
   content:'';
   position:absolute;
   width:100%;
-  height:0.05rem;
+  height:0.07rem;
   left:0;
   bottom:3px;
   background: #bfbfbf;

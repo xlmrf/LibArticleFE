@@ -29,6 +29,10 @@
           <span v-for="keyword in getDocument.keywords">{{keyword}}; </span>
         </div>
 
+        <div>Дата публікації:
+          <span>{{getDocument.publication_date}}</span>
+        </div>
+
         <div class="doc-counters">
           <span>Перегляди <span>250253</span></span>
           <span>Посилань <span>235</span></span>
@@ -47,13 +51,12 @@
             </select>
           </span>
         </span>
-        <div v-for="(reference,idx) in getDocument.references">
+        <div class="item-underline" v-for="(reference,idx) in getDocument.references">
           <span class="ref-body">{{idx+1}}. {{reference.bibliographic_description}}</span>
           <div class="ref-bottom">
               <span @click="copy(reference.bibliographic_description)" class="ref-copy-area">
                 скопіювати
               </span>
-            <span>root</span>
           </div>
         </div>
       </div>
@@ -118,6 +121,8 @@ export default {
   display: flex;
 }
 .top-ref-block > span{
+  cursor: default;
+  font-size: 1rem;
   display: inherit;
   align-items: center;
   margin-left: auto;
@@ -165,14 +170,10 @@ export default {
   align-items: center;
 }
 
-.ref-copy-area{
-  display: flex;
-  align-self: center;
-}
 
 .select-cite-format{
+  font-size: 1rem;
   margin: 0 10px;
-  font-size: 1.2rem;
   color: #212121;
   background: transparent;
   cursor: pointer;
@@ -183,28 +184,40 @@ export default {
   border-top: 1px solid gray;
   border-bottom: 1px solid gray;
 }
+.references-block > div{
+  margin: 10px 0;
+}
 
 .ref-bottom{
   display: flex;
 }
 .ref-bottom > span{
   /*color: #0969DA;*/
-  display: inherit;
-  margin: 5px 10px;
   cursor: pointer;
+}
+
+
+.ref-copy-area{
+  display: flex;
+  margin: 10px 2rem 0 auto;
+  align-self: center;
+  border-bottom: 1px solid transparent;
+  color: #535353;
+}
+
+.ref-copy-area:hover{
+  /*text-decoration: underline #535353;*/
+  color: #222222;
 }
 
 .document-wrapper{
   background: rgba(241, 241, 241, 0.4);
   font-size: 1.3em;
-  /*padding: 10px;*/
-  height: 100vh;
   width: 80%;
   display: flex;
   flex-flow: column;
   /*border: 1px solid #222222;*/
   margin: auto;
-  /*margin-top: 0.2rem;*/
 }
 
 .doc-body{
