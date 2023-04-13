@@ -270,7 +270,7 @@ export default {
   height:0.05rem;
   left:0;
   bottom:0;
-  background: rgba(148, 87, 235, 0.2);
+  background: rgba(87, 176, 235, 0.2);
 }
 .card-top::after{
   transform:scale(1,1);

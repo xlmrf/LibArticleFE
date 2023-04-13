@@ -188,6 +188,7 @@ input {
 
 .author-item-link{
   color: #0969DA;
+  text-decoration: none;
 }
 .author-item-link:hover{
   text-decoration: underline #3684DD;
@@ -208,9 +209,6 @@ input {
 .author-item:last-child:after{
   content: "";
   background: transparent;
-}
-.authors{
-  margin: 10px 0;
 }
 
 </style>
