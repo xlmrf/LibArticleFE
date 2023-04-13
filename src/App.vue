@@ -89,6 +89,16 @@ input {
   background: #bfbfbf;
 }
 
+.item-underline:last-child:after{
+  content:'';
+  position:absolute;
+  width:100%;
+  height:0.07rem;
+  left:0;
+  bottom:3px;
+  background: transparent;
+}
+
 .user-avatar-cycle{
   object-fit: cover;
   border-radius: 50%;

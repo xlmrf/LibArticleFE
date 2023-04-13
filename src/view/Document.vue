@@ -51,7 +51,7 @@
             </select>
           </span>
         </span>
-        <div class="item-underline" v-for="(reference,idx) in getDocument.references">
+        <div class="item-underline item-reference" v-for="(reference,idx) in getDocument.references">
           <span class="ref-body">{{idx+1}}. {{reference.bibliographic_description}}</span>
           <div class="ref-bottom">
               <span @click="copy(reference.bibliographic_description)" class="ref-copy-area">
@@ -61,7 +61,7 @@
         </div>
       </div>
 
-      <div>комменти</div>
+      <div class="doc-comments">комменти</div>
     </div>
 
 
@@ -186,6 +186,7 @@ export default {
 }
 .references-block > div{
   margin: 10px 0;
+  padding: 10px;
 }
 
 .ref-bottom{
@@ -222,6 +223,11 @@ export default {
 
 .doc-body{
   padding: 20px;
+}
+
+.doc-comments{
+  font-size: 1.2em;
+  font-weight: bold;
 }
 
 .document-title{
