@@ -14,7 +14,7 @@
 
         <div class="under-title-info">
           <span>Опублікував: Ходаніцький Олексій Олексійович</span>
-          <span class="pdf-loader file-download">PDF</span>
+          <span class="pdf-loader file-download" title="завантажити файл">PDF</span>
         </div>
 
         <div class="authors">
