@@ -9,33 +9,36 @@
     </div>
 
     <div class="doc-body">
+      <h3 class="document-title">{{ getDocument.title }}</h3>
       <div class="doc-main-info">
-        <h3 class="document-title">{{ getDocument.title }}</h3>
+        <div class="left-side-info">
+          <div class="under-title-info">
+            <span>Опублікував: Ходаніцький Олексій Олексійович</span>
+          </div>
 
-        <div class="under-title-info">
-          <span>Опублікував: Ходаніцький Олексій Олексійович</span>
+          <div class="authors">
+            Автори:
+            <span v-for="author in getDocument.authors">
+              <router-link class="author-item-link" :to="'/profile/'+author.user_id" v-if="author.user_id">{{ author.first_name[0] }}. {{ author.last_name }} </router-link>
+              <span v-else>{{ author.first_name[0] }}. {{ author.last_name }} </span>;
+          </span>
+          </div>
+
+          <div>Ключові слова:
+            <span v-for="keyword in getDocument.keywords">{{keyword}}; </span>
+          </div>
+
+          <div>Дата публікації:
+            <span>{{getDocument.publication_date}}</span>
+          </div>
+
+          <div class="doc-counters">
+            <span>Перегляди <span>250253</span></span>
+            <span>Посилань <span>235</span></span>
+          </div>
+        </div>
+        <div class="right-side-info">
           <span class="pdf-loader file-download" title="завантажити файл">PDF</span>
-        </div>
-
-        <div class="authors">
-          Автори:
-          <span v-for="author in getDocument.authors">
-            <router-link class="author-item-link" :to="'/profile/'+author.user_id" v-if="author.user_id">{{ author.first_name[0] }}. {{ author.last_name }} </router-link>
-            <span v-else>{{ author.first_name[0] }}. {{ author.last_name }} </span>;
-        </span>
-        </div>
-
-        <div>Ключові слова:
-          <span v-for="keyword in getDocument.keywords">{{keyword}}; </span>
-        </div>
-
-        <div>Дата публікації:
-          <span>{{getDocument.publication_date}}</span>
-        </div>
-
-        <div class="doc-counters">
-          <span>Перегляди <span>250253</span></span>
-          <span>Посилань <span>235</span></span>
         </div>
       </div>
 
@@ -44,12 +47,6 @@
       <div class="references-block">
         <span class="top-ref-block">
           <h2>посилання данного файла</h2>
-          <span>
-            Переглядати як:
-            <select class="select-cite-format">
-              <option value="apa">apa</option>
-            </select>
-          </span>
         </span>
         <div class="item-underline item-reference" v-for="(reference,idx) in getDocument.references">
           <span class="ref-body">{{idx+1}}. {{reference.bibliographic_description}}</span>
@@ -68,6 +65,13 @@
 <!--    <files>{{ getDocument.files }}</files>-->
 
     <!--              <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24" fill="none" stroke="#24292F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/><path d="M14 3v5h5M16 13H8M16 17H8M10 9H8"/></svg>-->
+
+<!--    <span>-->
+<!--            Переглядати як:-->
+<!--            <select class="select-cite-format">-->
+<!--              <option value="apa">apa</option>-->
+<!--            </select>-->
+<!--          </span>-->
 
 <!--    <comment>-->
 <!--      comment-->
@@ -113,9 +117,14 @@ export default {
 
 <style scoped>
 
-.doc-main-info > div{
+.left-side-info > div{
   margin: 15px 0;
 }
+
+.doc-main-info{
+  display: flex;
+}
+
 
 .top-ref-block{
   display: flex;
