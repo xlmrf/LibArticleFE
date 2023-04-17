@@ -99,6 +99,11 @@ input {
   background: transparent;
 }
 
+.document-list-item{
+  background: rgba(232, 232, 232, 0.4);
+  margin: 15px 0;
+}
+
 .user-avatar-cycle{
   object-fit: cover;
   border-radius: 50%;

@@ -1,6 +1,6 @@
 <template>
   <div class="select-search-area">
-    <h4>Обрати:</h4>
+    <h3>Обрати:</h3>
     <span @click="this.$refs.all.click()" :class="{active_date_format:only_own===false}">
       <input type="radio" v-model="only_own" :value="false" @change="query(only_own)" name="all" ref="all">
       <span class="label">Всі</span>
@@ -71,9 +71,9 @@ export default {
   /*background: #F0DDD1;*/
 }
 
-.select-search-area h4{
-  padding-bottom: 4px;
-  margin: 5px;
+.select-search-area > h3{
+  padding: 0.9rem 0;
+  margin-bottom: 10px;
   border-bottom: 1px solid #B2B2B2;
 }
 

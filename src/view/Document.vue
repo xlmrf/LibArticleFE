@@ -2,7 +2,7 @@
   <div class="document-wrapper" v-if="getDocument.authors && getTypes">
 
     <div class="top-document-info">
-      <span class="document-type">{{getTypes.find(item => item.id === getDocument.type_id)?.name}}</span>
+      <span class="document-type" @click="smooth()">{{getTypes.find(item => item.id === getDocument.type_id)?.name}}</span>
       <router-link class="remake-link" :to="'/document/make/'+$route.params.id" >
         Редагувати
       </router-link>
@@ -103,7 +103,13 @@ export default {
         } catch (err) {
           console.error('Failed to copy: ', err);
         }
-      }
+      },
+    smooth(){
+      window.scrollTo({top: 0, behavior: "smooth"});
+    },
+    handleScroll() {
+      const scrollBtn = this.$refs.scrollTopButton;
+    },
   },
   computed: {
     ...mapGetters(['getDocument','getTypes'])

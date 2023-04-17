@@ -2,23 +2,23 @@
   <div v-if="documents.data&&getTypes">
     <div class="documents-header">
       <div class="sort-filter">
-        <div>Показано <span>{{ documents.per_page*(documents.current_page-1)+1 }}</span> - <span>{{ documents.per_page*(documents.current_page-1)+documents.data.length }}</span> документи із <span>{{ documents.total }}</span> знайдених</div>
+        <div>Показано <span>{{ documents.total!==0 ? documents.per_page*(documents.current_page-1)+1 : '0' }}</span> - <span>{{ documents.per_page*(documents.current_page-1)+documents.data.length }}</span> документи із <span>{{ documents.total }}</span> знайдених</div>
         <div class="page-counter-control">
-          <div>
-            <label>На сторінці</label>
-            <br/>
-            <select v-model="documents.per_page">
-              <option v-for="y in documents.per_page" :key="y">
-                {{ y }}
-              </option>
-            </select>
-          </div>
+          <label>На сторінці</label>
+          <select v-model="documents.per_page">
+            <option v-for="y in documents.per_page" :key="y">
+              {{ y }}
+            </option>
+          </select>
         </div>
       </div>
       <nav-filtration v-if="$route.query" />
     </div>
-    <document-item class="item-underline" :document="document" v-for="document in documents.data"/>
-    <pagination :paginate="paginate(documents)"/>
+    <div class="not-found-document-panel" v-if="documents.total === 0">Документи не знайдено</div>
+    <div v-else>
+      <document-item class="document-list-item" :document="document" v-for="document in documents.data"/>
+      <pagination :paginate="paginate(documents)"/>
+    </div>
   </div>
 </template>
 
@@ -69,6 +69,15 @@ export default {
   border: 1px solid #212121;
 }
 
+.page-counter-control{
+  display: flex;
+  align-items: center;
+}
+
+.page-counter-control > label{
+  margin-right: 10px;
+}
+
 .citation-view {
   font-size: 0.8em;
 }
@@ -86,18 +95,22 @@ export default {
   margin: 0.5rem 0;
 }
 
+.not-found-document-panel{
+  font-size: 36px;
+  text-align: center;
+  /*margin-right: 20%;*/
+  font-weight: bold;
+
+}
+
 .documents-header {
   margin: 1rem 0.5rem;
   padding: 1rem;
   display: flex;
   flex-flow: column;
-  /*border: 1px solid #bbb;*/
+  border-bottom: 1px solid #bbb;
   font-size: 18px;
   color: #24292F;
-  /*font-weight: bold;*/
-  border-radius: 5px;
-  /*padding: 20px;*/
-  /*min-height: 9rem;*/
 }
 .sort-filter{
   display: flex;
@@ -110,7 +123,7 @@ export default {
   justify-self: right;
 }
 .page-counter-control select{
-  border: 1px solid #bbb;
+  /*border: 1px solid #bbb;*/
   border-radius: 3px;
   padding: 0.25rem 0.5rem;
   font-size: 1.2rem;

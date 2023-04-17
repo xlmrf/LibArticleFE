@@ -1,6 +1,6 @@
 <template>
   <div class="documents-wrapper" v-if="getDocuments && getTypes">
-    <filter-options/>
+    <filter-options class="filters-side" />
     <documents-list :documents="getDocuments" v-if="Object.keys(getDocuments).length > 0"/>
     <loader :loader_class="['mid-top']" width="4" radius="20" v-else/>
   </div>
@@ -56,6 +56,10 @@ export default {
 </script>
 
 <style scoped>
+
+.filters-side{
+  margin: 1rem 0;
+}
 
 .documents-wrapper {
   display: flex;
