@@ -57,10 +57,6 @@ export default {
 
 <style scoped>
 
-.filters-side{
-  margin: 1rem 0;
-}
-
 .documents-wrapper {
   display: flex;
 }
