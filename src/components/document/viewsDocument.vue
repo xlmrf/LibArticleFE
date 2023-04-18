@@ -46,3 +46,5 @@ export default {
   font-weight: bold;
   color: #333333;
 }
+
+</style>
