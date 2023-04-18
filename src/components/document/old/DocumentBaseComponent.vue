@@ -128,16 +128,6 @@ td{
   width: 400px;
   border:1px solid rgba(62, 62, 62, 0.2)
 }
-.comment{
-  display: flex;
-}
-.comment > small{
-  position: relative;
-  left: 10px;
-  font-size: 15px;
-  color: darkred;
-  cursor: pointer;
-}
 .btn{
   margin: 0 5px;
 }

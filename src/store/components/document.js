@@ -11,7 +11,9 @@ export default {
             types: [],
             propose_authors: [],
             newDocumentId: null,
-            uncompletedDocument: ''
+            uncompletedDocument: '',
+            cites:{},
+            views:{}
         }
     },
     actions: {
@@ -69,7 +71,28 @@ export default {
             axios.get(ctx.rootState.api_url_v1 + '/last-documents').then(response => {
                 ctx.commit('mutateLastDocuments', response.data)
             })
-        }
+        },
+
+       // reports
+
+        citesDocument(ctx) {
+            let id = router.currentRoute.value.params.id
+            axios.get(ctx.rootState.api_url_v1 + '/report/document-citation/' + id).then(response => {
+                ctx.commit('DocumentCites', response.data)
+            }, err => {
+                console.log('cites error:',err);
+            })
+        },
+
+        viewsDocument(ctx) {
+            let id = router.currentRoute.value.params.id
+            axios.get(ctx.rootState.api_url_v1 + '/report/document-views/' + id).then(response => {
+                ctx.commit('DocumentViews', response.data)
+            }, err => {
+                console.log('cites error:',err);
+            })
+        },
+
     },
     mutations: {
         catchInfo(ctx,data){
@@ -95,7 +118,18 @@ export default {
         },
         mutateLastDocuments(ctx, data) {
             ctx.last_documents = data
+        },
+
+        // reports mutations
+
+        DocumentCites(ctx,data){
+            ctx.cites = data
+        },
+
+        DocumentViews(ctx,data){
+            ctx.views = data
         }
+
     },
     getters: {
         getUncompletedDocument(ctx) {
@@ -116,6 +150,13 @@ export default {
         },
         getDocument(ctx) {
             return ctx.document
+        },
+
+        getDocumentCites(ctx){
+            return ctx.cites
+        },
+        getDocumentViews(ctx){
+            return ctx.views
         }
     },
 

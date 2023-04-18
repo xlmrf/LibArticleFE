@@ -2,7 +2,7 @@
   <div v-if="documents.data&&getTypes">
     <div class="documents-header">
       <div class="sort-filter">
-        <div>Показано <span>{{ documents.total!==0 ? documents.per_page*(documents.current_page-1)+1 : '0' }}</span> - <span>{{ documents.per_page*(documents.current_page-1)+documents.data.length }}</span> документи із <span>{{ documents.total }}</span> знайдених</div>
+        <div class="showed-items">Показано <span>{{ documents.total!==0 ? documents.per_page*(documents.current_page-1)+1 : '0' }}</span> - <span>{{ documents.per_page*(documents.current_page-1)+documents.data.length }}</span> документи із <span>{{ documents.total }}</span> знайдених</div>
         <div class="page-counter-control">
           <label>На сторінці</label>
           <select v-model="documents.per_page">
@@ -59,6 +59,11 @@ export default {
 </script>
 
 <style scoped>
+
+.showed-items{
+  display: flex;
+  align-self: center;
+}
 .list-item {
   display: flex;
   flex-direction: column;

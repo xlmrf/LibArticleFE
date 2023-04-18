@@ -28,7 +28,7 @@
 
         <span class="document-list-keywords">
           <span v-for="keyword in document.keywords">
-            router-link {{keyword}}
+          {{keyword}}
           </span>
         </span>
   <!--      <span>seen: {{document.views}}</span>-->

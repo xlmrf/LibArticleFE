@@ -33,8 +33,8 @@
           </div>
 
           <div class="doc-counters">
-            <span>Перегляди <span>250253</span></span>
-            <span>Посилань <span>235</span></span>
+            <span v-if="getDocumentViews.document_views">Перегляди <span>{{ getDocumentViews.document_views.value }}</span></span>
+            <span v-if="getDocumentCites.document_citation">Посилань <span>{{ getDocumentCites.document_citation.value }}</span></span>
           </div>
         </div>
         <div class="right-side-info">
@@ -55,14 +55,30 @@
         <div class="item-underline item-reference" v-for="(reference,idx) in getDocument.references">
           <span class="ref-body">{{idx+1}}. {{reference.bibliographic_description}}</span>
           <div class="ref-bottom">
-              <span @click="copy(reference.bibliographic_description)" class="ref-copy-area">
-                скопіювати
-              </span>
+            <span @click="copy(reference.bibliographic_description)" class="ref-copy-area">
+              скопіювати
+            </span>
           </div>
         </div>
       </div>
 
-      <div class="doc-comments">комменти</div>
+      <div class="doc-comments">
+        <h2>комменти</h2>
+        <div>
+          <input type="text" class="inp-e" @keypress.enter="pushComment(comment); comment = ''" name="comment" v-model="comment">
+          <button @click="pushComment(comment);comment = ''">Додати</button>
+        </div>
+        <span class="comment" v-for="(comment, index) in getComments">
+          <span class="comment-text">{{comment.text}}</span>
+          <small @click="removeComment([comment.id, index])">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                 stroke="#9A9A9A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg></small>
+          <span class="comment-date">20.09.2022</span>
+        </span>
+      </div>
     </div>
 
 
@@ -94,8 +110,13 @@ import Loader from "@/components/additional/loader";
 import Authors from "@/components/document/authors";
 
 export default {
+  data(){
+    return{
+      comment: ''
+    }
+  },
   methods:{
-    ...mapActions(['requestDocument','requestTypes']),
+    ...mapActions(['requestDocument','requestTypes','pushComment','reviseComments','removeComment']),
     ...mapMutations(['DocumentMutate']),
     async copy(text){
         try {
@@ -109,15 +130,18 @@ export default {
     },
     handleScroll() {
       const scrollBtn = this.$refs.scrollTopButton;
-    },
+    }
   },
   computed: {
-    ...mapGetters(['getDocument','getTypes'])
+    ...mapGetters(['getDocument','getTypes','getDocumentCites','getDocumentViews', 'getComments']),
+    ...mapActions(['citesDocument','viewsDocument'])
   },
   components:{Authors, Loader, info,files,comment},
   mounted() {
     this.requestDocument(this.$route.params.id)
     this.requestTypes()
+    this.citesDocument
+    this.viewsDocument
   },
   beforeUnmount() {
     this.DocumentMutate({})
@@ -272,6 +296,26 @@ export default {
   font-weight: bold;
 }
 
+.doc-comments input{
+  padding: 0.5rem;
+  font-size: 1.1rem;
+  color: #222222;
+}
+
+.doc-comments button{
+  background: transparent;
+  margin-left: 1rem;
+  padding: 0.2rem 1rem;
+  cursor: pointer;
+  border: 1px solid rgba(65, 159, 217, 0.6);
+  color: rgba(65, 159, 217, 0.8);
+}
+
+.doc-comments > div{
+  display: flex;
+  padding: 1rem 0;
+}
+
 .document-title{
   margin: 1.5rem 0;
   padding-bottom: 1rem;
@@ -321,6 +365,39 @@ export default {
 .remake-link:hover{
   border-bottom: 1px solid #525252;
   color: #222222;
+}
+
+.comment{
+  display: flex;
+  position: relative;
+  align-items: center;
+  color: #222222;
+  padding: 0.8rem 1.3rem 1rem 0.8rem;
+  margin: 0.5rem 0;
+  font-size: 0.6em;
+  font-weight: normal;
+  background: rgba(255, 255, 255, 0.27);
+  border: 1px solid rgba(34, 34, 34, 0.25);
+  border-radius: 3px;
+}
+
+.comment > small{
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  cursor: pointer;
+}
+.comment svg{
+  stroke: rgba(33, 0, 0, 0.79);
+}
+
+.comment-date{
+  position: absolute;
+  bottom: 0;
+  font-weight: normal;
+  font-size: 0.9em;
+  color: #535353;
+  right: 4rem;
 }
 
 .author-item{

@@ -116,7 +116,7 @@ export default {
         q = this.$route.fullPath.split("?")[1]
       let link = q ? '?' + q : '';//'?' + (q ? q + '&' : '');
       if (this.search !== '') {
-        link += link ? "&authors=" + this.search : "&authors=" + this.search
+        link += link ? "&authors=" + this.search : "?authors=" + this.search
       }
       return this.AuthorsFilter(link)
 
