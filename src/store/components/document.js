@@ -75,14 +75,6 @@ export default {
 
        // reports
 
-        citesDocument(ctx) {
-            let id = router.currentRoute.value.params.id
-            axios.get(ctx.rootState.api_url_v1 + '/report/document-citation/' + id).then(response => {
-                ctx.commit('DocumentCites', response.data)
-            }, err => {
-                console.log('cites error:',err);
-            })
-        },
 
         viewsDocument(ctx) {
             let id = router.currentRoute.value.params.id
@@ -122,10 +114,6 @@ export default {
 
         // reports mutations
 
-        DocumentCites(ctx,data){
-            ctx.cites = data
-        },
-
         DocumentViews(ctx,data){
             ctx.views = data
         }
@@ -150,10 +138,6 @@ export default {
         },
         getDocument(ctx) {
             return ctx.document
-        },
-
-        getDocumentCites(ctx){
-            return ctx.cites
         },
         getDocumentViews(ctx){
             return ctx.views

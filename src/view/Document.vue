@@ -33,8 +33,8 @@
           </div>
 
           <div class="doc-counters">
-            <span v-if="getDocumentViews.document_views">Перегляди <span>{{ getDocumentViews.document_views.value }}</span></span>
-            <span v-if="getDocumentCites.document_citation">Посилань <span>{{ getDocumentCites.document_citation.value }}</span></span>
+            <views-document />
+            <cites-document />
           </div>
         </div>
         <div class="right-side-info">
@@ -108,6 +108,8 @@ import files from "@/components/document/files";
 import comment from "@/components/document/comment";
 import Loader from "@/components/additional/loader";
 import Authors from "@/components/document/authors";
+import citesDocument from "@/components/document/citesDocument";
+import viewsDocument from "@/components/document/viewsDocument";
 
 export default {
   data(){
@@ -133,15 +135,12 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getDocument','getTypes','getDocumentCites','getDocumentViews', 'getComments']),
-    ...mapActions(['citesDocument','viewsDocument'])
+    ...mapGetters(['getDocument','getTypes', 'getComments']),
   },
-  components:{Authors, Loader, info,files,comment},
+  components:{Authors, Loader, info,files,comment, citesDocument,viewsDocument},
   mounted() {
     this.requestDocument(this.$route.params.id)
     this.requestTypes()
-    this.citesDocument
-    this.viewsDocument
   },
   beforeUnmount() {
     this.DocumentMutate({})
@@ -221,8 +220,8 @@ export default {
 .doc-counters > span > span{
   font-weight: bold;
   color: #333333;
-  font-size: 1.1em;
 }
+
 
 .top-document-info{
   display: flex;
