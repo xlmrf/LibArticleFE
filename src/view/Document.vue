@@ -52,6 +52,7 @@
         <span class="top-ref-block">
           <h2>посилання данного файла</h2>
         </span>
+        <div>
         <div class="item-underline item-reference" v-for="(reference,idx) in getDocument.references">
           <span class="ref-body">{{idx+1}}. {{reference.bibliographic_description}}</span>
           <div class="ref-bottom">
@@ -59,6 +60,7 @@
               скопіювати
             </span>
           </div>
+        </div>
         </div>
       </div>
 
@@ -396,7 +398,7 @@ export default {
   font-weight: normal;
   font-size: 0.9em;
   color: #535353;
-  right: 4rem;
+  right: 2rem;
 }
 
 .author-item{

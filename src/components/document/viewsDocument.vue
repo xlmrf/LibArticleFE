@@ -1,6 +1,6 @@
 <template>
 
-  <span v-if="views.document_views">Перегляди <span>{{ views.document_views.value }}</span></span>
+  <span class="view-frame" v-if="views.document_views">Перегляди <span>{{ views.document_views.value }}</span></span>
 
 </template>
 
@@ -38,11 +38,11 @@ export default {
 
 <style scoped>
 
-.cite-frame{
+.view-frame{
   display: flex;
 }
 
-.cite-frame > span{
+.view-frame > span{
   font-weight: bold;
   color: #333333;
 }
