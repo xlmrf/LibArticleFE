@@ -53,14 +53,14 @@
           <h2>посилання данного файла</h2>
         </span>
         <div>
-        <div class="item-underline item-reference" v-for="(reference,idx) in getDocument.references">
-          <span class="ref-body">{{idx+1}}. {{reference.bibliographic_description}}</span>
-          <div class="ref-bottom">
-            <span @click="copy(reference.bibliographic_description)" class="ref-copy-area">
-              скопіювати
-            </span>
+          <div class="item-underline item-reference" v-for="(reference,idx) in getDocument.references">
+            <span class="ref-body">{{idx+1}}. {{reference.bibliographic_description}}</span>
+            <div class="ref-bottom">
+              <span @click="copy(reference.bibliographic_description)" class="ref-copy-area">
+                скопіювати
+              </span>
+            </div>
           </div>
-        </div>
         </div>
       </div>
 
@@ -70,7 +70,7 @@
           <input type="text" class="inp-e" @keypress.enter="pushComment(comment); comment = ''" name="comment" v-model="comment">
           <button @click="pushComment(comment);comment = ''">Додати</button>
         </div>
-        <span class="comment" v-for="(comment, index) in getComments">
+        <div class="comment" v-for="(comment, index) in getComments">
           <span class="comment-text">{{comment.text}}</span>
           <small @click="removeComment([comment.id, index])">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
@@ -79,7 +79,8 @@
             <line x1="6" y1="6" x2="18" y2="18"></line>
           </svg></small>
           <span class="comment-date">20.09.2022</span>
-        </span>
+        </div>
+        <h3 class="noun-comments" v-if="getComments.length <= 0">Додайте перший коментар до документа</h3>
       </div>
     </div>
 
@@ -151,6 +152,12 @@ export default {
 </script>
 
 <style scoped>
+
+.noun-comments{
+  color: #333333;
+  text-align: center;
+  font-size: 1em;
+}
 
 .left-side-info > div{
   margin: 15px 0;
@@ -295,6 +302,11 @@ export default {
 .doc-comments{
   font-size: 1.2em;
   font-weight: bold;
+
+}
+
+.doc-comments > div{
+  margin: 1rem 5rem;
 }
 
 .doc-comments input{
@@ -314,7 +326,7 @@ export default {
 
 .doc-comments > div{
   display: flex;
-  padding: 1rem 0;
+  padding: 1rem;
 }
 
 .document-title{
