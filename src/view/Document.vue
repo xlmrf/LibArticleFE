@@ -46,42 +46,8 @@
         </div>
       </div>
 
-
-
-      <div class="references-block">
-        <span class="top-ref-block">
-          <h2>посилання данного файла</h2>
-        </span>
-        <div>
-          <div class="item-underline item-reference" v-for="(reference,idx) in getDocument.references">
-            <span class="ref-body">{{idx+1}}. {{reference.bibliographic_description}}</span>
-            <div class="ref-bottom">
-              <span @click="copy(reference.bibliographic_description)" class="ref-copy-area">
-                скопіювати
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="doc-comments">
-        <h2>комменти</h2>
-        <div>
-          <input type="text" class="inp-e" @keypress.enter="pushComment(comment); comment = ''" name="comment" v-model="comment">
-          <button @click="pushComment(comment);comment = ''">Додати</button>
-        </div>
-        <div class="comment" v-for="(comment, index) in getComments">
-          <span class="comment-text">{{comment.text}}</span>
-          <small @click="removeComment([comment.id, index])">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-                 stroke="#9A9A9A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg></small>
-          <span class="comment-date">20.09.2022</span>
-        </div>
-        <h3 class="noun-comments" v-if="getComments.length <= 0">Додайте перший коментар до документа</h3>
-      </div>
+      <document-refs :getDocument="getDocument" />
+      <comment />
     </div>
 
 
@@ -96,9 +62,6 @@
 <!--            </select>-->
 <!--          </span>-->
 
-<!--    <comment>-->
-<!--      comment-->
-<!--    </comment>-->
   </div>
 
   <loader class="middle-spinner" :width="4" :radius="20" v-else/>
@@ -113,6 +76,7 @@ import Loader from "@/components/additional/loader";
 import Authors from "@/components/document/authors";
 import citesDocument from "@/components/document/citesDocument";
 import viewsDocument from "@/components/document/viewsDocument";
+import DocumentRefs from "@/components/document/documentRefs";
 
 export default {
   data(){
@@ -121,15 +85,8 @@ export default {
     }
   },
   methods:{
-    ...mapActions(['requestDocument','requestTypes','pushComment','reviseComments','removeComment']),
+    ...mapActions(['requestDocument','requestTypes']),
     ...mapMutations(['DocumentMutate']),
-    async copy(text){
-        try {
-          await navigator.clipboard.writeText(text);
-        } catch (err) {
-          console.error('Failed to copy: ', err);
-        }
-      },
     smooth(){
       window.scrollTo({top: 0, behavior: "smooth"});
     },
@@ -138,9 +95,9 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getDocument','getTypes', 'getComments']),
+    ...mapGetters(['getDocument','getTypes']),
   },
-  components:{Authors, Loader, info,files,comment, citesDocument,viewsDocument},
+  components:{DocumentRefs, Authors, Loader, info,files,comment, citesDocument,viewsDocument},
   mounted() {
     this.requestDocument(this.$route.params.id)
     this.requestTypes()
@@ -153,11 +110,7 @@ export default {
 
 <style scoped>
 
-.noun-comments{
-  color: #333333;
-  text-align: center;
-  font-size: 1em;
-}
+
 
 .left-side-info > div{
   margin: 15px 0;
@@ -191,16 +144,6 @@ export default {
 }
 
 
-.top-ref-block{
-  display: flex;
-}
-.top-ref-block > span{
-  cursor: default;
-  font-size: 1rem;
-  display: inherit;
-  align-items: center;
-  margin-left: auto;
-}
 
 .doc-counters{
   display: flex;
@@ -253,37 +196,6 @@ export default {
   cursor: pointer;
 }
 
-.references-block{
-  margin: 10px 0;
-  border-top: 1px solid gray;
-  border-bottom: 1px solid gray;
-}
-.references-block > div{
-  margin: 10px 0;
-  padding: 10px;
-}
-
-.ref-bottom{
-  display: flex;
-}
-.ref-bottom > span{
-  /*color: #0969DA;*/
-  cursor: pointer;
-}
-
-
-.ref-copy-area{
-  display: flex;
-  margin: 10px 2rem 0 auto;
-  align-self: center;
-  border-bottom: 1px solid transparent;
-  color: #535353;
-}
-
-.ref-copy-area:hover{
-  /*text-decoration: underline #535353;*/
-  color: #222222;
-}
 
 .document-wrapper{
   background: rgba(241, 241, 241, 0.4);
@@ -297,36 +209,6 @@ export default {
 
 .doc-body{
   padding: 20px;
-}
-
-.doc-comments{
-  font-size: 1.2em;
-  font-weight: bold;
-
-}
-
-.doc-comments > div{
-  margin: 1rem 5rem;
-}
-
-.doc-comments input{
-  padding: 0.5rem;
-  font-size: 1.1rem;
-  color: #222222;
-}
-
-.doc-comments button{
-  background: transparent;
-  margin-left: 1rem;
-  padding: 0.2rem 1rem;
-  cursor: pointer;
-  border: 1px solid rgba(65, 159, 217, 0.6);
-  color: rgba(65, 159, 217, 0.8);
-}
-
-.doc-comments > div{
-  display: flex;
-  padding: 1rem;
 }
 
 .document-title{
@@ -378,39 +260,6 @@ export default {
 .remake-link:hover{
   border-bottom: 1px solid #525252;
   color: #222222;
-}
-
-.comment{
-  display: flex;
-  position: relative;
-  align-items: center;
-  color: #222222;
-  padding: 0.8rem 1.3rem 1rem 0.8rem;
-  margin: 0.5rem 0;
-  font-size: 0.6em;
-  font-weight: normal;
-  background: rgba(255, 255, 255, 0.27);
-  border: 1px solid rgba(34, 34, 34, 0.25);
-  border-radius: 3px;
-}
-
-.comment > small{
-  position: absolute;
-  right: 5px;
-  top: 5px;
-  cursor: pointer;
-}
-.comment svg{
-  stroke: rgba(33, 0, 0, 0.79);
-}
-
-.comment-date{
-  position: absolute;
-  bottom: 0;
-  font-weight: normal;
-  font-size: 0.9em;
-  color: #535353;
-  right: 2rem;
 }
 
 .author-item{

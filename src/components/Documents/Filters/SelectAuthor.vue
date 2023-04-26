@@ -4,7 +4,7 @@
       Автори <tumbler-filter-button :toggle="AuthorsFilterOpen"/>
     </span>
     <div :class="['filter-area',{filter_open:AuthorsFilterOpen}]" v-if="getAuthors.data">
-      <input type="text" v-model="search">
+      <input type="text" class="authors-searcher" v-model="search" placeholder="Tovkach">
       <label class="save-session filter-checkbox" v-for="(author,idx) in getAuthors.data" >
         <input type="checkbox" :value="author" v-model="chosen" id="test">
         <span class="label">{{ author.first_name }} {{ author.last_name }}</span>
@@ -161,6 +161,12 @@ export default {
 </script>
 
 <style scoped>
+
+.authors-searcher{
+  padding: 0.5rem;
+  font-size: 1em;
+  margin: 0.5rem 0;
+}
 
 .multiselect {
   width: 200px;

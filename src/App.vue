@@ -223,4 +223,8 @@ input {
   background: transparent;
 }
 
+.doc-list-item{
+  background: rgba(51, 51, 51, 0.04);
+}
+
 </style>
