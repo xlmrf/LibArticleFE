@@ -9,6 +9,7 @@ export default {
             authors:[],
             years: {},
             filter_types: [],
+            page_paginate_count:[10,25,50,100],
             info:''
         }
     },
@@ -103,6 +104,9 @@ export default {
         },
         getFilterTypes(ctx){
             return ctx.filter_types
+        },
+        getPageCountPaginate(ctx){
+            return ctx.page_paginate_count
         }
     }
 }

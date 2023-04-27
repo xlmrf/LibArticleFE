@@ -2,12 +2,12 @@
   <div v-if="documents.data&&getTypes">
     <div class="documents-header">
       <div class="sort-filter">
-        <div class="showed-items">Показано <span>{{ documents.total!==0 ? documents.per_page*(documents.current_page-1)+1 : '0' }}</span> - <span>{{ documents.per_page*(documents.current_page-1)+documents.data.length }}</span> документи із <span>{{ documents.total }}</span> знайдених</div>
+        <div class="showed-items">Показано<span>{{ documents.total!==0 ? documents.per_page*(documents.current_page-1)+1 : '0' }}</span> - <span>{{ documents.per_page*(documents.current_page-1)+documents.data.length }}</span>документи із<span>{{ documents.total }}</span>знайдених</div>
         <div class="page-counter-control">
           <label>На сторінці</label>
-          <select v-model="documents.per_page">
-            <option v-for="y in documents.per_page" :key="y">
-              {{ y }}
+          <select v-model="getPageCountPaginate[0]">
+            <option v-for="count in getPageCountPaginate" :key="count">
+              {{ count }}
             </option>
           </select>
         </div>
@@ -36,7 +36,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getTypes']),
+    ...mapGetters(['getTypes','getPageCountPaginate']),
   },
   methods: {
     paginate(item) {
@@ -64,6 +64,11 @@ export default {
   display: flex;
   align-self: center;
 }
+
+.showed-items > span{
+  margin: 0 0.33rem;
+}
+
 .list-item {
   display: flex;
   flex-direction: column;
