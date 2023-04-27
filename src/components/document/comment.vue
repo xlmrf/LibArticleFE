@@ -3,8 +3,8 @@
     <h2 @click="hide_comments = !hide_comments">комменти <tumbler-filter-button :toggle="!hide_comments"/></h2>
     <div class="comments-field" :class="{'comments-field-none':hide_comments}">
       <div>
-        <input type="text" class="inp-e" @keypress.enter="pushComment(comment); comment = ''" name="comment" v-model="comment">
-        <button @click="pushComment(comment);comment = ''">Додати</button>
+        <input type="text" class="sample-input comment-input" :class="{'sample-input-error':comment_warning}" @keypress.enter="SendComment()" name="comment" v-model="comment" required>
+        <button @click="SendComment()">Додати</button>
       </div>
       <div class="comment" v-for="(comment, index) in getComments">
         <span class="comment-text">{{comment.text}}</span>
@@ -29,12 +29,26 @@ export default {
   components: {TumblerFilterButton},
   data(){
     return{
+      comment:'',
+      comment_warning:false,
       hide_comments:true
     }
   },
-
+  watch:{
+    comment(){
+      this.comment_warning = false
+    }
+  },
   methods:{
-    ...mapActions(['pushComment','removeComment'])
+    ...mapActions(['pushComment','removeComment']),
+    SendComment(){
+      if (this.comment.length > 0){
+        this.pushComment(this.comment)
+      }
+      else{
+        this.comment_warning = true
+      }
+    },
   },
 
   computed:{
@@ -121,6 +135,10 @@ export default {
   font-size: 0.9em;
   color: #535353;
   right: 2rem;
+}
+
+.comment-input{
+  margin-left: 50px;
 }
 
 </style>

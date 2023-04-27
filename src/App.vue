@@ -198,6 +198,13 @@ input {
   padding: 3px 5px;
 }
 
+.sample-input-error:valid{
+  border: 1px solid rgba(229, 50, 45, 0.8);
+}
+.sample-input-error{
+  border: 1px solid rgba(229, 50, 45, 0.8);
+}
+
 .author-item-link{
   color: #0969DA;
   text-decoration: none;
@@ -224,7 +231,7 @@ input {
 }
 
 .doc-list-item{
-  background: rgba(51, 51, 51, 0.04);
+  /*background: rgba(51, 51, 51, 0.04);*/
 }
 
 </style>

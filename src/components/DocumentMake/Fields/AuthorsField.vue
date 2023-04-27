@@ -16,19 +16,19 @@
       <input type="text" :disabled="idx === 0 ? coAuthor : false" name="author_email" id="author_email" required
              v-model="author.email"
              @blur="author.email !== '' ? findAuthor({email:author.email,idx:idx}): false"
-             class='inp-e required-area'>
+             class='sample-input sample-input-error'>
     </div>
     <div>
       <label for="last_name">Прізвище</label>
       <input type="text" :disabled="idx === 0 ? coAuthor : false" name="last_name" id="last_name" required
              v-model="author.last_name"
-             class='inp-e required-area'>
+             class='sample-input sample-input-error'>
     </div>
     <div>
       <label for="first_name">Ім'я</label>
       <input type="text" :disabled="idx === 0 ? coAuthor : false" name="first_name" id="first_name" required
              v-model="author.first_name"
-             class='inp-e required-area'>
+             class='sample-input sample-input-error'>
     </div>
     <span class="user-remove-btn" v-if="getDocument.authors?.filter(item=>!item.delete).length>1"
           @click="removeAuthor(idx, author)">

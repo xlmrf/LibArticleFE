@@ -1,7 +1,7 @@
 <template>
   <div class="complex-item-control">
     <span>
-      <input type="text" class="inp-e" :id="keyword" v-model="keyword" @keypress.enter="addKeyword">
+      <input type="text" class="sample-input" :id="keyword" v-model="keyword" @keypress.enter="addKeyword">
       <span class="add-keyword-btn" @click="addKeyword">Додати</span>
     </span>
     <div :class="['list-keywords',{'list-able':this.getDocument.keywords}]">

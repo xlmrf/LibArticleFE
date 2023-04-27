@@ -72,7 +72,7 @@ export default {
 }
 
 .select-search-area > h3{
-  padding: 0.89rem 0;
+  padding: 1rem 0;
   margin-bottom: 10px;
   border-bottom: 1px solid #bbb;
 }

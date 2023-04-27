@@ -5,20 +5,20 @@
       <span>Change email</span>
       <div>
         <label for="email">email</label>
-        <input class="inp-e" type="text" name="" id="email" v-model="data.email">
+        <input class="sample-input" type="text" name="" id="email" v-model="data.email">
       </div>
     </div>
     <div class="new-password">
       <label for="email">password</label>
-      <input class="inp-e" type="password" name="" id="new-password" v-model="data.password">
+      <input class="sample-input" type="password" name="" id="new-password" v-model="data.password">
     </div>
     <div class="confirm-new-password">
       <label for="email">confirm password</label>
-      <input class="inp-e" type="password" name="" id="confirm-new-password" v-model="data.confirm_password">
+      <input class="sample-input" type="password" name="" id="confirm-new-password" v-model="data.confirm_password">
     </div>
     <div class="person-email">
       <label for="old-password">your password</label>
-      <input class="inp-e" type="password" name="" id="old-password" v-model="data.old_password">
+      <input class="sample-input" type="password" name="" id="old-password" v-model="data.old_password">
     </div>
     {{getUser}}
     <button @click="changePrivacy">Save</button>

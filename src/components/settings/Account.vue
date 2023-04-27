@@ -14,19 +14,19 @@
     <div class="about-user">
       <span>
         <label for="last_name">Прізвище</label>
-        <input class="inp-e" type="text" name="" id="last_name" v-model="getUser.info.last_name">
+        <input class="sample-input" type="text" name="" id="last_name" v-model="getUser.info.last_name">
       </span>
       <span>
         <label for="first_name">Ім'я</label>
-        <input class="inp-e" type="text" name="" id="first_name" v-model="getUser.info.first_name">
+        <input class="sample-input" type="text" name="" id="first_name" v-model="getUser.info.first_name">
       </span>
       <span>
         <label for="middle_name">По батькові</label>
-        <input class="inp-e" type="text" name="" id="middle_name" v-model="getUser.info.middle_name">
+        <input class="sample-input" type="text" name="" id="middle_name" v-model="getUser.info.middle_name">
       </span>
       <span>
         <label for="location">Місце проживання</label>
-        <input class="inp-e" type="text" name="" id="location" v-model="getUser.info.location">
+        <input class="sample-input" type="text" name="" id="location" v-model="getUser.info.location">
       </span>
       <span class="person-university">
         {{getUniversities}}

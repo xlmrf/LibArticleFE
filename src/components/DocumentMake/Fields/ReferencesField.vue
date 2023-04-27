@@ -1,7 +1,7 @@
 <template>
   <div class="complex-item-control">
     <span>
-      <input type="text" class="inp-e" v-model="reference" @keypress.enter="addKeyword">
+      <input type="text" class="sample-input" v-model="reference" @keypress.enter="addKeyword">
        <small @click="deleteReferenceIntup()" class="delete-ref-btn delete-item" v-if="reference!==''">
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
                stroke="#9A9A9A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

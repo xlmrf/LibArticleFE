@@ -24,7 +24,7 @@
 
               <div class="complex-item-control" v-else-if="item === 'keywords' || item === 'references'">
                 <span>
-                  <input type="text" class="inp-e" :id="item" v-model="comprehensive[item]" @keypress.enter="addItem(item)" >
+                  <input type="text" class="sample-input" :id="item" v-model="comprehensive[item]" @keypress.enter="addItem(item)" >
                   <span class="add-keyword-btn" @click="addItem(item)">Додати</span>
                 </span>
                 <div :class="[{'list-keywords':item === 'keywords'},{'list-references':item === 'references'},{'list-able':this.document.keywords.length}]">
@@ -37,8 +37,8 @@
                 <small>{{ error[item] }}</small>
               </div>
 
-              <div v-else-if="item === 'description'"><textarea class="inp-e document-description-area" v-model="document[item]"></textarea></div>
-              <input type="text" class="inp-e required-area" required :id="item" v-model="document[item]" v-else>
+              <div v-else-if="item === 'description'"><textarea class="sample-input document-description-area" v-model="document[item]"></textarea></div>
+              <input type="text" class="sample-input sample-input-error" required :id="item" v-model="document[item]" v-else>
             </div>
             <div class="btn-control">
               <button class="btn conclusion-btn" @click="pushDocument">Створити</button>
@@ -595,7 +595,7 @@ export default {
   stroke: #525252;
 }
 
-.inp-e{
+.sample-input{
   border: 1px solid #CCCCCC;
   padding: 0.3rem 0.5rem;
   border-radius: 3px;
@@ -618,15 +618,15 @@ export default {
   color: #535353;
 }
 
-.inp-e:focus,
-.inp-e:hover{
+.sample-input:focus,
+.sample-input:hover{
   border: 1px solid #419FD9;
 }
-.required-area:valid{
-  border: 1px solid #419FD9;
+.sample-input-error:valid{
+  border: 1px solid rgba(229, 50, 45, 0.8);
 }
 
-.inp-e:disabled:hover{
+.sample-input:disabled:hover{
   border: 1px solid #BBBBBB;
 }
 #co-author{

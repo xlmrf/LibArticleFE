@@ -14,21 +14,21 @@
                :value = author.email
                @input="author.email = $event.target.value;$emit('newAuthor', author)"
                @blur="author.email !== '' ? findAuthor(author.email): false"
-               class='inp-e required-area'>
+               class='sample-input sample-input-error'>
       </div>
       <div>
         <label for="last_name">Прізвище</label>
         <input type="text" :disabled="idx === 0 ? coAuthor : false" name="last_name" id="last_name" required
                :value = author.last_name
                @input="author.last_name = $event.target.value;$emit('newAuthor', author)"
-               class='inp-e required-area'>
+               class='sample-input sample-input-error'>
       </div>
       <div>
         <label for="first_name">Ім'я</label>
         <input type="text" :disabled="idx === 0 ? coAuthor : false" name="first_name" id="first_name" required
                :value = author.first_name
                @input="author.first_name = $event.target.value;$emit('newAuthor', author)"
-               class='inp-e required-area'>
+               class='sample-input sample-input-error'>
       </div>
       <span class="user-remove-btn" v-if="idx!==0" @click="removeAuthor(idx)">
           <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#9A9A9A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

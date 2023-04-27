@@ -81,7 +81,7 @@ import DocumentRefs from "@/components/document/documentRefs";
 export default {
   data(){
     return{
-      comment: ''
+
     }
   },
   methods:{
@@ -199,7 +199,7 @@ export default {
 
 .document-wrapper{
   background: rgba(241, 241, 241, 0.4);
-  font-size: 1.3em;
+  font-size: 1.1em;
   width: 80%;
   display: flex;
   flex-flow: column;
@@ -255,6 +255,7 @@ export default {
   text-decoration: none;
   color: #525252;
   position: absolute;
+  border-bottom: 1px solid transparent;
   right: 0;
 }
 .remake-link:hover{
