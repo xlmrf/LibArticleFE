@@ -8,14 +8,15 @@
         <div class="modalClose" @click="openModal = false">
           <small title="Close">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-                 stroke="#9A9A9A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                 stroke="#535353" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <line x1="18" y1="6" x2="6" y2="18"></line>
               <line x1="6" y1="6" x2="18" y2="18"></line>
             </svg></small>
         </div>
         <div class="modalWindow">
           <h3>Посилання документа</h3>
-          <div class="item-reference" v-for="(reference,idx) in getDocument.references">
+          {{document_cites}}
+          <div class="item-reference" v-for="(reference,idx) in document_cites.data">
             <span class="ref-body">{{idx+1}}. {{reference.bibliographic_description}}</span>
           </div>
         </div>
@@ -51,6 +52,14 @@ export default {
         this.cites = response.data
       }, err => {
         console.log('cites error:',err);
+      })
+    },
+    getCites(){
+      let id = router.currentRoute.value.params.id
+      axios.get(this.api_url_v1 + '/document/'+ id + '/citation').then(response => {
+        this.document_cites = response.data
+      }, err => {
+        console.log('get cites error:',err);
       })
     },
     show_all_cites(){
@@ -90,6 +99,7 @@ export default {
 
     window.addEventListener('click', this.closeWindow, false)
     this.citesDocument()
+    this.getCites()
   },
   beforeDestroy () {
     window.removeEventListener('click',this.closeWindow, false)
@@ -129,13 +139,14 @@ export default {
 }
 .modalActive {
   position: absolute;
+  overflow-y: auto;
   width: 60%;
   top: 60px;
   left: 20%;
   border-radius: 10px;
   background-color: rgb(255, 255, 255);
   cursor: default;
-  padding: 40px 20px;
+  padding: 20px;
   z-index: 999;
 }
 
@@ -153,6 +164,8 @@ export default {
 
 .modalWindow {
   position: relative;
+  height: 100%;
+  overflow-y: auto;
 }
 
 .modalWindow > h3{
