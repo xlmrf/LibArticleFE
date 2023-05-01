@@ -1,8 +1,8 @@
 <template>
   <div class="doc-list-item references-block">
-    <h2 class="top-ref-block" @click="hide_refs = !hide_refs">посилання данного файла <tumbler-filter-button :toggle="!hide_refs"/></h2>
-    <div :class="{'refs-field-none':hide_refs}">
-      <div class="item-underline item-reference" v-for="(reference,idx) in getDocument.references">
+    <h3 class="top-ref-block" @click="hide_refs = !hide_refs">Посилання данного файла <tumbler-filter-button :toggle="!hide_refs"/></h3>
+    <div :class="{'display-none':hide_refs}">
+      <div class="item-reference" v-for="(reference,idx) in getDocument.references">
         <span class="ref-body">{{idx+1}}. {{reference.bibliographic_description}}</span>
         <div class="ref-bottom">
           <span @click="copy(reference.bibliographic_description)" class="ref-copy-area">
@@ -25,7 +25,6 @@ export default {
       hide_refs: true
     }
   },
-
   methods:{
     async copy(text){
       try {
@@ -41,7 +40,10 @@ export default {
 
 <style scoped>
 
+.item-reference{
+  margin-top: 15px;
 
+}
 
 .references-block{
   margin: 10px 0;

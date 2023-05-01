@@ -1,13 +1,14 @@
 <template>
   <div class="doc-list-item doc-comments">
-    <h2 @click="hide_comments = !hide_comments">комменти <tumbler-filter-button :toggle="!hide_comments"/></h2>
-    <div class="comments-field" :class="{'comments-field-none':hide_comments}">
+    <h3 @click="hide_comments = !hide_comments">Коментарі <tumbler-filter-button :toggle="!hide_comments"/></h3>
+    <div class="comments-field" :class="{'display-none':hide_comments}">
       <div>
         <input type="text" class="sample-input comment-input" :class="{'sample-input-error':comment_warning}" @keypress.enter="SendComment()" name="comment" v-model="comment" required>
         <button @click="SendComment()">Додати</button>
       </div>
+      {{getComments}}
       <div class="comment" v-for="(comment, index) in getComments">
-        <span class="comment-text">{{comment.text}}</span>
+        <span class="comment-text">{{comment}}</span>
         <small @click="removeComment([comment.id, index])" title="Видалити коммент">
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
                stroke="#9A9A9A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -44,6 +45,7 @@ export default {
     SendComment(){
       if (this.comment.length > 0){
         this.pushComment(this.comment)
+        this.comment = ''
       }
       else{
         this.comment_warning = true
@@ -59,28 +61,14 @@ export default {
 
 <style scoped>
 
-.doc-comments{
-  font-size: 1.2em;
-  font-weight: bold;
-
-}
-
-.doc-comments > h2{
-  display: flex;
-  align-items: center;
-  color: #222222;
-  padding-bottom: 10px;
-  cursor: pointer;
-}
+/*.doc-comments{*/
+/*  font-weight: bold;*/
+/*}*/
 
 .comments-field > div{
   margin: 1rem 5rem;
   display: flex;
   padding: 1rem;
-}
-
-.comments-field-none{
-  display: none;
 }
 
 .doc-comments input{
@@ -101,7 +89,7 @@ export default {
 .noun-comments{
   color: #222222;
   text-align: center;
-  font-size: 0.6em;
+  font-size: 0.8em;
 }
 
 .comment{
@@ -111,7 +99,7 @@ export default {
   color: #222222;
   padding: 0.8rem 1.3rem 1rem 0.8rem;
   margin: 0.5rem 0;
-  font-size: 0.6em;
+  font-size: 0.8em;
   font-weight: normal;
   background: rgba(255, 255, 255, 0.27);
   border: 1px solid rgba(34, 34, 34, 0.25);

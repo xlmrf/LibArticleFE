@@ -18,10 +18,11 @@
 
           <div class="authors">
             Автори:
-            <span v-for="author in getDocument.authors">
+            <span v-for="(author,idx) in getDocument.authors">
               <router-link class="author-item-link" :to="'/profile/'+author.user_id" v-if="author.user_id">{{ author.first_name[0] }}. {{ author.last_name }} </router-link>
-              <span v-else>{{ author.first_name[0] }}. {{ author.last_name }} </span>;
-          </span>
+              <span v-else>{{ author.first_name[0] }}. {{ author.last_name }} </span><span v-if="idx+1 < getDocument.authors.length">; </span>
+            </span>
+            <span class="pin-all-authors" v-if="getDocument.authors.length > 1">Всі автори({{getDocument.authors.length}})</span>
           </div>
 
           <div>Ключові слова:
@@ -34,7 +35,7 @@
 
           <div class="doc-counters">
             <views-document />
-            <cites-document />
+            <cites-document :getDocument="getDocument" />
           </div>
         </div>
         <div class="right-side-info">
@@ -46,6 +47,8 @@
         </div>
       </div>
 
+
+      <annotation  :getDocument="getDocument" />
       <document-refs :getDocument="getDocument" />
       <comment />
     </div>
@@ -77,6 +80,7 @@ import Authors from "@/components/document/authors";
 import citesDocument from "@/components/document/citesDocument";
 import viewsDocument from "@/components/document/viewsDocument";
 import DocumentRefs from "@/components/document/documentRefs";
+import Annotation from "@/components/document/annotation";
 
 export default {
   data(){
@@ -97,7 +101,7 @@ export default {
   computed: {
     ...mapGetters(['getDocument','getTypes']),
   },
-  components:{DocumentRefs, Authors, Loader, info,files,comment, citesDocument,viewsDocument},
+  components:{Annotation, DocumentRefs, Authors, Loader, info,files,comment, citesDocument,viewsDocument},
   mounted() {
     this.requestDocument(this.$route.params.id)
     this.requestTypes()
@@ -147,31 +151,6 @@ export default {
 
 .doc-counters{
   display: flex;
-}
-
-.doc-counters > span{
-  display: flex;
-  padding: 10px;
-  margin: 15px 10px;
-  align-items: center;
-  flex-flow: column;
-  /*padding: 20px;*/
-  background: rgba(187, 187, 187, 0.25);
-  border-radius: 5px;
-}
-
-.doc-counters > span:hover{
-  background: #e0e0e0;
-  cursor: default;
-}
-
-.doc-counters > span:last-child:hover{
-  cursor: pointer;
-}
-
-.doc-counters > span > span{
-  font-weight: bold;
-  color: #333333;
 }
 
 
@@ -265,6 +244,12 @@ export default {
 
 .author-item{
   font-size: 1.1rem;
+}
+
+.pin-all-authors{
+  cursor: pointer;
+  color: #1C75DD;
+  margin-left: 15px;
 }
 
 </style>

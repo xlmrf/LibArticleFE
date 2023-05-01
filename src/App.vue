@@ -231,7 +231,51 @@ input {
 }
 
 .doc-list-item{
-  /*background: rgba(51, 51, 51, 0.04);*/
+  background: rgba(51, 51, 51, 0.04);
+  padding: 15px;
+  display: flex;
+  flex-flow: column;
+  border-radius: 3px;
+}
+
+.display-none{
+  display: none;
+}
+
+.doc-list-item h3{
+  display: flex;
+  align-items: center;
+  color: #333333;
+  cursor: pointer;
+}
+
+.doc-list-item .tumbler-filter{
+  fill: #535353;
+}
+
+.doc-counters > div > span{
+  display: flex;
+  padding: 10px;
+  margin: 15px 10px;
+  align-items: center;
+  flex-flow: column;
+  /*padding: 20px;*/
+  background: rgba(187, 187, 187, 0.25);
+  border-radius: 5px;
+}
+
+.doc-counters > div > span:hover{
+  background: #e0e0e0;
+  cursor: default;
+}
+
+.doc-counters > div > span:last-child:hover{
+  cursor: pointer;
+}
+
+.doc-counters > div > span > span{
+  font-weight: bold;
+  color: #333333;
 }
 
 </style>

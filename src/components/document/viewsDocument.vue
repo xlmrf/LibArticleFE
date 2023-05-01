@@ -1,7 +1,7 @@
 <template>
-
+<div>
   <span class="view-frame" v-if="views.document_views">Перегляди <span>{{ views.document_views.value }}</span></span>
-
+</div>
 </template>
 
 <script>
