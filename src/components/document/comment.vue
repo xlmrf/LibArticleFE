@@ -6,16 +6,17 @@
         <input type="text" class="sample-input comment-input" :class="{'sample-input-error':comment_warning}" @keypress.enter="SendComment()" name="comment" v-model="comment" required>
         <button @click="SendComment()">Додати</button>
       </div>
-      {{getComments}}
       <div class="comment" v-for="(comment, index) in getComments">
-        <span class="comment-text">{{comment}}</span>
-        <small @click="removeComment([comment.id, index])" title="Видалити коммент">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-               stroke="#9A9A9A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg></small>
-        <span class="comment-date">20.09.2022</span>
+        <div class="comment-text">{{comment.text}}</div>
+<!--        <div class="left-comment-side">-->
+          <small @click="removeComment([comment.id, index])" title="Видалити коммент">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                 stroke="#9A9A9A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg></small>
+          <span class="comment-date">{{new Date(Date.parse(comment.created_at)).toUTCString().slice(0,-4)}}</span>
+<!--        </div>-->
       </div>
       <h5 class="noun-comments" v-if="getComments.length <= 0">Додайте перший коментар до документа</h5>
     </div>
@@ -32,7 +33,7 @@ export default {
     return{
       comment:'',
       comment_warning:false,
-      hide_comments:true
+      hide_comments:false
     }
   },
   watch:{
@@ -41,7 +42,7 @@ export default {
     }
   },
   methods:{
-    ...mapActions(['pushComment','removeComment']),
+    ...mapActions(['pushComment','removeComment','reviseComments']),
     SendComment(){
       if (this.comment.length > 0){
         this.pushComment(this.comment)
@@ -55,6 +56,9 @@ export default {
 
   computed:{
     ...mapGetters(['getComments'])
+  },
+  mounted(){
+    this.reviseComments()
   }
 }
 </script>
@@ -93,12 +97,10 @@ export default {
 }
 
 .comment{
-  display: flex;
   position: relative;
+  justify-content: space-between;
   align-items: center;
   color: #222222;
-  padding: 0.8rem 1.3rem 1rem 0.8rem;
-  margin: 0.5rem 0;
   font-size: 0.8em;
   font-weight: normal;
   background: rgba(255, 255, 255, 0.27);

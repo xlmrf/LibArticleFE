@@ -128,9 +128,8 @@ export default {
   max-width: 300px;
   display: flex;
   flex-flow: column;
-  padding: 45px 0;
+  margin-top: 1.5rem;
   align-items: center;
-  justify-content: end;
   flex: 1;
 }
 
@@ -191,7 +190,6 @@ export default {
 }
 
 .document-title{
-  margin: 1.5rem 0;
   padding-bottom: 1rem;
   font-size: 1.5em;
   font-weight: bold;
@@ -205,12 +203,11 @@ export default {
   color: #212121;
   /*font-weight: bold;*/
   margin-top: 1rem;
-  margin-left: 1rem;
   display: flex;
-  padding: 0.7rem;
+  padding: 0.7rem 1.4rem;
   /*border: 1px solid rgba(32, 178, 170, 0.71);*/
   /*background: rgba(32, 178, 170, 0.25);*/
-  background: rgba(65, 159, 217, 0.15);
+  background: rgba(85, 184, 242, 0.23);
   justify-content: center;
   border-radius: 1px;
   width: fit-content;
@@ -230,6 +227,7 @@ export default {
 
 .remake-link{
   /*border: 1px solid #bbb;*/
+  margin-top: 1.2rem;
   padding: 0.7rem 1.2rem;
   text-decoration: none;
   color: #525252;

@@ -9,10 +9,10 @@ export default {
     actions: {
         pushComment(ctx, data){
             let id = router.currentRoute.value.params.id
-            ctx.commit('addComment', {text:data,sort:ctx.state.comments.length})
+            // ctx.commit('addComment', {text:data,sort:ctx.state.comments.length})
             axios.post('http://libarticle.loc/api/v1/documents/'+id+'/comments', {text:data}).then(response => {
                 console.log('response push comment',response.data);
-                ctx.commit('updComment', response.data)
+                ctx.commit('addComment', response.data)
             }).catch(error => console.log(error.response.data))
         },
         removeComment(ctx,[comment_id, index]){
@@ -35,14 +35,14 @@ export default {
     },
     mutations: {
         updateComments(ctx, data){
-            ctx.comments = data
+            ctx.comments = data.reverse()
         },
         addComment(ctx, data){
-            ctx.comments.push(data);
+            ctx.comments.unshift(data);
         },
-        updComment(ctx, data){
-            ctx.comments[ctx.comments.length-1] = data
-        }
+        // updComment(ctx, data){
+        //     ctx.comments[ctx.comments.length-1] = data
+        // }
     },
     getters: {
         getComments(ctx) {

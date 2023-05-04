@@ -83,17 +83,17 @@ input {
   content:'';
   position:absolute;
   width:100%;
-  height:0.07rem;
+  height:1px;
   left:0;
   bottom:3px;
-  background: #bfbfbf;
+  background: #bfbfbfb0;
 }
 
 .item-underline:last-child:after{
   content:'';
   position:absolute;
   width:100%;
-  height:0.07rem;
+  height:1px;
   left:0;
   bottom:3px;
   background: transparent;
