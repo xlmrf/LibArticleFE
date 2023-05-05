@@ -9,8 +9,8 @@
 
 <script>
 import {mapGetters, mapActions, mapMutations} from "vuex"
-import FirstStage from "@/components/DocumentMake/FirstStageDocument";
-import SecondStage from "@/components/DocumentMake/SecondStageDocument";
+import FirstStage from "@/components/DocumentMake/PrevMakeDocument";
+import SecondStage from "@/components/DocumentMake/EditDocument";
 
 export default {
   data() {

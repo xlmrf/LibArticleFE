@@ -30,7 +30,7 @@
           </div>
 
           <div>Дата публікації:
-            <span>{{getDocument.publication_date}}</span>
+            <span>{{new Date(Date.parse(getDocument.publication_date)).toDateString()}}</span>
           </div>
 
           <div class="doc-counters">

@@ -31,11 +31,11 @@
           {{keyword}}
           </span>
         </span>
-        <span class="profile-file-download-link" v-if="isProfile">
-          <router-link :to="''">Завантажити</router-link>
-<!--          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#50ADBE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <circle cx="12" cy="12" r="10"/><path d="M16 12l-4 4-4-4M12 8v7"/></svg>-->
-<!--          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#50ADBE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v13M5 12l7 7 7-7"/></svg>-->
-        </span>
+<!--        <span class="profile-file-download-link" v-if="isProfile">-->
+<!--          <router-link :to="''">Завантажити</router-link>-->
+<!--&lt;!&ndash;          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#50ADBE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <circle cx="12" cy="12" r="10"/><path d="M16 12l-4 4-4-4M12 8v7"/></svg>&ndash;&gt;-->
+<!--&lt;!&ndash;          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#50ADBE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v13M5 12l7 7 7-7"/></svg>&ndash;&gt;-->
+<!--        </span>-->
       </div>
 
       <div class="second-piece" v-if="!isProfile">
@@ -108,8 +108,8 @@ export default {
   padding: 5px 0;
 }
 .document-list-keywords > span{
-  background: rgb(41, 219, 227);
-  color: #ffffff;
+  background: rgba(125, 215, 207, 0.38);
+  color: #212121;
   /*background: rgba(32, 178, 170, 0.15);*/
   /*border-radius: 50px;*/
   border-radius: 3px;
@@ -148,7 +148,7 @@ export default {
 .publication-date{
   color: #535353;
   margin-left: auto;
-  font-size: 1em;
+  font-size: 0.8em;
   /*margin: 0.25rem;*/
 }
 

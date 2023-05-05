@@ -33,7 +33,7 @@ export default {
     return{
       comment:'',
       comment_warning:false,
-      hide_comments:false
+      hide_comments:true
     }
   },
   watch:{
