@@ -22,7 +22,6 @@
               <router-link class="author-item-link" :to="'/profile/'+author.user_id" v-if="author.user_id">{{ author.first_name[0] }}. {{ author.last_name }} </router-link>
               <span v-else>{{ author.first_name[0] }}. {{ author.last_name }} </span><span v-if="idx+1 < getDocument.authors.length">; </span>
             </span>
-            <span class="pin-all-authors" v-if="getDocument.authors.length > 1">Всі автори({{getDocument.authors.length}})</span>
           </div>
 
           <div>Ключові слова:

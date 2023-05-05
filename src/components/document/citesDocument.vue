@@ -66,9 +66,12 @@ export default {
     },
     getCites(){
       let id = router.currentRoute.value.params.id
-      axios.get(this.api_url_v1 + '/document/'+ id + '/citation?q=&perPage=5').then(response => {
+      axios.get(this.api_url_v1 + '/document/'+ id + '/citation?q='+this.searchCites+'&perPage=5').then(response => {
+
         this.lastPage = response.data.last_page
         this.document_cites = response.data.data
+        this.pageCounter = 1
+
       }, err => {
         console.log('get cites error:',err);
       })
@@ -97,8 +100,7 @@ export default {
       }
     },
     onScroll(e){
-
-      if (e.target.offsetHeight + e.target.scrollTop > e.target.scrollHeight-10){
+      if (e.target.offsetHeight + e.target.scrollTop > e.target.scrollHeight-10 && this.lastPage !== this.pageCounter){
         this.scrolled = true
         console.log('ok')
       }
@@ -109,10 +111,10 @@ export default {
   watch:{
 
     searchCites(){
-      this.findCites()
+      this.getCites()
     },
     scrolled(){
-      if (this.scrolled && this.pageCounter - 1 !== this.last_page ){
+      if (this.scrolled && (this.lastPage > this.pageCounter)){
         this.pageCounter++
         this.findCites()
       }
@@ -126,9 +128,9 @@ export default {
     // }
   },
   mounted() {
-
     window.addEventListener('click', this.closeWindow, false)
     document.getElementsByClassName('files-tape')[0].addEventListener('scroll', this.onScroll)
+    console.log('tape class',document.getElementsByClassName('files-tape')[0].scrollTopMax)
     this.citesDocument()
     this.getCites()
   },
@@ -243,13 +245,12 @@ export default {
   /*box-shadow: rgba(0, 0, 0, 0.35) 0px -8px 12px -8px inset;*/
   /*box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;*/
   border-radius: 6px;
-  align-self: center;
   display: flex;
   flex-direction: column;
   font-size: 0.8em;
   overflow: auto;
   /*overflow-y: hidden;*/
-  scrollbar-width: thin;
+  /*scrollbar-width: thin;*/
   z-index: 10;
 }
 .files-tape > div{
@@ -258,7 +259,6 @@ export default {
   /*border: 1px solid #0048BA;*/
   font-size: 18px;
   display: inline-block;
-  text-align: center;
   text-decoration: none;
 }
 
