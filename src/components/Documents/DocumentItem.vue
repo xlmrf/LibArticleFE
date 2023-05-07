@@ -31,11 +31,15 @@
           {{keyword}}
           </span>
         </span>
-<!--        <span class="profile-file-download-link" v-if="isProfile">-->
+        <span class="profile-file-download-link" v-if="isProfile">
 <!--          <router-link :to="''">Завантажити</router-link>-->
-<!--&lt;!&ndash;          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#50ADBE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <circle cx="12" cy="12" r="10"/><path d="M16 12l-4 4-4-4M12 8v7"/></svg>&ndash;&gt;-->
-<!--&lt;!&ndash;          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#50ADBE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v13M5 12l7 7 7-7"/></svg>&ndash;&gt;-->
-<!--        </span>-->
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#999999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+
+          <span v-if="views.document_views">{{views.document_views.value}}</span>
+
+<!--          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#50ADBE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <circle cx="12" cy="12" r="10"/><path d="M16 12l-4 4-4-4M12 8v7"/></svg>-->
+<!--          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#50ADBE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v13M5 12l7 7 7-7"/></svg>-->
+        </span>
       </div>
 
       <div class="second-piece" v-if="!isProfile">
@@ -48,17 +52,41 @@
 </template>
 
 <script>
-import {mapActions, mapGetters} from "vuex";
+import viewsDocument from "@/components/document/viewsDocument";
+import {mapActions, mapGetters, mapState} from "vuex";
+import router from "@/router";
+import axios from "axios";
 
 export default {
   props:['document','isProfile'],
+
+  data(){
+    return{
+      views:{}
+    }
+  },
+
+  methods:{
+    viewsDocument(){
+      axios.get(this.api_url_v1 + '/report/document-views/' + this.document.id).then(response => {
+        this.views = response.data
+      }, err => {
+        console.log('views error:',err);
+      })
+    },
+  },
+
   computed:{
     ...mapActions(['requestTypes']),
-    ...mapGetters(['getTypes'])
+    ...mapGetters(['getTypes']),
+    ...mapState(['api_url_v1'])
   },
   mounted() {
     this.requestTypes
-  }
+    this.viewsDocument()
+  },
+
+  components:{viewsDocument}
 }
 </script>
 
@@ -153,10 +181,18 @@ export default {
 }
 
 .profile-file-download-link{
+  display: flex;
   position: absolute;
   bottom: 0;
   right: 10px;
 }
+
+.profile-file-download-link > span{
+  padding-left: 5px;
+  color: #999999;
+  cursor: default;
+}
+
 .profile-file-download-link > a:hover{
   color: rgba(28, 117, 221, 0.75);
   stroke: #55B8CA;

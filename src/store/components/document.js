@@ -5,15 +5,12 @@ export default {
     state() {
         return {
             document: {},
-
             last_documents: [],
             info: '',
             types: [],
             propose_authors: [],
             newDocumentId: null,
             uncompletedDocument: '',
-            cites:{},
-            views:{}
         }
     },
     actions: {
@@ -73,18 +70,6 @@ export default {
             })
         },
 
-       // reports
-
-
-        viewsDocument(ctx) {
-            let id = router.currentRoute.value.params.id
-            axios.get(ctx.rootState.api_url_v1 + '/report/document-views/' + id).then(response => {
-                ctx.commit('DocumentViews', response.data)
-            }, err => {
-                console.log('cites error:',err);
-            })
-        },
-
     },
     mutations: {
         catchInfo(ctx,data){
@@ -112,12 +97,6 @@ export default {
             ctx.last_documents = data
         },
 
-        // reports mutations
-
-        DocumentViews(ctx,data){
-            ctx.views = data
-        }
-
     },
     getters: {
         getUncompletedDocument(ctx) {
@@ -139,9 +118,7 @@ export default {
         getDocument(ctx) {
             return ctx.document
         },
-        getDocumentViews(ctx){
-            return ctx.views
-        }
+
     },
 
 }

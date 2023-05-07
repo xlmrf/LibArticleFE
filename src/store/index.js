@@ -21,7 +21,7 @@ export default createStore({
         library,
         authorization,
         filesManager,
-        photo,
+        photo
     },
     state: {
         message: {},
