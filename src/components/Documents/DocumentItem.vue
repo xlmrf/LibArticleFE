@@ -77,12 +77,10 @@ export default {
   },
 
   computed:{
-    ...mapActions(['requestTypes']),
     ...mapGetters(['getTypes']),
     ...mapState(['api_url_v1'])
   },
   mounted() {
-    this.requestTypes
     this.viewsDocument()
   },
 

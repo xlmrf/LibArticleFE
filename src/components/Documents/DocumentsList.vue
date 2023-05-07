@@ -5,7 +5,7 @@
         <div class="showed-items">Показано<span>{{ documents.total!==0 ? documents.per_page*(documents.current_page-1)+1 : '0' }}</span> - <span>{{ documents.per_page*(documents.current_page-1)+documents.data.length }}</span>документи із<span>{{ documents.total }}</span>знайдених</div>
         <div class="page-counter-control">
           <label>На сторінці</label>
-          <select v-model="getPageCountPaginate[0]">
+          <select v-model="per_page">
             <option v-for="count in getPageCountPaginate" :key="count">
               {{ count }}
             </option>
@@ -35,8 +35,34 @@ export default {
       type: Object
     }
   },
+  data(){
+    return{
+      per_page:this.$route.query.perPage ? this.$route.query.perPage : 10
+    }
+  },
   computed: {
     ...mapGetters(['getTypes','getPageCountPaginate']),
+  },
+  watch: {
+    '$route.fullPath': {
+      handler(item) {
+        let q = '';
+        if (this.$route.fullPath.split('?')[1]) {
+          q = '?' + this.$route.fullPath.split('?')[1];
+        }
+      }
+    },
+    per_page(){
+      let query = Object.assign({}, this.$route.query);
+
+
+      // this.$route.push('/')
+      this.$router.push({
+        name: 'documents',
+        query: {...query, ...{'perPage':this.per_page}}
+      })
+
+    }
   },
   methods: {
     paginate(item) {
