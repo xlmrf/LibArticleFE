@@ -21,7 +21,7 @@
           <label :for="item">{{ translateAreas(item) }}</label>
           <component :is="setFields(item)" :field="item"></component>
         </div>
-        <button class="button conclusion-btn" @click="updateDocument(getDocument)">
+        <button class="button conclusion-btn" @click="update()">
           Зберегти документ
         </button>
       </div>
@@ -65,10 +65,17 @@ export default {
       }
       // console.log(this.$el.contains(e.target))
       return '22px';
+    },
+
+    update(){
+      let document = this.getDocument
+      document.files = this.getFiles
+      console.log('doc',this.getFiles)
+      this.updateDocument(document)
     }
   },
   computed: {
-    ...mapGetters(['getDocument', 'getTypes']),
+    ...mapGetters(['getDocument', 'getTypes','getFiles']),
     watcher(){
       return !this.getDocument.id;
     },
