@@ -25,14 +25,17 @@ export default createStore({
     },
     state: {
         message: {},
-         api_url_v1:'https://libarticle.polidar.in.ua/api/v1'
+        api_url_v1:'https://libarticle.polidar.in.ua/api/v1',
+        types:[]
        // api_url_v1:'http://lib.loc/api/v1'
     },
     mutations: {
         pageMessage(ctx, data) {
             ctx.message = data
         },
-
+        updateTypes(ctx,data){
+            ctx.types = data
+        },
         makeErrors(ctx, data) {
 
             if (data.response.status === 401) {
@@ -46,8 +49,8 @@ export default createStore({
         getPageMessage(ctx) {
             return ctx.message
         },
-        getRouteV1(ctx){
-            ctx.api_url_v1
+        getTypes(ctx){
+            return ctx.types
         }
     }
 })

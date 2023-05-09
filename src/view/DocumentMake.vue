@@ -1,7 +1,7 @@
 <template>
   <div class="document-make-body">
     <!--    <small v-if="getDocument.type_id">{{ getDocument }}</small>-->
-    <p class="code">{{getDocument}}</p>
+<!--    <p class="code">{{getDocument}}</p>-->
     <first-stage v-if="prev_stage" @next="next"/>
     <second-stage @prev="prev" v-else/>
   </div>
@@ -20,7 +20,9 @@ export default {
   },
   methods: {
     ...mapMutations(['DocumentMutate']),
-    ...mapActions(['createDocument', 'requestDocument', 'requestTypes']),
+    ...mapActions(['createDocument', 'requestDocument'
+      // , 'requestTypes'
+    ]),
     next() {
       this.prev_stage = !this.prev_stage
       if (!this.$route.params.id) {
@@ -58,7 +60,7 @@ export default {
       this.requestDocument(this.$route.params.id);
       this.prev_stage = false
     }
-    this.requestTypes();
+    // this.requestTypes();
   },
   updated() {
     // if (this.$route.params.id !== ''&&!this.getDocument.id) {

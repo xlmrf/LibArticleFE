@@ -57,6 +57,9 @@ import {mapActions, mapGetters, mapMutations} from "vuex";
 // import axios from "axios";
 
 export default {
+
+  props:['isReady'],
+
   data() {
     return {
       // files: {

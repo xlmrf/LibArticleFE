@@ -3,7 +3,7 @@
     <div class="city">
       <router-view />
     </div>
-    <supplement class="subway"></supplement>
+<!--    <supplement class="subway"></supplement>-->
   </div>
   <!--  <loader v-else class="page-loader" width="3" radius="15"></loader>-->
 </template>

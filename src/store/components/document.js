@@ -7,7 +7,7 @@ export default {
             document: {},
             last_documents: [],
             info: '',
-            types: [],
+            // types: [],
             propose_authors: [],
             newDocumentId: null,
             uncompletedDocument: '',
@@ -24,11 +24,11 @@ export default {
                 ctx.commit('setInfo', err)
             })
         },
-        requestTypes(ctx) {
-            axios.get(ctx.rootState.api_url_v1 + '/document-types').then(response => {
-                ctx.commit('types', response.data)
-            })
-        },
+        // requestTypes(ctx) {
+        //     axios.get(ctx.rootState.api_url_v1 + '/document-types').then(response => {
+        //         ctx.commit('types', response.data)
+        //     })
+        // },
         findAuthor(ctx, data) {
             axios.get(ctx.rootState.api_url_v1 + '/author?email=' + data.email,).then(response => {
                 ctx.commit('upAuthor', {res:response.data,idx:data.idx})
@@ -87,9 +87,9 @@ export default {
         DocumentMutate(state,data){
             state.document = data
         },
-        types(state, data) {
-            state.types = data
-        },
+        // types(state, data) {
+        //     state.types = data
+        // },
         upAuthor(ctx, data) {
             ctx.propose_authors[data.idx] = data.res
         },
@@ -102,10 +102,10 @@ export default {
         getUncompletedDocument(ctx) {
             return ctx.uncompletedDocument
         },
-        getTypes(ctx) {
-            // console.log('ctx:', ctx.categories);
-            return ctx.types;
-        },
+        // getTypes(ctx) {
+        //     // console.log('ctx:', ctx.categories);
+        //     return ctx.types;
+        // },
         getProposeAuthors(ctx) {
             return ctx.propose_authors
         },

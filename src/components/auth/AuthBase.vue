@@ -10,6 +10,17 @@
     </div>
   </div>
 
+<!--  main-->
+<!--    - login {req->email, pass; res-> [User+token]||[errors:[{error:''},{error:''}]]}-->
+<!--    - registration {req-> email}-->
+<!--      - registration-confirm (email&token)-->
+<!--    - recovery (email)-->
+<!--      - recovery-confirm (email&token -> email&token&password)-->
+
+
+<!--  ['errors' => [['code' => 'credentials_incorrect', 'text' => 'The provided credentials are incorrect.']]]-->
+<!--  ['errors' => [['attribute' => ':attribute','code' => 'credentials_incorrect', 'text' => 'The provided credentials are incorrect.']]]-->
+
 </template>
 
 <script>

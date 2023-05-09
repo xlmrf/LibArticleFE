@@ -11,13 +11,13 @@
       <div>
         <h3>Категорії</h3>
       <div class="files-tape">
-        <div v-for="(category,key) in getCategories" :class="['file-name',{'category-active':data.category_id === key+1}]" @click="data.category_id = key+1">{{category.name}}</div>
+        <div v-for="(category,key) in getTypes" :class="['file-name',{'category-active':data.category_id === key+1}]" @click="data.category_id = key+1">{{category.name}}</div>
       </div>
       </div>
       <div class="type-description">
         <h3>Поля для заповнення</h3>
         <ul class="item-category-collection" v-if="data.category_id">
-          <li class="manual-item" v-for="(item,idx) in getCategories[data.category_id-1]['areas']">{{translateAreas(item)}}</li>
+          <li class="manual-item" v-for="(item,idx) in getTypes[data.category_id-1]['areas']">{{translateAreas(item)}}</li>
         </ul>
           <span class="category-not-chosen" v-else>Оберіть категорію</span>
       </div>
@@ -45,8 +45,7 @@ export default {
     }
   },
   computed:{
-    ...mapActions(['requestCategories']),
-    ...mapGetters(['getCategories','getNewDocumentId']),
+    ...mapGetters(['getTypes','getNewDocumentId']),
 
   },
   watch:{

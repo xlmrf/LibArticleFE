@@ -16,7 +16,7 @@
           </div>
 
           <div class="document-areas" >
-            <div class="form-item" v-for="(item,idx) in fromStorage ? JSON.parse(getDocument.category.areas) : getCategories.filter(x => x.name === getDocument.category).map(x => x['areas'])[0]"> <!-- find method not work -->
+            <div class="form-item" v-for="(item,idx) in fromStorage ? JSON.parse(getDocument.category.areas) : getTypes.filter(x => x.name === getDocument.category).map(x => x['areas'])[0]"> <!-- find method not work -->
               <label :for="item">{{translateAreas(item)}}</label>
               <div class="author-fill-list" v-if="item === 'authors'">
                 <author-fields :getUser="getUser" @newAuthor="setAuthors"></author-fields>
@@ -92,8 +92,8 @@ export default {
     }
   },
   computed:{
-    ...mapGetters(['getDocument','getCategories', 'getUser','getFiles']),
-    ...mapActions(['reviseDocument','requestCategories']),
+    ...mapGetters(['getDocument','getTypes', 'getUser','getFiles']),
+    ...mapActions(['reviseDocument']),
     transformDocument(){
       this.document.type = this.getDocument.category
       this.document.title = this.getDocument.title
@@ -240,6 +240,7 @@ export default {
 }
 .card-top{
   font-size: 1em;
+  padding: 5px;
   width: 100%;
   align-self: center;
   overflow:hidden;

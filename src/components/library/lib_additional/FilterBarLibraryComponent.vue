@@ -23,7 +23,7 @@
     <div>
       <h4>Категорії</h4>
       <span class="files-tape">
-        <label v-for="(category,key) in getCategories.filter(e => filter.categories.includes(e.id))" class="save-session">
+        <label v-for="(category,key) in getTypes.filter(e => filter.categories.includes(e.id))" class="save-session">
             <input type="checkbox"
                    @input="selected_categories.find(e => e === category.name) ?
                            selected_categories.splice(selected_categories.indexOf(category.name),1) :
@@ -92,7 +92,7 @@ export default {
   },
   computed:{
 
-    ...mapGetters(['getCategories','getFilter']),
+    ...mapGetters(['getTypes','getFilter']),
     inquire(){
       return this.FilterDocuments(this.$route.query)
       // return this.DocumentSearcher(this.$route.query)

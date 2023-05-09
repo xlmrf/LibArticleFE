@@ -1,47 +1,51 @@
 <template>
-  <!--    <p class="authors">-->
-  <!--      {{getAuthor}}-->
-  <!--    </p>-->
-<!--  {{getProposeAuthors}}-->
-  <span class="author-control">
-      <label class="check-coauthor">
-        <input type="checkbox" name="save-user" id="co-author" v-model="coAuthor">
-        <span class="label">Я співавтор</span>
-      </label>
-      <span class="new-author-btn" @click="addAuthor">Додати автора</span>
-    </span>
-  <div v-for="(author,idx) in getDocument.authors?.filter(item=>!item.delete)" :key="idx" class="author-list-item">
-    <div>
-      <label for="author_email">Email</label>
-      <input type="text" :disabled="idx === 0 ? coAuthor : false" name="author_email" id="author_email" required
-             v-model="author.email"
-             @blur="author.email !== '' ? findAuthor({email:author.email,idx:idx}): false"
-             class='sample-input sample-input-error'>
-    </div>
-    <div>
-      <label for="last_name">Прізвище</label>
-      <input type="text" :disabled="idx === 0 ? coAuthor : false" name="last_name" id="last_name" required
-             v-model="author.last_name"
-             class='sample-input sample-input-error'>
-    </div>
-    <div>
-      <label for="first_name">Ім'я</label>
-      <input type="text" :disabled="idx === 0 ? coAuthor : false" name="first_name" id="first_name" required
-             v-model="author.first_name"
-             class='sample-input sample-input-error'>
-    </div>
-    <span class="user-remove-btn" v-if="getDocument.authors?.filter(item=>!item.delete).length>1"
-          @click="removeAuthor(idx, author)">
-        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
-             stroke="#9A9A9A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="18" y1="6" x2="6" y2="18"></line>
-          <line x1="6" y1="6" x2="18" y2="18"></line></svg>
-    </span>
-    <div class="break"></div>
-    <div class="propose-authors">
-      <span v-for="author in getProposeAuthors[idx]" @click="addExistAuthor(author,idx)">
-        {{ author.last_name }} {{ author.first_name[0] }}.
+  <div>
+    <span class="author-control">
+        <label class="check-coauthor">
+          <input type="checkbox" name="save-user" id="co-author" v-model="coAuthor">
+          <span class="label">Я співавтор</span>
+        </label>
+        <span class="new-author-btn" @click="addAuthor">Додати автора</span>
       </span>
+    <div v-for="(author,idx) in getDocument.authors?.filter(item=>!item.delete)" :key="idx" class="author-list-item">
+      <div>
+        <label for="author_email">Email</label>
+        <input type="text" :disabled="idx === 0 ? coAuthor : false"
+               name="author_email" id="author_email" required
+               v-model="author.email"
+               @blur="author.email !== '' ? findAuthor({email:author.email,idx:idx}): false"
+               :class="{'sample-input-error':authorError.email}"
+               class='sample-input'>
+      </div>
+      <div>
+        <label for="last_name">Прізвище</label>
+        <input type="text" :disabled="idx === 0 ? coAuthor : false"
+               name="last_name" id="last_name" required
+               v-model="author.last_name"
+               :class="{'sample-input-error':authorError.last_name}"
+               class='sample-input'>
+      </div>
+      <div>
+        <label for="first_name">Ім'я</label>
+        <input type="text" :disabled="idx === 0 ? coAuthor : false"
+               name="first_name" id="first_name" required
+               v-model="author.first_name"
+               :class="{'sample-input-error':authorError.first_name}"
+               class='sample-input'>
+      </div>
+      <span class="user-remove-btn" v-if="getDocument.authors?.filter(item=>!item.delete).length>1"
+            @click="removeAuthor(idx, author)">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+               stroke="#9A9A9A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </span>
+      <div class="break"></div>
+      <div class="propose-authors">
+        <span v-for="author in getProposeAuthors[idx]" @click="addExistAuthor(author,idx)">
+          {{ author.last_name }} {{ author.first_name[0] }}.
+        </span>
+      </div>
     </div>
   </div>
 </template>
@@ -50,20 +54,23 @@
 import {mapActions, mapGetters} from "vuex";
 
 export default {
-  props: ['authors'],
+  props: ['authors','isReady'],
   // emits:['newAuthor'],
   data() {
     return {
       emailValid: '',
-      author: {
-        first_name: '',
-        last_name: '',
-        email: ''
+      authorError:{
+        email:false,
+        first_name:false,
+        last_name:false
       },
       coAuthor: false
     }
   },
   watch: {
+    isReady(){
+      console.log('is ready check')
+    },
     coAuthor() {
       let author = {
         // first_name:this.getUser.info.first_name,
@@ -88,15 +95,6 @@ export default {
         }
       }
     },
-    // getAuthor(){
-    //   if (this.getAuthor) {
-    //     this.authors.find(k => k.email === this.getAuthor.email).first_name = this.getAuthor.first_name
-    //     this.authors.find(k => k.email === this.getAuthor.email).last_name = this.getAuthor.last_name
-    //   }
-    // },
-    // deleteAuthor(idx){
-    //   this.getDocument.authors.splice(idx, 1)
-    // }
   },
   computed: {
     ...mapGetters(['getAuthor', 'getDocument', 'getUser', 'getProposeAuthors'])

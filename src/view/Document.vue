@@ -88,7 +88,9 @@ export default {
     }
   },
   methods:{
-    ...mapActions(['requestDocument','requestTypes']),
+    ...mapActions(['requestDocument'
+    // 'requestTypes'
+    ]),
     ...mapMutations(['DocumentMutate']),
     smooth(){
       window.scrollTo({top: 0, behavior: "smooth"});
@@ -103,7 +105,7 @@ export default {
   components:{Annotation, DocumentRefs, Authors, Loader, info,files,comment, citesDocument,viewsDocument},
   mounted() {
     this.requestDocument(this.$route.params.id)
-    this.requestTypes()
+    // this.requestTypes()
   },
   beforeUnmount() {
     this.DocumentMutate({})

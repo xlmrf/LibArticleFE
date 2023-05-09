@@ -14,6 +14,9 @@ export default {
                 ctx.commit('userMessages', {error: err.response.data, date: Date.now(), status: err.response.status})
                 console.log('err', err.response);
             })
+        {
+
+        }
     },
     createPass(ctx, data) {
         axios.post(ctx.rootState.api_url_v1 + '/reset-password/' + data.token, data).then(res => {

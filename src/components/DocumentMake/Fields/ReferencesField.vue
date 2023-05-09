@@ -41,6 +41,8 @@ import {mapGetters} from "vuex";
 
 export default {
 
+  props:['isReady'],
+
   data() {
     return {
       reference: '',

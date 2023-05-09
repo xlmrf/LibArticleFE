@@ -4,8 +4,8 @@
       <span>
         {{getTypes.find(item => item.id === document.type_id)?.name}}
       </span>
-      <div class="publication-date">
-        {{document.publication_date}}
+      <div class="publication-date" v-if="document.publication_date">
+        {{getDate()}}
       </div>
     </div>
     <div class="context-document-item">
@@ -53,8 +53,7 @@
 
 <script>
 import viewsDocument from "@/components/document/viewsDocument";
-import {mapActions, mapGetters, mapState} from "vuex";
-import router from "@/router";
+import {mapGetters, mapState} from "vuex";
 import axios from "axios";
 
 export default {
@@ -74,6 +73,17 @@ export default {
         console.log('views error:',err);
       })
     },
+    getDate(){
+      const date = new Date(this.document.publication_date)
+      const yyyy = date.getFullYear()
+      let mm = date.getMonth() + 1
+      let dd = date.getDate()
+
+      if (dd < 10) dd = '0' + dd
+      if (mm < 10) mm = '0' + mm
+
+      return dd + '.' + mm + '.' + yyyy
+    }
   },
 
   computed:{

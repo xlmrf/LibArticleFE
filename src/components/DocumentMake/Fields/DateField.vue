@@ -49,6 +49,8 @@ import {mapGetters} from "vuex";
 
 export default {
   name: "DatePicker",
+
+  props:['isReady'],
   data() {
     return {
       formatDate: 'date',

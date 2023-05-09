@@ -28,7 +28,7 @@ export default {
   mixins: ['translate'],
   computed: {
     ...mapGetters(['getDocument', 'getTypes']),
-    ...mapActions(['requestTypes'])
+    // ...mapActions(['requestTypes'])
   },
   mounted() {
     // this.requestTypes
@@ -75,7 +75,7 @@ export default {
   width: 50%;
   margin:2.5rem auto 0 auto;
   height: 100%;
-  min-height: 300px;
+  min-height: 200px;
   /*box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;*/
 }
 .type-description{

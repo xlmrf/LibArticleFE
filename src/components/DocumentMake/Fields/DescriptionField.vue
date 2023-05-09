@@ -8,7 +8,7 @@
 import {mapGetters} from "vuex";
 
 export default {
-  props: ['field'],
+  props: ['field','isReady'],
   computed: {
     ...mapGetters(['getDocument'])
   },

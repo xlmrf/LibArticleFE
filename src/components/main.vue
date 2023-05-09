@@ -8,16 +8,33 @@
 
 <script>
 import NavbarMenu from "../view/Navbar";
-import {mapActions, mapGetters} from "vuex";
+import {mapActions, mapGetters, mapMutations, mapState} from "vuex";
+import axios from "axios";
 
 export default {
   computed: {
     ...mapActions(['requestUser']),
-    ...mapGetters(['getUser'])
+    ...mapGetters(['getUser','getTypes']),
+    ...mapState(['api_url_v1','types']),
+  },
+
+  data(){
+    return{
+      data:[]
+    }
+  },
+  methods:{
+    ...mapMutations(['updateTypes']),
+    askTypes() {
+      axios.get(this.api_url_v1 + '/document-types').then(response => {
+        this.updateTypes(response.data)
+      })
+    }
   },
 
   mounted() {
     this.requestUser;
+    this.askTypes()
   },
   components: {NavbarMenu}
 }

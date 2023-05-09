@@ -3,7 +3,9 @@
 <!--    Your new email confirmed!-->
 <!--    <div>{{getPageMessage}}</div>-->
 
-    На вказаний email прийшло повідомлення з підтвердженням акаунту
+<!--    На вказаний email прийшло повідомлення з підтвердженням акаунту-->
+
+<!--    https://libarticle.polidar.in.ua/confirm-email?email={{$data['email']}}&token={{$data['token']-->
 
     <router-link to="/login">Login</router-link>
 

@@ -19,7 +19,7 @@
         <div class="form-item" v-for="(item,idx) in getTypes.find(type => type.id === getDocument.type_id)?.fields"
              :key="idx">
           <label :for="item">{{ translateAreas(item) }}</label>
-          <component :is="setFields(item)" :field="item"></component>
+          <component :is="setFields(item)" :field="item" :is-ready="isReady"></component>
         </div>
         <button class="button conclusion-btn" @click="update()">
           Зберегти документ
@@ -45,7 +45,9 @@ export default {
   emits: ['prev'],
   mixins: ['translate'],
   data() {
-    return {}
+    return {
+      isReady: false
+    }
   },
   methods: {
     ...mapActions(['updateDocument']),
@@ -68,10 +70,11 @@ export default {
     },
 
     update(){
+      this.isReady = true
       let document = this.getDocument
       document.files = this.getFiles
-      console.log('doc',this.getFiles)
-      this.updateDocument(document)
+      console.log('doc',document)
+      // this.updateDocument(document)
     }
   },
   computed: {

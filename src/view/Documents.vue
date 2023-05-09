@@ -32,7 +32,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['DocumentSearcher', 'requestTypes']),
+    ...mapActions(['DocumentSearcher']),
     ...mapMutations(['DocumentsMutate'])
   },
   computed: {
@@ -50,7 +50,7 @@ export default {
       q+=q?'&user_id='+this.$route.params.id:'?user_id='+this.$route.params.id
     }
     this.DocumentSearcher(q);
-    this.requestTypes()
+    // this.requestTypes()
   }
 }
 </script>

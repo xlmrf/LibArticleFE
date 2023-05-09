@@ -1,10 +1,10 @@
 <template>
-  <div v-if="getUserMessage.agree" class="alert alert-warning">
-    <small>
-      {{ getUserMessage.agree }}
-    </small>
-  </div>
-  <div v-else class="form-control">
+<!--  <div v-if="getUserMessage.agree" class="alert alert-warning">-->
+<!--    <small>-->
+<!--      {{ getUserMessage.agree }}-->
+<!--    </small>-->
+<!--  </div>-->
+  <div class="form-control">
     <div class="area-control">
       <input type="text" name="email" id="in-name" required v-model="data.name"
              :class="['input in-form', {invalid:nValidate}]">
@@ -24,19 +24,19 @@
       <small>{{ pValidate }}</small>
     </div>
 
-    <div v-if="getUserMessage.errors" v-bind="loader=false">
-      <div v-for="item in getUserMessage.errors" class="alert" :class="alert_class(item.code)">
-        <small>{{ item.text }}
-          <router-link class="link-reset" to="/forget-password">Відновити пароль</router-link>
-        </small>
-      </div>
-    </div>
+<!--    <div v-if="getUserMessage.errors" v-bind="loader=false">-->
+<!--      <div v-for="item in getUserMessage.errors" class="alert" :class="alert_class(item.code)">-->
+<!--        <small>{{ item.text }}-->
+<!--          <router-link class="link-reset" to="/forget-password">Відновити пароль</router-link>-->
+<!--        </small>-->
+<!--      </div>-->
+<!--    </div>-->
 
-    <div v-if="getUserMessage.status==='confirmation'" class="alert alert-warning" v-bind="loader=false">
-      <small>
-        На вказаний email прийшло повідомлення з підтвердженням акаунту
-      </small>
-    </div>
+<!--    <div v-if="getUserMessage.status==='confirmation'" class="alert alert-warning" v-bind="loader=false">-->
+<!--      <small>-->
+<!--        На вказаний email прийшло повідомлення з підтвердженням акаунту-->
+<!--      </small>-->
+<!--    </div>-->
 
     <button :class="['sign-in-system btn primary', {'load':loader}]" :disabled="loader" type="submit" @click="enter">
       Реєстрація

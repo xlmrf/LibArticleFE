@@ -25,7 +25,9 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['DocumentSearcher', 'requestTypes'])
+    ...mapActions(['DocumentSearcher'
+      // , 'requestTypes'
+    ])
   },
   computed: {
     ...mapGetters(['getDocuments', 'getTypes'])
@@ -43,7 +45,7 @@ export default {
       q+='&author=true'
     }
     this.DocumentSearcher(q);
-    this.requestTypes()
+    // this.requestTypes()
   }
 }
 </script>

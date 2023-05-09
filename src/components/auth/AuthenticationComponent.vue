@@ -13,13 +13,13 @@
       <small>{{ pValidate }}</small>
     </div>
 
-    <div v-if="getUserMessage.errors" v-bind="loader=false">
-      <div v-for="item in getUserMessage.errors" class="alert" :class="alert_class(item.code)">
-        <small>{{ item.text }}
-          <router-link class="link-reset" to="/forget-password">Відновити пароль</router-link></small>
-      </div>
+<!--    <div v-if="getUserMessage.errors" v-bind="loader=false">-->
+<!--      <div v-for="item in getUserMessage.errors" class="alert" :class="alert_class(item.code)">-->
+<!--        <small>{{ item.text }}-->
+<!--          <router-link class="link-reset" to="/forget-password">Відновити пароль</router-link></small>-->
+<!--      </div>-->
+<!--    </div>-->
 
-    </div>
     <!--    <label class="save-session">-->
     <!--      <input type="checkbox" name="save-user" v-model="data.session" id="save-user">-->
     <!--      <span class="label">зберегти сесію</span>-->
