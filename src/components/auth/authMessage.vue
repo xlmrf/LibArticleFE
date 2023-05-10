@@ -4,7 +4,7 @@
       <div v-for="item in messages.errors" class="alert" :class="alert_class(item.code)">
         <small v-if="item.code === 'credentials_incorrect'">
           <span>Введений пароль або логін не вірний</span>
-          <router-link class="link-reset" to="/forget-password">Відновити пароль</router-link>
+          <router-link class="link-reset" :to="{name:'recovery'}">Відновити пароль</router-link>
         </small>
       </div>
     </div>
