@@ -210,7 +210,7 @@ input {
   white-space: nowrap;
   align-self: start;
   top: -20px;
-  right: 0;
+  right: 10px;
   position: absolute;
   color: red;
 }

@@ -14,7 +14,7 @@
       <small class="field-message-error">{{ valid.password }}</small>
     </div>
 
-    <auth-message :messages="messages" />
+    <auth-message v-if="messages.length>0" :messages="messages" />
 
     <button :class="['sign-in-system btn primary',{load:loader}]" :disabled="loader" type="submit" @click="enter">
       Ввійти
@@ -24,7 +24,7 @@
     <div class="form-trip">
       <span class="text">
         Якщо немає акаунту,
-        <router-link to="/registration" class="text-to">створіть його</router-link>
+        <router-link :to="{name:'registration'}" class="text-to">створіть його</router-link>
       </span>
     </div>
 </template>
@@ -115,81 +115,6 @@ export default {
 </script>
 
 <style scoped>
-/*.input {*/
-/*  font-size: 18px;*/
-/*  padding: 10px;*/
-/*  display: block;*/
-/*  width: 300px;*/
-/*  border: 1px solid #cecece;*/
-/*  border-radius: 7px;*/
-/*  position: relative;*/
-/*  height: 2.7rem;*/
-/*  color: #212121;*/
-/*  !*border-bottom: 1px solid #ccc;*!*/
-/*}*/
-
-/*.btn {*/
-/*  height: 40px;*/
-/*  width: 300px;*/
-/*  border-radius: 7px;*/
-/*  cursor: pointer;*/
-/*  font-size: 16px;*/
-/*  background: none;*/
-/*  border: 1px solid #212121;*/
-/*  color: #212121;*/
-/*  transition: 0s;*/
-/*}*/
-
-/*.btn:hover {*/
-/*  border: 2px solid #212121;*/
-/*}*/
 
 
-.input.invalid {
-  border: 1px solid red;
-}
-
-.input.invalid:focus {
-  border: 2px solid red;
-}
-
-.invalid:valid {
-  border: 1px solid red;
-}
-
-.marker {
-  color: #b8b8b8;
-  font-size: 18px;
-  position: absolute;
-  pointer-events: none;
-  left: 0.9rem;
-  top: 0.7rem;
-  transition: 0.2s ease all;
-  -moz-transition: 0.2s ease all;
-  -webkit-transition: 0.2s ease all;
-}
-
-input:focus ~ .marker,
-input:valid ~ .marker {
-  top: -1.5rem;
-  left: 0.5rem;
-  font-size: 16px;
-  color: #212121;
-}
-
-.invalid:focus ~ .marker,
-.invalid:valid ~ .marker {
-  color: red;
-}
-
-.load {
-  cursor: default;
-  border: 1px solid #717171;
-  color: #717171;
-}
-
-.load:hover {
-  cursor: default;
-  border: 1px solid #717171;
-}
 </style>

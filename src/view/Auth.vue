@@ -37,17 +37,13 @@ export default {
 }
 
 .content{
-  /*padding: 1rem;*/
   display:flex;
   flex-direction: column;
   justify-content: center;
-  width:100%;
-  /*max-width:500px;*/
+  width: 320px;
+  margin: 0 auto;
   position: relative;
   top: 25%;
-  /*left: 50%;*/
-  /*margin-right: -50%;*/
-  /*transform: translate(-50%, -50%);*/
 }
 
 .content > h2{
@@ -76,10 +72,9 @@ export default {
 
 }
 .form-control > div{
-  /*border: 1px solid darkmagenta;*/
-  /*width: 300px;*/
   display: flex;
-  justify-self: center;
+  width: 100%;
+  justify-content: center;
 }
 .form-trip{
   display:flex;
@@ -89,7 +84,7 @@ export default {
   font-size: 18px;
   padding: 10px;
   display: block;
-  width: 300px;
+  width: 100%;
   border: 1px solid #cecece;
   border-radius:7px;
   position: relative;
@@ -109,6 +104,44 @@ export default {
 .input:focus {
   outline: none;
   border: 2px solid #212121;
+}
+
+
+.input.invalid {
+  border: 1px solid red;
+}
+
+.input.invalid:focus {
+  border: 2px solid red;
+}
+
+.invalid:valid {
+  border: 1px solid red;
+}
+
+.marker {
+  color: #b8b8b8;
+  font-size: 18px;
+  position: absolute;
+  pointer-events: none;
+  left: 0.9rem;
+  top: 0.7rem;
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+}
+
+input:focus ~ .marker,
+input:valid ~ .marker {
+  top: -1.5rem;
+  left: 0.5rem;
+  font-size: 16px;
+  color: #212121;
+}
+
+.invalid:focus ~ .marker,
+.invalid:valid ~ .marker {
+  color: red;
 }
 
 .btn{
@@ -131,12 +164,14 @@ export default {
   color: #212121;
 }
 
-.load{
+.load {
   cursor: default;
   border: 1px solid #717171;
   color: #717171;
 }
-.load:hover{
+
+.load:hover {
+  cursor: default;
   border: 1px solid #717171;
 }
 .form-trip{
