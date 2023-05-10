@@ -3,7 +3,7 @@
     <div class="city">
       <router-view />
     </div>
-<!--    <supplement class="subway"></supplement>-->
+    <supplement class="subway"></supplement>
   </div>
   <!--  <loader v-else class="page-loader" width="3" radius="15"></loader>-->
 </template>
@@ -38,7 +38,7 @@ export default {
 }
 
 .window {
-  height: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
 }
@@ -51,13 +51,13 @@ body {
 }
 
 .subway {
-  margin-top: 50px;
+  margin-top: 75px;
   min-height: 42px;
   display: block;
 }
 
 .city {
-/*  flex: 1;*/
+  flex: 1;
 /*  !*min-height: 450px;*!*/
 }
 
@@ -203,6 +203,16 @@ input {
 }
 .sample-input-error{
   border: 1px solid rgba(229, 50, 45, 0.8);
+}
+
+.field-message-error {
+  display: flex;
+  white-space: nowrap;
+  align-self: start;
+  top: -20px;
+  right: 0;
+  position: absolute;
+  color: red;
 }
 
 .author-item-link{

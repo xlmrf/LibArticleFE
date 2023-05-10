@@ -24,10 +24,10 @@
     <!--      <input type="checkbox" name="save-user" v-model="data.session" id="save-user">-->
     <!--      <span class="label">зберегти сесію</span>-->
     <!--    </label>-->
-    <button :class="['sign-in-system btn primary',{load:loader}]" :disabled="loader" type="submit" @click="enter">
-      Ввійти
-      <loader v-if="loader" class="type-loader" :radius="8" :width="2"></loader>
-    </button>
+  <button :class="['sign-in-system btn primary',{load:loader}]" :disabled="loader" type="submit" @click="enter">
+    Ввійти
+    <loader v-if="loader" class="type-loader" :radius="8" :width="2"></loader>
+  </button>
   </div>
   <div class="form-trip">
     <span class="text">Якщо немає акаунту, <router-link to="/registration"
