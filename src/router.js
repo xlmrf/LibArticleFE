@@ -2,22 +2,16 @@ import {createWebHistory, createRouter} from "vue-router";
 import main from "./components/main"
 import info from "./components/info"
 import index from "./components/index";
-import AuthBase from "./components/auth/AuthBase"
-import verify from "./components/auth/VerifyAuthentication";
-import login from "./components/auth/AuthenticationComponent"
-import recoveryPassword from "./components/auth/RecoveryPasswordComponent"
-import registration from "./components/auth/RegistrationComponent"
-import setNewPassword from "./components/auth/ReplacePasswordComponent";
-import NewDocument from "./components/new_document/select_type/NewDocumentBaseComponent"
-import NewDocumentFields from "./components/new_document/select_type/DocumentTypesComponent"
-// import library from "./components/library/LibraryBaseComponent";
+import confirmReg from "./components/auth/confirmReg";
+import login from "./components/auth/login"
+import recovery from "./components/auth/recovery"
+import registration from "./components/auth/registration"
+import confirmNewPass from "./components/auth/confirmNewPass";
+
 import documents from "./view/Documents";
 import document from "./view/Document"
 import profile from "./view/Profile"
-
-import profileStatistic from "./components/profile/old/content_items/StatisticInfoComponent"
-// import userCard from "./components/user/UserCardComponent"
-import UserMain from "./components/profile/old/UserMainComponent"
+import Auth from "./view/Auth"
 
 import tutorial from "./components/fallback/TutorialComponent"
 import support from "./view/UnknownPage"
@@ -35,7 +29,7 @@ import DocumentMake from "@/view/DocumentMake";
 import UnknownPage from "@/view/UnknownPage"
 
 
-import confirmEmail from "./components/auth/ConfirmEmail";
+import confirmEmail from "./components/auth/old/ConfirmEmail";
 
 const routes = [
     {
@@ -47,7 +41,7 @@ const routes = [
     {
         path: '/auth',
         name: 'auth',
-        component: AuthBase,
+        component: Auth,
         children:[
             {
                 path: '/login',
@@ -55,14 +49,14 @@ const routes = [
                 component: login
             },
             {
-                path: '/forget-password',
-                name: 'forget-password',
-                component: recoveryPassword
+                path: '/recovery-password',
+                name: 'recovery',
+                component: recovery
             },
             {
-                path: "/reset-password/",
-                name: 'reset-password',
-                component: setNewPassword
+                path: "/confirm-password",
+                name: 'confirmNewPass',
+                component: confirmNewPass
             },
             {
                 path: '/registration',
@@ -70,9 +64,9 @@ const routes = [
                 component: registration
             },
             {
-                path: '/confirmEmail',
-                name: 'ConfirmEmail',
-                component: confirmEmail
+                path: '/confirm-registration',
+                name: 'confirmReg',
+                component: confirmReg
             },
 
         ]
@@ -195,16 +189,16 @@ const routes = [
 
         ]
     },
-    {
-        path: "/verify-email",
-        name: 'verify',
-        component: verify
-    },
-    {
-        path: "/confirm-email",
-        name: 'verify',
-        component: verify
-    },
+    // {
+    //     path: "/",
+    //     name: 'verify',
+    //     component: verify
+    // },
+    // {
+    //     path: "/confirm-email",
+    //     name: 'verify',
+    //     component: verify
+    // },
 ];
 
 const router = createRouter({

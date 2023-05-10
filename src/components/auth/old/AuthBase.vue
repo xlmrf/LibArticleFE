@@ -25,7 +25,7 @@
 
 <script>
 import {mapActions, mapGetters} from "vuex";
-import loader from "../additional/loader";
+import loader from "../../additional/loader";
 
 export default {
 

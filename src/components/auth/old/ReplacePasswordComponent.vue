@@ -31,8 +31,8 @@
 
 <script>
 import {mapActions, mapGetters, mapMutations} from "vuex";
-import loader from "../additional/loader"
-import email from "../../mixins/email"
+import loader from "../../additional/loader"
+import email from "../../../mixins/email"
 
 export default {
 
