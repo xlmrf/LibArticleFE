@@ -2,9 +2,9 @@
   <div class="form-control">
     <div class="name-block">
       <div class="area-control">
-        <input type="text" name="name" required v-model="data.name"
+        <input type="text" name="name" required v-model="data.first_name"
                @keyup.enter="this.$el.nextSibling.childNodes[1].firstChild.focus()"
-               :class="['input in-form name', {invalid:valid.name}]">
+               :class="['input in-form name', {invalid:valid.first_name}]">
         <label for="in-email" class="marker">Ім'я</label>
         <small class="field-message-error">{{ valid.first_name }}</small>
       </div>
@@ -30,7 +30,7 @@
       <small class="field-message-error">{{ valid.password }}</small>
     </div>
 
-    <auth-message v-if="messages.length > 0" :messages="messages" />
+    <auth-message v-if="messages" :messages="messages" />
 
     <button :class="['sign-in-system btn primary',{load:loader}]" :disabled="loader" type="submit" @click="enter">
       Ввійти
@@ -61,13 +61,13 @@ export default {
   data(){
     return{
       valid:{
-        name:'',
+        first_name:'',
         last_name:'',
         email:'',
         password:''
       },
       data:{
-        name:'',
+        first_name:'',
         last_name:'',
         email:'',
         password:''
@@ -85,7 +85,7 @@ export default {
     },
     'data.first_name': {
       handler() {
-        this.valid.name = ''
+        this.valid.first_name = ''
       }
     },
     'data.last_name': {
@@ -111,16 +111,16 @@ export default {
         this.loader = false
       }
     },
-    registration() {
+    registration(){
       axios.post(this.api_url_v1 + '/registration', this.data).then(res => {
-            this.messages = res.data
-          },
-          err => {
-            this.loader = false
-            this.messages = err.response.data
-            console.log("registration user axios error: ", err.response.data);
-          })
-    }
+          this.messages = res.data
+        },
+        err => {
+          this.loader = false
+          this.messages = err.response.data
+          console.log("registration user axios error: ", err.response.data);
+        })
+      }
   },
 
   computed:{
@@ -134,7 +134,7 @@ export default {
         this.valid.password = non_pass
       }
       if (this.data.first_name === '') {
-        this.valid.name = err_name
+        this.valid.first_name = err_name
       }
       if (this.data.last_name === '') {
         this.valid.last_name = err_lName
@@ -142,7 +142,7 @@ export default {
       if (this.checkEmail(this.data.email)) {
         this.valid.email = this.emailFail
       }
-      return !(this.valid.email || this.valid.password || this.valid.last_name || this.valid.name);
+      return !(this.valid.email || this.valid.password || this.valid.last_name || this.valid.first_name);
     }
   },
 

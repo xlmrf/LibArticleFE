@@ -19,7 +19,7 @@
 
 
 <!--  ['errors' => [['code' => 'credentials_incorrect', 'text' => 'The provided credentials are incorrect.']]]-->
-<!--  ['errors' => [['attribute' => ':attribute','code' => 'credentials_incorrect', 'text' => 'The provided credentials are incorrect.']]]-->
+<!--  ['message' => [['code' => 'confirmation', 'text' => 'Confirmations token send you on email']]]-->
 
 </template>
 

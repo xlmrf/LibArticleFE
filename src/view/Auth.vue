@@ -3,8 +3,10 @@
     <h2>LIBARTICLE</h2>
     <div class="content">
       <h2>
-        <span v-if="$route.name === 'login'">Login</span>
-        <span v-if="$route.name === 'registration'">Registration</span>
+        <span v-if="$route.name === 'login'">Логін</span>
+        <span v-if="$route.name === 'registration'">Реєстрація</span>
+        <span v-if="$route.name === 'confirmNewPass'">Зміна паролю</span>
+        <span v-if="$route.name === 'recovery'">Відновлення паролю</span>
       </h2>
       <div class="mainframe">
         <router-view></router-view>
@@ -48,11 +50,17 @@ export default {
 
 .content > h2{
   text-align: center;
-  position: relative;
-  bottom: 40px;
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  top: -65px;
   font-size: 28px;
   /*margin-bottom: 10px;*/
 }
+
+
+
 
 .marker{
   font-size: 18px;

@@ -14,7 +14,7 @@
       <small class="field-message-error">{{ valid.password }}</small>
     </div>
 
-    <auth-message v-if="messages.length>0" :messages="messages" />
+    <auth-message v-if="messages" :messages="messages" />
 
     <button :class="['sign-in-system btn primary',{load:loader}]" :disabled="loader" type="submit" @click="enter">
       Ввійти
@@ -75,7 +75,7 @@ export default {
       this.loader = true
       if (this.validate) {
         this.login()
-        console.log('welcome');
+        console.log('Checking..');
       } else {
         this.loader = false
       }
