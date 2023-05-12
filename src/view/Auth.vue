@@ -5,7 +5,6 @@
       <h2>
         <span v-if="$route.name === 'login'">Логін</span>
         <span v-if="$route.name === 'registration'">Реєстрація</span>
-        <span v-if="$route.name === 'confirmNewPass'">Зміна паролю</span>
         <span v-if="$route.name === 'recovery'">Відновлення паролю</span>
       </h2>
       <div class="mainframe">
@@ -50,11 +49,11 @@ export default {
 
 .content > h2{
   text-align: center;
-  position: absolute;
-
+  position: relative;
+  color: #343434;
   left: 0;
   right: 0;
-  top: -65px;
+  top: -40px;
   font-size: 28px;
   /*margin-bottom: 10px;*/
 }
@@ -198,7 +197,7 @@ input:valid ~ .marker {
   position: relative;
   display: flex;
   align-items: center;
-  left: 50px;
+  left: 0;
 }
 
 .sign-in-system{

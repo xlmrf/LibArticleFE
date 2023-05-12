@@ -1,11 +1,12 @@
 <template>
-  <div>
-    <span v-if="loader">
-      <loader />
-    </span>
-    <div>
-      Registration Confirmed
-      <auth-message :messages="messages" />
+  <loader v-if="loader" width="3" radius="15" style="position: relative; left: 33%"/>
+  <div v-else>
+    <div v-if="!error">
+      Registration Confirmed...
+    </div>
+    <div class="not-exist" v-else>
+      Does not exist
+      <a href="/">Go to main</a>
     </div>
   </div>
 </template>
@@ -25,7 +26,7 @@ export default {
         email:this.$route.query.email
       },
       loader: false,
-      messages:[]
+      error:false,
     }
   },
 
@@ -35,12 +36,6 @@ export default {
       this.loader = true
       axios.post(this.api_url_v1 + '/confirm-registration', this.data).then(res => {
         this.loader = false
-        this.messages = [
-          {
-            code:'registered',
-            text:'Акаунт зареєстровано'
-          }
-        ]
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + res.data.api_token
         localStorage.setItem('access_token', res.data.api_token);
         setTimeout(() => {
@@ -49,8 +44,7 @@ export default {
       },
       err => {
         this.loader = false
-        this.messages = err.response.data
-        console.log("registration user axios error: ", err.response.data);
+        this.error = true
       })
     }
   },

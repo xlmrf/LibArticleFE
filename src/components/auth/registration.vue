@@ -1,5 +1,5 @@
 <template>
-  <div class="form-control">
+  <div class="form-control" v-if="!confirmation">
     <div class="name-block">
       <div class="area-control">
         <input type="text" name="name" required v-model="data.first_name"
@@ -30,13 +30,16 @@
       <small class="field-message-error">{{ valid.password }}</small>
     </div>
 
-    <auth-message v-if="messages" :messages="messages" />
+    <auth-message :messages="messages" />
 
     <button :class="['sign-in-system btn primary',{load:loader}]" :disabled="loader" type="submit" @click="enter">
       Реєстрація
       <loader v-if="loader" class="type-loader" :radius="8" :width="2"></loader>
     </button>
   </div>
+
+  <auth-message :messages="messages" v-else/>
+
   <div class="form-trip">
       <span class="text">
         Якщо у вас створений акаунт,
@@ -73,6 +76,7 @@ export default {
         password:''
       },
       messages:[],
+      confirmation:false,
       loader:false
     }
   },
@@ -114,6 +118,7 @@ export default {
     registration(){
       axios.post(this.api_url_v1 + '/registration', this.data).then(res => {
           this.messages = res.data
+          this.confirmation = true
         },
         err => {
           this.loader = false

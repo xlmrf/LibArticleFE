@@ -1,5 +1,5 @@
 <template>
-  <div class="form-control">
+  <div class="form-control" v-if="!sent">
     <div class="area-control">
       <input type="text" name="email" id="in-email" :disabled="loader" required v-model="data.email" :class="['input in-form', {invalid:valid.email}]" @keypress.enter="enter">
       <label for="in-email" class="marker" v-if="!loader">Email</label>
@@ -11,6 +11,9 @@
     </button>
 
   </div>
+
+  <auth-message :messages="messages" v-else />
+
   <div class="form-trip">
     <span class="text">Якщо ви пам'ятаєте пароль, <router-link to="/login" class="text-to">ввійти</router-link></span>
   </div>
@@ -21,6 +24,7 @@
 import {mapActions, mapGetters, mapMutations, mapState} from "vuex";
 import loader from "@/components/additional/loader";
 import axios from "axios";
+import AuthMessage from "@/components/auth/authMessage";
 
 export default {
 
@@ -34,6 +38,8 @@ export default {
         email:''
       },
       loader: false,
+      sent:false,
+      messages:[]
     }
   },
   methods:{
@@ -48,13 +54,14 @@ export default {
     },
     recovery(){
       axios.post(this.api_url_v1 + '/recovery-password', this.data).then(res => {
-            console.log('recovery response',res);
-          },
-          err => {
-            this.loader = false
-            this.messages = err.response.data
-            console.log('err', err.response);
-          })
+        this.messages = res.data
+        this.sent = true
+      },
+      err => {
+        this.loader = false
+        this.messages = err.response.data
+        console.log('err', err.response);
+      })
       {
 
       }
@@ -78,7 +85,7 @@ export default {
       return !this.eValidate;
     }
   },
-  components:{loader}
+  components:{AuthMessage, loader}
 
 }
 </script>

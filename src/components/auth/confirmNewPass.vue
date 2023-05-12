@@ -1,24 +1,30 @@
 <template>
-  {{check_url}}
-  <div class="form-control" v-if="!not_found">
-    <h3>spaceeternal8@gmail.com</h3>
-    <div class="area-control">
-      <input type="password" name="password" id="in-password" required v-model="data.password" :class="['input in-form', {invalid:valid.password}]">
-      <label for="in-password" class="marker">Пароль</label>
-      <small class="field-message-error">{{valid.password}}</small>
-    </div>
-    <div class="area-control">
-      <input type="password" name="password" id="confirm-password" @keypress.enter="enter" required v-model="data.confirm_password" :class="['input in-form', {invalid:valid.confirm_password}]">
-      <label for="in-password" class="marker">Підтвердження</label>
-      <small class="field-message-error">{{valid.confirm_password}}</small>
-    </div>
-    <auth-message :messages="messages" />
-    <button :class="['sign-in-system btn primary', {load:loader}]" type="submit" @click="enter">
-      Змінити пароль<loader v-if="loader" class="type-loader" :radius="8" :width="2"></loader>
-    </button>
-  </div>
+  <loader v-if="loader" width="4" radius="20" style="position: relative;left: 34%" />
   <div v-else>
-    The page not found
+    <auth-message v-if="changed" :messages="messages" />
+    <div v-else>
+      <div class="form-control" v-if="!not_found">
+        <h2>Зміна паролю</h2>
+        <h3>{{ $route.query.email }}</h3>
+        <div class="area-control">
+          <input type="password" name="password" id="in-password" required v-model="data.password" :class="['input in-form', {invalid:valid.password}]">
+          <label for="in-password" class="marker">Пароль</label>
+          <small class="field-message-error">{{valid.password}}</small>
+        </div>
+        <div class="area-control">
+          <input type="password" name="password" id="confirm-password" @keypress.enter="enter" required v-model="data.confirm_password" :class="['input in-form', {invalid:valid.confirm_password}]">
+          <label for="in-password" class="marker">Підтвердження</label>
+          <small class="field-message-error">{{valid.confirm_password}}</small>
+        </div>
+        <button :class="['sign-in-system btn primary', {load:loader}]" type="submit" @click="enter">
+          Змінити пароль<loader v-if="loader" class="type-loader" :radius="8" :width="2"></loader>
+        </button>
+      </div>
+      <div class="not-exist" v-else>
+        Does not exist
+        <a href="/">Go to main</a>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -31,44 +37,50 @@ import AuthMessage from "@/components/auth/authMessage";
 export default {
 
   data(){
-    return{
-      data:{
+    return {
+      data: {
         hash: this.$route.query.hash,
         email: this.$route.query.email,
         password: '',
         confirm_password: ''
       },
-      valid:{
-        password:'',
+      valid: {
+        password: '',
         confirm_password: ''
       },
-      check_url:{
+      check_url: {
         hash: this.$route.query.hash,
         email: this.$route.query.email
       },
-      loader: false,
+      loader: true,
       not_found: false,
-      messages:[]
+      changed: false,
+      messages: {}
     }
   },
   methods:{
     ...mapActions(['createPass']),
     enter(){
-      this.loader = true
       if (this.validate) {
         this.changePassword(this.data)
-      }
-      else {
-        this.loader = false
       }
     },
     changePassword(){
       axios.post(this.api_url_v1 + '/confirm-password', this.data).then(res => {
-        this.messages = res.data
+        this.changed = true
+        this.messages = {
+          notes:[
+            {code:'password-changed'}
+          ]
+        }
+        setTimeout(() => {
+          this.$router.push('/login')
+        },2000)
       },
       err => {
+        this.not_found = true
         this.messages = err.response.data
-        console.log(err.response.data.message);
+        console.log('errorrrr',err.response.data.message);
       })
     }
   },
@@ -99,10 +111,11 @@ export default {
     },
     checkHash(){
       axios.post(this.api_url_v1 + '/confirm-password', this.check_url).then(res => {
+        this.loader = false
       },
       err => {
+        this.loader = false
         this.not_found = true
-        this.messages = err.response.data
         console.log("registration user axios error: ", err.response.data);
       })
     }
@@ -117,6 +130,14 @@ export default {
 
 
 <style scoped>
+
+h2{
+  text-align: center;
+  font-size: 28px;
+  color: #222222;
+  position: relative;
+  top: -25px;
+}
 
 .form-control > h3{
   margin: -20px auto 30px auto;

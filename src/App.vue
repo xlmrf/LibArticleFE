@@ -288,4 +288,17 @@ input {
   color: #333333;
 }
 
+.not-exist{
+  text-align: center;
+  display: flex;
+  flex-flow: column;
+  color: #222222;
+  font-size: 40px;
+  margin-top: 2rem;
+}
+
+.not-exist > a{
+  color: #222222;
+}
+
 </style>
