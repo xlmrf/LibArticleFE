@@ -33,7 +33,7 @@
     <auth-message v-if="messages" :messages="messages" />
 
     <button :class="['sign-in-system btn primary',{load:loader}]" :disabled="loader" type="submit" @click="enter">
-      Ввійти
+      Реєстрація
       <loader v-if="loader" class="type-loader" :radius="8" :width="2"></loader>
     </button>
   </div>

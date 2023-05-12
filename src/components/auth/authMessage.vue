@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <div v-if="messages.errors">
-      <div v-for="item in messages.errors" class="alert" :class="alert_class(item.code)">
+  <div v-if="messages.length !== 0">
+    <div v-for="item in messages.errors" v-if="messages.errors">
+      <div  class="alert" :class="alert_class(item.code)">
         <small v-if="item.code === 'credentials_incorrect'">
           <span>Введений пароль або логін не вірний</span>
           <router-link class="link-reset" :to="{name:'recovery'}">Відновити пароль</router-link>
@@ -9,11 +9,11 @@
       </div>
     </div>
 
-<!--    <div v-if="getUserMessage.status==='confirmation'" class="alert alert-warning" v-bind="loader=false">-->
-<!--      <small>-->
-<!--        На вказаний email прийшло повідомлення з підтвердженням акаунту-->
-<!--      </small>-->
-<!--    </div>-->
+    <div class="alert alert-warning" v-for="item in messages.notes" v-else>
+      <small v-if="item.code === 'confirmation'">
+        Для підтвердження реєстрації на вказану почту надіслано повідомлення
+      </small>
+    </div>
   </div>
 </template>
 
