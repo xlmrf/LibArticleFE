@@ -40,7 +40,7 @@ export default {
         localStorage.setItem('access_token', res.data.api_token);
         setTimeout(() => {
           this.$router.push('/')
-        }, 2000)
+        }, 1000)
       },
       err => {
         this.loader = false

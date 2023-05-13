@@ -3,6 +3,7 @@
     <navbar-menu class="nav-over"></navbar-menu>
     <div class="main">
       <router-view />
+      profile {{getUser}}
     </div>
 </template>
 

@@ -32,11 +32,11 @@
           </span>
         </span>
         <span class="profile-file-download-link" >
-          <router-link :to="''">Завантажити</router-link>
           <svg xmlns="http://www.w3.org/2000/svg" v-if="isProfile" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#999999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
 
-          <span v-if="isProfile">{{views.document_views.value}}</span>
+          <span v-if="isProfile && views.document_views">{{views.document_views.value}}</span>
 
+          <router-link :to="''" v-if="!isProfile">Завантажити</router-link>
 <!--          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#50ADBE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <circle cx="12" cy="12" r="10"/><path d="M16 12l-4 4-4-4M12 8v7"/></svg>-->
 <!--          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#50ADBE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v13M5 12l7 7 7-7"/></svg>-->
         </span>
