@@ -1,16 +1,17 @@
 <template>
-<!--    v-if="getUser.id"-->
-    <navbar-menu class="nav-over"></navbar-menu>
-    <div class="main">
-      <router-view />
-      profile {{getUser}}
-    </div>
+  <navbar-menu class="nav-over"></navbar-menu>
+  <div class="main" v-if="getUser.id">
+    <router-view />
+    profile {{getUser}}
+  </div>
+  <loader v-else class="mid-loader" width="3" radius="14" />
 </template>
 
 <script>
 import NavbarMenu from "../view/Navbar";
 import {mapActions, mapGetters, mapMutations, mapState} from "vuex";
 import axios from "axios";
+import Loader from "@/components/additional/loader";
 
 export default {
   computed: {
@@ -37,7 +38,7 @@ export default {
     this.requestUser;
     this.askTypes()
   },
-  components: {NavbarMenu}
+  components: {Loader, NavbarMenu}
 }
 </script>
 

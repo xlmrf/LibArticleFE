@@ -1,29 +1,55 @@
-<template>
+<template xmlns="">
   <div class="privacy-settings">
-    <h3>Privacy</h3>
-    <div class="person-email">
-      <span>Change email</span>
-      <div>
-        <label for="email">email</label>
-        <input class="sample-input" type="text" name="" id="email" v-model="data.email">
-      </div>
+    <div class="setting-block">
+      <h3>Зміна почти</h3>
+      <span>
+<!--        <input type="text" name="email" id="in-email" required v-model="data.email"-->
+<!--               @keyup.enter="this.$el.nextSibling.childNodes[1].firstChild.focus()"-->
+<!--               :class="['input in-form', {invalid:valid.email}]">-->
+<!--        <label for="in-email" class="marker">Email</label>-->
+<!--        <span>{{data.email}}</span>-->
+<!--        <small class="field-message-error">{{ valid.email }}</small>-->
+      </span>
+
     </div>
-    <div class="new-password">
-      <label for="email">password</label>
-      <input class="sample-input" type="password" name="" id="new-password" v-model="data.password">
+
+    <div class="setting-block">
+      <h3>Зміна паролю</h3>
+      <span>
+      <label for="real-password">Діючий пароль</label>
+      <input type="text"
+             name="real-password" id="real-password"
+
+             class='sample-input'>
+      </span>
+      <span>
+      <label for="new-password">Новий пароль</label>
+      <input type="text"
+             name="new-password" id="new-password"
+
+             class='sample-input'>
+      </span>
+      <span>
+      <label for="confirm-password">Підтвердження паролю</label>
+      <input type="text"
+             name="confirm-password" id="confirm-password"
+
+             class='sample-input'>
+      </span>
     </div>
-    <div class="confirm-new-password">
-      <label for="email">confirm password</label>
-      <input class="sample-input" type="password" name="" id="confirm-new-password" v-model="data.confirm_password">
+
+    <div class="setting-block">
+      <h3>Видимість акаунту</h3>
+      <input type="checkbox" name="">
     </div>
-    <div class="person-email">
-      <label for="old-password">your password</label>
-      <input class="sample-input" type="password" name="" id="old-password" v-model="data.old_password">
-    </div>
-    {{getUser}}
+
+
     <button @click="changePrivacy">Save</button>
+
   </div>
 </template>
+
+
 
 <script>
 import {mapActions, mapGetters} from "vuex";

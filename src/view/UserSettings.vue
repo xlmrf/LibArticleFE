@@ -1,8 +1,11 @@
 <template>
-  <div class="main-card" v-if="getUser?.id">
+  <div class="main-card">
     <side-bar></side-bar>
     <div class="main-window">
-      <router-view ></router-view>
+      <div class="loader" v-if="!getProfile?.id" >
+        <loader width="2" radius="13"/>
+      </div>
+      <router-view v-else></router-view>
     </div>
   </div>
 </template>
@@ -10,27 +13,39 @@
 <script>
 import SideBar from "../components/settings/SideBar"
 import {mapActions, mapGetters} from "vuex";
+import Loader from "@/components/additional/loader";
 export default {
 
   methods:{
-    ...mapActions(['requestUser']),
+    ...mapActions(['requestProfile'])
   },
+
   computed:{
-    ...mapGetters(['getUser'])
+    ...mapGetters(['getUser','getProfile']),
   },
   mounted() {
-    this.requestUser()
+    this.requestProfile(this.getUser.id)
   },
-  components:{SideBar}
+  components:{Loader, SideBar}
 }
 </script>
 
 <style scoped>
+
+
+.loader{
+  display: flex;
+  margin: 0 auto;
+  position: relative;
+  right: 120px;
+}
+
+
 .main-card{
   /*background: #F1F1F1;*/
   height: auto;
   flex-direction: row;
-  padding: 1rem;
+  padding-top: 1rem;
   /*padding: 1rem;*/
 
 }
@@ -38,10 +53,10 @@ export default {
 
 }
 .main-window{
-  background: #fff;
-  margin: 0 5%;
-  padding: 10px;
-  width: 60%;
+  display: flex;
+  flex-flow: column;
+  flex: 1;
+  margin-left: 1rem;
   border-radius: 5px;
 }
 

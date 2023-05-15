@@ -1,9 +1,9 @@
 <template>
   <div class="settings-sidebar-list">
-    <span><router-link to="/settings/profile">Акаунт</router-link></span>
-    <span><router-link to="/settings/privacy">Приватність</router-link></span>
-    <span><router-link to="/settings/security">Безпека</router-link></span>
-<!--    <span><router-link to="/settings/advanced">Інші</router-link></span>-->
+    <span><router-link :to="{name:'settings.profile'}">Акаунт</router-link></span>
+    <span><router-link :to="{name:'settings.privacy'}">Приватність</router-link></span>
+    <span><router-link :to="{name:'settings.security'}">Безпека</router-link></span>
+    <span><router-link :to="{name:'settings.advanced'}">Інше</router-link></span>
   </div>
 </template>
 
@@ -24,7 +24,8 @@ a{
   flex-flow: column;
   /*position: fixed;*/
   /*flex-flow: column;*/
-  padding: 1rem;
+  /*padding: 1rem;*/
+  padding-right: 5px;
   position: relative;
   border-radius: 5px;
   width: 15%;
@@ -33,7 +34,7 @@ a{
 .settings-sidebar-list:after{
   content: '';
   position:absolute;
-  width:0.05rem;
+  width: 1px;
   height:100%;
   /*left:0;*/
   right: 1px;
@@ -48,26 +49,24 @@ a{
 
   border-radius: 4px;
 }
+
+
+
 .settings-sidebar-list >span > a{
   width: 100%;
   height: 100%;
-  padding: 5px 10px;
+  padding: 10px;
   /*margin: 5px 0;*/
   /*border: 1px solid #1c5cfc;*/
   border-radius: 4px;
   outline: none;
   text-decoration: none;
   /*color: #535353;*/
+
 }
 
-
 .router-link-active, .router-link-exact-active{
-  color: white;
-  /*background-image: linear-gradient(120deg, #141E30 0%, #243B55  100%); */
-  background: #419FD9;
-  /*#141E30 0%, #243B55  51%*/
-  /*#00c7c5 0%, #0088d7 100%*/
-    /*background-image: linear-gradient(to right, #ECE9E6 0%, #FFFFFF  51%, #ECE9E6  100%);*/
+  background: #f1f1f1;
 }
 
 

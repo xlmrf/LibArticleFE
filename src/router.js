@@ -23,8 +23,10 @@ import story from "./components/UserActions/StoryActions"
 
 import settings from "./view/UserSettings"
 import ProfileSettings from "./components/settings/Account"
-import PrivacySettings from "./components/settings/Privacy"
-import AdvancedSettings from "./components/settings/Security"
+import Privacy from "./components/settings/Privacy"
+import Security from "./components/settings/Security"
+import Advanced from "./components/settings/Advanced"
+
 import DocumentMake from "@/view/DocumentMake";
 import UnknownPage from "@/view/UnknownPage"
 
@@ -176,13 +178,18 @@ const routes = [
                     {
                         path:'privacy',
                         name:'settings.privacy',
-                        component: PrivacySettings
+                        component: Privacy
                     },
-                    // {
-                    //     path:'advanced',
-                    //     name:'settings.advanced',
-                    //     component: AdvancedSettings
-                    // }
+                    {
+                        path:'advanced',
+                        name:'settings.advanced',
+                        component: Advanced
+                    },
+                    {
+                        path:'security',
+                        name:'settings.security',
+                        component: Security
+                    }
                 ]
             }
 

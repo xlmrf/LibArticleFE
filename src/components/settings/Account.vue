@@ -1,38 +1,30 @@
 <template>
   <div>{{getProfile}}</div>
-  <div class="middle-spinner" v-if="!data">
-    <span><loader width="4" radius="20"></loader></span>
+  <div class="loader" v-if="false">
+    <span><loader width="2" radius="13"></loader></span>
   </div>
   <div class="user-card" v-else>
-    <div class="avatar">
-      <img :class="['user-avatar']" :src="getUser.info.image" alt="">
-      <input class="photo-loader-input" type="file" id="files" @change="photoUpdate()" accept="image/jpeg,image/png"
-             ref="image">
-      <span @click="changePhoto()">change photo</span>
-      <!--          https://i.photographers.ua/images/pictures/45416/dsc_4556_1.jpg-->
-    </div>
     <div class="about-user">
       <span>
         <label for="last_name">Прізвище</label>
-        <input class="sample-input" type="text" name="" id="last_name" v-model="getUser.info.last_name">
+        <input class="sample-input" type="text" name="" id="last_name" v-model="getProfile.last_name">
       </span>
       <span>
         <label for="first_name">Ім'я</label>
-        <input class="sample-input" type="text" name="" id="first_name" v-model="getUser.info.first_name">
+        <input class="sample-input" type="text" name="" id="first_name" v-model="getProfile.first_name">
       </span>
       <span>
         <label for="middle_name">По батькові</label>
-        <input class="sample-input" type="text" name="" id="middle_name" v-model="getUser.info.middle_name">
+        <input class="sample-input" type="text" name="" id="middle_name" v-model="getProfile.middle_name">
       </span>
       <span>
         <label for="location">Місце проживання</label>
-        <input class="sample-input" type="text" name="" id="location" v-model="getUser.info.location">
+        <input class="sample-input" type="text" name="" id="location" v-model="getProfile.location">
       </span>
       <span class="person-university">
-        {{getUniversities}}
         <label for="university">Університет</label>
-        <select name="university" id="university" class="select-type" v-model="data.info.university">
-          <option v-for="university in getUniversities" :value="university">{{ university.label }}</option>
+        <select name="university" id="university" class="select-type" v-model="getProfile.university">
+          <option v-for="university in [getProfile.university]" :value="university">{{ university.label }}</option>
         </select>
       </span>
       <small v-if="error">{{ error }}</small>
@@ -46,6 +38,7 @@
 import {mapActions, mapGetters, mapMutations} from "vuex";
 import Loader from "../additional/loader";
 import axios from "axios";
+import PulseLoader from "@/components/additional/pulseLoader";
 
 export default {
   data() {
@@ -64,7 +57,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getUniversities', 'getUser']),
+    ...mapGetters(['getUniversities', 'getUser', 'getProfile']),
     ...mapActions(['requestUniversity']),
     logout() {
       localStorage.removeItem('access_token')
@@ -85,20 +78,7 @@ export default {
   methods: {
     ...mapActions(['setUser']),
     ...mapMutations(['updateUser']),
-    photoUpdate() {
-      let image = this.$refs.image.files;
-      let form = new FormData();
-      form.set('file', image[0]);
-      console.log('file:', form);
-      axios.post('http://192.168.0.102/api/upload-image', form).then(response => {
-        this.newPhoto = response.data.nameFile;
-        this.data.info.image = this.newPhoto;
-      }, error => console.log('Server catch error', error));
-    },
-    changePhoto() {
-      this.valid = false
-      this.$refs.image.click()
-    },
+
     save() {
       // for (let item in this.data.info){
       //   if (item === ''){
@@ -120,6 +100,7 @@ export default {
     }
   },
   components: {
+    PulseLoader,
     Loader
   },
   mounted() {
@@ -130,51 +111,14 @@ export default {
 
 <style scoped>
 
-
-.avatar {
+.loader{
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: auto;
-  margin: 1rem;
+  position: relative;
+  margin: 0 auto;
+  right: 120px;
+
 }
 
-.avatar span {
-  cursor: pointer;
-  text-decoration: #212121 underline;
-}
-
-.user-avatar {
-  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
-  object-fit: cover;
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-}
-
-.user-avatar:hover {
-  /*color: rgba(33, 33, 33, 0.34);*/
-  /*clip-path: ellipse(200px 200px at 0px 10px);*/
-}
-
-/*.photo-update-icon{*/
-/*  background: rgba(0, 0, 0, 0.54);*/
-/*  position: absolute;*/
-/*  clip-path: ellipse(255px 50px at 100px 210px);*/
-/*  transition: transform 1s ease;*/
-/*}*/
-/*.user-avatar::after{*/
-/*  content: '';*/
-/*  position: absolute;*/
-/*  height: 10px;*/
-/*  width: 10px;*/
-/*  border: 1px solid red;*/
-/*}*/
-.photo-loader-input {
-  position: absolute;
-  display: none;
-}
 
 .user-card {
   display: flex;

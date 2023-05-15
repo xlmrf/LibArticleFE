@@ -17,8 +17,7 @@ export default {
 
     },
     actions: {
-        requestProfile(ctx) {
-            let id = router.currentRoute.value.params.id
+        requestProfile(ctx,id) {
             console.log(id)
             axios.get(ctx.rootState.api_url_v1 + '/profile/' + id)
                 .then(res => {

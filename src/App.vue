@@ -300,5 +300,10 @@ input {
 .not-exist > a{
   color: #222222;
 }
+.mid-loader{
+  position: absolute;
+  top: 33%;
+  left: calc(45% + 30px);
+}
 
 </style>
