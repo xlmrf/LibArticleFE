@@ -11,6 +11,7 @@
 <script>
 import axios from "axios";
 import DocumentItem from "@/components/Documents/DocumentItem";
+import {mapGetters} from "vuex";
 
 export default {
   components: {DocumentItem},
@@ -20,11 +21,11 @@ export default {
     }
   },
   watch: {
-    '$route.params.id': {
-      handler(item) {
-        this.get();
-      }
-    }
+    // '$route.params.id': {
+    //   handler(item) {
+    //     this.get();
+    //   }
+    // }
   },
   methods: {
     get() {
@@ -35,6 +36,9 @@ export default {
         // ctx.commit('setInfo', err)
       })
     }
+  },
+  computed:{
+    ...mapGetters(['getUser'])
   },
   mounted() {
     this.get();

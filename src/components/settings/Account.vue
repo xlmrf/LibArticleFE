@@ -1,17 +1,17 @@
 <template>
-  <div>{{getProfile}}</div>
-  <div class="loader" v-if="false">
+  <div class="loader" v-if="!getProfile">
     <span><loader width="2" radius="13"></loader></span>
   </div>
   <div class="user-card" v-else>
     <div class="about-user">
-      <span>
-        <label for="last_name">Прізвище</label>
-        <input class="sample-input" type="text" name="" id="last_name" v-model="getProfile.last_name">
-      </span>
+
       <span>
         <label for="first_name">Ім'я</label>
         <input class="sample-input" type="text" name="" id="first_name" v-model="getProfile.first_name">
+      </span>
+      <span>
+        <label for="last_name">Прізвище</label>
+        <input class="sample-input" type="text" name="" id="last_name" v-model="getProfile.last_name">
       </span>
       <span>
         <label for="middle_name">По батькові</label>
@@ -23,41 +23,35 @@
       </span>
       <span class="person-university">
         <label for="university">Університет</label>
-        <select name="university" id="university" class="select-type" v-model="getProfile.university">
-          <option v-for="university in [getProfile.university]" :value="university">{{ university.label }}</option>
+        <select v-if="getUniversities.length > 0" name="university" id="university" class="select-type" v-model="getProfile.university_id" >
+          <option  v-for="university in getUniversities" :value="university.id">{{ university.label }}</option>
         </select>
       </span>
       <small v-if="error">{{ error }}</small>
-      <button @click="save">Зберегти</button>
+      <button @click="userUpdate()">Зберегти</button>
     </div>
     <button class="user-logout-item" @click="logout">Вихід</button>
   </div>
+  <div>{{getProfile}}</div>
 </template>
 
 <script>
-import {mapActions, mapGetters, mapMutations} from "vuex";
+import {mapActions, mapGetters, mapMutations, mapState} from "vuex";
 import Loader from "../additional/loader";
 import axios from "axios";
 import PulseLoader from "@/components/additional/pulseLoader";
+import router from "@/router";
 
 export default {
   data() {
     return {
-      data: {
-        info: {
-          last_name: '',
-          first_name: '',
-          middle_name: '',
-          university: '',
-          location: ''
-        }
-      },
       error: '',
       newPhoto: ''
     }
   },
   computed: {
     ...mapGetters(['getUniversities', 'getUser', 'getProfile']),
+    ...mapState(['api_url_v1']),
     ...mapActions(['requestUniversity']),
     logout() {
       localStorage.removeItem('access_token')
@@ -67,17 +61,32 @@ export default {
     }
   },
   watch: {
-    'data.info.university': {
-      handler(key) {
-        if (this.data.info && key !== null) {
-          this.data.info.university_id = key.id
-        }
-      }
-    }
+    // 'getProfile.university': {
+    //   handler(key) {
+    //     if (this.data.info && key !== null) {
+    //       this.data.info.university_id = key.id
+    //     }
+    //   }
+    // }
   },
   methods: {
-    ...mapActions(['setUser']),
-    ...mapMutations(['updateUser']),
+
+    ...mapActions(['requestProfile']),
+
+    userUpdate() {
+      console.log('upd user')
+      axios.patch(this.api_url_v1+'/user', this.getProfile).then(res => {
+        this.updateProfile(null)
+        this.requestProfile(this.getUser.id)
+        console.log("user settings", res.data);
+        this.$router.push('/profile/'+this.getUser.id)
+      }).catch(err => {
+        console.log('set user error:', err.response);
+        // this.error = err.response
+      })
+    },
+
+    ...mapMutations(['updateProfile']),
 
     save() {
       // for (let item in this.data.info){
@@ -85,14 +94,12 @@ export default {
       //      return this.error = ''
       //    }
       // }
-      this.error = ''
-      let info = this.data.info
-      if (!info.last_name || !info.first_name || !info.location) {
-        return this.error = 'Заповніть усі поля'
-      }
-      this.data.info.university_id = this.data.info.university.id
-      delete this.data.info.document_count
-      this.setUser(this.data)
+      // this.error = ''
+      // let info = this.data.info
+      // if (!info.last_name || !info.first_name || !info.location) {
+      //   return this.error = 'Заповніть усі поля'
+      // }
+
     },
 
     push() {
@@ -119,6 +126,16 @@ export default {
 
 }
 
+.person-university{
+  display: flex;
+  position: relative;
+}
+
+.pulse-loader{
+  position: absolute;
+  left: 50%;
+  bottom: -20px;
+}
 
 .user-card {
   display: flex;
@@ -144,8 +161,47 @@ export default {
 }
 
 .about-user > span{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  flex-flow: column;
   margin: 0.3rem 0;
+  align-items: center;
+
 }
+
+.about-user > span label{
+  margin: 5px 2px;
+  position: relative;
+  align-self: baseline;
+  left: 10%;
+}
+
+.about-user > span input{
+  font-size: 18px;
+  padding: 5px 10px;
+  display: block;
+  justify-content: center;
+  width: 80%;
+  border: 1px solid #cecece;
+  border-radius:3px;
+  position: relative;
+  color: #212121;
+}
+
+.about-user > span input:valid {
+  border: 1px solid #1059FF;
+}
+
+.about-user > span input:hover {
+  border: 1px solid #212121;
+}
+
+.about-user > span input:focus {
+  outline: none;
+  border: 1px solid #212121;
+}
+
 
 .about-user > button {
   margin: 1rem;
@@ -163,7 +219,7 @@ export default {
   content: '';
   position: absolute;
   width: 100%;
-  height: 0.1rem;
+  height: 1px;
   left: 0;
   bottom: 0;
   background: #BBBBBB;

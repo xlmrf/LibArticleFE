@@ -34,17 +34,21 @@ export default {
   watch: {
     '$route.params.id': {
       handler(item) {
-        this.requestProfile
+        this.requestProfile(this.getUser.id)
       }
     }
   },
-  computed:{
+
+  methods:{
     ...mapActions(['requestProfile']),
-    ...mapGetters(['getUniversities','getProfile'])
+  },
+
+  computed:{
+    ...mapGetters(['getUniversities','getProfile','getUser'])
   },
 
   mounted() {
-    this.requestProfile
+    this.requestProfile(this.getUser.id)
     // this.requestAuthorPhoto
   },
   components:{UserInfo, ProfileDocuments, Statistic, UserCard,loader}
@@ -83,6 +87,33 @@ export default {
   padding: 1rem;
 }
 
+
+
+.input{
+  font-size: 18px;
+  padding: 10px;
+  display: block;
+  width: 100%;
+  border: 1px solid #cecece;
+  border-radius:7px;
+  position: relative;
+  height: 2.7rem;
+  color: #212121;
+  /*border-bottom: 1px solid #ccc;*/
+}
+
+.input:valid {
+  border: 1px solid #1059FF;
+}
+
+.input:hover {
+  border: 1px solid #212121;
+}
+
+.input:focus {
+  outline: none;
+  border: 2px solid #212121;
+}
 
 
 

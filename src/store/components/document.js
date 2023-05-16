@@ -65,9 +65,9 @@ export default {
             })
         },
         lastDocuments(ctx) {
-            axios.get(ctx.rootState.api_url_v1 + '/last-documents').then(response => {
-                ctx.commit('mutateLastDocuments', response.data)
-            })
+            // axios.get(ctx.rootState.api_url_v1 + '/last-documents').then(response => {
+            //     ctx.commit('mutateLastDocuments', response.data)
+            // })
         },
 
     },

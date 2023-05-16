@@ -18,7 +18,7 @@ export default {
     },
     actions: {
         requestProfile(ctx,id) {
-            console.log(id)
+            console.log('id:',id)
             axios.get(ctx.rootState.api_url_v1 + '/profile/' + id)
                 .then(res => {
                     ctx.commit('updateProfile', res.data)

@@ -70,7 +70,7 @@ export default {
   content:'';
   position:absolute;
   width:100%;
-  height:0.08rem;
+  height:1px;
   left:0;
   bottom:2px;
   background: rgba(191, 191, 191, 0.3);

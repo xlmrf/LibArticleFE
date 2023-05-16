@@ -306,4 +306,44 @@ input {
   left: calc(45% + 30px);
 }
 
+.input{
+  font-size: 18px;
+  padding: 10px;
+  display: block;
+  width: 100%;
+  border: 1px solid #cecece;
+  border-radius:7px;
+  position: relative;
+  height: 2.7rem;
+  color: #212121;
+  /*border-bottom: 1px solid #ccc;*/
+}
+
+.input:valid {
+  border: 1px solid #1059FF;
+}
+
+.input:hover {
+  border: 1px solid #212121;
+}
+
+.input:focus {
+  outline: none;
+  border: 2px solid #212121;
+}
+
+
+.input.invalid {
+  border: 1px solid red;
+}
+
+.input.invalid:focus {
+  border: 2px solid red;
+}
+
+.invalid:valid {
+  border: 1px solid red;
+}
+
+
 </style>

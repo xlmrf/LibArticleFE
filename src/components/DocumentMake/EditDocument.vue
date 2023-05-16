@@ -74,7 +74,7 @@ export default {
       let document = this.getDocument
       document.files = this.getFiles
       console.log('doc',document)
-      // this.updateDocument(document)
+      this.updateDocument(document)
     }
   },
   computed: {
