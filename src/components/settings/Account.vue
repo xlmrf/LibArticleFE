@@ -5,6 +5,8 @@
   <div class="user-card" v-else>
     <div class="about-user">
 
+      <account-img :image="getProfile.image"/>
+
       <span>
         <label for="first_name">Ім'я</label>
         <input class="sample-input" type="text" name="" id="first_name" v-model="getProfile.first_name">
@@ -41,6 +43,7 @@ import Loader from "../additional/loader";
 import axios from "axios";
 import PulseLoader from "@/components/additional/pulseLoader";
 import router from "@/router";
+import AccountImg from "@/components/settings/accountImg";
 
 export default {
   data() {
@@ -107,6 +110,7 @@ export default {
     }
   },
   components: {
+    AccountImg,
     PulseLoader,
     Loader
   },
@@ -183,6 +187,19 @@ export default {
   display: block;
   justify-content: center;
   width: 80%;
+  border: 1px solid #cecece;
+  border-radius:3px;
+  position: relative;
+  color: #212121;
+}
+
+.about-user > span select{
+  font-size: 14px;
+  padding: 0 5px;
+  display: block;
+  justify-content: center;
+  width: 80%;
+  height:2.5rem;
   border: 1px solid #cecece;
   border-radius:3px;
   position: relative;

@@ -1,6 +1,6 @@
 <template>
   <div class="avatar">
-    <img :class="['user-avatar']" :src="getUser.info.image" alt="">
+    <img :class="['user-avatar']" :src="image" alt="">
     <input class="photo-loader-input" type="file" id="files" @change="photoUpdate()" accept="image/jpeg,image/png"
            ref="image">
     <span @click="changePhoto()">change photo</span>
@@ -12,6 +12,8 @@
 import axios from "axios";
 
 export default {
+
+  props:['image'],
 
   methods:{
     photoUpdate() {
