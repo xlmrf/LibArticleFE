@@ -8,6 +8,11 @@
       <account-img :image="getProfile.image"/>
 
       <span>
+        <label for="bio">Біо</label>
+        <textarea class="sample-input textarea" placeholder="Я живу у вільній країні.&#10;I live in a free country" maxlength="80" wrap="hard" name="bio" id="bio" cols="10" rows="3" v-model="getProfile.bio"></textarea>
+      </span>
+
+      <span>
         <label for="first_name">Ім'я</label>
         <input class="sample-input" type="text" name="" id="first_name" v-model="getProfile.first_name">
       </span>
@@ -128,6 +133,10 @@ export default {
   margin: 0 auto;
   right: 120px;
 
+}
+
+.textarea{
+  width: 80%;
 }
 
 .person-university{

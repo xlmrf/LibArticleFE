@@ -198,6 +198,27 @@ input {
   padding: 3px 5px;
 }
 
+
+.sample-input{
+  border: 1px solid #CCCCCC;
+  padding: 0.3rem 0.5rem;
+  border-radius: 3px;
+  font-size: 16px;
+  resize: none;
+  outline: none;
+  width: 100%;
+  -webkit-transition: all .3s ease-out;
+  -moz-transition: all .3s ease-out;
+  -ms-transition: all .3s ease-out;
+  -o-transition: all .3s ease-out;
+  transition: all .3s ease-out
+}
+
+.sample-input:focus,
+.sample-input:hover{
+  border: 1px solid #419FD9;
+}
+
 .sample-input-error:valid{
   border: 1px solid rgba(229, 50, 45, 0.8);
 }
