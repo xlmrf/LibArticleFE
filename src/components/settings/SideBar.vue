@@ -1,8 +1,8 @@
 <template>
   <div class="settings-sidebar-list">
     <span><router-link :to="{name:'settings.profile'}">Акаунт</router-link></span>
-    <span><router-link :to="{name:'settings.privacy'}">Приватність</router-link></span>
     <span><router-link :to="{name:'settings.security'}">Безпека</router-link></span>
+    <span><router-link :to="{name:'settings.privacy'}">Приватність</router-link></span>
     <span><router-link :to="{name:'settings.advanced'}">Інше</router-link></span>
   </div>
 </template>
