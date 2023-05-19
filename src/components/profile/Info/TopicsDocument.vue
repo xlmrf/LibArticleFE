@@ -21,11 +21,13 @@ export default {
     }
   },
   watch: {
-    // '$route.params.id': {
-    //   handler(item) {
-    //     this.get();
-    //   }
-    // }
+    '$route.params.id': {
+      handler(item) {
+        if (this.$route.params.id !== undefined) {
+          this.get()
+        }
+      }
+    }
   },
   methods: {
     get() {

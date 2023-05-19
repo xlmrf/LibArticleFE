@@ -1,6 +1,6 @@
 <template>
   <div class="avatar">
-    <img :class="['user-avatar']" :src="image" alt="">
+    <img :class="['user-avatar']" :src="getTempPhoto.progress === 100 ? getTempPhoto.image : image" alt="">
     <input class="photo-loader-input" type="file" id="files" @change="photoUpdate()" accept="image/jpeg,image/png"
            ref="image">
     <span @click="changePhoto()">change photo</span>
@@ -10,8 +10,16 @@
 
 <script>
 import axios from "axios";
+import {mapGetters, mapState} from "vuex";
 
 export default {
+
+  data(){
+    return{
+      loadError:'',
+      photo:''
+    }
+  },
 
   props:['image'],
 
@@ -21,15 +29,31 @@ export default {
       let form = new FormData();
       form.set('file', image[0]);
       console.log('file:', form);
-      axios.post('http://192.168.0.102/api/upload-image', form).then(response => {
-        this.newPhoto = response.data.nameFile;
-        this.data.info.image = this.newPhoto;
-      }, error => console.log('Server catch error', error));
+      axios.post(this.server_url_v1+'/file?image', form, {
+        onUploadProgress: progressEvent => {
+          if (progressEvent.lengthComputable){
+            this.getTempPhoto.progress = (progressEvent.loaded / progressEvent.total) * 100
+          }
+        }
+      }).then(response => {
+        this.getTempPhoto.image = response.data.url
+      }, error => {
+        this.loadError = error
+        console.log('error in add files:', error);
+      });
+      // axios.post('http://192.168.0.102/api/upload-image', form).then(response => {
+      //   this.newPhoto = response.data.nameFile;
+      //   this.data.info.image = this.newPhoto;
+      // }, error => console.log('Server catch error', error));
     },
     changePhoto() {
       this.valid = false
       this.$refs.image.click()
     },
+  },
+  computed:{
+    ...mapState(['server_url_v1']),
+    ...mapGetters(['getTempPhoto'])
   }
 
 }

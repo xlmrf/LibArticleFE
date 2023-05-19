@@ -22,6 +22,8 @@ export default {
             axios.get(ctx.rootState.api_url_v1 + '/profile/' + id)
                 .then(res => {
                     ctx.commit('updateProfile', res.data)
+
+
                     // ctx.commit('userMessages', res.statusText)
                     console.log("author info", res);
                 }, error => {
@@ -31,6 +33,9 @@ export default {
         async requestUser(ctx) {
             await axios.get(ctx.rootState.api_url_v1 + '/user?info')
                 .then(res => {
+
+                    ctx.commit('userPhoto', res.data.info.image)
+
                     ctx.commit('updateUser', res.data)
                     console.log("user info", res);
                 }, error => {

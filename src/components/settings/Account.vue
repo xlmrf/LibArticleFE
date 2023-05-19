@@ -39,7 +39,6 @@
     </div>
     <button class="user-logout-item" @click="logout">Вихід</button>
   </div>
-  <div>{{getProfile}}</div>
 </template>
 
 <script>
@@ -58,7 +57,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getUniversities', 'getUser', 'getProfile']),
+    ...mapGetters(['getUniversities', 'getUser', 'getProfile','getTempPhoto']),
     ...mapState(['api_url_v1']),
     ...mapActions(['requestUniversity']),
     logout() {
@@ -83,6 +82,7 @@ export default {
 
     userUpdate() {
       console.log('upd user')
+      this.getProfile.image = this.getTempPhoto.image
       axios.patch(this.api_url_v1+'/user', this.getProfile).then(res => {
         this.updateProfile(null)
         this.requestProfile(this.getUser.id)

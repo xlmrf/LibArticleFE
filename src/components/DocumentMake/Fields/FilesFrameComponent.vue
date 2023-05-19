@@ -27,6 +27,7 @@
 
 
         <hr :style="'width:'+getProgressLoadingFile+'%'">
+        <span>{{loadError}}</span>
         <div :class="['file-update-area',{dragover:isDragging}]"
              @dragover="dragover"
              @dragleave="dragleave"
@@ -54,6 +55,7 @@
 <script>
 import loader from "../../additional/loader";
 import {mapActions, mapGetters, mapMutations} from "vuex";
+import axios from "axios";
 // import axios from "axios";
 
 export default {
@@ -62,9 +64,6 @@ export default {
 
   data() {
     return {
-      // files: {
-      //
-      // },
       isDragging:false,
       file_id: 0,
       valid: false,
@@ -91,20 +90,8 @@ export default {
     getProcess() {
       console.log(this.getProcess);
     },
-    //   'files.length':{
-    //         handler: key =>{
-    //             if(key >= 5 ){
-    //                 console.log('disabled')
-    //                 // this.disabled = true
-    //             }
-    //             else {
-    //                 // this.disabled = false
-    //             }
-    //         },
-    //   }
   },
   methods: {
-    ...mapActions(['pushFile']),
     ...mapMutations(['FilePusher', 'updateFiles']),
 
     dragover(e) {
@@ -134,12 +121,26 @@ export default {
         return item + " " + 'B'
       }
     },
-    // frameUrl(file) {
-    //   if (file.typeFile === 'doc' || file.typeFile === 'docx')
-    //     return 'https://view.officeapps.live.com/op/embed.aspx?src=' + file.url;
-    //   else
-    //     return file.url;
-    // },
+
+    pushFile(data){
+      axios.post('https://s1.libarticle.polidar.in.ua/api/v1/file', data, {
+        onUploadProgress: progressEvent => {
+          if (progressEvent.lengthComputable){
+            this.getProgressLoadingFile = (progressEvent.loaded / progressEvent.total) * 100
+          }
+        }
+      }).then(response => {
+        if (Object.keys(this.getFiles.main).length === 0){
+          this.getFiles.main = response.data
+        }
+        else {
+          this.getFiles.add.push(response.data)
+        }
+      }, error => {
+        this.loadError = error
+        console.log('error in add files:', error);
+      });
+    },
     validate(valid) {
       // this.valid = valid
       let size = valid.size / 1024 / 1024
@@ -155,10 +156,10 @@ export default {
       }
       return valid
     },
-    next() {
-      console.log("validator", this.getFiles.length);
-      this.uploadDocument(this.document)
-    },
+    // next() {
+    //   console.log("validator", this.getFiles.length);
+    //   this.uploadDocument(this.document)
+    // },
     addFile() {
       this.valid = false
       this.$refs.files.click()

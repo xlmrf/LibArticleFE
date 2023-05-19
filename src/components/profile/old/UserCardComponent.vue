@@ -1,18 +1,18 @@
 <template>
     <div class="user-card">
         <div class="avatar">
-          <span class="user-avatar-loader" v-if="!getPhoto"><loader width="4" radius="20"></loader></span>
-<!--          <img class="user-avatar" v-else :src="getPhoto !== 'not_found'? 'http://s1.libarticle.loc/api/image/'+ getPhoto : 'http://s1.libarticle.loc/api/image/default-image'" alt="">-->
-          <img :src="getPhoto" class="user-avatar" alt="user photo" v-else>
-        </div>
-        <hr>
-        <div class="personal-info">
-          <div class="about-user">
-            <span class="person-full-name">{{getUser.first_name}} {{getUser.middle_name}} {{getUser.last_name}}</span>
-<!--            <span class="person-email">{{getUser.email}}</span>-->
-<!--            <span class="person-location"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#212121" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 6.9 8 11.7z"/></svg>{{getUser.info.location}}</span>-->
-<!--            <span class="person-university" v-if="getUser.info.university">{{getUser.info.university.label}}</span>-->
-          </div>
+<!--          <span class="user-avatar-loader" v-if="!getPhoto"><loader width="4" radius="20"></loader></span>-->
+<!--&lt;!&ndash;          <img class="user-avatar" v-else :src="getPhoto !== 'not_found'? 'http://s1.libarticle.loc/api/image/'+ getPhoto : 'http://s1.libarticle.loc/api/image/default-image'" alt="">&ndash;&gt;-->
+<!--          <img :src="getPhoto" class="user-avatar" alt="user photo" v-else>-->
+<!--        </div>-->
+<!--        <hr>-->
+<!--        <div class="personal-info">-->
+<!--          <div class="about-user">-->
+<!--            <span class="person-full-name">{{getUser.first_name}} {{getUser.middle_name}} {{getUser.last_name}}</span>-->
+<!--&lt;!&ndash;            <span class="person-email">{{getUser.email}}</span>&ndash;&gt;-->
+<!--&lt;!&ndash;            <span class="person-location"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#212121" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 6.9 8 11.7z"/></svg>{{getUser.info.location}}</span>&ndash;&gt;-->
+<!--&lt;!&ndash;            <span class="person-university" v-if="getUser.info.university">{{getUser.info.university.label}}</span>&ndash;&gt;-->
+<!--          </div>-->
         </div>
     </div>
 </template>
@@ -24,15 +24,15 @@ import Loader from "../../additional/loader";
 export default {
   props:['getUser'],
   computed:{
-    ...mapGetters(['getPhoto','getAuthorPhoto','getAltPhoto']),
+    // ...mapGetters(['getPhoto','getAuthorPhoto','getAltPhoto']),
   },
   methods:{
     ...mapMutations(['updatePhoto'])
   },
   components: {Loader},
-  async mounted() {
-    await this.updatePhoto(this.getUser.image)
-  }
+  // async mounted() {
+  //   await this.updatePhoto(this.getUser.image)
+  // }
 }
 </script>
 

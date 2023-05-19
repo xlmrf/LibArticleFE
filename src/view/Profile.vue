@@ -4,7 +4,7 @@
   </div>
 
   <div class="profile-card" v-else>
-    <user-card :getUser="getProfile" class="user-card-component"></user-card>
+    <user-card :getProfile="getProfile" class="user-card-component"></user-card>
     <user-info />
 <!--    <statistic />-->
   </div>
@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import {mapActions, mapGetters} from "vuex";
+import {mapActions, mapGetters, mapMutations} from "vuex";
 import loader from "@/components/additional/loader";
 import UserCard from "@/components/profile/UserCard";
 import Statistic from "@/components/profile/Statistic";
@@ -34,21 +34,24 @@ export default {
   watch: {
     '$route.params.id': {
       handler(item) {
-        this.requestProfile(this.getUser.id)
+        if (this.$route.params.id !== this.getUser.id && this.$route.params.id !== undefined) {
+          this.requestProfile(this.$route.params.id)
+          this.updateProfile({})
+        }
       }
     }
   },
 
   methods:{
     ...mapActions(['requestProfile']),
+    ...mapMutations(['updateProfile'])
   },
 
   computed:{
     ...mapGetters(['getUniversities','getProfile','getUser'])
   },
-
   mounted() {
-    this.requestProfile(this.getUser.id)
+    this.requestProfile(this.$route.params.id)
     // this.requestAuthorPhoto
   },
   components:{UserInfo, ProfileDocuments, Statistic, UserCard,loader}

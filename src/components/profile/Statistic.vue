@@ -59,6 +59,16 @@ export default {
       documents_views:{}
     }
   },
+  watch: {
+    '$route.params.id': {
+      handler(item) {
+        if (this.$route.params.id !== undefined) {
+          this.getDocumentCount()
+          this.getDocumentsViews()
+        }
+      }
+    }
+  },
   methods: {
     getDocumentCount() {
       axios.get('https://libarticle.polidar.in.ua/api/v1/report/documents-count/profile/' + this.$route.params.id).then(response => {
