@@ -4,7 +4,7 @@
       <span @click="toggleDropdown" :class="{'active-nav-menu':openNavMenu}">
 <!--        https://t4.ftcdn.net/jpg/03/59/58/91/360_F_359589186_JDLl8dIWoBNf1iqEkHxhUeeOulx0wOC5.jpg-->
 <!--        <img v-if="getPhoto" class="user-nav-avatar" :src="getPhoto !== 'not_found'? 'http://s1.libarticle.loc/api/image/'+ getPhoto : '../../assets/default_user_icon2.png'" alt="">-->
-            <img v-if="getPhoto" class="user-nav-avatar user-avatar-cycle" :src="getPhoto" alt="">
+            <img v-if="getUser.info" class="user-nav-avatar user-avatar-cycle" :src="getUser.info.image" alt="">
       </span>
       <ul :class="['nav-menu',{'open-nav-menu':openNavMenu}]">
         <li><router-link class="menu-link-item" :to="'/profile/'+getUser.id">

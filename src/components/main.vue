@@ -2,6 +2,7 @@
   <navbar-menu class="nav-over"></navbar-menu>
   <div class="main" v-if="getUser.id">
     <router-view />
+    {{getUser}}
   </div>
   <loader v-else class="mid-loader" width="3" radius="14" />
 </template>
