@@ -3,6 +3,9 @@
     <span><loader width="2" radius="13"></loader></span>
   </div>
   <div class="privacy-settings" v-else>
+
+    <h2>Зміна паролю</h2>
+
 <!--    <div class="setting-block">-->
 <!--      <h3>Зміна почти</h3>-->
 <!--      <span>-->
@@ -17,32 +20,36 @@
 <!--    </div>-->
 
     <div class="setting-block">
-      <h3>Зміна паролю</h3>
       <span>
       <label for="real-password">Діючий пароль</label>
-      <input type="text"
+      <input type="password"
              name="real-password" id="real-password"
 
              class='sample-input'>
       </span>
       <span>
       <label for="new-password">Новий пароль</label>
-      <input type="text"
+      <input type="password"
              name="new-password" id="new-password"
 
              class='sample-input'>
       </span>
       <span>
       <label for="confirm-password">Підтвердження паролю</label>
-      <input type="text"
+      <input type="password"
              name="confirm-password" id="confirm-password"
 
              class='sample-input'>
       </span>
     </div>
 
-    <button @click="changePrivacy">Змінити пароль</button>
+    <div class="alert alert-warning" >
+      <small>
+        Для більшої надійності паролю, не використовуйте очевидні відношення (Дата народження, ПІБ, т.п.) <br>та легкі комбінації (12345678, helloworld...)
+      </small>
+    </div>
 
+    <button @click="changePrivacy">Змінити пароль</button>
   </div>
 </template>
 
@@ -89,11 +96,12 @@ export default {
 .privacy-settings{
   display: flex;
   flex-direction: column;
+  align-self: center;
+  width: 100%;
 }
 
-.privacy-settings > h3{
-  justify-self: center;
-  align-self: center;
+.privacy-settings > h2{
+  margin: 0 0.5rem;
 }
 
 .setting-block {
@@ -104,7 +112,11 @@ export default {
   position: relative;
   overflow: hidden;
   outline: none;
-  width: 100%;
+  width: 300px;
+}
+
+.setting-block > span{
+  margin: 6px 0;
 }
 
 .privacy-settings > div{
@@ -129,6 +141,36 @@ export default {
 
 
 
-
+.link-reset{
+  display: flex;
+  justify-content: center;
+  color: #212121;
+}
+.link-reset:hover{
+  color: #7f7f7f;
+}
+.alert{
+  border: 1px solid #B2B2B2;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+  font-size: 16px;
+  text-align: center;
+  align-self: center;
+}
+.alert-warning{
+  /*border: 1px solid rgb(34,46,152);*/
+  /*background: rgba(153, 159, 239, 0.1);*/
+  position: relative;
+  padding: 15px;
+  font-size: 18px;
+  border: 1px solid rgba(147, 158, 179, 0.5);
+  background: rgba(128, 167, 221, 0.1);
+}
+.alert-error{
+  border: 1px solid #EB4C42;
+  background: rgba(255, 15, 0, 0.1);
+}
 
 </style>

@@ -82,12 +82,14 @@ export default {
 
     userUpdate() {
       console.log('upd user')
-      this.getProfile.image = this.getTempPhoto.image
+      if(this.getTempPhoto.image !== '') {
+        this.getProfile.image = this.getTempPhoto.image
+      }
       axios.patch(this.api_url_v1+'/user', this.getProfile).then(res => {
         //this.updateUser(res.data)
         this.requestUser()
         console.log("user settings", res.data);
-        // this.$router.push('/profile/'+this.getUser.id)
+        this.$router.push('/profile/'+this.getUser.id)
       }).catch(err => {
         console.log('set user error:', err.response);
         // this.error = err.response
