@@ -1,9 +1,9 @@
 <template>
-  <div>
-    <statistic />
+  <div class="info-panel">
+    <statistic class="item-underline"/>
 <!--    <topics-publication />-->
-    <topics-document />
-<!--    <co-authors />-->
+    <topics-document class="item-underline"/>
+    <co-authors />
 <!--    <bio />-->
   </div>
 </template>
@@ -19,6 +19,11 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
+
+.chapter-header{
+  color: #222222;
+  margin: 10px;
+}
 
 </style>

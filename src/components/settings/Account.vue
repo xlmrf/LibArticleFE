@@ -62,7 +62,7 @@ export default {
     ...mapActions(['requestUniversity']),
     logout() {
       localStorage.removeItem('access_token')
-      this.updateUser('')
+      this.updateUser()
       this.token = null
       this.$router.push('/login')
     }

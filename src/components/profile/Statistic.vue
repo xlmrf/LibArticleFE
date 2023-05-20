@@ -1,5 +1,5 @@
 <template>
-  <div class="user-state-panel item-underline">
+  <div class="user-state-panel">
     <router-link class="state-link" to="">
       <div class="state-upload">
         <span class="state-count">{{document_count}}</span>
@@ -8,7 +8,7 @@
     </router-link>
     <router-link class="state-link" to="">
       <div class="state-citation">
-        <span class="state-count">2</span>
+        <span class="state-count">0</span>
         <span class="sub-name-state">Процитовано</span>
       </div>
     </router-link>

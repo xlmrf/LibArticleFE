@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="document-topics" v-if="data[0]">
     <p class="chapter-header">Популярні публікації</p>
-    <div class="document-topics">
-      <document-item class="s-document" v-for="item in data" :document="item" :isProfile="true"/>
+    <div class="document-topics-block">
+      <document-item class="s-document" v-for="item in data " :document="item" :isProfile="true"/>
 <!--       <router-link :to="'/document/'+item.id">{{item.title}} </router-link> - {{item.views}}-->
     </div>
   </div>
@@ -24,13 +24,13 @@ export default {
     '$route.params.id': {
       handler(item) {
         if (this.$route.params.id !== undefined) {
-          this.get()
+          this.getTopics()
         }
       }
     }
   },
   methods: {
-    get() {
+    getTopics() {
       axios.get('https://libarticle.polidar.in.ua/api/v1/report/documents-top/profile/' + this.$route.params.id).then(response => {
         this.data = response.data;
       }, err => {
@@ -43,7 +43,7 @@ export default {
     ...mapGetters(['getUser'])
   },
   mounted() {
-    this.get();
+    this.getTopics();
   }
 }
 </script>
@@ -52,6 +52,10 @@ export default {
 p{
 
 }
+.document-topics{
+  padding: 10px 0;
+}
+
 .s-document{
   font-size: 0.8em;
   border: 1px solid #BFBFBFD8;
@@ -61,7 +65,7 @@ p{
   width: 48%;
   flex: auto;
 }
-.document-topics{
+.document-topics-block{
   display: flex;
   flex-flow: row wrap;
 }
