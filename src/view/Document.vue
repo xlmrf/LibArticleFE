@@ -37,7 +37,7 @@
             <cites-document :getDocument="getDocument" />
           </div>
         </div>
-        <files :files="getDocument.files" @close-modal-file="openModalFile = false" />
+        <files v-if="getDocument.files.main" :files="getDocument.files" @close-modal-file="openModalFile = false" />
       </div>
 
 

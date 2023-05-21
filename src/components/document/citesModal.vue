@@ -10,8 +10,8 @@
       </small>
       <div class="modalWindow">
         <div class="top-modal-window">
-          <input type="text" v-model="searchCites" placeholder="Estimation of radio...">
           <h3 @click="pageCounter++">Посилання документа</h3>
+          <input type="text" v-model="searchCites" placeholder="Estimation of radio...">
         </div>
         <div class="files-tape">
           <div class="item-reference" v-for="(reference,idx) in document_cites">
@@ -123,15 +123,14 @@ export default {
 
 .top-modal-window{
   display: flex;
+  flex-flow: column;
   justify-content: center;
   padding: 10px;
   border-bottom: 1px solid #A9A9A995;
 }
 
 .top-modal-window > input{
-  position: absolute;
-  left: 10px;
-  top: 6px;
+  margin-top: 15px;
   padding: 5px 6px;
   font-size: 1em;
 }
