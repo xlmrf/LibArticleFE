@@ -37,7 +37,7 @@
             <cites-document :getDocument="getDocument" />
           </div>
         </div>
-        <files :files="getDocument.files" />
+        <files :files="getDocument.files" @close-modal-file="openModalFile = false" />
       </div>
 
 
@@ -76,11 +76,11 @@ import DocumentRefs from "@/components/document/documentRefs";
 import Annotation from "@/components/document/annotation";
 
 export default {
-  data(){
-    return{
-
-    }
-  },
+  // data(){
+  //   return{
+  //     openModalFile:false
+  //   }
+  // },
   methods:{
     ...mapActions(['requestDocument'
     // 'requestTypes'
