@@ -3,7 +3,7 @@
 
     <div class="top-document-info">
       <span class="document-type" @click="smooth()">{{getTypes.find(item => item.id === getDocument.type_id)?.name}}</span>
-      <router-link class="remake-link" :to="'/document/make/'+$route.params.id" >
+      <router-link v-if="getDocument.authors.map(item => item.user_id === getUser.id).includes(true)" class="remake-link" :to="'/document/make/'+$route.params.id" >
         Редагувати
       </router-link>
     </div>
@@ -30,6 +30,7 @@
 
           <div>Дата публікації:
             <span>{{new Date(Date.parse(getDocument.publication_date)).toDateString()}}</span>
+            {{this.getDocument.authors.map(item => item.user_id === 1).includes(true)}}
           </div>
 
           <div class="doc-counters">
@@ -94,7 +95,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getDocument','getTypes']),
+    ...mapGetters(['getDocument','getTypes', 'getUser']),
   },
   components:{Annotation, DocumentRefs, Authors, Loader, info,files,comment, citesDocument,viewsDocument},
   mounted() {
