@@ -86,6 +86,7 @@ export default {
 
 .document-make-body {
   height: 100%;
+  background: #F6F8FA;
   /*border:1px solid #0d2839;*/
 }
 </style>

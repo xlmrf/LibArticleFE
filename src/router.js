@@ -17,9 +17,9 @@ import tutorial from "./components/fallback/TutorialComponent"
 import support from "./view/UnknownPage"
 import rules from "./view/UnknownPage"
 
-import actions from "./view/UserActions"
-import notices from "./components/UserActions/Notices"
-import story from "./components/UserActions/StoryActions"
+import actions from "./view/Actions"
+import notices from "./components/actions/Notices"
+import story from "./components/actions/StoryActions"
 
 import settings from "./view/UserSettings"
 import ProfileSettings from "./components/settings/Account"

@@ -184,6 +184,12 @@ export default {
   /*border: 1px solid #bbb;*/
   margin: 3px;
 }
+
+.form-item > label{
+  font-weight: bold;
+  font-size: 18px;
+}
+
 .form-item label{
   margin: 3px;
   color: #313131;

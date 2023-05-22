@@ -2,8 +2,8 @@
   <div>
     <form class="card" @submit.prevent enctype="multipart/form-data">
       <!--    enctype="multipart/form-data"-->
-      <input class="form-control select-input" type="file" id="files" @change="selectedFiles()"
-             ref="files" :multiple="getFiles.main.url">
+<!--      <input class="form-control select-input" type="file" id="files" @change="selectedFiles()"-->
+<!--             ref="files" :multiple="getFiles.main.url">-->
       <div class="document-files-wrapper">
 
 
@@ -28,14 +28,31 @@
 
         <hr :style="'width:'+getProgressLoadingFile+'%'">
         <span>{{loadError}}</span>
-        <div :class="['file-update-area',{dragover:isDragging}]"
-             @dragover="dragover"
-             @dragleave="dragleave"
-             @drop="drop"
-             @click="addFile()">
-          <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="#24292F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15v4c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-4M17 9l-5 5-5-5M12 12.8V2.5"/></svg>
-          <span>завантажити файл</span>
+        <div
+            class="dropzone-container"
+            :class="{'dropzone-active':isDragging}"
+            @dragover="dragover"
+            @dragleave="dragleave"
+            @drop="drop">
+          <input
+              name="file"
+              class="form-control select-input" type="file" id="files" @change="selectedFiles()"
+              ref="files" :multiple="getFiles.main.url"
+          />
+
+          <label for="files" class="file-label" @dragover="dragover">
+            <div v-if="isDragging">Опускайте файл</div>
+            <div v-else @click="addFile()">Щоб завантажити файл, перетягніть файл в поле або <u>натисніть сюди</u>.</div>
+          </label>
         </div>
+<!--        <div -->
+<!--             @dragover="dragover"-->
+<!--             @dragleave="dragleave"-->
+<!--             @drop="drop"-->
+<!--             @click="addFile()">-->
+<!--          <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="#24292F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15v4c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-4M17 9l-5 5-5-5M12 12.8V2.5"/></svg>-->
+<!--          <span>завантажити файл</span>-->
+<!--        </div>-->
 <!--        <div class="box-frame" v-else>-->
 <!--&lt;!&ndash;          <iframe :src='frameUrl(getFiles[file_id])+"#view=FitH"'></iframe>&ndash;&gt;-->
 <!--          &lt;!&ndash;          <iframe :src="getFiles[file_id].url" frameborder="0">Не вийшло завантажити файл</iframe>&ndash;&gt;-->
@@ -48,6 +65,22 @@
 <!--        </div>-->
       </div>
     </form>
+    <div class="files-control-panel" >
+      <div v-if="getFiles.main.url">
+        <span>
+          {{ getFiles.main }}
+        </span>
+        <span>{{ checkSize(getFiles.main.sizeFile)}}</span>
+        <span class="user-remove-btn">
+<!--          @click="removeAuthor(idx, author)"-->
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+               stroke="#9A9A9A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </span>
+      </div>
+<!--      <div v-for="file in getFiles.add">{{ file }}</div>-->
+    </div>
     {{getFiles}}
   </div>
 </template>
@@ -94,6 +127,16 @@ export default {
   methods: {
     ...mapMutations(['FilePusher', 'updateFiles']),
 
+
+    //При дропі документа файл добавляється в стор, потім відправляється на бек,
+    // для того щоб контролювати файл який закинули і при помилці маніпулювати інформацією
+
+    // onChange() {
+      // this.files = [...this.$refs.file.files];
+      // this.selectedFiles()
+      // console.log('onChange',this.files)
+    // },
+
     dragover(e) {
       e.preventDefault();
       this.isDragging = true;
@@ -103,26 +146,41 @@ export default {
     },
     drop(e) {
       e.preventDefault();
-      this.$refs.file.files = e.dataTransfer.files;
-      this.onChange();
+      this.$refs.files.files = e.dataTransfer.files;
+      this.selectedFiles()
+      console.log('file transfer',this.$refs)
+      // let uploadedFiles = this.$refs.files.files;
+      // let formData = new FormData();
+      // let length = 0
+      // uploadedFiles.length > 5 ? length = 5 : length = uploadedFiles.length
+      // for (var i = 0; i < length; i++) {
+      //   let file = this.validate(uploadedFiles[i]);
+      //   formData.set('file', file);
+      //   if (file !== null) {
+      //     this.pushFile(formData)
+      //   }
+      // }
+      // this.pushFile(e.dataTransfer.files[0])
       this.isDragging = false;
     },
 
-    checkSize(item, type) {
+    checkSize(item) {
+      let type = ''
       if (item > 1000) {
-        type = 'KB'
+        type = 'K'
         item = item / 1024
         if (item > 1000) {
-          type = 'MB'
+          type = 'M'
           item = item / 1024
         }
-        return parseFloat(item).toFixed(2) + " " + type
+        return parseFloat(item).toFixed(2) + " " + type + "B"
       } else {
         return item + " " + 'B'
       }
     },
 
     pushFile(data){
+      console.log('push file',data)
       axios.post('https://s1.libarticle.polidar.in.ua/api/v1/file', data, {
         onUploadProgress: progressEvent => {
           if (progressEvent.lengthComputable){
@@ -156,14 +214,14 @@ export default {
       }
       return valid
     },
-    // next() {
-    //   console.log("validator", this.getFiles.length);
-    //   this.uploadDocument(this.document)
-    // },
+
+
     addFile() {
       this.valid = false
       this.$refs.files.click()
     },
+
+
     removeItem() {
       this.getFiles.splice(this.file_id, 1)
       // this.src.splice(this.file_id, 1)
@@ -173,6 +231,8 @@ export default {
         this.file_id = 0
       }
     },
+
+
     selectedFiles() {
       let uploadedFiles = this.$refs.files.files;
       let formData = new FormData();
@@ -192,6 +252,52 @@ export default {
 </script>
 
 <style scoped>
+.files-control-panel{
+  margin: 10px 0;
+  background: white;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+}
+
+.files-control-panel > div{
+  margin: 5px 0;
+  cursor: pointer;
+  padding: 10px 5px;
+  border-radius: 3px;
+}
+
+.files-control-panel > div:hover{
+  background: #f1f1f1;
+}
+
+.dropzone-container {
+  display: flex;
+  width: 592px;
+  height: 400px;
+  padding:10px;
+  border-radius: 4px;
+  background: white;
+  border: 1px solid #e2e8f0;
+
+}
+
+.dropzone-active{
+  box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
+}
+
+.file-label {
+  text-align: center;
+  font-size: 20px;
+  display: block;
+  width: 100%;
+  align-self: center;
+  cursor: pointer;
+}
+
+.preview-container {
+  display: flex;
+  margin-top: 2rem;
+}
+
 hr {
   display: block;
   height: 1px;
@@ -251,49 +357,6 @@ body {
   transform-origin: center center;
 }
 
-/*.rotate-shadows:before {*/
-/*  box-shadow: inset 0 20px 0 rgba(6, 159, 219, 0.6), inset 20px 0 0 rgba(16, 111, 111, 0.6), inset 0 -20px 0 rgba(48, 115, 137, 0.6), inset -20px 0 0 rgba(49, 120, 137, 0.6);*/
-/*  animation: rotate-before 2s -0.5s linear infinite;*/
-/*}*/
-.rotate-shadows:after {
-  box-shadow: inset 0 10px 0 rgba(175, 0, 250, 0.6), inset 10px 0 0 rgba(196, 0, 250, 0.6), inset 0 -10px 0 rgba(225, 0, 250, 0.6), inset -10px 0 0 rgba(183, 0, 250, 0.6);
-  animation: rotate-after 3s -0.1s linear infinite;
-}
-
-@keyframes rotate-after {
-  0% {
-    transform: rotateZ(0deg) scaleX(1) scaleY(1);
-  }
-  25% {
-    transform: rotateZ(90deg) scaleX(0.96) scaleY(0.97);
-    box-shadow: inset 0 10px 0 rgba(137, 11, 213, 0.3), inset 10px 0 0 rgba(250, 0, 0, 0.6), inset 0 -10px 0 rgba(113, 205, 213, 0.6), inset -10px 0 0 rgba(38, 90, 245, 0.6);
-  }
-  50% {
-    transform: rotateZ(180deg) scaleX(0.92) scaleY(0.95);
-    box-shadow: inset 0 10px 0 rgba(196, 0, 0, 0.3), inset 10px 0 0 rgba(233, 0, 250, 0.6), inset 0 -10px 0 rgba(12, 105, 217, 0.6), inset -10px 0 0 rgba(7, 209, 219, 0.6);
-  }
-  75% {
-    transform: rotateZ(270deg) scaleX(0.96) scaleY(0.98);
-    box-shadow: inset 0 10px 0 rgba(63, 229, 51, 0.3), inset 10px 0 0 rgba(0, 63, 250, 0.6), inset 0 -10px 0 rgba(217, 166, 12, 0.6), inset -10px 0 0 rgba(198, 7, 219, 0.6);
-  }
-  100% {
-    transform: rotateZ(360deg) scaleX(1) scaleY(1);
-  }
-}
-
-@keyframes rotate-before {
-  0% {
-    transform: rotateZ(0deg) scaleX(1) scaleY(1);
-  }
-  50% {
-    transform: rotateZ(-180deg) scaleX(0.95) scaleY(0.95);
-  }
-  100% {
-    transform: rotateZ(-360deg) scaleX(1) scaleY(1);
-  }
-}
-
-
 .select-input {
   display: none;
 }
@@ -302,50 +365,6 @@ body {
   /*background-color: #e9ecef;*/
   opacity: 0;
   display: none;
-}
-
-.type-loader {
-  display: none;
-  /*display: flex;*/
-  position: relative;
-  /*padding: 50px;*/
-  /*  top: 50%;*/
-  /*  right: 20%;*/
-  /*justify-content: center;*/
-}
-
-.main-card {
-  display: block;
-  height: 100%;
-  /*border: 1px solid black;*/
-}
-
-.card {
-
-}
-
-.wrapper {
-  display: grid;
-  margin-top: 1rem;
-  grid-template-columns: 3fr 4fr;
-  /*border: 1px solid blueviolet;*/
-}
-
-/*.file-areas{*/
-/*    display: grid;*/
-/*    grid-template-rows: repeat(4,1fr);*/
-/*    grid-gap: 25px;*/
-
-/*}*/
-
-.file_control {
-  display: flex;
-  padding: 0 20px;
-  justify-content: space-between;
-}
-
-.file_control > div {
-  position: relative;
 }
 
 /*input settings*/

@@ -80,8 +80,9 @@ export default {
 
 .select-search-area > span{
   cursor: pointer;
-  padding: 5px 10px;
-  width: 150px;
+  padding: 7px 10px;
+  margin: 3px 0;
+  width: 120px;
   border-radius: 6px;
 }
 

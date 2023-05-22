@@ -1,8 +1,8 @@
 <template>
   <div class="main">
-    {{files}}
     <div
         class="dropzone-container"
+        :class="{'dropzone-active':isDragging}"
         @dragover="dragover"
         @dragleave="dragleave"
         @drop="drop">
@@ -16,9 +16,9 @@
           ref="file"
           accept=".pdf,.jpg,.jpeg,.png"/>
 
-      <label for="fileInput" class="file-label">
-        <div v-if="isDragging">Release to drop files here.</div>
-        <div v-else>Drop files here or <u>click here</u> to upload.</div>
+      <label for="fileInput" class="file-label" @dragover="dragover">
+        <div v-if="isDragging">Опускайте файл</div>
+        <div v-else>Щоб завантажити файл, перетягніть файл в поле або <u>натисніть сюди</u>.</div>
       </label>
     </div>
   </div>
@@ -35,16 +35,20 @@ export default {
   methods: {
     onChange() {
       this.files = [...this.$refs.file.files];
+      console.log('onChange',this.files)
     },
     dragover(e) {
       e.preventDefault();
+      console.log('dragOver')
       this.isDragging = true;
     },
     dragleave() {
+      console.log('dragLeave')
       this.isDragging = false;
     },
     drop(e) {
       e.preventDefault();
+      console.log('drop')
       this.$refs.file.files = e.dataTransfer.files;
       this.onChange();
       this.isDragging = false;
@@ -64,9 +68,17 @@ export default {
 }
 
 .dropzone-container {
-  padding: 4rem;
+  display: flex;
+  width: 592px;
+  height: 400px;
+  padding:10px;
+  border-radius: 4px;
   background: #f7fafc;
   border: 1px solid #e2e8f0;
+}
+
+.dropzone-active{
+  border: 2px solid #1C75DD;
 }
 
 .hidden-input {
@@ -80,6 +92,8 @@ export default {
 .file-label {
   font-size: 20px;
   display: block;
+  width: 100%;
+  align-self: center;
   cursor: pointer;
 }
 
