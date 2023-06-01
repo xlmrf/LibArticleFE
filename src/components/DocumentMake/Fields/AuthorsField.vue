@@ -130,10 +130,6 @@ export default {
 </script>
 
 <style scoped>
-.author-control {
-  display: flex;
-  align-items: end;
-}
 
 .authors {
   border: 1px solid #a9a9a9;
@@ -250,4 +246,10 @@ export default {
   stroke: #525252;
   /*border: 1px solid black;*/
 }
+
+.author-control{
+  /*display: flex;*/
+  /*align-items: end;*/
+}
+
 </style>

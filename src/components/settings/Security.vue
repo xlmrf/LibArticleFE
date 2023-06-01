@@ -163,6 +163,7 @@ export default {
   /*border: 1px solid rgb(34,46,152);*/
   /*background: rgba(153, 159, 239, 0.1);*/
   position: relative;
+  color: #444444;
   padding: 15px;
   font-size: 18px;
   border: 1px solid rgba(147, 158, 179, 0.5);
