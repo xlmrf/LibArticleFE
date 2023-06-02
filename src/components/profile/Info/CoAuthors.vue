@@ -103,7 +103,6 @@ export default {
   margin: 0 10px;
 }
 
-
 .avatar {
   display: flex;
   flex-direction: column;
