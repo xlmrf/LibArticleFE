@@ -42,6 +42,7 @@ export default {
   watch: {
     '$route.params.id': {
       handler(item) {
+        this.data = []
         if (this.$route.params.id !== undefined) {
           this.getAuthors()
         }

@@ -30,7 +30,6 @@ export default createStore({
         api_url_v1:'https://libarticle.polidar.in.ua/api/v1',
         server_url_v1:'https://s1.libarticle.polidar.in.ua/api/v1',
         types:[]
-       // api_url_v1:'http://lib.loc/api/v1'
     },
     mutations: {
         pageMessage(ctx, data) {
