@@ -12,6 +12,7 @@
         <div class="top-modal-window">
           <h3 @click="pageCounter++">Посилання документа</h3>
           <input type="text" v-model="searchCites" placeholder="Estimation of radio...">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#777777" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
         </div>
         <div class="files-tape">
           <div class="item-reference" v-for="(reference,idx) in document_cites">
@@ -123,6 +124,7 @@ export default {
 
 .top-modal-window{
   display: flex;
+  position: relative;
   flex-flow: column;
   justify-content: center;
   padding: 10px;
@@ -133,6 +135,12 @@ export default {
   margin-top: 15px;
   padding: 5px 6px;
   font-size: 1em;
+}
+
+.top-modal-window > svg{
+  position: absolute;
+  right: 20px;
+  bottom: 15px;
 }
 
 .cites-modal {

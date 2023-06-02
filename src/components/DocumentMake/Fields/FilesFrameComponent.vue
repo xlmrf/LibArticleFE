@@ -139,6 +139,7 @@ export default {
 
     dragover(e) {
       e.preventDefault();
+      console.log('dragover: ', e.preventDefault())
       this.isDragging = true;
     },
     dragleave() {
