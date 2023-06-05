@@ -42,6 +42,7 @@
 
           <label for="files" class="file-label" @dragover="dragover">
             <div v-if="isDragging">Опускайте файл</div>
+            <div v-else-if="file_type_error">Тип документу не коректний</div>
             <div v-else @click="addFile()">Щоб завантажити файл, перетягніть файл в поле або <u>натисніть сюди</u>.</div>
           </label>
         </div>
@@ -87,7 +88,7 @@
 
 <script>
 import loader from "../../additional/loader";
-import {mapActions, mapGetters, mapMutations} from "vuex";
+import {mapActions, mapGetters, mapMutations, mapState} from "vuex";
 import axios from "axios";
 // import axios from "axios";
 
@@ -101,10 +102,13 @@ export default {
       file_id: 0,
       valid: false,
       process: 0,
-      loadError: null
+      loadError: null,
+      file_type_error: null
+
     }
   },
   computed: {
+    ...mapState(['access_file_types']),
     ...mapGetters(['getProgressLoadingFile', 'getFiles']),
     checkItem() {
       if (this.src[this.file_id] === undefined) {
@@ -139,7 +143,6 @@ export default {
 
     dragover(e) {
       e.preventDefault();
-      console.log('dragover: ', e.preventDefault())
       this.isDragging = true;
     },
     dragleave() {
@@ -200,11 +203,18 @@ export default {
         console.log('error in add files:', error);
       });
     },
-    validate(valid) {
+    validate(file) {
       // this.valid = valid
-      let size = valid.size / 1024 / 1024
-      console.log('valid -', valid.type);
+      let size = file.size / 1024 / 1024
+      console.log('file types:', )
+      console.log('valid -', file);
+      this.file_type_error = false
       if (size > 512) {
+        return null
+      }
+      if(!Object.values(this.access_file_types).includes(file.type))
+      {
+        this.file_type_error = true
         return null
       }
       // if (valid.type !== 'application/pdf' && valid.type !== 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' && valid.type !== 'application/msword') {
@@ -213,7 +223,7 @@ export default {
       if (this.getFiles.length === 0) {
         this.valid = true
       }
-      return valid
+      return file
     },
 
 

@@ -29,6 +29,13 @@ export default createStore({
         message: {},
         api_url_v1:'https://libarticle.polidar.in.ua/api/v1',
         server_url_v1:'https://s1.libarticle.polidar.in.ua/api/v1',
+        access_file_types: {
+            'docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            'pdf':'application/pdf',
+            'doc':'application/msword',
+            'pptx':'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+            'txt':'text/plain'
+        },
         types:[]
     },
     mutations: {

@@ -544,7 +544,7 @@ export default {
   margin: 0 5%;
   padding: 5px;
   overflow: hidden;
-  background: none;
+  background: #fff;
   text-align: center;
   border: 1px solid #A9A9A9;
   outline: none;
