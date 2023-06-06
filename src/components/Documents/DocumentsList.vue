@@ -3,9 +3,17 @@
     <div class="documents-header">
       <div class="sort-filter">
         <div class="showed-items">Показано<span>{{ documents.total!==0 ? documents.per_page*(documents.current_page-1)+1 : '0' }}</span> - <span>{{ documents.per_page*(documents.current_page-1)+documents.data.length }}</span>документи із<span>{{ documents.total }}</span>знайдених</div>
+        <div class="sort-type-control">
+          <label class="top-filter-label">Сортувати за</label>
+          <select class="top-filter-select" v-model="sortSelect">
+            <option v-for="count in sortDocuments" :key="count">
+              {{ count }}
+            </option>
+          </select>
+        </div>
         <div class="page-counter-control">
-          <label>На сторінці</label>
-          <select v-model="per_page">
+          <label class="top-filter-label">На сторінці</label>
+          <select class="top-filter-select" v-model="per_page">
             <option v-for="count in getPageCountPaginate" :key="count">
               {{ count }}
             </option>
@@ -33,11 +41,16 @@ export default {
   props: {
     documents: {
       type: Object
+
     }
   },
   data(){
     return{
-      per_page:this.$route.query.perPage ? this.$route.query.perPage : 10
+      per_page:this.$route.query.perPage ? this.$route.query.perPage : 10,
+      sortDocuments: {
+        documents: 'документами'
+      },
+      sortSelect: ''
     }
   },
   computed: {
@@ -105,13 +118,19 @@ export default {
   border: 1px solid #212121;
 }
 
-.page-counter-control{
+.page-counter-control, .sort-type-control{
   display: flex;
   align-items: center;
 }
 
-.page-counter-control > label{
+.top-filter-label{
   margin-right: 10px;
+}
+
+.sort-type-control .top-filter-select{
+  font-size: 1em;
+  font-weight: normal;
+  color: #222222;
 }
 
 .citation-view {
@@ -141,7 +160,7 @@ export default {
 
 .documents-header {
   margin: 1rem 0.5rem;
-  padding: 1rem;
+  padding: 5px 5px;
   display: flex;
   flex-flow: column;
   border-bottom: 1px solid #bbb;
@@ -158,7 +177,7 @@ export default {
 .nav-filter-items{
   justify-self: right;
 }
-.page-counter-control select{
+.top-filter-select{
   /*border: 1px solid #bbb;*/
   border-radius: 3px;
   padding: 0.25rem 0.5rem;
