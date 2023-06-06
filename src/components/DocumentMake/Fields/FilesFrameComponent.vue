@@ -26,11 +26,11 @@
 
 
 
-        <hr :style="'width:'+getProgressLoadingFile+'%'">
+        <hr class="top-load-line" :style="'width:'+getProgressLoadingFile+'%'">
         <span>{{loadError}}</span>
         <div
             class="dropzone-container"
-            :class="{'dropzone-active':isDragging}"
+            :class="{'dropzone-active':isDragging, 'dropzone-error':file_type_error}"
             @dragover="dragover"
             @dragleave="dragleave"
             @drop="drop">
@@ -41,8 +41,9 @@
           />
 
           <label for="files" class="file-label" @dragover="dragover">
-            <div v-if="isDragging">Опускайте файл</div>
-            <div v-else-if="file_type_error">Тип документу не коректний</div>
+            <div class="text-predict" v-if="isDragging" >Опускайте файл</div>
+            <div class="text-error" v-else-if="file_type_error" >Тип документу не коректний</div>
+            <div class="file-loader" v-else-if="this.getProgressLoadingFile !== 0 && this.getProgressLoadingFile !== 100" ><loader width="3" radius="12" /></div>
             <div v-else @click="addFile()">Щоб завантажити файл, перетягніть файл в поле або <u>натисніть сюди</u>.</div>
           </label>
         </div>
@@ -103,13 +104,13 @@ export default {
       valid: false,
       process: 0,
       loadError: null,
-      file_type_error: null
-
+      file_type_error: null,
+      getProgressLoadingFile: 0
     }
   },
   computed: {
     ...mapState(['access_file_types']),
-    ...mapGetters(['getProgressLoadingFile', 'getFiles']),
+    ...mapGetters(['getFiles']),
     checkItem() {
       if (this.src[this.file_id] === undefined) {
         for (let i = 0; i < this.getFiles.length; i++) {
@@ -188,6 +189,7 @@ export default {
       axios.post('https://s1.libarticle.polidar.in.ua/api/v1/file', data, {
         onUploadProgress: progressEvent => {
           if (progressEvent.lengthComputable){
+            console.log('loader',this.getProgressLoadingFile)
             this.getProgressLoadingFile = (progressEvent.loaded / progressEvent.total) * 100
           }
         }
@@ -291,9 +293,16 @@ export default {
 
 }
 
+.dropzone-error{
+  box-shadow: rgba(214, 11, 3, 0.3) 0px 0px 0px 3px;
+}
+
 .dropzone-active{
   box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
 }
+
+
+
 
 .file-label {
   text-align: center;
@@ -346,6 +355,12 @@ body {
 
 .dragover{
   border: 1px solid #0969DA;
+}
+
+.file-loader{
+  position: relative;
+  top: -50px;
+  right: 40px;
 }
 
 .rotate-shadows {
@@ -640,6 +655,9 @@ body {
 
 }
 
+.top-load-line{
+  max-width: 592px;
+}
 
 .nav {
   width: 100%;
@@ -694,6 +712,10 @@ li {
   color: rgba(255, 255, 255, .3);
   text-decoration: none;
   transition: all .25s ease;
+}
+
+.text-predict{
+  color: rgba(16, 89, 255, 0.82);
 }
 
 @media screen and (max-width: 800px) {

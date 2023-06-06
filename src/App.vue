@@ -361,5 +361,8 @@ input {
   border: 1px solid red;
 }
 
+.text-error{
+  color: rgba(217, 39, 27, 0.87);
+}
 
 </style>
