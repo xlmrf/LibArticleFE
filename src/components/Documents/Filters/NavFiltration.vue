@@ -1,7 +1,7 @@
 <template>
   <div class="used-filters" v-if="JSON.stringify(checkFilter) !== '{}'">
 <!--    <span class="top-filter-panel">-->
-      <span>Увімкнені фільтри:</span>
+      <span>Застосовані фільтри:</span>
 <!--    </span>-->
     <span class="filter-panel" v-for="(item,k) in checkFilter">
       {{ translateFilters(k) }}
@@ -16,7 +16,7 @@
           </small>
       </span>
     </span>
-    <span class="clear-filter-btn" @click="clearFilter()">очистити фільтри</span>
+    <span class="clear-filter-btn" @click="clearFilter()">очистити</span>
   </div>
 </template>
 
