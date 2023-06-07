@@ -1,6 +1,8 @@
 <template>
   <div class="used-filters" v-if="JSON.stringify(checkFilter) !== '{}'">
-    Увімкнені фільтри:
+<!--    <span class="top-filter-panel">-->
+      <span>Увімкнені фільтри:</span>
+<!--    </span>-->
     <span class="filter-panel" v-for="(item,k) in checkFilter">
       {{ translateFilters(k) }}
       <span v-for="(el, i) in textFilter(item, k)">
@@ -14,6 +16,7 @@
           </small>
       </span>
     </span>
+    <span class="clear-filter-btn" @click="clearFilter()">очистити фільтри</span>
   </div>
 </template>
 
@@ -97,6 +100,12 @@ export default {
         name: 'documents',
         query: {...query}
       })
+    },
+    clearFilter(){
+      this.$router.replace({
+        name: 'documents',
+        query: {}
+      })
     }
   },
 
@@ -112,7 +121,9 @@ export default {
 .used-filters {
   margin-top: 1rem;
   /*display: flex;*/
+  position: relative;
 }
+
 
 .filter-panel{
   display: flex;
@@ -143,5 +154,21 @@ export default {
 
 .delete-item > svg:hover {
   stroke: #222222;
+}
+
+.clear-filter-btn{
+  position: absolute;
+  top: calc(50% - 20px);
+  right: 20px;
+  border: 1px solid #bbbbbb;
+  color: #535353;
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 5px 10px;
+}
+
+.clear-filter-btn:hover{
+  border: 1px solid #535353;
+  color: #333333;
 }
 </style>

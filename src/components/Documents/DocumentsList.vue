@@ -3,15 +3,15 @@
     <div class="documents-header">
       <div class="sort-filter">
         <div class="showed-items">Показано<span>{{ documents.total!==0 ? documents.per_page*(documents.current_page-1)+1 : '0' }}</span> - <span>{{ documents.per_page*(documents.current_page-1)+documents.data.length }}</span>документи із<span>{{ documents.total }}</span>знайдених</div>
-        <div class="sort-type-control">
+        <div class="select-control">
           <label class="top-filter-label">Сортувати за</label>
           <select class="top-filter-select" v-model="sortSelect">
-            <option v-for="count in sortDocuments" :key="count">
+            <option class="filter-option" v-for="count in sortDocuments" :key="count">
               {{ count }}
             </option>
           </select>
         </div>
-        <div class="page-counter-control">
+        <div class="select-control">
           <label class="top-filter-label">На сторінці</label>
           <select class="top-filter-select" v-model="per_page">
             <option v-for="count in getPageCountPaginate" :key="count">
@@ -48,7 +48,8 @@ export default {
     return{
       per_page:this.$route.query.perPage ? this.$route.query.perPage : 10,
       sortDocuments: {
-        documents: 'документами'
+        popular: 'популярністю',
+        date: 'датою',
       },
       sortSelect: ''
     }
@@ -171,6 +172,8 @@ export default {
   display: flex;
   justify-content: space-between;
 }
+
+
 .sort-filter >:nth-child(1) > span{
   font-weight: bold;
 }
@@ -178,13 +181,41 @@ export default {
   justify-self: right;
 }
 .top-filter-select{
-  /*border: 1px solid #bbb;*/
+  border: 1px solid #1C75DD;
+  color: #1C75DD;
+  text-align: center;
   border-radius: 3px;
-  padding: 0.25rem 0.5rem;
+  padding: 5px;
   font-size: 1.2rem;
   cursor: pointer;
   line-height: 1.1;
-  background-color: #fff;
+  position: relative;
+  background: none;
+}
+.top-filter-select > option{
+  color: #333333;
+  background: #f1f1f1;
+}
+.select-control{
+  overflow: hidden;
+  position: relative;
+  padding: 10px 0;
+}
+.select-control:after{
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #1C75DD;
+  position: absolute;
+  top: 46%;
+  right: 4px;
+  content: "";
+  z-index: 999;
+}
+
+.filter-option{
+  text-align: center;
 }
 
 </style>

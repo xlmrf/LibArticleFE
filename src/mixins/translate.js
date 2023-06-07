@@ -13,9 +13,9 @@ export default {
                 'description' : 'Опис',
             },
             filters_equal:{
-                'authors': 'Автори:',
-                'type_id': 'Тип:',
-                'publication_date': 'Дата публікації:'
+                'authors': 'автори:',
+                'type_id': 'тип:',
+                'publication_date': 'дата публікації:'
             }
         }
     },

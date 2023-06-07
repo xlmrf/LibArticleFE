@@ -26,8 +26,7 @@
 
 
 
-        <hr class="top-load-line" :style="'width:'+getProgressLoadingFile+'%'">
-        <span>{{loadError}}</span>
+        <span v-if="loadError">{{loadError}}</span>
         <div
             class="dropzone-container"
             :class="{'dropzone-active':isDragging, 'dropzone-error':file_type_error}"
@@ -47,6 +46,7 @@
             <div v-else @click="addFile()">Щоб завантажити файл, перетягніть файл в поле або <u>натисніть сюди</u>.</div>
           </label>
         </div>
+        <hr class="top-load-line" :style="'width:'+getProgressLoadingFile+'%'">
 <!--        <div -->
 <!--             @dragover="dragover"-->
 <!--             @dragleave="dragleave"-->
@@ -68,9 +68,9 @@
       </div>
     </form>
     <div class="files-control-panel" >
-      <div v-if="getFiles.main.url">
-        <span>
-          {{ getFiles.main }}
+      <div class="inside-file-item" v-if="getFiles.main.url">
+        <span class="file-name">
+          {{ getFiles.main.originalNameFile }}.{{ getFiles.main.typeFile }}
         </span>
         <span>{{ checkSize(getFiles.main.sizeFile)}}</span>
         <span class="user-remove-btn">
@@ -81,6 +81,7 @@
             <line x1="6" y1="6" x2="18" y2="18"></line></svg>
       </span>
       </div>
+      <div class="no-files" v-else>Добавте перший файл</div>
 <!--      <div v-for="file in getFiles.add">{{ file }}</div>-->
     </div>
     {{getFiles}}
@@ -273,9 +274,21 @@ export default {
 
 .files-control-panel > div{
   margin: 5px 0;
+}
+
+.inside-file-item{
   cursor: pointer;
   padding: 10px 5px;
   border-radius: 3px;
+}
+
+.file-name{
+  color: #1C75DD;
+}
+
+.no-files{
+  text-align: center;
+  padding: 20px 0;
 }
 
 .files-control-panel > div:hover{
