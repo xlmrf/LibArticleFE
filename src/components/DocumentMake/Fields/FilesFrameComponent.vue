@@ -68,20 +68,23 @@
       </div>
     </form>
     <div class="files-control-panel" >
-      <div class="inside-file-item" v-if="getFiles.main.url">
+<!--      <label class="label-file-category">Головний файл</label>-->
+      <div class="inside-file-item main-item-file" v-if="getFiles.main.url">
         <span class="file-name">
           {{ getFiles.main.originalNameFile }}.{{ getFiles.main.typeFile }}
         </span>
-        <span>{{ checkSize(getFiles.main.sizeFile)}}</span>
-        <span class="user-remove-btn">
-<!--          @click="removeAuthor(idx, author)"-->
-          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
-               stroke="#9A9A9A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line></svg>
-      </span>
+        <span class="label-file-size">{{ checkSize(getFiles.main.sizeFile)}}</span>
+        <span class="remove-item-file">Видалити</span>
       </div>
-      <div class="no-files" v-else>Добавте перший файл</div>
+<!--      <label class="label-file-category">Додаткові файли</label>-->
+      <div class="inside-file-item" v-if="getFiles.add[0]" v-for="file in getFiles.add">
+        <span class="file-name">
+          {{ file.originalNameFile }}.{{ file.typeFile }}
+        </span>
+        <span class="label-file-size">{{ checkSize(file.sizeFile)}}</span>
+        <span class="remove-item-file">Видалити</span>
+      </div>
+      <div class="no-files" v-else>Додаткових файлів немає</div>
 <!--      <div v-for="file in getFiles.add">{{ file }}</div>-->
     </div>
     {{getFiles}}
@@ -268,19 +271,60 @@ export default {
 <style scoped>
 .files-control-panel{
   max-width: 592px;
+  position: relative;
   margin: 10px 0;
+}
+
+.files-control-panel > div{
   background: white;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
 }
 
-.files-control-panel > div{
-  margin: 5px 0;
-}
-
 .inside-file-item{
   cursor: pointer;
+  display: flex;
   padding: 10px 5px;
   border-radius: 3px;
+}
+
+.inside-file-item > span{
+  align-self: center;
+}
+
+.main-item-file{
+  margin-bottom: 20px;
+}
+
+.label-file-size{
+  margin-left: auto;
+  padding: 0 10px;
+}
+
+.remove-item-file{
+  color: #d2443b;
+  margin: 0 10px;
+}
+
+.label-file-category{
+  position: relative;
+  top: -5px;
+  margin: 5px;
+}
+
+.remove-item-file:hover{
+  text-decoration: underline;
+}
+
+.remove-file{
+  padding: 6px;
+  position: absolute;
+  right: -40px;
+  height: 40px;
+  width: 40px;
+  z-index: 99;
+}
+.remove-file:hover{
+  /*background: rgba(239, 149, 149, 0.8);*/
 }
 
 .file-name{
@@ -292,7 +336,7 @@ export default {
   padding: 20px 0;
 }
 
-.files-control-panel > div:hover{
+.inside-file-item:hover{
   background: #f1f1f1;
 }
 
