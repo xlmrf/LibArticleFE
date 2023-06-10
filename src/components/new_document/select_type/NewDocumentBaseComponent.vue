@@ -83,6 +83,9 @@ export default {
 </script>
 
 <style scoped>
+
+/*#7A8FA8AD*/
+
 .manual-item{
   padding:10px 25px;
   text-decoration:none;

@@ -36,7 +36,15 @@
 
           <span v-if="isProfile && views.document_views">{{views.document_views.value}}</span>
 
-          <router-link :to="''" v-if="!isProfile">Завантажити</router-link>
+          <span v-if="!isProfile">
+            <router-link class="file-download-link" :to="''"  v-if="true">
+
+              Завантажити
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3684DD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15v4c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-4M17 9l-5 5-5-5M12 12.8V2.5"/></svg>
+            </router-link>
+            <span v-else>Доступ до файлу закритий</span>
+          </span>
+
 <!--          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#50ADBE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <circle cx="12" cy="12" r="10"/><path d="M16 12l-4 4-4-4M12 8v7"/></svg>-->
 <!--          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#50ADBE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v13M5 12l7 7 7-7"/></svg>-->
         </span>
@@ -101,7 +109,7 @@ export default {
 <style scoped>
 
 .document-item{
-  padding: 0.2rem 1rem;
+  padding: 0.1rem 1rem;
   overflow:hidden;
   outline: none;
 }
@@ -181,6 +189,14 @@ export default {
   color: #0969DA;
 }
 
+.file-download-link{
+  display: flex;
+}
+
+.file-download-link > svg{
+  margin-left: 5px;
+}
+
 .publication-date{
   color: #535353;
   margin-left: auto;
@@ -191,7 +207,7 @@ export default {
 .profile-file-download-link{
   display: flex;
   position: absolute;
-  bottom: 0;
+  bottom: 15px;
   right: 10px;
 }
 

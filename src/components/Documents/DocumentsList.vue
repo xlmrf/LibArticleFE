@@ -181,7 +181,7 @@ export default {
   justify-self: right;
 }
 .top-filter-select{
-  border: 1px solid #1C75DD;
+  /*border: 1px solid #1C75DD;*/
   color: #1C75DD;
   text-align: center;
   border-radius: 3px;
@@ -211,7 +211,7 @@ export default {
   top: 46%;
   right: 4px;
   content: "";
-  z-index: 999;
+  z-index: 99;
 }
 
 .filter-option{
