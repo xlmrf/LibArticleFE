@@ -7,6 +7,12 @@
       </div>
     </router-link>
     <router-link class="state-link" to="">
+      <div class="state-upload">
+        <span class="state-count">{{document_count}}</span>
+        <span class="sub-name-state">Авторських документів</span>
+      </div>
+    </router-link>
+    <router-link class="state-link" to="">
       <div class="state-citation">
         <span class="state-count">0</span>
         <span class="sub-name-state">Процитовано</span>
