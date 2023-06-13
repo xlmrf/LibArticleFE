@@ -247,9 +247,24 @@ export default {
   /*border: 1px solid black;*/
 }
 
+.check-coauthor{
+  background: #f1f1f1;
+  padding: 3px 10px;
+  border-radius: 6px;
+}
+
 .author-control{
-  /*display: flex;*/
-  /*align-items: end;*/
+  /*background: #bbbbbb;*/
+  position: relative;
+  top: -20px;
+  margin-left: auto;
+  width: fit-content;
+  display: flex;
+  align-items: end;
+}
+
+.author-control > label{
+  margin-right: 20px;
 }
 
 </style>

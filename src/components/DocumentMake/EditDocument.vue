@@ -178,15 +178,28 @@ export default {
   /*margin-right: 1rem;*/
 }
 .form-item{
+  border: 1px solid #BBBBBB;
+  border-radius: 8px;
+  background: white;
+
   display: inherit;
   flex-flow: column;
   width: 100%;
   /*border: 1px solid #bbb;*/
-  margin: 3px;
+  margin: 10px 0;
+  padding: 5px;
 }
 
 .form-item > label{
-  font-weight: bold;
+  position: relative;
+  top: -20px;
+  color: #333333;
+  background: white;
+  display: flex;
+  width: fit-content;
+  left: 10px;
+  padding: 0 3px;
+  /*font-weight: bold;*/
   font-size: 18px;
 }
 
@@ -265,7 +278,8 @@ export default {
   align-self: center;
   position: relative;
   cursor: pointer;
-  margin: 0 5%;
+  /*margin-left: auto;*/
+  /*margin-right: 40px;*/
   padding: 5px;
   overflow:hidden;
   background: none;
@@ -534,6 +548,14 @@ export default {
 .fill-areas-document > div {
   flex: 1 400px;
   margin: 0 1.3rem;
+}
+
+.complex-item-control{
+  display: flex;
+  width: 100%;
+}
+.complex-item-control > span{
+  width: 100%;
 }
 
 </style>

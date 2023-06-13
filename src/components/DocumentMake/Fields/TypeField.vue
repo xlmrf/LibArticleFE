@@ -79,16 +79,36 @@ export default {
   /*box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;*/
 }
 .type-description{
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  background: #fcfcfc;
   display: flex;
   flex-flow: column;
   width: 60%;
   margin-left: 20px;
 }
+
+h3:after{
+  content:'';
+  position:absolute;
+  width:100%;
+  height:1px;
+  left:0;
+  bottom:0;
+  background: rgba(191, 191, 191, 0.46);
+}
+
 h3{
-  height: 21px;
-  color: #24292F;
+  background: #009FFF;
+  position: relative;
+  overflow:hidden;
+  outline: none;
+  padding: 10px 0;
+
+  /*height: 21px;*/
+  /*color: #24292F;*/
+  color: white;
   font-size: 1.1em;
-  margin: 1rem 0;
+  /*margin: 1rem 0;*/
   /*color: #212121;*/
   font-weight: normal;
 }
@@ -99,8 +119,8 @@ h3{
   width: 100%;
   border-radius: 2px;
   height: 220px;
-  background: #f5f5f5;
-  /*box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;*/
+  /*background: #f5f5f5;*/
+  /*box-shadow: rgba(0, box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;*/
   position: relative;
   z-index: 9;
 }
@@ -128,7 +148,7 @@ h3{
   align-self: center;
   display: flex;
   flex-direction: column;
-  margin: 10px;
+  /*margin: 10px;*/
   font-size: 0.8em;
   height: 220px;
   width: 200px;
