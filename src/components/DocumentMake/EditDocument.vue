@@ -178,10 +178,11 @@ export default {
   /*margin-right: 1rem;*/
 }
 .form-item{
-  border: 1px solid #BBBBBB;
+  /*border: 1px solid #E1DBC8;*/
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
   border-radius: 8px;
   background: white;
-
+  position: relative;
   display: inherit;
   flex-flow: column;
   width: 100%;
@@ -190,11 +191,15 @@ export default {
   padding: 5px;
 }
 
+.form-item > div{
+  padding: 5px 10px 0 10px;
+}
+
 .form-item > label{
   position: relative;
   top: -20px;
   color: #333333;
-  background: white;
+  /*background: #FBFBFB;*/
   display: flex;
   width: fit-content;
   left: 10px;
@@ -231,7 +236,7 @@ export default {
   outline: none;
   position: relative;
   display: flex;
-  width: 90%;
+  width: 95%;
   margin: 0.3rem 0;
   /*border: 1px solid orangered;*/
 }
@@ -280,27 +285,33 @@ export default {
   cursor: pointer;
   /*margin-left: auto;*/
   /*margin-right: 40px;*/
-  padding: 5px;
+  border-radius: 4px;
+  padding: 6px 8px;
+  margin-right: 4px;
   overflow:hidden;
   background: none;
   outline: none;
   color: #525252;
 }
-.new-author-btn::after{
-  content:'';
-  position:absolute;
-  width:100%;
-  height:0.05rem;
-  left:0;
-  bottom:0;
-  background: #525252;
-}
-.new-author-btn::after{
-  transform:scale(0.85,1);
-  transition: transform 0.1s ease;
-}
-.new-author-btn:hover::after{
-  transform:scale(1,1);
+/*.new-author-btn::after{*/
+/*  content:'';*/
+/*  position:absolute;*/
+/*  width:100%;*/
+/*  height:0.05rem;*/
+/*  left:0;*/
+/*  bottom:0;*/
+/*  background: #525252;*/
+/*}*/
+/*.new-author-btn::after{*/
+/*  transform:scale(0.85,1);*/
+/*  transition: transform 0.1s ease;*/
+/*}*/
+/*.new-author-btn:hover::after{*/
+/*  transform:scale(1,1);*/
+/*}*/
+
+.new-author-btn:hover{
+  background: #eeeeee;
 }
 
 
@@ -520,21 +531,23 @@ export default {
 }
 
 .conclusion-btn{
-  /*text-transform: uppercase;*/
-  margin: 3px;
+  margin: 20px auto;
+  padding: 10px 50px;
   font-size: 1em;
+  background: #4694f1;
+  border-radius: 3px;
+  /*color: #333333;*/
+  color: white;
+  /*border: 1px solid #525252;*/
 }
 
-.conclusion-btn{
-  border-radius: 3px;
-  border: 1px solid #525252;
-  color: #222222;
-  padding: 0.5rem 1rem;
-  margin-right: auto;
-  margin-left: auto;
+.conclusion-btn:hover{
+  background: #5a9cea;
 }
 
 .fill-areas-document {
+  padding-bottom: 2rem;
+  height: 100%;
   display: flex;
   flex-wrap: wrap;
   margin-top: 1rem;
@@ -552,6 +565,7 @@ export default {
 
 .complex-item-control{
   display: flex;
+  flex-flow: column;
   width: 100%;
 }
 .complex-item-control > span{

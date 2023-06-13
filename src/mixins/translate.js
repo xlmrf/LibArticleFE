@@ -5,7 +5,7 @@ export default {
                 'title': 'Назва',
                 'edition': 'Науковий напрямок',
                 'authors': 'Автори',
-                'place' : 'Місце',
+                'place' : 'Місце публікації',
                 'publication_date' : 'Дата публікації',
                 'keywords' : 'Ключові слова',
                 'pages' : 'Сторінки',

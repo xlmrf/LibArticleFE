@@ -16,5 +16,11 @@ export default {
 </script>
 
 <style scoped>
-
+label{
+  position: absolute;
+  top: -20px;
+}
+div{
+  position: relative;
+}
 </style>

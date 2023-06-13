@@ -146,6 +146,13 @@ export default {
 .propose-authors > *{
   cursor: pointer;
   color: #0d2839;
+  padding: 3px 5px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  border-radius: 6px;
+}
+.propose-authors > *:hover{
+  background: #f1f1f1;
 }
 
 .author-fill-list {
@@ -171,8 +178,8 @@ export default {
   outline: none;
   position: relative;
   display: flex;
-  width: 90%;
-  margin: 0.3rem 0;
+  width: 95%;
+  margin: 1rem 0;
   flex-wrap: wrap;
   /*border: 1px solid orangered;*/
 }
@@ -187,6 +194,11 @@ export default {
 
 .author-list-item > div {
   margin: 2px;
+}
+
+.author-list-item > div > label{
+  position: relative;
+  bottom: 3px;
 }
 
 /*.author-list-item > :last-child {*/
@@ -248,19 +260,31 @@ export default {
 }
 
 .check-coauthor{
-  background: #f1f1f1;
-  padding: 3px 10px;
+  /*background: #f1f1f1;*/
+  padding: 5px 10px;
   border-radius: 6px;
+  cursor: pointer;
 }
 
 .author-control{
   /*background: #bbbbbb;*/
-  position: relative;
-  top: -20px;
-  margin-left: auto;
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  border: 1px solid #E1DBC8;
+  border-top-right-radius: 8px;
+  border-bottom-left-radius: 8px;
   width: fit-content;
   display: flex;
   align-items: end;
+}
+
+.check-coauthor:hover{
+  background: #eee;
+}
+
+.author-control{
+  background: #f8f8f8;
 }
 
 .author-control > label{
