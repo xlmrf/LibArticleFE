@@ -1,6 +1,11 @@
 <template>
   <div>
     <form class="card" @submit.prevent enctype="multipart/form-data">
+      <input
+          name="file"
+          class="form-control select-input" type="file" id="files" @change="selectedFiles()"
+          ref="files" :multiple="getFiles.main.url" :accept="typeOfFile"
+      />
       <!--    enctype="multipart/form-data"-->
 <!--      <input class="form-control select-input" type="file" id="files" @change="selectedFiles()"-->
 <!--             ref="files" :multiple="getFiles.main.url">-->
@@ -27,17 +32,12 @@
 
 
         <span v-if="loadError">{{loadError}}</span>
-        <div
+        <div v-if="!getFiles.main.url"
             class="dropzone-container"
             :class="{'dropzone-active':isDragging, 'dropzone-error':file_type_error}"
             @dragover="dragover"
             @dragleave="dragleave"
             @drop="drop">
-          <input
-              name="file"
-              class="form-control select-input" type="file" id="files" @change="selectedFiles()"
-              ref="files" :multiple="getFiles.main.url"
-          />
 
           <label for="files" class="file-label" @dragover="dragover">
             <div class="text-predict" v-if="isDragging" >Опускайте файл</div>
@@ -45,6 +45,13 @@
             <div class="file-loader" v-else-if="this.getProgressLoadingFile !== 0 && this.getProgressLoadingFile !== 100" ><loader width="3" radius="12" /></div>
             <div v-else @click="addFile()">Щоб завантажити файл, перетягніть файл в поле або <u>натисніть сюди</u>.</div>
           </label>
+        </div>
+        <div class="box-frame" v-else>
+<!--          <iframe :src='frameUrl(getFiles[file_id])+"#view=FitH"'></iframe>-->
+          <iframe :src="getFiles.main.url" frameborder="0">Не вийшло завантажити файл</iframe>
+
+<!--          <iframe :src="'https://view.officeapps.live.com/op/embed.aspx?src='+getFiles[file_id].url" v-else-if="getFiles[file_id].typeFile === 'doc'" frameborder="0">Не вийшло завантажити файл</iframe>-->
+
         </div>
         <hr class="top-load-line" :style="'width:'+getProgressLoadingFile+'%'">
 <!--        <div -->
@@ -55,11 +62,7 @@
 <!--          <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="#24292F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15v4c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-4M17 9l-5 5-5-5M12 12.8V2.5"/></svg>-->
 <!--          <span>завантажити файл</span>-->
 <!--        </div>-->
-<!--        <div class="box-frame" v-else>-->
-<!--&lt;!&ndash;          <iframe :src='frameUrl(getFiles[file_id])+"#view=FitH"'></iframe>&ndash;&gt;-->
-<!--          &lt;!&ndash;          <iframe :src="getFiles[file_id].url" frameborder="0">Не вийшло завантажити файл</iframe>&ndash;&gt;-->
-<!--          &lt;!&ndash;        <iframe :src="'https://view.officeapps.live.com/op/embed.aspx?src='+getFiles[file_id].url" v-else-if="getFiles[file_id].typeFile === 'doc'" frameborder="0">Не вийшло завантажити файл</iframe>&ndash;&gt;-->
-<!--        </div>-->
+
 <!--        <div class="wrapper-ground" v-if="getFiles.length !== 0">-->
 <!--          <small>{{ checkSize(getFiles[file_id].sizeFile) }}</small>-->
 <!--          &lt;!&ndash;        <div :class="[{'loader-sprint':getProgress}]">{{getProgress}}</div>&ndash;&gt;-->
@@ -67,27 +70,27 @@
 <!--        </div>-->
       </div>
     </form>
-    <div class="files-control-panel" >
+    <div class="files-control-panel" v-if="getFiles.main.url">
 <!--      <label class="label-file-category">Головний файл</label>-->
       <div class="inside-file-item main-item-file" v-if="getFiles.main.url">
         <span class="file-name">
           {{ getFiles.main.originalNameFile }}.{{ getFiles.main.typeFile }}
         </span>
         <span class="label-file-size">{{ checkSize(getFiles.main.sizeFile)}}</span>
-        <span class="remove-item-file">Видалити</span>
+        <span class="remove-item-file" @click="RemoveFile()">Видалити</span>
       </div>
 <!--      <label class="label-file-category">Додаткові файли</label>-->
-      <div class="inside-file-item" v-if="getFiles.add[0]" v-for="file in getFiles.add">
+      <div class="inside-file-item" v-if="getFiles.add[0]" v-for="(file,idx) in getFiles.add">
         <span class="file-name">
           {{ file.originalNameFile }}.{{ file.typeFile }}
         </span>
         <span class="label-file-size">{{ checkSize(file.sizeFile)}}</span>
-        <span class="remove-item-file">Видалити</span>
+        <span class="remove-item-file" @click="RemoveFile(idx)">Видалити</span>
       </div>
-      <div class="no-files" v-else>Додаткових файлів немає</div>
+      <div class="no-files" v-else>Додаткових файлів немає <p @click="addFile()" class="add-extra-files">Добавити</p></div>
 <!--      <div v-for="file in getFiles.add">{{ file }}</div>-->
     </div>
-    {{getFiles}}
+<!--    {{getFiles}}-->
   </div>
 </template>
 
@@ -115,6 +118,17 @@ export default {
   computed: {
     ...mapState(['access_file_types']),
     ...mapGetters(['getFiles']),
+
+    typeOfFile(){
+      if (!this.getFiles.main.url) {
+        return 'application/pdf'
+      }
+      else{
+        return "application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint, text/plain, application/pdf"
+
+      }
+    },
+
     checkItem() {
       if (this.src[this.file_id] === undefined) {
         for (let i = 0; i < this.getFiles.length; i++) {
@@ -209,6 +223,17 @@ export default {
         console.log('error in add files:', error);
       });
     },
+
+
+    RemoveFile(idx = -2){
+      if (idx === -2){
+        this.getFiles.main = {}
+      }
+      else {
+         this.getFiles.add.splice(idx,1)
+      }
+    },
+
     validate(file) {
       // this.valid = valid
       let size = file.size / 1024 / 1024
@@ -270,7 +295,7 @@ export default {
 
 <style scoped>
 .files-control-panel{
-  max-width: 592px;
+  /*max-width: 592px;*/
   position: relative;
   margin: 10px 0;
 }
@@ -328,6 +353,8 @@ export default {
 }
 
 .file-name{
+  max-width: 65%;
+  overflow-wrap: anywhere;
   color: #1C75DD;
 }
 
@@ -704,7 +731,7 @@ body {
 }
 
 .box-frame iframe {
-  min-height: 700px;
+  min-height: 500px;
   width: 100%;
   height: 100%;
   display: block;
@@ -774,6 +801,14 @@ li {
 
 .text-predict{
   color: rgba(16, 89, 255, 0.82);
+}
+
+.add-extra-files{
+  cursor: pointer;
+}
+
+.add-extra-files:hover{
+  text-decoration: underline;
 }
 
 @media screen and (max-width: 800px) {

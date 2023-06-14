@@ -18,7 +18,7 @@
 
       <div class="fill-areas">
         <div class="form-item" v-for="(item,idx) in getTypes.find(type => type.id === getDocument.type_id)?.fields"
-             :key="idx">
+             :key="idx" :class="{'universal-field': ['edition','place'].includes(item) }" >
           <label :for="item">{{ translateAreas(item) }}</label>
           <component :is="setFields(item)" :field="item" :is-ready="isReady"></component>
         </div>
@@ -211,6 +211,15 @@ export default {
 .form-item label{
   margin: 3px;
   color: #313131;
+}
+
+.universal-field{
+  flex: 1;
+  margin-right: 5px;
+}
+
+.universal-field:last-of-type{
+  color: red;
 }
 
 
@@ -553,9 +562,16 @@ export default {
   margin-top: 1rem;
 }
 
+.fill-areas-document > div:first-child{
+  flex: 3 300px;
+
+}
+
 .fill-areas{
+  height: 100%;
   display: flex;
-  flex-flow: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .fill-areas-document > div {

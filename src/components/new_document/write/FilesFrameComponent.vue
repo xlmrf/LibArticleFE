@@ -13,10 +13,13 @@
         <h4 v-else>Завантажте перший документ</h4>
       </div>
       <div :class="['file-update-area',{valid}]" @click="addFile()" v-if="getFiles.length === 0">завантажити файл</div>
-      <div class="box-frame" v-else>
-        <iframe :src="getFiles[file_id].url" frameborder="0">Не вийшло завантажити файл</iframe>
-<!--        <iframe :src="'https://view.officeapps.live.com/op/embed.aspx?src='+getFiles[file_id].url" v-else-if="getFiles[file_id].typeFile === 'doc'" frameborder="0">Не вийшло завантажити файл</iframe>-->
-      </div>
+<!--      <div class="box-frame" v-else>-->
+<!--        -->
+<!--        <iframe :src="getFiles.main.url" frameborder="0">Не вийшло завантажити файл</iframe>-->
+<!--        -->
+<!--&lt;!&ndash;        <iframe :src="'https://view.officeapps.live.com/op/embed.aspx?src='+getFiles[file_id].url" v-else-if="getFiles[file_id].typeFile === 'doc'" frameborder="0">Не вийшло завантажити файл</iframe>&ndash;&gt;-->
+<!--        -->
+<!--      </div>-->
       <div class="wrapper-ground" v-if="getFiles.length !== 0">
         <small>{{checkSize(getFiles[file_id].sizeFile)}}</small>
 <!--        <div :class="[{'loader-sprint':getProgress}]">{{getProgress}}</div>-->

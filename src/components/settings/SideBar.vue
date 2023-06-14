@@ -18,7 +18,6 @@ a{
   color: #535353;
 }
 .settings-sidebar-list{
-  height: 100%;
   background: #fff;
   display: flex;
   flex-flow: column;
@@ -31,6 +30,10 @@ a{
   width: 15%;
 }
 
+.settings-sidebar-list > span:hover{
+  background: rgba(241, 241, 241, 0.5);
+}
+
 .settings-sidebar-list:after{
   content: '';
   position:absolute;
@@ -39,7 +42,7 @@ a{
   /*left:0;*/
   right: 1px;
   bottom:0;
-  background: #bfbfbf;
+  background: rgba(191, 191, 191, 0.5);
 }
 
 .settings-sidebar-list > span{

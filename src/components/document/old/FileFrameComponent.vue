@@ -201,7 +201,7 @@ body {
 }
 
 .box-frame iframe{
-  min-height: 700px;
+  min-height: 500px;
   width: 100%;
   height: 100%;
   display: block;

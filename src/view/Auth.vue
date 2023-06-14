@@ -1,6 +1,6 @@
 <template>
   <div class="auth-template">
-    <h2>LIBARTICLE</h2>
+    <h2>SCINATE</h2>
     <div class="content">
       <h2>
         <span v-if="$route.name === 'login'">Логін</span>

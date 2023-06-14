@@ -2,7 +2,7 @@
 <!--  <div class="loader" v-if="loader">-->
 <!--    <loader :radius="15" :width="4"></loader>-->
 <!--  </div>-->
-  <h2>LIBARTICLE</h2>
+  <h2>SCINATE</h2>
   <div class="content">
     <h2>{{$route.name}}</h2>
     <div class="mainframe">

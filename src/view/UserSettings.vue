@@ -45,7 +45,6 @@ export default {
   /*background: #F1F1F1;*/
   height: auto;
   flex-direction: row;
-  padding-top: 1rem;
   /*padding: 1rem;*/
 
 }

@@ -1,7 +1,7 @@
 <template>
   <!--  navbar-->
   <div class="navbar">
-    <div class="logo"><span @click="$router.push('/')">LibArticle</span></div>
+    <div class="logo"><span @click="$router.push('/')">Scinate</span></div>
     <div class="manual">
       <input type="text" name="search" id="search" class="input searcher" required v-model="keywords"
              @keydown.enter="query(keywords)">

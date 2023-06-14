@@ -248,7 +248,7 @@ export default {
   margin-top: auto;
   align-self: center;
   top: 38%;
-  right: -5%;
+  right: -30px;
   position: absolute;
   /*right: -30px;*/
   cursor: pointer;
