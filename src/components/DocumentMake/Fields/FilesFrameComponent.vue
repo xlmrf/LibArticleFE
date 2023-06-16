@@ -54,20 +54,7 @@
 
         </div>
         <hr class="top-load-line" :style="'width:'+getProgressLoadingFile+'%'">
-<!--        <div -->
-<!--             @dragover="dragover"-->
-<!--             @dragleave="dragleave"-->
-<!--             @drop="drop"-->
-<!--             @click="addFile()">-->
-<!--          <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="#24292F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15v4c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-4M17 9l-5 5-5-5M12 12.8V2.5"/></svg>-->
-<!--          <span>завантажити файл</span>-->
-<!--        </div>-->
 
-<!--        <div class="wrapper-ground" v-if="getFiles.length !== 0">-->
-<!--          <small>{{ checkSize(getFiles[file_id].sizeFile) }}</small>-->
-<!--          &lt;!&ndash;        <div :class="[{'loader-sprint':getProgress}]">{{getProgress}}</div>&ndash;&gt;-->
-<!--          <span @click="removeItem">Видалити файл</span>-->
-<!--        </div>-->
       </div>
     </form>
     <div class="files-control-panel" v-if="getFiles.main.url">
