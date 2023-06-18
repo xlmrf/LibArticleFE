@@ -77,7 +77,7 @@
       <div class="no-files" v-else>Додаткових файлів немає <p @click="addFile()" class="add-extra-files">Добавити</p></div>
 <!--      <div v-for="file in getFiles.add">{{ file }}</div>-->
     </div>
-<!--    {{getFiles}}-->
+
   </div>
 </template>
 
