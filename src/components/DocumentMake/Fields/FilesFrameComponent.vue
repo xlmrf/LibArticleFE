@@ -12,25 +12,6 @@
       <div class="document-files-wrapper">
 
 
-
-<!--        <div class="files-roll-manager">-->
-<!--          <div v-if="getFiles.length !== 0">-->
-<!--            <div class="files-tape">-->
-<!--              <span :class="['item', key === file_id ? 'active' : 'inactive']" v-for="(file, key) in getFiles"-->
-<!--                    @click="file_id = key">{{ file.originalNameFile }}</span>-->
-<!--            </div>-->
-<!--            <svg class="document-increment-label" @click="addFile()" xmlns="http://www.w3.org/2000/svg" width="28"-->
-<!--                 height="28" viewBox="0 0 24 24" fill="none" stroke="#B2B2B2" stroke-width="2" stroke-linecap="round"-->
-<!--                 stroke-linejoin="round">-->
-<!--              <line x1="12" y1="5" x2="12" y2="19"></line>-->
-<!--              <line x1="5" y1="12" x2="19" y2="12"></line>-->
-<!--            </svg>-->
-<!--          </div>-->
-<!--          <h4 v-else>Завантажте перший документ</h4>-->
-<!--        </div>-->
-
-
-
         <span v-if="loadError">{{loadError}}</span>
         <div v-if="!getFiles.main.url"
             class="dropzone-container"
@@ -74,6 +55,7 @@
         <span class="label-file-size">{{ checkSize(file.sizeFile)}}</span>
         <span class="remove-item-file" @click="RemoveFile(idx)">Видалити</span>
       </div>
+      <p @click="addFile()" class="inside-file-item">Добавити</p>
       <div class="no-files" v-else>Додаткових файлів немає <p @click="addFile()" class="add-extra-files">Добавити</p></div>
 <!--      <div v-for="file in getFiles.add">{{ file }}</div>-->
     </div>

@@ -65,6 +65,9 @@ export default {
 .ref-copy-area{
   display: flex;
   margin: 10px 2rem 0 auto;
+  border: 1px solid #bbb;
+  padding: 5px 10px;
+  border-radius: 4px;
   align-self: center;
   border-bottom: 1px solid transparent;
   color: #535353;
