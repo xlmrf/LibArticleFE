@@ -40,7 +40,7 @@
     </form>
     <div class="files-control-panel" v-if="getFiles.main.url">
 <!--      <label class="label-file-category">Головний файл</label>-->
-      <div class="inside-file-item main-item-file" v-if="getFiles.main.url">
+      <div class="inside-file-item main-item-file">
         <span class="file-name">
           {{ getFiles.main.originalNameFile }}.{{ getFiles.main.typeFile }}
         </span>
@@ -55,8 +55,8 @@
         <span class="label-file-size">{{ checkSize(file.sizeFile)}}</span>
         <span class="remove-item-file" @click="RemoveFile(idx)">Видалити</span>
       </div>
-      <p @click="addFile()" class="inside-file-item">Добавити</p>
       <div class="no-files" v-else>Додаткових файлів немає <p @click="addFile()" class="add-extra-files">Добавити</p></div>
+      <p @click="addFile()" class="inside-file-item">Добавити</p>
 <!--      <div v-for="file in getFiles.add">{{ file }}</div>-->
     </div>
 
