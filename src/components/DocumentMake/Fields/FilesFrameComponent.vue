@@ -6,12 +6,9 @@
           class="form-control select-input" type="file" id="files" @change="selectedFiles()"
           ref="files" :multiple="getFiles.main.url" :accept="typeOfFile"
       />
-      <!--    enctype="multipart/form-data"-->
-<!--      <input class="form-control select-input" type="file" id="files" @change="selectedFiles()"-->
-<!--             ref="files" :multiple="getFiles.main.url">-->
+
       <div class="document-files-wrapper">
-
-
+        <p v-if="chosenLink.chosenLink">{{ chosenLink.originalNameFile }}</p>
         <span v-if="loadError">{{loadError}}</span>
         <div v-if="!getFiles.main.url"
             class="dropzone-container"
@@ -20,18 +17,16 @@
             @dragleave="dragleave"
             @drop="drop">
 
-          <label for="files" class="file-label" @dragover="dragover">
+          <label class="file-label" @dragover="dragover" >
             <div class="text-predict" v-if="isDragging" >Опускайте файл</div>
             <div class="text-error" v-else-if="file_type_error" >Тип документу не коректний</div>
             <div class="file-loader" v-else-if="this.getProgressLoadingFile !== 0 && this.getProgressLoadingFile !== 100" ><loader width="3" radius="12" /></div>
-            <div v-else @click="addFile()">Щоб завантажити файл, перетягніть файл в поле або <u>натисніть сюди</u>.</div>
+            <div v-else >Щоб завантажити файл, перетягніть файл в поле або <u @click="addFile()">натисніть сюди</u>.</div>
           </label>
         </div>
         <div class="box-frame" v-else>
 <!--          <iframe :src='frameUrl(getFiles[file_id])+"#view=FitH"'></iframe>-->
-          <iframe :src="getFiles.main.url" frameborder="0">Не вийшло завантажити файл</iframe>
-
-<!--          <iframe :src="'https://view.officeapps.live.com/op/embed.aspx?src='+getFiles[file_id].url" v-else-if="getFiles[file_id].typeFile === 'doc'" frameborder="0">Не вийшло завантажити файл</iframe>-->
+          <iframe :src="chosenLink.url" frameborder="0">Не вийшло завантажити файл</iframe>
 
         </div>
         <hr class="top-load-line" :style="'width:'+getProgressLoadingFile+'%'">
@@ -39,25 +34,29 @@
       </div>
     </form>
     <div class="files-control-panel" v-if="getFiles.main.url">
-<!--      <label class="label-file-category">Головний файл</label>-->
-      <div class="inside-file-item main-item-file">
+
+      <label class="label-file-category">Головний файл</label>
+
+      <div class="inside-file-item main-item-file" @click="chosenFileKey = -1">
         <span class="file-name">
           {{ getFiles.main.originalNameFile }}.{{ getFiles.main.typeFile }}
         </span>
         <span class="label-file-size">{{ checkSize(getFiles.main.sizeFile)}}</span>
         <span class="remove-item-file" @click="RemoveFile()">Видалити</span>
       </div>
-<!--      <label class="label-file-category">Додаткові файли</label>-->
-      <div class="inside-file-item" v-if="getFiles.add[0]" v-for="(file,idx) in getFiles.add">
+
+      <label class="label-file-category" v-if="getFiles.add[0]">Додаткові файли</label>
+
+      <div class="inside-file-item" v-if="getFiles.add[0]" v-for="(file,idx) in getFiles.add" @click="chosenFileKey = idx">
         <span class="file-name">
           {{ file.originalNameFile }}.{{ file.typeFile }}
         </span>
         <span class="label-file-size">{{ checkSize(file.sizeFile)}}</span>
         <span class="remove-item-file" @click="RemoveFile(idx)">Видалити</span>
       </div>
-      <div class="no-files" v-else>Додаткових файлів немає <p @click="addFile()" class="add-extra-files">Добавити</p></div>
-      <p @click="addFile()" class="inside-file-item">Добавити</p>
-<!--      <div v-for="file in getFiles.add">{{ file }}</div>-->
+
+      <p @click="addFile()" class="inside-file-item add-extra-under-files">Добавити додаткові файли</p>
+
     </div>
 
   </div>
@@ -67,7 +66,6 @@
 import loader from "../../additional/loader";
 import {mapActions, mapGetters, mapMutations, mapState} from "vuex";
 import axios from "axios";
-// import axios from "axios";
 
 export default {
 
@@ -81,12 +79,23 @@ export default {
       process: 0,
       loadError: null,
       file_type_error: null,
-      getProgressLoadingFile: 0
+      getProgressLoadingFile: 0,
+      chosenFileKey:-1
     }
   },
   computed: {
     ...mapState(['access_file_types']),
     ...mapGetters(['getFiles']),
+
+    chosenLink(){
+
+      if (this.chosenFileKey === -1) {
+        return this.getFiles.main
+      }
+      else{
+        return this.getFiles.add[this.chosenFileKey]
+      }
+    },
 
     typeOfFile(){
       if (!this.getFiles.main.url) {
@@ -266,7 +275,7 @@ export default {
 .files-control-panel{
   /*max-width: 592px;*/
   position: relative;
-  margin: 10px 0;
+  margin-top: 10px;
 }
 
 .files-control-panel > div{
@@ -301,6 +310,7 @@ export default {
 
 .label-file-category{
   position: relative;
+  color: #264050;
   top: -5px;
   margin: 5px;
 }
@@ -338,10 +348,11 @@ export default {
 
 .dropzone-container {
   display: flex;
-  width: 592px;
+  /*width: 592px;*/
   height: 400px;
+  margin-top: 5px;
   padding:10px;
-  border-radius: 4px;
+  border-radius: 8px;
   background: white;
   border: 1px solid #e2e8f0;
 
@@ -356,14 +367,24 @@ export default {
 }
 
 
+.card{margin-top: 5px}
 
 
 .file-label {
+  height: 400px;
   text-align: center;
   font-size: 20px;
   display: block;
-  width: 100%;
-  align-self: center;
+  color: #3a3f52;
+  margin: 50px auto;
+  /*align-self: center;*/
+}
+
+.file-label:last-child{
+  width: 60%;
+}
+
+.file-label u{
   cursor: pointer;
 }
 
@@ -389,10 +410,6 @@ hr {
   cursor: pointer;
 }
 
-.document-increment-label:hover {
-  stroke: #222222;
-}
-
 body {
   background: #eef1f3;
 }
@@ -415,26 +432,6 @@ body {
   position: relative;
   top: -50px;
   right: 40px;
-}
-
-.rotate-shadows {
-  width: 120px;
-  height: 2rem;
-  /*height: 120px;*/
-  position: relative;
-  border: 1px solid cornflowerblue;
-}
-
-.rotate-shadows:after,
-.rotate-shadows:before {
-  content: "";
-  border-radius: 50%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  transform-origin: center center;
 }
 
 .select-input {
@@ -463,15 +460,18 @@ body {
 .document-files-wrapper {
   position: relative;
   display: flex;
-  padding: 0.2rem;
   height: 100%;
   width: 100%;
-
   flex-direction: column;
-  /*justify-content: center;*/
-  /*align-items: center;*/
-  /*border: 3px solid palevioletred;*/
+}
 
+.document-files-wrapper > p{
+  background: rgba(32, 178, 170, 0.11);
+  color: #264050;
+  padding: 10px;
+  width: calc(100% + 1px);
+  border-top-right-radius: 8px;
+  border-top-left-radius: 2px;
 }
 
 .wrapper-ground {
@@ -516,59 +516,6 @@ body {
   color: #525252;
   cursor: default;
   align-self: center;
-}
-
-.files-tape {
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
-  border-radius: 4px;
-  font-size: 0.8em;
-  width: 90%;
-  overflow: auto;
-  overflow-y: hidden;
-  scrollbar-width: thin;
-  /*padding: 0.3rem;*/
-  display: flex;
-  height: 100%;
-}
-
-.files-tape .item {
-  align-self: center;
-  flex-shrink: 0;
-}
-
-.files-tape .item:after {
-  content: "";
-  background-color: rgba(187, 187, 187, 0.75);
-  position: absolute;
-  width: 2px;
-  height: 60%;
-  top: 20%;
-  left: 99.7%;
-  display: block;
-  border-radius: 20%;
-}
-
-.files-tape .item:hover {
-  background: #bbbbbb;
-}
-
-.files-tape .item:last-child:after {
-  content: "";
-  background-color: transparent;
-  /*position: absolute;*/
-  /*width: 2px;*/
-  /*height: 20px;*/
-  /*top: 30%;*/
-  /*left: 99.5%;*/
-  /*display: block;*/
-  /*border-radius: 20%;*/
-}
-
-.files-tape > span {
-  font-size: 18px;
-  align-items: center;
-  padding: 0.5rem;
-  text-decoration: none;
 }
 
 .document-increment-label {
@@ -646,24 +593,6 @@ body {
   height: 100%;
 }
 
-.active {
-  /*padding-bottom: 0.1rem;*/
-  background: rgba(178, 178, 178, 0.25);
-  /*  */
-  /*  border-bottom: 1px solid #0048BA;*/
-  /*  !*border-radius: 5px;*!*/
-}
-
-/*.active::after{*/
-/*  content:'';*/
-/*  position:absolute;*/
-/*  width:90%;*/
-/*  text-align: center;*/
-/*  height:0.05rem;*/
-/*  !*left:20%;*!*/
-/*  bottom:0;*/
-/*  background: #B2B2B2;*/
-/*}*/
 .active::after {
   transform: scale(0.8, 1);
   /*transition: transform 0.22s ease;*/
@@ -705,12 +634,12 @@ body {
   height: 100%;
   display: block;
   box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 
 }
 
 .top-load-line{
-  max-width: 592px;
+  max-width: 100%;
 }
 
 .nav {
@@ -774,6 +703,13 @@ li {
 
 .add-extra-files{
   cursor: pointer;
+}
+
+.add-extra-under-files{
+  margin-top: 20px;
+  color: #264050;
+  padding-left: 20px;
+  border: 1px solid rgba(13, 40, 57, 0.15);
 }
 
 .add-extra-files:hover{

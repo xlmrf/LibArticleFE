@@ -73,8 +73,8 @@ export default {
     },
     coAuthor() {
       let author = {
-        // first_name:this.getUser.info.first_name,
-        // last_name:this.getUser.info.last_name,
+        first_name:this.getUser.info.first_name,
+        last_name:this.getUser.info.last_name,
         email: this.getUser.email
       }
       if (this.coAuthor) {
