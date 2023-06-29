@@ -67,6 +67,7 @@ export default {
 
 .documents-wrapper > :last-child {
   flex: 4;
+  margin-right: 5px;
 }
 
 </style>
