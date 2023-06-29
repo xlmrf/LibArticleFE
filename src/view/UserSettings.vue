@@ -55,8 +55,8 @@ export default {
   display: flex;
   flex-flow: column;
   flex: 1;
-  margin-left: 1rem;
   border-radius: 5px;
+  min-height: 500px;
 }
 
 

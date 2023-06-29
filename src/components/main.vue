@@ -45,7 +45,7 @@ export default {
 <style scoped>
 .main {
   min-height: calc(100vh - 90px);
-  max-width: 1280px;
+  max-width: 1366px;
   margin-right: auto;
   margin-left: auto;
   margin-top: 56px;

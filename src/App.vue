@@ -198,6 +198,7 @@ input {
   border-radius: 3px;
   font-size: 16px;
   resize: none;
+  background: #FDFDFD;
   outline: none;
   width: 100%;
   -webkit-transition: all .3s ease-out;

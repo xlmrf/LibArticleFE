@@ -4,7 +4,7 @@
   </div>
   <div class="privacy-settings" v-else>
 
-    <h2>Зміна паролю</h2>
+    <h2 class="item-underline">Зміна паролю</h2>
 
 <!--    <div class="setting-block">-->
 <!--      <h3>Зміна почти</h3>-->
@@ -21,35 +21,33 @@
 
     <div class="setting-block">
       <span>
-      <label for="real-password">Діючий пароль</label>
-      <input type="password"
-             name="real-password" id="real-password"
-
-             class='sample-input'>
+        <label for="real-password">Діючий пароль</label>
+        <input type="password"
+               name="real-password" id="real-password"
+               class='sample-input'>
       </span>
       <span>
-      <label for="new-password">Новий пароль</label>
-      <input type="password"
-             name="new-password" id="new-password"
-
-             class='sample-input'>
+        <label for="new-password">Новий пароль</label>
+        <input type="password"
+               name="new-password" id="new-password"
+               class='sample-input'>
       </span>
       <span>
-      <label for="confirm-password">Підтвердження паролю</label>
-      <input type="password"
-             name="confirm-password" id="confirm-password"
-
-             class='sample-input'>
+        <label for="confirm-password">Підтвердження паролю</label>
+        <input type="password"
+               name="confirm-password" id="confirm-password"
+               class='sample-input'>
       </span>
-    </div>
-
-    <div class="alert alert-warning" >
-      <small>
-        Для більшої надійності паролю, не використовуйте очевидні відношення (Дата народження, ПІБ, т.п.) <br>та легкі комбінації (12345678, helloworld...)
-      </small>
     </div>
 
     <button @click="changePrivacy">Змінити пароль</button>
+
+    <div class="alert alert-warning" >
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#5795e3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+      <small>
+        Для створення надійного паролю не використовуйте легкі комбінації (Дата народження, ПІБ, 12345678...)
+      </small>
+    </div>
   </div>
 </template>
 
@@ -101,22 +99,43 @@ export default {
 }
 
 .privacy-settings > h2{
-  margin: 0 0.5rem;
+  padding: 1rem;
+  color: #3a3a3b;
+}
+.privacy-settings > h2:after{
+  content: '';
+  position:absolute;
+  width: 100%;
+  height:1px;
+  /*left:0;*/
+  bottom:0;
+  background: rgba(191, 191, 191, 0.5);
 }
 
 .setting-block {
   display: inherit;
   flex-direction: column;
-  align-self: center;
+  align-items: center;
   justify-content: center;
   position: relative;
   overflow: hidden;
   outline: none;
-  width: 300px;
+  padding: 20px;
+  width: 100%;
 }
 
 .setting-block > span{
   margin: 6px 0;
+  width: 300px;
+}
+
+.setting-block > span > input{
+  margin-top: 5px;
+}
+
+
+.setting-block > span > label{
+  padding: 5px;
 }
 
 .privacy-settings > div{
@@ -128,17 +147,20 @@ export default {
 }
 
 .privacy-settings > button{
-  margin: 2rem;
+  margin-top: 1rem;
   background: none;
-  border: 1px solid rgba(32, 178, 170, 0.8);
+  border: 1px solid rgba(32, 178, 170, 0.6);
   color: rgba(32, 178, 170, 0.8);
-  width: 120px;
-  height: 30px;
+  padding: 10px 30px;
   cursor: pointer;
   align-self: center;
 }
 
+.privacy-settings > button:hover{
 
+  border: 1px solid rgba(32, 178, 170);
+
+}
 
 
 .link-reset{
@@ -160,14 +182,19 @@ export default {
   align-self: center;
 }
 .alert-warning{
+  top: 20px;
   /*border: 1px solid rgb(34,46,152);*/
   /*background: rgba(153, 159, 239, 0.1);*/
   position: relative;
-  color: #444444;
   padding: 15px;
-  font-size: 18px;
+  color: #606060;
+  font-size: 16px;
+  align-items: center;
   border: 1px solid rgba(147, 158, 179, 0.5);
-  background: rgba(128, 167, 221, 0.1);
+  background: rgba(128, 167, 221, 0.05);
+}
+.alert-warning > small{
+  padding: 0 20px;
 }
 .alert-error{
   border: 1px solid #EB4C42;

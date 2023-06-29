@@ -236,11 +236,13 @@ export default {
   background: none;
   border: 1px solid rgba(32, 178, 170, 0.8);
   color: rgba(32, 178, 170, 0.8);
-  width: 120px;
-  height: 30px;
+  padding: 10px 30px;
   cursor: pointer;
   align-self: center;
-  padding: 5px;
+}
+
+button{
+  padding: 10px 40px;
 }
 
 .about-user::after {
@@ -272,8 +274,6 @@ export default {
   cursor: pointer;
   background: none;
   border: 1px solid;
-  width: 100px;
-  height: 30px;
   color: rgba(229, 50, 45, 0.85);
 }
 </style>

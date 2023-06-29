@@ -1,9 +1,11 @@
 <template>
   <div class="settings-sidebar-list">
-    <span><router-link :to="{name:'settings.profile'}">Акаунт</router-link></span>
-    <span><router-link :to="{name:'settings.security'}">Безпека</router-link></span>
-    <span><router-link :to="{name:'settings.privacy'}">Приватність</router-link></span>
-    <span><router-link :to="{name:'settings.advanced'}">Інше</router-link></span>
+    <div>
+      <span class="settings-bar-link"><router-link :to="{name:'settings.profile'}">Акаунт</router-link></span>
+      <span class="settings-bar-link"><router-link :to="{name:'settings.security'}">Безпека</router-link></span>
+      <span class="settings-bar-link"><router-link :to="{name:'settings.privacy'}">Приватність</router-link></span>
+      <span class="settings-bar-link"><router-link :to="{name:'settings.advanced'}">Інше</router-link></span>
+    </div>
   </div>
 </template>
 
@@ -24,13 +26,19 @@ a{
   /*position: fixed;*/
   /*flex-flow: column;*/
   /*padding: 1rem;*/
+  min-height: 100vh;
   padding-right: 5px;
   position: relative;
   border-radius: 5px;
-  width: 15%;
+  width: 180px;
 }
 
-.settings-sidebar-list > span:hover{
+.settings-sidebar-list > div{
+  position: fixed;
+  width: 177px;
+}
+
+.settings-bar-link:hover{
   background: rgba(241, 241, 241, 0.5);
 }
 
@@ -45,7 +53,7 @@ a{
   background: rgba(191, 191, 191, 0.5);
 }
 
-.settings-sidebar-list > span{
+.settings-bar-link{
   display: flex;
   /*padding: 5px 10px;*/
   margin: 5px 0;
@@ -55,7 +63,7 @@ a{
 
 
 
-.settings-sidebar-list >span > a{
+.settings-bar-link > a{
   width: 100%;
   height: 100%;
   padding: 10px;

@@ -592,9 +592,6 @@ export default {
   height: 32px;
 
 }
-.main-card svg:hover{
-  stroke: #525252;
-}
 
 .sample-input{
   border: 1px solid #CCCCCC;

@@ -21,6 +21,10 @@ export default {
 
 <style>
 
+.info-panel{
+  margin: 0 2rem;
+}
+
 .chapter-header{
   color: #222222;
   margin: 10px;

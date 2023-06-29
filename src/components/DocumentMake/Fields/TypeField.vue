@@ -142,18 +142,14 @@ h3{
 }
 
 .files-tape{
-  /*box-shadow: rgba(0, 0, 0, 0.35) 0px -8px 12px -8px inset;*/
-  /*box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;*/
   border-radius: 6px;
   align-self: center;
   display: flex;
   flex-direction: column;
-  /*margin: 10px;*/
   font-size: 0.8em;
   height: 220px;
   width: 200px;
   overflow: auto;
-  /*overflow-y: hidden;*/
   scrollbar-width: thin;
   z-index: 10;
 }
