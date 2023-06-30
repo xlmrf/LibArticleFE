@@ -5,7 +5,10 @@ export default {
         return {
             ErrorCodeMessage:{
                 'credentials_incorrect': 'Введений пароль або логін не вірний.',
-                'invalid_hash': 'Хешу не існує.'
+                'invalid_hash': 'Хешу не існує.',
+                'enter_value': 'Необхідно ввести значення',
+                'different_pass': 'Паролі не збігаються',
+                'incorrect_pass': 'Не вірний пароль'
             },
             NotesCodeMessage: {
                 'recovery-password': 'Форма підтвердження про відновлення паролю відправлено на вказану почту.',

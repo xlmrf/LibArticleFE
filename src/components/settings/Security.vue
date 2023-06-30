@@ -24,19 +24,22 @@
         <label for="real-password">Діючий пароль</label>
         <input type="password"
                name="real-password" id="real-password"
-               class='sample-input'>
+               class='sample-input' :class="{'sample-input-error':errors.old_password}" v-model="data.old_password">
+        <small class="text-error" v-if="errors.old_password">{{getErrorMessage[errors.old_password]}}</small>
       </span>
       <span>
         <label for="new-password">Новий пароль</label>
         <input type="password"
                name="new-password" id="new-password"
-               class='sample-input'>
+               class='sample-input' :class="{'sample-input-error':errors.password}" v-model="data.password">
+        <small class="text-error" v-if="errors.password">{{getErrorMessage[errors.password]}}</small>
       </span>
       <span>
         <label for="confirm-password">Підтвердження паролю</label>
         <input type="password"
                name="confirm-password" id="confirm-password"
-               class='sample-input'>
+               class='sample-input' :class="{'sample-input-error':errors.confirm_password}" v-model="data.confirm_password">
+        <small class="text-error" v-if="errors.confirm_password">{{getErrorMessage[errors.confirm_password]}}</small>
       </span>
     </div>
 
@@ -66,24 +69,66 @@ export default {
         password:'',
         confirm_password:'',
         old_password:''
+      },
+      errors: {
+        old_password: '',
+        password:'',
+        confirm_password: ''
       }
     }
   },
   watch:{
     getUser(){
       this.data.email = this.getUser.email
+    },
+    'data.old_password':{
+      handler(){
+        this.errors.old_password = ''
+      }
+    },
+    'data.password':{
+      handler(){
+        this.errors.password = ''
+      }
+    },
+    'data.confirm_password':{
+      handler(){
+        this.errors.confirm_password = ''
+      }
     }
   },
   computed:{
-    ...mapGetters(['getProfile'])
+    ...mapGetters(['getProfile', 'getErrorMessage']),
+
+    validate(){
+      if (this.data.old_password === ''){
+        this.errors.old_password = 'enter_value'
+        return false
+      }
+      if (this.data.password === ''){
+        this.errors.password = 'enter_value'
+        return false
+      }
+      if (this.data.confirm_password === ''){
+        this.errors.confirm_password = 'enter_value'
+        return false
+      }
+      if (this.data.confirm_password !== this.data.password){
+        this.errors.confirm_password = 'different_pass'
+        return false
+      }
+
+      return true
+    }
   },
   methods:{
     ...mapActions(['updatePrivacy']),
     changePrivacy(){
-      if (this.data.email !== this.getUser.email){
-        alert('На ваш попередній email прийде повідомлення для підтвердження зміни почти')
+
+      if (this.validate){
+        this.updatePrivacy(this.data)
       }
-      this.updatePrivacy(this.data)
+
 
     }
   }
