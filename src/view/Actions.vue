@@ -1,26 +1,8 @@
 <template>
   <div class="main">
-    <div
-        class="dropzone-container"
-        :class="{'dropzone-active':isDragging}"
-        @dragover="dragover"
-        @dragleave="dragleave"
-        @drop="drop">
-      <input
-          type="file"
-          multiple
-          name="file"
-          id="fileInput"
-          class="hidden-input"
-          @change="onChange"
-          ref="file"
-          accept=".pdf,.jpg,.jpeg,.png"/>
 
-      <label for="fileInput" class="file-label" @dragover="dragover">
-        <div v-if="isDragging">Опускайте файл</div>
-        <div v-else>Щоб завантажити файл, перетягніть файл в поле або <u>натисніть сюди</u>.</div>
-      </label>
-    </div>
+    <div></div>
+
   </div>
 </template>
 

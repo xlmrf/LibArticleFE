@@ -73,6 +73,8 @@ export default {
         name = 'my-documents';
       }
 
+      localStorage.setItem('searcher', JSON.stringify({'request1':'Hello'}))
+
       this.$router.push({
         name: name,
         query: {...query, ...data}
