@@ -137,6 +137,9 @@ export default {
 
 <style scoped>
 
+.setting-block{
+  align-items: center;
+}
 
 .link-reset{
   display: flex;

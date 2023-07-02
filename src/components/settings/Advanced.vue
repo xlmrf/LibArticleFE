@@ -68,10 +68,13 @@ export default {
   flex-flow: column;
 }
 
+.save-session > span{
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
 .der-setting-block > span{
-  padding: 5px;
-  margin-top: 5px;
-  border: 1px solid #525252;
+  margin-top: 10px;
   color: #333333;
 }
 
