@@ -145,6 +145,7 @@ input {
   opacity: 0;
   position: absolute;
   z-index: -1;
+
 }
 
 .save-session > span {
