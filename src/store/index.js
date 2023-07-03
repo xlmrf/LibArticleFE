@@ -7,7 +7,8 @@ import comment from "./components/comment"
 import library from "./components/documents"
 import authorization from './components/user/auth'
 import filesManager from './components/filesManager'
-import CodeMessages from "./components/CodeMessages";
+import CodeMessages from "./components/CodeMessages"
+import langLabels from "./components/langLabels";
 import photo from './components/user/photo'
 
 import router from "../router";
@@ -23,7 +24,9 @@ export default createStore({
         authorization,
         filesManager,
         photo,
-        CodeMessages
+        CodeMessages,
+        langLabels
+
     },
     state: {
         message: {},
