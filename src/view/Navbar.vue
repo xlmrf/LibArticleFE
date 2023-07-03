@@ -14,7 +14,7 @@
           <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
         </svg>
       </span>
-      <small class="title-error" v-if="false">Введите полный адрес</small>
+      <small class="title-error" v-if="false">Enter value</small>
       <!--      <button :class="['btn search-btn',{'valid-btn':keyword}]" >Пошук</button>-->
       <label v-if="mistake">{{ mistake }}</label>
 

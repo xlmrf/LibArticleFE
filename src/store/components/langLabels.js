@@ -4,7 +4,21 @@ export default {
     state() {
         return {
             ua:{
+
+                navbar:{
+
+                    nav_menu:{
+                        'account': "Акаунт",
+                        'add_document': "Додати",
+                        'documents': "Документи",
+                        'actions': "Активність",
+                        'settings': "Налаштування"
+                    }
+
+                },
+
                 settings:{
+
                     left_bar_titles:{
                         'account': "Акаунт",
                         'security': "Безпека",
@@ -16,7 +30,12 @@ export default {
                         'last_name': "Прізвище",
                         'middle_name': "По батькові",
                         'city': "Місце проживання",
-                        'university': "Університет"
+                        'university': "Університет",
+
+                        'change_photo': "змінити фото",
+
+                        'btn_save_info': "Зберегти",
+                        'btn_logout': "Вийти"
                     },
                     security_titles:{
                         'title_change_password': "Зміна паролю",
@@ -37,12 +56,32 @@ export default {
                         'title_privacy': "Приватність",
                         'open_profile_box': "Відкрити профіль для перегляду іншим користувачам",
 
-                        'btn_save_settings': "Зберегти"
+                        'title_change_lang': "Мова",
+
+                        'system_lang': "Мова системи",
+
+                        'select_lang_ua': "Українська",
+                        'select_lang_en': "English",
+
+                        'btn_save_settings': "Зберегти",
 
                     }
                 }
             },
             en: {
+
+                navbar:{
+
+                    nav_menu:{
+                        'account': "Account",
+                        'add_document': "Add document",
+                        'documents': "Documents",
+                        'actions': "Actions",
+                        'settings': "Settings"
+                    }
+
+                },
+
                 settings: {
                     left_bar_titles: {
                         'account': "Account",
@@ -55,7 +94,12 @@ export default {
                         'last_name': "Last name",
                         'middle_name': "Middle name",
                         'city': "Place of residence",
-                        'university': "University"
+                        'university': "University",
+
+                        'change_photo': "change photo",
+
+                        'btn_save_info': "Save",
+                        'btn_logout': "Logout"
                     },
                     security_titles: {
                         'title_change_password': "Password",
@@ -75,6 +119,13 @@ export default {
 
                         'title_privacy': "Privacy",
                         'open_profile_box': "Makes your user info confidential.",
+
+                        'title_change_lang': "Language",
+
+                        'system_lang': "System language",
+
+                        'select_lang_ua': "Українська",
+                        'select_lang_en': "English",
 
                         'btn_save_settings': "Save"
 

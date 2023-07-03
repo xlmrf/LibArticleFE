@@ -8,36 +8,36 @@
       <account-img :image="getProfile.image"/>
 
       <span>
-        <label for="bio">Біо</label>
+        <label for="bio">{{this.$store.getters.getLanguage.settings.account_titles.bio}}</label>
         <textarea class="sample-input textarea" placeholder="Я живу у вільній країні.&#10;I live in a free country" maxlength="80" wrap="hard" name="bio" id="bio" cols="10" rows="3" v-model="getProfile.bio"></textarea>
       </span>
 
       <span>
-        <label for="first_name">Ім'я</label>
+        <label for="first_name">{{this.$store.getters.getLanguage.settings.account_titles.name}}</label>
         <input class="sample-input" type="text" name="" id="first_name" v-model="getProfile.first_name">
       </span>
       <span>
-        <label for="last_name">Прізвище</label>
+        <label for="last_name">{{this.$store.getters.getLanguage.settings.account_titles.last_name}}</label>
         <input class="sample-input" type="text" name="" id="last_name" v-model="getProfile.last_name">
       </span>
       <span>
-        <label for="middle_name">По батькові</label>
+        <label for="middle_name">{{this.$store.getters.getLanguage.settings.account_titles.middle_name}}</label>
         <input class="sample-input" type="text" name="" id="middle_name" v-model="getProfile.middle_name">
       </span>
       <span>
-        <label for="location">Місце проживання</label>
+        <label for="location">{{this.$store.getters.getLanguage.settings.account_titles.city}}</label>
         <input class="sample-input" type="text" name="" id="location" v-model="getProfile.location">
       </span>
       <span class="person-university">
-        <label for="university">Університет</label>
+        <label for="university">{{this.$store.getters.getLanguage.settings.account_titles.university}}</label>
         <select v-if="getUniversities.length > 0" name="university" id="university" class="select-type" v-model="getProfile.university_id" >
           <option  v-for="university in getUniversities" :value="university.id">{{ university.label }}</option>
         </select>
       </span>
       <small v-if="error">{{ error }}</small>
-      <button @click="userUpdate()">Зберегти</button>
+      <button @click="userUpdate()">{{this.$store.getters.getLanguage.settings.account_titles.btn_save_info}}</button>
     </div>
-    <button class="user-logout-item" @click="logout">Вихід</button>
+    <button class="user-logout-item" @click="logout">{{this.$store.getters.getLanguage.settings.account_titles.btn_logout}}</button>
   </div>
 </template>
 

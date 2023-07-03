@@ -4,7 +4,7 @@
   </div>
   <div class="privacy-settings" v-else>
 
-    <h2 class="item-underline">Зміна паролю</h2>
+    <h2 class="item-underline">{{this.$store.getters.getLanguage.settings.security_titles.title_change_password}}</h2>
 
 <!--    <div class="setting-block">-->
 <!--      <h3>Зміна почти</h3>-->
@@ -20,22 +20,22 @@
 <!--    </div>-->
 
     <div class="setting-block">
-      <span>
-        <label for="real-password">Діючий пароль</label>
+      <span class="fields_fill">
+        <label for="real-password">{{this.$store.getters.getLanguage.settings.security_titles.password}}</label>
         <input type="password"
                name="real-password" id="real-password"
                class='sample-input' :class="{'sample-input-error':errors.old_password}" v-model="data.old_password">
         <small class="text-error" v-if="errors.old_password">{{getErrorMessage[errors.old_password]}}</small>
       </span>
-      <span>
-        <label for="new-password">Новий пароль</label>
+      <span class="fields_fill">
+        <label for="new-password">{{this.$store.getters.getLanguage.settings.security_titles.new_password}}</label>
         <input type="password"
                name="new-password" id="new-password"
                class='sample-input' :class="{'sample-input-error':errors.password}" v-model="data.password">
         <small class="text-error" v-if="errors.password">{{getErrorMessage[errors.password]}}</small>
       </span>
-      <span>
-        <label for="confirm-password">Підтвердження паролю</label>
+      <span class="fields_fill">
+        <label for="confirm-password">{{this.$store.getters.getLanguage.settings.security_titles.confirm_password}}</label>
         <input type="password"
                name="confirm-password" id="confirm-password"
                class='sample-input' :class="{'sample-input-error':errors.confirm_password}" v-model="data.confirm_password">
@@ -43,12 +43,12 @@
       </span>
     </div>
 
-    <button @click="changePrivacy">Змінити пароль</button>
+    <button @click="changePrivacy">{{this.$store.getters.getLanguage.settings.security_titles.btn_save_settings}}</button>
 
     <div class="alert alert-warning" >
       <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#5795e3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
       <small>
-        Для створення надійного паролю не використовуйте легкі комбінації (Дата народження, ПІБ, 12345678...)
+        {{this.$store.getters.getLanguage.settings.security_titles.better_password_hint}}
       </small>
     </div>
   </div>

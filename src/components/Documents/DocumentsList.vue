@@ -5,7 +5,7 @@
         <div class="showed-items">Показано<span>{{ documents.total!==0 ? documents.per_page*(documents.current_page-1)+1 : '0' }}</span> - <span>{{ documents.per_page*(documents.current_page-1)+documents.data.length }}</span>документи із<span>{{ documents.total }}</span>знайдених</div>
         <div class="select-control">
           <label class="top-filter-label">Сортувати за</label>
-          <select class="top-filter-select" v-model="sortSelect">
+          <select class="select top-filter-select" v-model="sortSelect">
             <option class="filter-option" v-for="count in sortDocuments" :key="count">
               {{ count }}
             </option>
@@ -13,7 +13,7 @@
         </div>
         <div class="select-control">
           <label class="top-filter-label">На сторінці</label>
-          <select class="top-filter-select" v-model="per_page">
+          <select class="select top-filter-select" v-model="per_page">
             <option v-for="count in getPageCountPaginate" :key="count">
               {{ count }}
             </option>
@@ -183,17 +183,12 @@ export default {
 .top-filter-select{
   /*border: 1px solid #1C75DD;*/
   color: #1C75DD;
-  text-align: center;
   border-radius: 3px;
   padding: 5px;
   font-size: 1.2rem;
-  cursor: pointer;
   line-height: 1.1;
-  position: relative;
-  background: none;
 }
 .top-filter-select > option{
-  color: #333333;
   background: #f1f1f1;
 }
 .select-control{

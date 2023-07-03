@@ -39,11 +39,15 @@ export default createStore({
             'pptx':'application/vnd.openxmlformats-officedocument.presentationml.presentation',
             'txt':'text/plain'
         },
-        types:[]
+        types:[],
+        lang: localStorage.getItem('lang')
     },
     mutations: {
         pageMessage(ctx, data) {
             ctx.message = data
+        },
+        changeLang(ctx, data){
+            ctx.lang = data
         },
         updateTypes(ctx,data){
             ctx.types = data
@@ -63,6 +67,14 @@ export default createStore({
         },
         getTypes(ctx){
             return ctx.types
+        },
+        getLanguage(ctx){
+            if (ctx.lang === 'ua'){
+                return ctx.langLabels.ua
+            }
+            else {
+                return ctx.langLabels.en
+            }
         }
     }
 })

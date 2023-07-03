@@ -94,17 +94,17 @@ export default {
   width: 100%;
 }
 
-.setting-block > span{
+.setting-block > .fields_fill{
   margin: 6px 0;
   width: 300px;
 }
 
-.setting-block > span > input{
+.setting-block > .fields_fill > input{
   margin-top: 5px;
 }
 
 
-.setting-block > span > label{
+.setting-block > .fields_fill > label{
   padding: 5px;
 }
 

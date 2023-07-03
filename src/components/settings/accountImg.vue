@@ -3,7 +3,7 @@
     <img :class="['user-avatar']" :src="getTempPhoto.progress === 100 ? getTempPhoto.image : image" alt="">
     <input class="photo-loader-input" type="file" id="files" @change="photoUpdate()" accept="image/jpeg,image/png"
            ref="image">
-    <span @click="changePhoto()">change photo</span>
+    <span @click="changePhoto()">{{this.$store.getters.getLanguage.settings.account_titles.change_photo}}</span>
     <!--          https://i.photographers.ua/images/pictures/45416/dsc_4556_1.jpg-->
   </div>
 </template>
