@@ -7,9 +7,10 @@
 
       <account-img :image="getProfile.image"/>
 
-      <span>
+      <span class="person-bio">
         <label for="bio">{{this.$store.getters.getLanguage.settings.account_titles.bio}}</label>
-        <textarea class="sample-input textarea" placeholder="Я живу у вільній країні.&#10;I live in a free country" maxlength="80" wrap="hard" name="bio" id="bio" cols="10" rows="3" v-model="getProfile.bio"></textarea>
+        <textarea class="sample-input textarea" placeholder="" maxlength="80" wrap="hard" name="bio" id="bio" cols="10" rows="3" v-model="getProfile.bio"></textarea>
+        <span class="hint-person-bio">Наприклад: 42 роки, доцент кафедри РТС, КПІ. Досліджую високочастотні приймачі.</span>
       </span>
 
       <span>
@@ -144,6 +145,20 @@ export default {
 .person-university{
   display: flex;
   position: relative;
+}
+
+.person-bio{
+  position: relative;
+}
+
+.hint-person-bio{
+  /*position: absolute;*/
+  font-size: 14px;
+  color: #333333;
+  /*right: -50px;*/
+  width: 375px;
+  margin-top: 10px;
+  cursor: default;
 }
 
 .pulse-loader{

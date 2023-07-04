@@ -15,7 +15,7 @@ import Loader from "@/components/additional/loader";
 
 export default {
   computed: {
-    ...mapActions(['requestUser']),
+    ...mapActions(['requestUser','userPhoto']),
     ...mapGetters(['getUser','getTypes']),
     ...mapState(['api_url_v1','types']),
   },
@@ -37,6 +37,7 @@ export default {
   mounted() {
     this.requestUser;
     this.askTypes()
+    this.userPhoto
   },
   components: {Loader, NavbarMenu}
 }

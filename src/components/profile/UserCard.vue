@@ -45,6 +45,7 @@ export default {
 
 .person-mind{
   white-space: pre-line;
+  margin-bottom: 10px;
 }
 
 .user-card{

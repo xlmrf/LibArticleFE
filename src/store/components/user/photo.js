@@ -11,17 +11,19 @@ export default {
                 image:'',
                 progress:0,
                 checkLoad:false
-            }
+            },
+            profilePhoto:''
         }
     },
     actions:{
-        // requestAuthorPhoto(ctx,id){
-        //     axios.get(ctx.rootState.server_url_v1+'/photo/'+id).then(response => {
-        //         ctx.commit('updatePhoto', response.data)
-        //     }).catch(err => {
-        //         console.log(err)
-        //     })
-        // },
+        userPhoto(ctx){
+            console.log('user photo check');
+            axios.get(ctx.rootState.api_url_v1+'/user-photo').then(response => {
+                ctx.commit('profilePhoto', response.data)
+            }).catch(err => {
+                console.log(err)
+            })
+        },
 
     },
     mutations:{
@@ -31,6 +33,10 @@ export default {
         },
         userPhoto(ctx,data){
             ctx.userPhoto = data
+        },
+
+        profilePhoto(ctx, data){
+            ctx.profilePhoto = data
         }
         // updateAuthorPhoto(ctx,data){
         //     data === 'not_found' ?
@@ -47,6 +53,9 @@ export default {
         },
         getTempPhoto(ctx){
             return ctx.tempPhoto
+        },
+        getProfilePhoto(ctx){
+            return ctx.profilePhoto
         }
     }
 }
