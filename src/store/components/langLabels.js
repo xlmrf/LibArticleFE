@@ -17,6 +17,13 @@ export default {
 
                 },
 
+                actions:{
+                    left_bar_titles: {
+                        'notices': "Повідомлення",
+                        'actions': "Діяльність",
+                    },
+                },
+
                 settings:{
 
                     left_bar_titles:{
@@ -80,6 +87,13 @@ export default {
                         'settings': "Settings"
                     }
 
+                },
+
+                actions:{
+                    left_bar_titles: {
+                        'notices': "Notices",
+                        'actions': "Actions",
+                    },
                 },
 
                 settings: {

@@ -150,18 +150,19 @@ const routes = [
             {
                 path:'/actions',
                 name:'actions',
+                // redirect:{name:'actions.notices'},
                 component: actions,
                 children:[
                     {
-                        path:'/notices',
-                        name:'notices',
+                        path:'notices',
+                        name:'actions.notices',
                         component: notices
                     },
-                    {
-                        path:'/story',
-                        name:'story',
-                        component: story
-                    }
+                //     {
+                //         path:'/story',
+                //         name:'story',
+                //         component: story
+                //     }
                 ]
             },
             {

@@ -1,13 +1,22 @@
 <template>
-  <div class="main">
-
-    <div></div>
-
+  <div class="settings-main-card">
+    <side-action-bar></side-action-bar>
+    <div class="settings-main-window">
+<!--      <div class="loader settings-loader" v-if="!getProfile?.id" >-->
+<!--        <loader width="2" radius="13"/>-->
+<!--      </div>-->
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
 <script>
+
+import Loader from "@/components/additional/loader";
+import SideActionBar from "@/components/actions/SideActionBar";
+
 export default {
+  components: {SideActionBar, Loader},
   data() {
     return {
       isDragging: false,
