@@ -158,11 +158,11 @@ const routes = [
                         name:'actions.notices',
                         component: notices
                     },
-                //     {
-                //         path:'/story',
-                //         name:'story',
-                //         component: story
-                //     }
+                    {
+                        path:'/story',
+                        name:'actions.story',
+                        component: story
+                    }
                 ]
             },
             {
