@@ -8,7 +8,8 @@
         <li v-for="notice in notificationMessages.slice(0,2)">
           <router-link :class="['menu-link-item',{'unread-notice':!notice.check}]" :to="'/profile/1'">{{notice.message+' '+myTruncate(this.title,15, '...')}}<span>{{ notice.date }}</span></router-link>
         </li>
-        <span class="menu-link-item " @click="ShowNotices" v-if="notificationMessages.length > 2">Переглянути всі <small>{{Object.values(notificationMessages).filter(item => item.check === true).length}}</small></span>
+        <span class="menu-link-item " @click="ShowNotices" v-if="notificationMessages.length > 2">Переглянути всі <small>{{getNewMessagesCount}}</small></span>
+<!--        {{Object.values(notificationMessages).filter(item => item.check === true).length}}-->
         <span class="none-messages" v-if="!notificationMessages.length">Нових повідомлень немає</span>
       </ul>
     </nav>
@@ -17,7 +18,8 @@
 </template>
 
 <script>
-import {mapActions, mapGetters} from "vuex";
+import {mapActions, mapGetters, mapMutations, mapState} from "vuex";
+import axios from "axios";
 
 export default {
   mixins:['truncate'],
@@ -60,6 +62,7 @@ export default {
     }
   },
   methods:{
+    ...mapMutations(['updateNewMessagesCount']),
     toggleDropdown(e) {
       this.notificationMessages.some(e => e.check)
       this.openNavMenu = !this.openNavMenu
@@ -72,13 +75,22 @@ export default {
     }
   },
   computed:{
-    ...mapGetters(['getUser']),
+    ...mapGetters(['getUser', 'getNewMessagesCount']),
     ShowNotices(){
       // console.log(this.$route.name);
       this.$router.push('/actions/notices?from='+this.$route.name)
-    }
+    },
+    getMessagesCount(){
+      axios.get(this.api_url_v1 + '/actions/notices').then(response => {
+        this.updateNewMessagesCount(response.data.count_new_messages)
+      }, err => {
+        console.log('cites error:',err);
+      })
+    },
+    ...mapState(['api_url_v1'])
   },
   mounted() {
+    this.getMessagesCount
     document.addEventListener('click', this.close)
   },
   beforeDestroy () {

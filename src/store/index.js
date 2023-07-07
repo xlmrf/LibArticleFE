@@ -10,6 +10,7 @@ import filesManager from './components/filesManager'
 import CodeMessages from "./components/CodeMessages"
 import langLabels from "./components/langLabels";
 import photo from './components/user/photo'
+import notices from "@/store/components/user/notices";
 
 import router from "../router";
 
@@ -25,7 +26,8 @@ export default createStore({
         filesManager,
         photo,
         CodeMessages,
-        langLabels
+        langLabels,
+        notices
 
     },
     state: {
