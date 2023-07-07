@@ -5,12 +5,12 @@
         <svg class="alert-bell" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#525252" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 17H2a3 3 0 0 0 3-3V9a7 7 0 0 1 14 0v5a3 3 0 0 0 3 3zm-8.27 4a2 2 0 0 1-3.46 0"></path></svg>
       </span>
       <ul :class="['nav-menu',{'open-notices-menu':openNavMenu}]">
-        <li v-for="notice in notificationMessages.slice(0,2)">
+        <li v-for="notice in lastNotices.slice(0,2)">
           <router-link :class="['menu-link-item',{'unread-notice':!notice.check}]" :to="'/profile/1'">{{notice.message+' '+myTruncate(this.title,15, '...')}}<span>{{ notice.date }}</span></router-link>
         </li>
-        <span class="menu-link-item " @click="ShowNotices" v-if="notificationMessages.length > 2">Переглянути всі <small>{{getNewMessagesCount}}</small></span>
+        <span class="menu-link-item " @click="ShowNotices" v-if="lastNotices.length > 2">Переглянути всі <small>{{getNewMessagesCount}}</small></span>
 <!--        {{Object.values(notificationMessages).filter(item => item.check === true).length}}-->
-        <span class="none-messages" v-if="!notificationMessages.length">Нових повідомлень немає</span>
+        <span class="none-messages" v-if="!lastNotices.length">Нових повідомлень немає</span>
       </ul>
     </nav>
 
@@ -27,7 +27,7 @@ export default {
     return{
       openNavMenu:false,
       title:'Технології оптимального оброблення сигналів',
-      notificationMessages:[
+      lastNotices:[
         {
           date:'18.06.2022',
           message: 'Ваш документ використали як посилання',
@@ -64,7 +64,7 @@ export default {
   methods:{
     ...mapMutations(['updateNewMessagesCount']),
     toggleDropdown(e) {
-      this.notificationMessages.some(e => e.check)
+      this.lastNotices.some(e => e.check)
       this.openNavMenu = !this.openNavMenu
     },
     close (e) {
@@ -77,20 +77,29 @@ export default {
   computed:{
     ...mapGetters(['getUser', 'getNewMessagesCount']),
     ShowNotices(){
-      // console.log(this.$route.name);
       this.$router.push('/actions/notices?from='+this.$route.name)
     },
+
     getMessagesCount(){
-      axios.get(this.api_url_v1 + '/actions/notices').then(response => {
+      axios.get(this.api_url_v1 + '/actions/count-new-messages').then(response => {
         this.updateNewMessagesCount(response.data.count_new_messages)
+      }, err => {
+        console.log('cites error:',err);
+      })
+    },
+    getLastNotices(){
+      axios.get(this.api_url_v1 + '/actions/last-notices').then(response => {
+        this.lastNotices = response.data
       }, err => {
         console.log('cites error:',err);
       })
     },
     ...mapState(['api_url_v1'])
   },
+
   mounted() {
     this.getMessagesCount
+    // this.getLastNotices
     document.addEventListener('click', this.close)
   },
   beforeDestroy () {

@@ -8,6 +8,8 @@
 
 <script>
 import Message from "@/components/actions/Message";
+import axios from "axios";
+import {mapState} from "vuex";
 export default {
   components: {Message},
   data(){
@@ -33,6 +35,25 @@ export default {
 
       ]
     }
+  },
+
+  computed:{
+    getLastNotices(){
+      axios.get(this.api_url_v1 + '/actions/messages').then(response => {
+        this.messages = response.data
+      }, err => {
+        console.log('cites error:',err);
+      })
+    },
+    ...mapState(['api_url_v1'])
+  },
+
+  methods:{
+
+  },
+
+  mounted() {
+    this.getLastNotices
   }
 
 }

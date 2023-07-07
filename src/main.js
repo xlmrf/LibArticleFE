@@ -5,6 +5,7 @@ import store from './store/index'
 import email from "./mixins/email";
 import translate from "./mixins/translate";
 import truncate from "./mixins/truncate";
+import dateConverter from "./mixins/dateConverter";
 // import '../style/theme.css';
 require('./bootstrap');
 
@@ -13,6 +14,7 @@ app
     .mixin(truncate)
     .mixin(email)
     .mixin(translate)
+    .mixin(dateConverter)
     .use(store)
     .use(router)
     .mount('#app');

@@ -30,7 +30,7 @@
 
           <div>Дата публікації:
             <span>{{new Date(Date.parse(getDocument.publication_date)).toDateString()}}</span>
-            {{this.getDocument.authors.map(item => item.user_id === 1).includes(true)}}
+<!--            {{this.getDocument.authors.map(item => item.user_id === 1).includes(true)}}-->
           </div>
 
           <div class="doc-counters">
