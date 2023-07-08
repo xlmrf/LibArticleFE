@@ -13,7 +13,12 @@ export default {
 
 
         updateNewMessagesCount(ctx,data){
-            ctx.newMessagesCount = data
+            if (data === -1){
+                ctx.newMessagesCount--
+            }
+            else {
+                ctx.newMessagesCount = data
+            }
         }
     },
     getters: {

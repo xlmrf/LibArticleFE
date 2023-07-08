@@ -38,7 +38,7 @@ export default {
   },
 
   computed:{
-    getLastNotices(){
+    getNotices(){
       axios.get(this.api_url_v1 + '/actions/messages').then(response => {
         this.messages = response.data
       }, err => {
@@ -53,7 +53,7 @@ export default {
   },
 
   mounted() {
-    this.getLastNotices
+    this.getNotices
   }
 
 }

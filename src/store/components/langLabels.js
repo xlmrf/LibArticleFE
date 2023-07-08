@@ -4,9 +4,7 @@ export default {
     state() {
         return {
             ua:{
-
                 navbar:{
-
                     nav_menu:{
                         'account': "Акаунт",
                         'add_document': "Додати",
@@ -14,7 +12,6 @@ export default {
                         'actions': "Активність",
                         'settings': "Налаштування"
                     }
-
                 },
 
                 actions:{
@@ -25,7 +22,6 @@ export default {
                 },
 
                 settings:{
-
                     left_bar_titles:{
                         'account': "Акаунт",
                         'security': "Безпека",
@@ -71,14 +67,14 @@ export default {
                         'select_lang_en': "English",
 
                         'btn_save_settings': "Зберегти",
-
                     }
                 }
             },
+
+
+
             en: {
-
                 navbar:{
-
                     nav_menu:{
                         'account': "Account",
                         'add_document': "Add document",
@@ -86,7 +82,6 @@ export default {
                         'actions': "Actions",
                         'settings': "Settings"
                     }
-
                 },
 
                 actions:{
