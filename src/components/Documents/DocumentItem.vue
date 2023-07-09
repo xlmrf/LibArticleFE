@@ -1,11 +1,11 @@
 <template>
-  <div class="document-item">
+  <div class="document-item" v-if="document.title">
     <div class="list-document-type">
       <span>
         {{getTypes.find(item => item.id === document.type_id)?.name}}
       </span>
       <div class="publication-date" v-if="document.publication_date">
-        {{getDate()}}
+        {{getDate(document.publication_date)}}
       </div>
     </div>
     <div class="context-document-item">
@@ -81,14 +81,15 @@ export default {
         console.log('views error:',err);
       })
     },
-    getDate(){
-      const date = new Date(this.document.publication_date)
-      const yyyy = date.getFullYear()
-      let mm = date.getMonth() + 1
-      let dd = date.getDate()
+    getDate(old_date){
+      let date_arr = old_date.split('-')
 
-      if (dd < 10) dd = '0' + dd
-      if (mm < 10) mm = '0' + mm
+      const yyyy = date_arr[0]
+      let mm = date_arr[1]
+      let dd = date_arr[2]
+
+      // if (dd < 10) dd = '0' + dd
+      // if (mm < 10) mm = '0' + mm
 
       return dd + '.' + mm + '.' + yyyy
     }

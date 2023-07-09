@@ -8,7 +8,7 @@
         <li v-for="notice in lastNotices">
 <!--          <router-link :class="['menu-link-item',{'unread-notice':!notice.check}]" :to="'/profile/1'">{{notice.message+' '+myTruncate(this.title,15, '...')}}<span>{{ notice.date }}</span></router-link>-->
 <!--          {{notice}}-->
-          <span :class="['menu-link-item',{'unread-notice':!notice.check }]" v-html="getMessageUa({type:notice.type, document_title:myTruncate(notice.document_title,33, '...'), document_id:notice.document_id})"></span>
+          <span :class="['menu-link-item',{'unread-notice':!notice.check }]" v-html="getMessageUa({type:notice.type, document_title:myTruncate(notice.document_title,35, '...'), document_id:notice.document_id})"></span>
         </li>
         <span class="menu-link-item " @click="ShowNotices" v-if="lastNotices.length > 2">Переглянути всі <small v-if="getNewMessagesCount!== 0">{{getNewMessagesCount}}</small></span>
 <!--        {{Object.values(notificationMessages).filter(item => item.check === true).length}}-->
@@ -131,7 +131,7 @@ export default {
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
   position: absolute;
   margin-top: 37px;
-  left: -200px;
+  left: -180px;
   display: none;
   min-width: auto;
   border-radius: 5px;
@@ -141,7 +141,7 @@ export default {
 }
 .nav-menu li{
   border-radius: 3px;
-  width: 250px;
+  width: 280px;
   /*white-space: pre;*/
 }
 .nav-menu > *:hover{
