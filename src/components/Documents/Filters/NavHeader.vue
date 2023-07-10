@@ -3,8 +3,9 @@
     <div class="sort-filter">
       <div class="showed-items">Показано<span>{{ documents.total!==0 ? documents.per_page*(documents.current_page-1)+1 : '0' }}</span> - <span>{{ documents.per_page*(documents.current_page-1)+documents.data.length }}</span>документи із<span>{{ documents.total }}</span>знайдених</div>
       <div class="select-control">
-        <label class="top-filter-label">Сортувати </label>
+        <label class="top-filter-label">Сортувати по</label>
         <select class="select top-filter-select" v-model="sortSelect">
+<!--          <option selected value> &#45;&#45; select an option &#45;&#45; </option>-->
           <option class="filter-option" v-for="value in sortDocuments" :key="value">
             {{ value }}
           </option>
@@ -32,12 +33,12 @@ export default {
     return{
       per_page:this.$route.query.perPage ? this.$route.query.perPage : 10,
       sortDocuments: {
-        popular: 'за популярністю',
-        date_end: 'по даті від старших',
-        date_start: 'по даті від нових',
-        name: 'по назві',
+        popular: 'переглядах',
+        date_start: 'даті ↓',
+        date_end: 'даті ↑',
+        name: 'назві',
       },
-      sortSelect: 'за популярністю'
+      sortSelect: 'переглядах'
     }
   },
   computed: {
@@ -129,29 +130,9 @@ export default {
   color: #222222;
 }
 
-.citation-view {
-  font-size: 0.8em;
-}
-
-.none_item {
-  color: rgba(33, 33, 33, 0.62);
-}
-
-.citation-link {
-  text-decoration: none;
-}
-
 .nav-filtration{
 
   margin: 0.5rem 0;
-}
-
-.not-found-document-panel{
-  font-size: 36px;
-  text-align: center;
-  /*margin-right: 20%;*/
-  font-weight: bold;
-
 }
 
 .documents-header {
@@ -184,6 +165,7 @@ export default {
   line-height: 1.1;
 }
 .top-filter-select > option{
+  font-size: 0.9em;
   background: #f1f1f1;
 }
 .select-control{

@@ -4,7 +4,7 @@
       <nav-header :documents="documents" />
       <nav-filtration v-if="$route.query" />
     </div>
-    <div class="not-found-document-panel" v-if="documents.total === 0">Документи не знайдено</div>
+    <div class="not-found-document-panel" v-if="documents.total === 0">Документів не знайдено</div>
     <div v-else>
       <document-item class="document-list-item" :document="document" v-for="document in documents.data"/>
       <pagination :paginate="paginate(documents)"/>
@@ -103,8 +103,11 @@ export default {
 }
 
 .not-found-document-panel{
-  font-size: 36px;
+  font-size: 28px;
   text-align: center;
+  color: #333333;
+  background: #F2F2F2;
+  padding: 25px;
   /*margin-right: 20%;*/
   font-weight: bold;
 

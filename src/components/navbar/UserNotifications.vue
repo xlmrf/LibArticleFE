@@ -5,14 +5,15 @@
         <svg class="alert-bell" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#525252" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 17H2a3 3 0 0 0 3-3V9a7 7 0 0 1 14 0v5a3 3 0 0 0 3 3zm-8.27 4a2 2 0 0 1-3.46 0"></path></svg>
       </span>
       <ul :class="['nav-menu',{'open-notices-menu':openNavMenu}]">
-        <li v-for="notice in lastNotices">
+        <li v-for="notice in lastNotices" >
 <!--          <router-link :class="['menu-link-item',{'unread-notice':!notice.check}]" :to="'/profile/1'">{{notice.message+' '+myTruncate(this.title,15, '...')}}<span>{{ notice.date }}</span></router-link>-->
 <!--          {{notice}}-->
           <span :class="['menu-link-item',{'unread-notice':!notice.check }]" v-html="getMessageUa({type:notice.type, document_title:myTruncate(notice.document_title,35, '...'), document_id:notice.document_id})"></span>
         </li>
-        <span class="menu-link-item " @click="ShowNotices" v-if="lastNotices.length > 2">Переглянути всі <small v-if="getNewMessagesCount!== 0">{{getNewMessagesCount}}</small></span>
+        <span class="menu-link-item see-all" @click="ShowNotices" >{{ this.$store.getters.getLanguage.navbar.nav_notices.check_all_messages }} <small v-if="getNewMessagesCount !== 0">{{getNewMessagesCount}}</small><span v-if="getNewMessagesCount !== 0">{{this.$store.getters.getLanguage.navbar.nav_notices.none_messages}}</span></span>
 <!--        {{Object.values(notificationMessages).filter(item => item.check === true).length}}-->
-        <span class="none-messages" v-if="!lastNotices.length">Нових повідомлень немає</span>
+
+<!--        <span class="menu-link-item" v-else>{{ this.$store.getters.getLanguage.navbar.nav_notices.none_messages }}</span>-->
       </ul>
     </nav>
 
@@ -131,7 +132,7 @@ export default {
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
   position: absolute;
   margin-top: 37px;
-  left: -180px;
+  left: -220px;
   display: none;
   min-width: auto;
   border-radius: 5px;
@@ -160,13 +161,15 @@ export default {
   color: #212121;
   flex-wrap: wrap;
 }
-
+.see-all{
+  font-weight: bold;
+}
 .menu-link-item small{
   font-size: 14px;
   margin: 0 0.5rem;
   padding: 0 10px;
   border-radius: 40px;
-  background: rgba(19, 9, 24, 0.12);
+  background: rgba(49, 140, 231, 0.22);
 }
 .unread-notice{
   /*background: rgba(65, 159, 217, 0.13);*/

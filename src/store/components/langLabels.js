@@ -11,6 +11,10 @@ export default {
                         'documents': "Документи",
                         'actions': "Активність",
                         'settings': "Налаштування"
+                    },
+                    nav_notices:{
+                        'none_messages': "Переглянути всі",
+                        'check_all_messages': "Переглянути нові"
                     }
                 },
 
@@ -81,6 +85,10 @@ export default {
                         'documents': "Documents",
                         'actions': "Actions",
                         'settings': "Settings"
+                    },
+                    nav_notices:{
+                        'none_messages': "See all",
+                        'check_all_messages': "See new"
                     }
                 },
 
