@@ -1,25 +1,7 @@
 <template>
-  <div v-if="documents.data&&getTypes">
-    <div class="documents-header">
-      <div class="sort-filter">
-        <div class="showed-items">Показано<span>{{ documents.total!==0 ? documents.per_page*(documents.current_page-1)+1 : '0' }}</span> - <span>{{ documents.per_page*(documents.current_page-1)+documents.data.length }}</span>документи із<span>{{ documents.total }}</span>знайдених</div>
-        <div class="select-control">
-          <label class="top-filter-label">Сортувати за</label>
-          <select class="select top-filter-select" v-model="sortSelect">
-            <option class="filter-option" v-for="count in sortDocuments" :key="count">
-              {{ count }}
-            </option>
-          </select>
-        </div>
-        <div class="select-control">
-          <label class="top-filter-label">На сторінці</label>
-          <select class="select top-filter-select" v-model="per_page">
-            <option v-for="count in getPageCountPaginate" :key="count">
-              {{ count }}
-            </option>
-          </select>
-        </div>
-      </div>
+  <div>
+    <div>
+      <nav-header :documents="documents" />
       <nav-filtration v-if="$route.query" />
     </div>
     <div class="not-found-document-panel" v-if="documents.total === 0">Документи не знайдено</div>
@@ -36,6 +18,7 @@ import citation from "../additional/CitationStyle"
 import DocumentItem from "@/components/Documents/DocumentItem";
 import {mapGetters} from "vuex";
 import NavFiltration from "@/components/Documents/Filters/NavFiltration";
+import NavHeader from "@/components/Documents/Filters/NavHeader";
 
 export default {
   props: {
@@ -44,56 +27,24 @@ export default {
 
     }
   },
-  data(){
-    return{
-      per_page:this.$route.query.perPage ? this.$route.query.perPage : 10,
-      sortDocuments: {
-        popular: 'популярністю',
-        date: 'датою',
-      },
-      sortSelect: ''
-    }
-  },
   computed: {
     ...mapGetters(['getTypes','getPageCountPaginate']),
-  },
-  watch: {
-    '$route.fullPath': {
-      handler(item) {
-        let q = '';
-        if (this.$route.fullPath.split('?')[1]) {
-          q = '?' + this.$route.fullPath.split('?')[1];
-        }
-      }
-    },
-    per_page(){
-      let query = Object.assign({}, this.$route.query);
 
-
-      // this.$route.push('/')
-      this.$router.push({
-        name: 'documents',
-        query: {...query, ...{'perPage':this.per_page}}
-      })
-
-    }
   },
   methods: {
     paginate(item) {
       const {data, links, ...paginateObj} = item;
       return paginateObj
-    },
+    }
   },
   components: {
+    NavHeader,
     NavFiltration,
     DocumentItem,
     citation,
     pagination
   },
   mounted() {
-    let i = Object.assign({},this.documents)
-    // i.splice(i.indexOf(i.data), 1);
-    console.log('i', i);
   }
 }
 </script>

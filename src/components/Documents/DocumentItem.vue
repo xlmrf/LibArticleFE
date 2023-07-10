@@ -69,7 +69,8 @@ export default {
 
   data(){
     return{
-      views:{}
+      views:{},
+      pointDocument: null
     }
   },
 
