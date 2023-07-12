@@ -66,6 +66,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-self: center;
+  padding-bottom: 20px;
   width: 100%;
 }
 
@@ -81,31 +82,6 @@ export default {
   /*left:0;*/
   bottom:0;
   background: rgba(191, 191, 191, 0.5);
-}
-
-.setting-block {
-  display: inherit;
-  flex-direction: column;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-  outline: none;
-  padding: 20px;
-  width: 100%;
-}
-
-.setting-block > .fields_fill{
-  margin: 6px 0;
-  width: 300px;
-}
-
-.setting-block > .fields_fill > input{
-  margin-top: 5px;
-}
-
-
-.setting-block > .fields_fill > label{
-  padding: 5px;
 }
 
 .privacy-settings > div{

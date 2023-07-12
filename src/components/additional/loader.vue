@@ -13,6 +13,10 @@ export default {
 </script>
 
 <style scoped>
+.spinner-box{
+  position: relative;
+}
+
 .spinner {
   animation: rotate 2s linear infinite;
   z-index: 2;
@@ -28,6 +32,16 @@ export default {
     stroke-linecap: round;
     animation: dash 1.6s ease-in-out infinite;
   }
+
+.save-session-loader{
+  margin: 0;
+  top: -32px;
+  left: 20px;
+}
+
+.save-session-loader .path{
+  stroke: hsl(177, 70%, 41%);
+}
 
 @keyframes rotate {
   100% {

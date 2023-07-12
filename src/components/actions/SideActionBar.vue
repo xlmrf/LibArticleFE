@@ -1,13 +1,10 @@
 <template>
   <div class="settings-sidebar-list">
     <div>
-      <span class="settings-bar-link search-bar"><span><input type="text" name="" v-model="search[$route.fullPath.substring($route.fullPath.lastIndexOf('/') + 1)]" id="searcher" :placeholder="getLanguage.actions.left_bar_titles.searcher[$route.name]"></span><label
-          for="searcher"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#555555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></label></span>
       <span class="settings-bar-link messages-link"><router-link :to="{name:'actions.notices'}"><span>{{ getLanguage.actions.left_bar_titles.notices }} <small class="action-counter" v-if="messagesCount > 0">{{messagesCount}}</small></span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#222222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
         <span class="messages-count" v-if="getNewMessagesCount > 0">{{ getNewMessagesCount }}</span></router-link>
       </span>
       <span class="settings-bar-link"><router-link :to="{name:'actions.story'}"><span>{{ getLanguage.actions.left_bar_titles.actions }} <small class="action-counter" v-if="actionsCount > 0">{{actionsCount}}</small></span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#222222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"></path><polygon points="18 2 22 6 12 16 8 16 8 12 18 2"></polygon></svg></router-link></span>
-      {{search}}
     </div>
   </div>
 </template>
@@ -23,10 +20,7 @@ export default {
     return{
       messagesCount: 0,
       actionsCount: 0,
-      search:{
-        notices: '',
-        story: ''
-      }
+
     }
   },
   watch:{
@@ -155,43 +149,6 @@ a{
   border-radius: 4px;
 }
 
-.search-bar{
-  position: relative;
-  /*bottom: 0;*/
-}
-.search-bar input{
-  padding: 7px 30px 7px 5px;
-  font-size: 16px;
-  border-radius: 3px;
-  width: 176px;
-
-  background: #fafafa;
-  border: 1px solid #bbbbbb;
-  resize: none;
-  outline: none;
-  -webkit-transition: all .3s ease-out;
-  -moz-transition: all .3s ease-out;
-  -o-transition: all .3s ease-out;
-  transition: all .3s ease-out
-}
-
-.search-bar input:valid,
-.search-bar input:focus {
-  border: 1px solid #929292;
-}
-
-.search-bar input:focus,
-.search-bar input:hover {
-  background: #fff;
-  border: 1px solid #419FD9;
-}
-
-.search-bar svg{
-  position: absolute;
-  top: 7px;
-  right: 5px;
-
-}
 
 .action-counter{
   /*background: #ffffff;*/

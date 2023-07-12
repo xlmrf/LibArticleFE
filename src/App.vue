@@ -191,6 +191,30 @@ input {
   color: #333333;
 }
 
+.setting-block {
+  display: inherit;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  outline: none;
+  padding: 20px;
+  width: 100%;
+}
+
+.setting-block > .fields_fill{
+  margin: 6px 0;
+  width: 300px;
+}
+
+.setting-block > .fields_fill > input{
+  margin-top: 5px;
+}
+
+
+.setting-block > .fields_fill > label{
+  padding: 5px;
+}
 
 .delete-item{
   cursor: pointer;

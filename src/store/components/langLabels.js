@@ -63,6 +63,11 @@ export default {
 
                         'send_email_box': "Відправляти повідомлення на email",
                         'send_email_advice': "Відмітивши поле, на ваш email будуть відправлятись повідомлення про: використання вашого документу як посилання, позначення вас як співавтора в доданому іншими користувачами документа та ін.",
+                        'clear_notices': "Видалити повідомлення",
+                        'clear_notices_advice': "Очистити повністю список повідомлень",
+
+                        'clear_story': "Видалити історію",
+                        'clear_story_advice': "Очистити повністю список подій",
 
                         'title_privacy': "Приватність",
                         'open_profile_box': "Відкрити профіль для перегляду іншим користувачам",
@@ -141,6 +146,11 @@ export default {
 
                         'send_email_box': "Send notices to email",
                         'send_email_advice': "Messages about marking you as a co-author in a document added by other users, using your document as a cite, etc. will be notice you in email.",
+                        'clear_notices': "Clear notices",
+                        'clear_notices_advice': "Clear the message list completely",
+
+                        'clear_story': "Clear actions",
+                        'clear_story_advice': "Clear the actions list completely",
 
                         'title_privacy': "Privacy",
                         'open_profile_box': "Makes your user info confidential.",
