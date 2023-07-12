@@ -99,6 +99,7 @@ export default {
   flex-flow: row;
   justify-content: space-between;
   background: rgba(49, 140, 231, 0.05);
+  font-size: 18px;
 }
 
 .setting-item-reason{
@@ -119,13 +120,13 @@ export default {
 
 .der-setting-block{
   display: flex;
-  align-self: baseline;
-  align-items: center;
-  font-size: 1.2em;
+  align-items: baseline;
+  font-size: 20px;
 }
 
 .setting-item-reason{
   margin-top: 5px;
+  /*font-size: 18px;*/
 
 }
 
@@ -146,7 +147,7 @@ export default {
 .select-language{
   color: #318CE7;
   border-radius: 3px;
-  margin-left: 10px;
+  margin-left: 15px;
   padding: 6px;
   font-size: 1.2rem;
   line-height: 1.1;
@@ -166,6 +167,9 @@ export default {
   font-size: 15px;
   margin-left: auto;
   cursor: pointer;
+  color: #369AFF;
+  padding: 6px 10px;
+  border-radius: 4px;
 }
 
 .save-session > span::before{
