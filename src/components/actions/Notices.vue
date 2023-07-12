@@ -1,8 +1,9 @@
 <template>
   <div>
-    <div v-for="message in messages">
+    <div v-for="message in messages" v-if="messageRequest">
       <message :message="message" />
     </div>
+    <loader v-else/>
   </div>
 </template>
 
@@ -10,38 +11,43 @@
 import Message from "@/components/actions/Message";
 import axios from "axios";
 import {mapState} from "vuex";
+import Loader from "@/components/additional/loader";
 export default {
-  components: {Message},
+  components: {Loader, Message},
   data(){
     return{
       messages:[
-        {
-          id:7,
-          text: 'Вас відзначено як співавтора в документі "Sensor system and new..."',
-          date: '22-05-2022',
-          type: 'coauthor',
-          check: 'false',
-          ref_doc_title_id: {id:12, title:'Sensor system..'},
-          who_marked_full_name_id: {id:1, name:'Name'},
-        },
-        {
-          id:8,
-          text: 'Документ набрав високої популярності. "Sensor system and new..."',
-          date: '29-05-2022',
-          type: 'popular',
-          check: 'false',
-          ref_doc_title_id: {id:12, title:'Sensor system..'}
-        },
+        // {
+        //   id:7,
+        //   text: 'Вас відзначено як співавтора в документі "Sensor system and new..."',
+        //   date: '22-05-2022',
+        //   type: 'coauthor',
+        //   check: 'false',
+        //   ref_doc_title_id: {id:12, title:'Sensor system..'},
+        //   who_marked_full_name_id: {id:1, name:'Name'},
+        // },
+        // {
+        //   id:8,
+        //   text: 'Документ набрав високої популярності. "Sensor system and new..."',
+        //   date: '29-05-2022',
+        //   type: 'popular',
+        //   check: 'false',
+        //   ref_doc_title_id: {id:12, title:'Sensor system..'}
+        // },
 
-      ]
+      ],
+      messageRequest: false
     }
   },
 
   computed:{
     getNotices(){
+      this.messageRequest = false
       axios.get(this.api_url_v1 + '/actions/messages').then(response => {
         this.messages = response.data
+        this.messageRequest = true
       }, err => {
+        this.messageRequest = true
         console.log('cites error:',err);
       })
     },

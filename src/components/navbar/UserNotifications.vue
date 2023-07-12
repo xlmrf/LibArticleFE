@@ -10,7 +10,13 @@
 <!--          {{notice}}-->
           <span :class="['menu-link-item',{'unread-notice':!notice.check }]" v-html="getMessageUa({type:notice.type, document_title:myTruncate(notice.document_title,35, '...'), document_id:notice.document_id})"></span>
         </li>
-        <span class="menu-link-item see-all" @click="ShowNotices" >{{ this.$store.getters.getLanguage.navbar.nav_notices.check_all_messages }} <small v-if="getNewMessagesCount !== 0">{{getNewMessagesCount}}</small><span v-if="getNewMessagesCount !== 0">{{this.$store.getters.getLanguage.navbar.nav_notices.none_messages}}</span></span>
+        <li class="see-all" @click="ShowNotices" >
+          <span class="menu-link-item" v-if="getNewMessagesCount === 0">{{ this.$store.getters.getLanguage.navbar.nav_notices.none_messages }}</span>
+          <span class="menu-link-item" v-else>
+            {{this.$store.getters.getLanguage.navbar.nav_notices.new_messages}}
+            <small >{{getNewMessagesCount}}</small>
+          </span>
+        </li>
 <!--        {{Object.values(notificationMessages).filter(item => item.check === true).length}}-->
 
 <!--        <span class="menu-link-item" v-else>{{ this.$store.getters.getLanguage.navbar.nav_notices.none_messages }}</span>-->
@@ -30,38 +36,7 @@ export default {
     return{
       openNavMenu:false,
       title:'Технології оптимального оброблення сигналів',
-      lastNotices:[
-        {
-          date:'18.06.2022',
-          message: 'Ваш документ використали як посилання',
-          check:false
-        },
-        {
-          date:'16.06.2022',
-          message: 'Вас позначили співавтором у документі',
-          check:true
-        },
-        {
-          date:'11.06.2022',
-          message: 'Вас позначили співавтором у документі',
-          check:false
-        },
-        {
-          date:'08.06.2022',
-          message: 'Вас позначили співавтором у документі',
-          check:true
-        },
-        {
-          date:'05.06.2022',
-          message: 'Вас позначили співавтором у документі',
-          check:false
-        },
-        {
-          date:'01.06.2022',
-          message: 'Вас позначили співавтором у документі',
-          check:true
-        }
-      ]
+      lastNotices:[]
     }
   },
   methods:{
@@ -151,22 +126,22 @@ export default {
 
 .menu-link-item{
   border: 1px solid transparent;
-  font-size: 14px;
+  font-size: 15px;
   display: flex;
   align-items: center;
   padding: 10px 0 10px 5px;
   position: relative;
   width: 100%;
   text-decoration: none;
-  color: #212121;
+  color: #333333;
   flex-wrap: wrap;
 }
 .see-all{
   font-weight: bold;
 }
-.menu-link-item small{
-  font-size: 14px;
-  margin: 0 0.5rem;
+.menu-link-item > small{
+  font-size: 15px;
+  margin: 0 10px;
   padding: 0 10px;
   border-radius: 40px;
   background: rgba(49, 140, 231, 0.22);

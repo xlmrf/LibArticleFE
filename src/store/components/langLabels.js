@@ -14,7 +14,7 @@ export default {
                     },
                     nav_notices:{
                         'none_messages': "Переглянути всі",
-                        'check_all_messages': "Переглянути нові"
+                        'new_messages': "Переглянути нові"
                     }
                 },
 
@@ -22,6 +22,10 @@ export default {
                     left_bar_titles: {
                         'notices': "Повідомлення",
                         'actions': "Діяльність",
+                        searcher:{
+                            'actions.notices': "Пошук повідомлення...",
+                            'actions.story': "Пошук взаємодії..."
+                        }
                     },
                 },
 
@@ -88,7 +92,7 @@ export default {
                     },
                     nav_notices:{
                         'none_messages': "See all",
-                        'check_all_messages': "See new"
+                        'new_messages': "See new"
                     }
                 },
 
@@ -96,6 +100,10 @@ export default {
                     left_bar_titles: {
                         'notices': "Notices",
                         'actions': "Actions",
+                        searcher:{
+                            'actions.notices': "Find message...",
+                            'actions.story': "Find action..."
+                        }
                     },
                 },
 
