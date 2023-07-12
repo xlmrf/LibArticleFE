@@ -214,8 +214,14 @@ history:createWebHistory(),
 routes
 });
 router.beforeEach((to,from,next)=>{
+
+
+    if (to.name === 'actions'){
+        next({name:'actions.notices'})
+    }
+
     let token = localStorage.getItem('access_token')
-    console.log(to.name);
+    console.log(to);
     // if (!token){
     //     if (to.name !== 'login' && to.name !== 'registration' && to.name !== 'forget-password' && to.name !== 'reset-password' && to.name !== 'verify'){
     //         return next({

@@ -25,13 +25,27 @@ export default {
       data:[]
     }
   },
+  watch:{
+    '$route.fullPath':{
+      handler(){
+        console.log('route: ',this.$route.fullPath);
+        this.scrollToTop()
+      }
+    }
+  },
   methods:{
     ...mapMutations(['updateTypes']),
     askTypes() {
       axios.get(this.api_url_v1 + '/document-types').then(response => {
         this.updateTypes(response.data)
       })
-    }
+    },
+    scrollToTop() {
+      window.scrollTo({top: 0});
+    },
+    handleScroll() {
+      const scrollBtn = this.$refs.scrollTopButton;
+    },
   },
 
   mounted() {

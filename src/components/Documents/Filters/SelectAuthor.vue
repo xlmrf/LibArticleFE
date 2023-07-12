@@ -164,7 +164,6 @@ export default {
 
 .authors-searcher{
   padding: 0.5rem;
-  font-size: 1em;
   margin: 0.5rem 0;
 }
 
