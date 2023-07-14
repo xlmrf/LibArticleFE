@@ -24,7 +24,7 @@ export default {
                         'actions': "Діяльність",
                         searcher:{
                             'actions.notices': "Пошук повідомлення...",
-                            'actions.story': "Пошук взаємодії..."
+                            'actions.story': "Пошук активностей..."
                         }
                     },
                 },

@@ -1,21 +1,17 @@
 <template>
-<!--  {{message}}-->
-  <div class="message-item" v-if="message.check">
-<!--    <p>{{message.type}}</p>-->
-<!--    <span><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#222222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path></svg></span>-->
-    <span @click="$router.push('/document/'+message.document_id)" class="title-message" v-html="getMessageUa({type:message.type, document_title:message.document_title, document_id:message.document_id})"></span>
-<!--    <span>{{message}}</span>-->
-    <span class="date-message">{{ getConvertDate(message.created_at) }}</span>
-<!--    // new Date(Date.parse(message.created_at)).toUTCString().slice(0,-4)-->
+  <div v-for="(notice,idx) in sortNotices" :key="notice.id" @click="read(notice.id)">
+    <div class="message-item" :class="{'unread-message': !notice.check}">
+      <span @click="$router.push('/document/'+notice.document_id)" class="title-message" v-html="getMessageUa({type:notice.type, document_title:notice.document_title, document_id:notice.document_id})"></span>
+      <span class="date-message">{{ getConvertDate(notice.created_at) }}</span>
+    </div>
   </div>
 
-  <div class="message-item unread-message" @click="read" v-else>
+<!--  <div class="message-item unread-message" @click="read" v-else>-->
 
-<!--    <p>{{message.type}}</p>-->
-    <span @click="$router.push('/document/'+message.document_id)" class="title-message" v-html="getMessageUa({type:message.type, document_title:message.document_title, document_id:message.document_id})"></span>
-    <span class="date-message">{{ getConvertDate(message.created_at) }}</span>
+<!--    <span @click="$router.push('/document/'+message.document_id)" class="title-message" v-html="getMessageUa({type:message.type, document_title:message.document_title, document_id:message.document_id})"></span>-->
+<!--    <span class="date-message">{{ getConvertDate(message.created_at) }}</span>-->
 
-  </div>
+<!--  </div>-->
 </template>
 
 <script>
@@ -24,18 +20,25 @@ import {mapMutations, mapState} from "vuex";
 
 export default {
   mixins:['dateConverter', 'messages'],
-  props:['message'],
+  props:['notices','type'],
   computed:{
-    read(){
-      axios.get(this.$store.state.api_url_v1+'/actions/check-message/'+this.message.id).then(res => {
-        this.message.check = res.data.notice_check
+    sortNotices(){
+      const checkedItems = this.notices.filter(item => item.check === 1);
+      const uncheckedItems = this.notices.filter(item => item.check === 0);
+      return [...uncheckedItems, ...checkedItems];
+    }
+    // ...mapState(['api_url_v1'])
+  },
+  methods:{
+    read(idx){
+      // console.log(this.notices.find(item => item.id === idx).check);
+
+      axios.get(this.$store.state.api_url_v1+'/actions/check-message/'+idx).then(res => {
+        this.notices.find(item => item.id === idx).check = res.data.notice_check
         console.log('response',res);
         this.updateNewMessagesCount(-1)
       })
     },
-    // ...mapState(['api_url_v1'])
-  },
-  methods:{
     ...mapMutations(['updateNewMessagesCount'])
   }
 

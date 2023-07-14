@@ -159,7 +159,7 @@ const routes = [
                         component: notices
                     },
                     {
-                        path:'/story',
+                        path:'story',
                         name:'actions.story',
                         component: story
                     }
@@ -218,6 +218,11 @@ router.beforeEach((to,from,next)=>{
 
     if (to.name === 'actions'){
         next({name:'actions.notices'})
+    }
+    //
+
+    if (to.name === 'stat'){
+        next({name:'documents'})
     }
 
     let token = localStorage.getItem('access_token')
