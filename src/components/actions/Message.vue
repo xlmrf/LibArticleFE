@@ -1,17 +1,11 @@
 <template>
-  <div v-for="(notice,idx) in sortNotices" :key="notice.id" @click="read(notice.id)">
+  {{notices}}
+  <div v-for="notice in sortNotices" :key="notice.id" @click="read(notice.id)">
     <div class="message-item" :class="{'unread-message': !notice.check}">
-      <span @click="$router.push('/document/'+notice.document_id)" class="title-message" v-html="getMessageUa({type:notice.type, document_title:notice.document_title, document_id:notice.document_id})"></span>
+      <span @click="$router.push('/document/'+notice?.document_id)" class="title-message" v-html="getMessageUa(notice)"></span>
       <span class="date-message">{{ getConvertDate(notice.created_at) }}</span>
     </div>
   </div>
-
-<!--  <div class="message-item unread-message" @click="read" v-else>-->
-
-<!--    <span @click="$router.push('/document/'+message.document_id)" class="title-message" v-html="getMessageUa({type:message.type, document_title:message.document_title, document_id:message.document_id})"></span>-->
-<!--    <span class="date-message">{{ getConvertDate(message.created_at) }}</span>-->
-
-<!--  </div>-->
 </template>
 
 <script>
