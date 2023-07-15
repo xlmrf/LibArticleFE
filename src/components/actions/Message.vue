@@ -1,7 +1,7 @@
 <template>
   {{notices}}
-  <div v-for="notice in sortNotices" :key="notice.id" @click="read(notice.id)">
-    <div class="message-item" :class="{'unread-message': !notice.check}">
+  <div v-for="notice in type === 'message' ? sortNotices: notices" :key="notice.id" @click="read(notice.id)">
+    <div class="message-item" :class="{'unread-message': type === 'message' ? !notice.check : false}">
       <span @click="$router.push('/document/'+notice?.document_id)" class="title-message" v-html="getMessageUa(notice)"></span>
       <span class="date-message">{{ getConvertDate(notice.created_at) }}</span>
     </div>
@@ -30,10 +30,10 @@ export default {
       axios.get(this.$store.state.api_url_v1+'/actions/check-message/'+idx).then(res => {
         this.notices.find(item => item.id === idx).check = res.data.notice_check
         console.log('response',res);
-        this.updateNewMessagesCount(-1)
+        this.updateNewNoticesCount(-1)
       })
     },
-    ...mapMutations(['updateNewMessagesCount'])
+    ...mapMutations(['updateNewNoticesCount'])
   }
 
 }

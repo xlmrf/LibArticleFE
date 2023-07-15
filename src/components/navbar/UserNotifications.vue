@@ -11,10 +11,10 @@
           <span :class="['menu-link-item',{'unread-notice':!notice.check }]" v-html="getMessageUa({type:notice.type, document_title:myTruncate(notice.document_title,35, '...'), document_id:notice.document_id})"></span>
         </li>
         <li class="see-all" @click="ShowNotices" >
-          <span class="menu-link-item" v-if="getNewMessagesCount === 0">{{ this.$store.getters.getLanguage.navbar.nav_notices.none_messages }}</span>
+          <span class="menu-link-item" v-if="getNewNoticesCount === 0">{{ this.$store.getters.getLanguage.navbar.nav_notices.none_messages }}</span>
           <span class="menu-link-item" v-else>
             {{this.$store.getters.getLanguage.navbar.nav_notices.new_messages}}
-            <small >{{getNewMessagesCount}}</small>
+            <small >{{getNewNoticesCount}}</small>
           </span>
         </li>
 <!--        {{Object.values(notificationMessages).filter(item => item.check === true).length}}-->
@@ -40,7 +40,7 @@ export default {
     }
   },
   methods:{
-    ...mapMutations(['updateNewMessagesCount']),
+    ...mapMutations(['updateNewNoticesCount']),
     toggleDropdown(e) {
       this.lastNotices.some(e => e.check)
       this.openNavMenu = !this.openNavMenu
@@ -53,14 +53,14 @@ export default {
     }
   },
   computed:{
-    ...mapGetters(['getUser', 'getNewMessagesCount']),
+    ...mapGetters(['getUser', 'getNewNoticesCount']),
     ShowNotices(){
       this.$router.push('/actions/notices?from='+this.$route.name)
     },
 
-    getMessagesCount(){
-      axios.get(this.api_url_v1 + '/actions/count-new-messages').then(response => {
-        this.updateNewMessagesCount(response.data.count_new_messages)
+    getNoticesCount(){
+      axios.get(this.api_url_v1 + '/actions/count-new-notices').then(response => {
+        this.updateNewNoticesCount(response.data.count_new_notices)
       }, err => {
         console.log('cites error:',err);
       })
@@ -76,7 +76,7 @@ export default {
   },
 
   mounted() {
-    this.getMessagesCount
+    this.getNoticesCount
     this.getLastNotices
     document.addEventListener('click', this.close)
   },

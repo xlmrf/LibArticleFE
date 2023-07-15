@@ -19,7 +19,7 @@ import rules from "./view/UnknownPage"
 
 import actions from "./view/Actions"
 import notices from "./components/actions/Notices"
-import story from "./components/actions/Story"
+import events from "./components/actions/Event"
 
 import settings from "./view/UserSettings"
 import ProfileSettings from "./components/settings/Account"
@@ -159,9 +159,9 @@ const routes = [
                         component: notices
                     },
                     {
-                        path:'story',
-                        name:'actions.story',
-                        component: story
+                        path:'events',
+                        name:'actions.events',
+                        component: events
                     }
                 ]
             },

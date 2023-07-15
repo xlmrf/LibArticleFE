@@ -24,7 +24,7 @@ export default {
                         'actions': "Діяльність",
                         searcher:{
                             'actions.notices': "Пошук повідомлення...",
-                            'actions.story': "Пошук активностей..."
+                            'actions.events': "Пошук активностей..."
                         }
                     },
                 },
@@ -66,8 +66,8 @@ export default {
                         'clear_notices': "Видалити повідомлення",
                         'clear_notices_advice': "Очистити повністю список повідомлень",
 
-                        'clear_story': "Видалити історію",
-                        'clear_story_advice': "Очистити повністю список подій",
+                        'clear_events': "Видалити історію",
+                        'clear_events_advice': "Очистити повністю список подій",
 
                         'title_privacy': "Приватність",
                         'open_profile_box': "Відкрити профіль для перегляду іншим користувачам",
@@ -107,7 +107,7 @@ export default {
                         'actions': "Actions",
                         searcher:{
                             'actions.notices': "Find message...",
-                            'actions.story': "Find action..."
+                            'actions.events': "Find action..."
                         }
                     },
                 },
@@ -149,8 +149,8 @@ export default {
                         'clear_notices': "Clear notices",
                         'clear_notices_advice': "Clear the message list completely",
 
-                        'clear_story': "Clear actions",
-                        'clear_story_advice': "Clear the actions list completely",
+                        'clear_events': "Clear actions",
+                        'clear_events_advice': "Clear the actions list completely",
 
                         'title_privacy': "Privacy",
                         'open_profile_box': "Makes your user info confidential.",

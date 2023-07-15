@@ -31,8 +31,8 @@
     </div>
 
     <div class="setting-block">
-      <span class="setting-item-reason">{{this.$store.getters.getLanguage.settings.other_settings_titles.clear_story_advice}}</span>
-      <span class="setting-item-option"><button class="btn-red">{{this.$store.getters.getLanguage.settings.other_settings_titles.clear_story}}</button></span>
+      <span class="setting-item-reason">{{this.$store.getters.getLanguage.settings.other_settings_titles.clear_events_advice}}</span>
+      <span class="setting-item-option"><button class="btn-red">{{this.$store.getters.getLanguage.settings.other_settings_titles.clear_events}}</button></span>
     </div>
 
 

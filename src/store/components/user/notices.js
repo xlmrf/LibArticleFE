@@ -1,8 +1,8 @@
 export default {
     state() {
         return {
-            messages:[],
-            newMessagesCount:0
+            notices:[],
+            newNoticesCount:0
         }
     },
     actions: {
@@ -12,19 +12,19 @@ export default {
     mutations: {
 
 
-        updateNewMessagesCount(ctx,data){
+        updateNewNoticesCount(ctx,data){
             if (data === -1){
-                ctx.newMessagesCount--
+                ctx.newNoticesCount--
             }
             else {
-                ctx.newMessagesCount = data
+                ctx.newNoticesCount = data
             }
         }
     },
     getters: {
 
-        getNewMessagesCount(ctx){
-            return ctx.newMessagesCount
+        getNewNoticesCount(ctx){
+            return ctx.newNoticesCount
         }
     },
 

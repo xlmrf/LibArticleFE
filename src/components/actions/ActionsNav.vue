@@ -19,7 +19,7 @@ export default {
     return {
       search:{
         notices: '',
-        story: ''
+        events: ''
       }
     };
   },
@@ -29,7 +29,7 @@ export default {
         this.getNotices
       }
     },
-    'search.story':{
+    'search.events':{
       handler(){
         //
       }
@@ -47,7 +47,7 @@ export default {
       //   console.log('get cites error:', err);
       // })
     },
-    ...mapGetters(['getLanguage', 'getNewMessagesCount']),
+    ...mapGetters(['getLanguage', 'getNewNoticesCount']),
     ...mapState(['api_url_v1'])
   },
 

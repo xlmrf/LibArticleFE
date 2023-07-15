@@ -1,6 +1,6 @@
 <template>
   <div>
-    <message :notices="messages" type="message" v-if="messageRequest"/>
+    <message :notices="notices" type="notice" v-if="messageRequest"/>
     <loader v-else/>
   </div>
 </template>
@@ -14,7 +14,7 @@ export default {
   components: {Loader, Message},
   data(){
     return{
-      messages:[
+      notices:[
         // {
         //   id:7,
         //   text: 'Вас відзначено як співавтора в документі "Sensor system and new..."',
@@ -41,8 +41,8 @@ export default {
   computed:{
     getNotices(){
       this.messageRequest = false
-      axios.get(this.api_url_v1 + '/actions/messages').then(response => {
-        this.messages = response.data
+      axios.get(this.api_url_v1 + '/actions/notices').then(response => {
+        this.notices = response.data
         this.messageRequest = true
       }, err => {
         this.messageRequest = true

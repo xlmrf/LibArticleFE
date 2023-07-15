@@ -8,7 +8,7 @@ export default {
                 console.log("user settings");
             }).catch(err => {
                 console.log('set user error:',err.response);
-                ctx.commit('userMessages', err.response.data)
+                ctx.commit('userNotices', err.response.data)
             })
         }
 }
