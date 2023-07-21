@@ -1,6 +1,6 @@
 <template>
   <div>
-    <message :notices="notices" type="notice" v-if="messageRequest"/>
+    <message v-for="notice in notices" :notice="notice" :id="'notice-' + notice.id" type="notice" v-if="messageRequest"/>
     <loader v-else/>
   </div>
 </template>
@@ -52,12 +52,24 @@ export default {
     ...mapState(['api_url_v1'])
   },
 
-  methods:{
-
+  methods: {
+    scrollToMessage() {
+      // Перевірка наявності якоря в URL
+      const anchor = window.location.hash;
+      if (anchor) {
+        // Знаходження повного повідомлення з заданим id
+        const element = document.querySelector(anchor);
+        if (element) {
+          // Прокручування до повного повідомлення
+          element.scrollIntoView({behavior: 'smooth'});
+        }
+      }
+    },
   },
 
   mounted() {
     this.getNotices
+    this.scrollToMessage()
   }
 
 }

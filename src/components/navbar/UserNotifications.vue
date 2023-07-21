@@ -5,9 +5,8 @@
         <svg class="alert-bell" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#525252" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 17H2a3 3 0 0 0 3-3V9a7 7 0 0 1 14 0v5a3 3 0 0 0 3 3zm-8.27 4a2 2 0 0 1-3.46 0"></path></svg>
       </span>
       <ul :class="['nav-menu',{'open-notices-menu':openNavMenu}]">
-        <li v-for="notice in lastNotices" >
+        <li v-for="notice in lastNotices" @click="goToMessage(notice.id)">
 <!--          <router-link :class="['menu-link-item',{'unread-notice':!notice.check}]" :to="'/profile/1'">{{notice.message+' '+myTruncate(this.title,15, '...')}}<span>{{ notice.date }}</span></router-link>-->
-<!--          {{notice}}-->
           <span :class="['menu-link-item',{'unread-notice':!notice.check }]" v-html="getMessageUa({type:notice.type, document_title:myTruncate(notice.document_title,35, '...'), document_id:notice.document_id})"></span>
         </li>
         <li class="see-all" @click="ShowNotices" >
@@ -50,13 +49,17 @@ export default {
       {
         this.openNavMenu = false
       }
-    }
+    },
+    goToMessage(id) {
+      // Перехід до повного повідомлення з використанням якоря
+      this.$router.push({ path: '/actions/notices#'+2 });
+    },
   },
   computed:{
     ...mapGetters(['getUser', 'getNewNoticesCount']),
-    ShowNotices(){
-      this.$router.push('/actions/notices?from='+this.$route.name)
-    },
+    // ShowNotices(){
+    //   this.$router.push('/actions/notices?from='+this.$route.name)
+    // },
 
     getNoticesCount(){
       axios.get(this.api_url_v1 + '/actions/count-new-notices').then(response => {
