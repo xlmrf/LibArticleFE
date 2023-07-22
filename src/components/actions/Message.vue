@@ -1,11 +1,12 @@
 <template>
 <!--  v-for="notice in type === 'message' ? sortNotices: notices" sort in message-->
-  <div @click="read(notice.id)">
-    <div class="message-item" :class="{'unread-message': type === 'message' ? !notice.check : false}">
-      <span @click="$router.push('/document/'+notice?.document_id)" class="title-message" v-html="getMessageUa(notice)"></span>
-      <span class="date-message">{{ getConvertDate(notice.created_at) }}</span>
-    </div>
-  </div>
+  <p>{{message}}</p>
+<!--  <div @click="read(notice.id)">-->
+<!--    <div class="message-item" :class="{'unread-message': type === 'message' ? !notice.check : false}">-->
+<!--      <span @click="$router.push('/document/'+notice.document_id)" class="title-message" v-html="getMessageUa(notice)"></span>-->
+<!--      <span class="date-message">{{ getConvertDate(notice.created_at) }}</span>-->
+<!--    </div>-->
+<!--  </div>-->
 </template>
 
 <script>
@@ -14,7 +15,7 @@ import {mapMutations, mapState} from "vuex";
 
 export default {
   mixins:['dateConverter', 'messages'],
-  props:['notice','type'],
+  props:['message','type'],
   computed:{
     sortNotices(){
       const checkedItems = this.notices.filter(item => item.check === 1);

@@ -27,9 +27,9 @@ export default {
     methods:{
         getMessageUa(data){
 
-            let text = `<span style="color: #318CE7;font-weight: bold;">${data.document_title}</span>`
+            let text = `<span style="color: #318CE7;font-weight: bold;">${data?.document_title}</span>`
 
-            return this.ua.messages[data.type]?.replace(/\*/g, text);
+            return this.ua.messages[data?.type]?.replace(/\*/g, text);
         },
         getMessageEn(data){
             return this.en

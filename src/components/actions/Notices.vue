@@ -1,6 +1,6 @@
 <template>
   <div>
-    <message v-for="notice in notices" :notice="notice" :id="'notice-' + notice.id" type="notice" v-if="messageRequest"/>
+    <message v-for="notice in notices" :message="notice" :id="'notice-' + notice.id" type="notice" v-if="messageRequest"/>
     <loader v-else/>
   </div>
 </template>

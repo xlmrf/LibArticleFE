@@ -1,6 +1,6 @@
 <template>
   <div>
-    <message :notices="events" type="events" v-if="messageRequest"/>
+    <message v-for="event in events" :message="event" type="events" v-if="messageRequest"/>
     <loader v-else/>
   </div>
 </template>

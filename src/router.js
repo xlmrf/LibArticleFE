@@ -19,7 +19,7 @@ import rules from "./view/UnknownPage"
 
 import actions from "./view/Actions"
 import notices from "./components/actions/Notices"
-import events from "./components/actions/Event"
+import events from "./components/actions/Events"
 
 import settings from "./view/UserSettings"
 import ProfileSettings from "./components/settings/Account"
