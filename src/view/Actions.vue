@@ -55,28 +55,6 @@ export default {
     ...mapGetters(['getLanguage', 'getNewNoticesCount']),
     ...mapState(['api_url_v1'])
   },
-  methods: {
-    onChange() {
-      this.files = [...this.$refs.file.files];
-      console.log('onChange',this.files)
-    },
-    dragover(e) {
-      e.preventDefault();
-      console.log('dragOver')
-      this.isDragging = true;
-    },
-    dragleave() {
-      console.log('dragLeave')
-      this.isDragging = false;
-    },
-    drop(e) {
-      e.preventDefault();
-      console.log('drop')
-      this.$refs.file.files = e.dataTransfer.files;
-      this.onChange();
-      this.isDragging = false;
-    },
-  },
 };
 </script>
 

@@ -19,59 +19,10 @@ import router from "@/router";
 
 export default {
 
-  data(){
-    return{
-      noticesCount: 0,
-      actionsCount: 0,
 
-    }
-  },
-  watch:{
-    'search.notices':{
-      handler(){
-        this.getNotices
-      }
-    },
-    'search.events':{
-      handler(){
-        //
-      }
-    }
-  },
   computed:{
-    getNotices() {
-      // axios.get(this.api_url_v1 + '/document/' + id + '/citation?q=' + this.searchCites + '&perPage=5').then(response => {
-      //
-      //   this.lastPage = response.data.last_page
-      //   this.document_cites = response.data.data
-      //   this.pageCounter = 1
-
-      // }, err => {
-      //   console.log('get cites error:', err);
-      // })
-    },
-    getNoticesCount(){
-      axios.get(this.api_url_v1 + '/actions/notices-count').then(response => {
-        this.noticesCount = response.data.notices_count
-      }, err => {
-        console.log('views error:',err);
-      })
-    },
-    getActionsCount(){
-      axios.get(this.api_url_v1 + '/actions/actions-count').then(response => {
-        this.actionsCount = response.data.actions_count
-      }, err => {
-        console.log('views error:',err);
-      })
-    },
     ...mapGetters(['getLanguage', 'getNewNoticesCount']),
-    ...mapState(['api_url_v1'])
-  },
-  mounted() {
-    this.getNoticesCount
-    this.getActionsCount
   }
-
 }
 </script>
 

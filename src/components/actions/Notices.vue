@@ -1,6 +1,6 @@
 <template>
   <div>
-    <message v-for="notice in notices" :message="notice" :id="'notice-' + notice.id" type="notices" v-if="messageRequest"/>
+    <message v-for="notice in getMessages.notices" :message="notice" :id="'notice-' + notice.id" type="notices" v-if="messageRequest"/>
     <loader v-else/>
   </div>
 </template>
@@ -8,7 +8,7 @@
 <script>
 import Message from "@/components/actions/Message";
 import axios from "axios";
-import {mapState} from "vuex";
+import {mapGetters, mapMutations, mapState} from "vuex";
 import Loader from "@/components/additional/loader";
 export default {
   components: {Loader, Message},
@@ -34,7 +34,7 @@ export default {
         // },
 
       ],
-      messageRequest: false
+      messageRequest: true
     }
   },
 
@@ -42,14 +42,15 @@ export default {
     getNotices(){
       this.messageRequest = false
       axios.get(this.api_url_v1 + '/actions/notices').then(response => {
-        this.notices = response.data
+        this.upnotices(response.data.data)
         this.messageRequest = true
       }, err => {
         this.messageRequest = true
         console.log('cites error:',err);
       })
     },
-    ...mapState(['api_url_v1'])
+    ...mapState(['api_url_v1']),
+    ...mapGetters(['getMessages'])
   },
 
   methods: {
@@ -65,10 +66,13 @@ export default {
         }
       }
     },
+    ...mapMutations(['upnotices'])
   },
 
   mounted() {
-    this.getNotices
+    if (this.getMessages.notices.length === 0){
+      this.getNotices
+    }
     this.scrollToMessage()
   }
 
