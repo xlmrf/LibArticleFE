@@ -57,9 +57,9 @@ export default {
   },
   computed:{
     ...mapGetters(['getUser', 'getNewNoticesCount']),
-    // ShowNotices(){
-    //   this.$router.push('/actions/notices?from='+this.$route.name)
-    // },
+    ShowNotices(){
+      this.$router.push('/actions/notices')
+    },
 
     getNoticesCount(){
       axios.get(this.api_url_v1 + '/actions/count-new-notices').then(response => {
