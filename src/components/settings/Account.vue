@@ -83,7 +83,20 @@ export default {
         this.logoutLoader = false
         this.logoutError = error.data
       })
-    }
+    },
+    validate() {
+      // for (let item in this.data.info){
+      //   if (item === ''){
+      //      return this.error = ''
+      //    }
+      // }
+      // this.error = ''
+      // let info = this.data.info
+      // if (!info.last_name || !info.first_name || !info.location) {
+      //   return this.error = 'Заповніть усі поля'
+      // }
+
+    },
   },
   watch: {
     // 'getProfile.university': {
@@ -103,32 +116,20 @@ export default {
       if (this.getTempPhoto.image !== '') {
         this.getProfile.image = this.getTempPhoto.image
       }
-      axios.patch(this.api_url_v1 + '/user', this.getProfile).then(res => {
-        //this.updateUser(res.data)
-        this.requestUser()
-        console.log("user settings", res.data);
-        this.$router.push('/profile/' + this.getUser.id)
-      }).catch(err => {
-        console.log('set user error:', err.response);
-        // this.error = err.response
-      })
+      if (this.validate) {
+        axios.patch(this.api_url_v1 + '/user', this.getProfile).then(res => {
+          //this.updateUser(res.data)
+          this.requestUser()
+          console.log("user settings", res.data);
+          this.$router.push('/profile/' + this.getUser.id)
+        }).catch(err => {
+          console.log('set user error:', err.response);
+          // this.error = err.response
+        })
+      }
     },
 
     ...mapMutations(['updateProfile']),
-
-    save() {
-      // for (let item in this.data.info){
-      //   if (item === ''){
-      //      return this.error = ''
-      //    }
-      // }
-      // this.error = ''
-      // let info = this.data.info
-      // if (!info.last_name || !info.first_name || !info.location) {
-      //   return this.error = 'Заповніть усі поля'
-      // }
-
-    },
 
     push() {
       this.photoUpdate = !this.photoUpdate
