@@ -1,6 +1,6 @@
 <template>
-    <div class="spinner-box">
-        <svg class="spinner" :class="loader_class" viewBox="0 0 50 50">
+    <div class="spinner-box" :class="loader_class">
+        <svg class="spinner" viewBox="0 0 50 50">
             <circle class="path" cx="25" cy="25" :r="radius? radius : 8" fill="none" :stroke-width="width? width: 2"></circle>
         </svg>
     </div>
@@ -24,8 +24,16 @@ export default {
   width: 50px;
   margin: 25px;
 }
-.mid-top{
+.mid-top > svg{
   left: 50%;
+}
+.over-wall{
+  padding: 42px;
+  border-radius: 4px;
+  background: rgba(123, 123, 123, 0.54);
+}
+.over-wall > svg{
+  margin: -25px;
 }
 .spinner .path {
     stroke: hsla(280, 48%, 6%, 0.89);
