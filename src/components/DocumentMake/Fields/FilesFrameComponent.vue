@@ -12,7 +12,7 @@
         <span v-if="loadError">{{loadError}}</span>
         <div v-if="!getFiles.main.url"
             class="dropzone-container"
-            :class="{'dropzone-active':isDragging, 'dropzone-error':file_type_error}"
+            :class="{'dropzone-active':isDragging, 'dropzone-error':file_type_error || empty}"
             @dragover="dragover"
             @dragleave="dragleave"
             @drop="drop">
@@ -21,7 +21,9 @@
             <div class="text-predict" v-if="isDragging" >Опускайте файл</div>
             <div class="text-error" v-else-if="file_type_error" >Тип документу не коректний</div>
             <div class="file-loader" v-else-if="this.getProgressLoadingFile !== 0 && this.getProgressLoadingFile !== 100" ><loader width="3" radius="12" /></div>
-            <div v-else >Щоб завантажити файл, перетягніть файл в поле або <u @click="addFile()">натисніть сюди</u>.</div>
+            <div class="file-drop-text" v-else >
+              <p class="not-file-error" v-if="empty">Файл обов'язковий</p>
+              Щоб завантажити файл, перетягніть файл в поле або <u @click="addFile()">натисніть сюди</u>.</div>
           </label>
         </div>
         <div class="box-frame" v-else>
@@ -69,7 +71,7 @@ import axios from "axios";
 
 export default {
 
-  props:['isReady'],
+  props:['isReady', 'empty'],
 
   data() {
     return {
@@ -303,6 +305,11 @@ export default {
   padding: 0 10px;
 }
 
+.not-file-error{
+  margin: 10px auto;
+  color: #e32b20;
+}
+
 .remove-item-file{
   color: #d2443b;
   margin: 0 10px;
@@ -432,6 +439,10 @@ body {
   position: relative;
   top: -50px;
   right: 40px;
+}
+
+.file-drop-text{
+  position: relative;
 }
 
 .select-input {

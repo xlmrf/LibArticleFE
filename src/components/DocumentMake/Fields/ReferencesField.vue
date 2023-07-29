@@ -11,7 +11,7 @@
         </small>
       <span class="add-keyword-btn" @click="addKeyword">{{ edit ? "Зберегти" : 'Додати' }}</span>
     </span>
-    <span v-for="(el,idx) in getDocument.references.filter(item=>!item.delete)" :key="idx">
+    <span class="reference-item" v-for="(el,idx) in getDocument.references.filter(item=>!item.delete)" :key="idx">
       <span @dblclick="editRef(el)" :class="{'italic':el.edit}">{{
         idx + 1
       }}. {{ el.bibliographic_description }}</span>
@@ -112,6 +112,13 @@ export default {
 </script>
 
 <style scoped>
+
+.reference-item{
+  margin: 6px 2px;
+  font-size: 18px;
+  background: #bbbbbb;
+  width: 100%;
+}
 .complex-item-control > span{
   position: relative;
 }
@@ -127,4 +134,9 @@ export default {
 li{
   position: relative;
 }
+
+.delete-item{
+  margin-left: auto;
+}
+
 </style>

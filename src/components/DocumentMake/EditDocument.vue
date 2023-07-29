@@ -1,5 +1,5 @@
 <template>
-  <div class="middle-spinner" v-if="watcher">
+  <div class="middle-spinner" v-if="!this.getDocument.id">
     <span><loader width="4" radius="20"></loader></span>
   </div>
   <div v-else>
@@ -12,19 +12,22 @@
         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#BBBBBB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="14 2 18 6 7 17 3 17 3 13 14 2"></polygon><line x1="3" y1="22" x2="21" y2="22"></line></svg>
       </span>
     </div>
-
     <div class="fill-areas-document">
-      <files-frame-component/>
-
+      <files-frame-component :empty="fileEmpty"/>
       <div class="fill-areas">
         <div class="form-item" v-for="(item,idx) in getTypes.find(type => type.id === getDocument.type_id)?.fields"
              :key="idx" :class="{'universal-field': ['edition','place'].includes(item) }" >
           <label :for="item">{{ translateAreas(item) }}</label>
           <component :is="setFields(item)" :field="item" :is-ready="isReady"></component>
+          <small class="text-error error-area-text" v-if="invalidAreas[item]">Поле <span class="areas-name">{{ translateAreas(item) }}</span> не може бути пустим</small>
         </div>
-        <button class="button conclusion-btn" @click="update()">
-          Зберегти документ
-        </button>
+        <div class="btn-control-panel">
+          <button class="button conclusion-btn" :class="{'disable-btn': isComplete}" @click="update()">
+            Зберегти документ
+          </button>
+          <button class="button to-archive" @click="toArchive">Занести в архів</button>
+          <small class="text-error save-error" v-if="serverError">{{ serverError }}</small>
+        </div>
       </div>
     </div>
   </div>
@@ -38,7 +41,7 @@ import Publication_dateField from "@/components/DocumentMake/Fields/DateField";
 import ReferencesField from "@/components/DocumentMake/Fields/ReferencesField";
 import UniversalField from "@/components/DocumentMake/Fields/UniversalField";
 import DescriptionField from "@/components/DocumentMake/Fields/DescriptionField";
-import {mapActions, mapGetters} from "vuex";
+import {mapActions, mapGetters, mapState} from "vuex";
 import loader from "@/components/additional/loader";
 import FilesFrameComponent from "@/components/DocumentMake/Fields/FilesFrameComponent";
 
@@ -47,11 +50,25 @@ export default {
   mixins: ['translate'],
   data() {
     return {
-      isReady: false
+      isReady: false,
+      isComplete: false,
+      invalidAreas:{},
+      fileEmpty:false,
+      serverError:null
+    }
+  },
+  watch:{
+    getDocument:{
+      handler() {
+        this.invalidAreas = {}
+        this.fileEmpty = false
+      },
+      deep:true
     }
   },
   methods: {
     ...mapActions(['updateDocument']),
+
     setFields(item) {
       if (item === 'place' || item === 'edition')
         return 'universal-field';
@@ -72,16 +89,61 @@ export default {
 
     update(){
       this.isReady = true
+      this.serverError = null
       let document = this.getDocument
       document.files = this.getFiles
-      console.log('doc',document)
-      this.updateDocument(document)
+      !this.docValidate ? this.updateDocument(document) : this.docValidate
+    },
+
+    toArchive(){
+      this.serverError = null
+      let document = this.getDocument
+      document.files = this.getFiles
+      axios.post(this.api_url_v1+'/make/draft', document).then(() => {
+
+      }).catch(error => {
+        this.serverError = error
+        console.log(error);
+      })
     }
   },
   computed: {
     ...mapGetters(['getDocument', 'getTypes','getFiles']),
-    watcher(){
-      return !this.getDocument.id;
+    ...mapState(['api_url_v1']),
+
+    docValidate(){
+
+      if (Object.keys(this.getFiles.main).length === 0){
+        this.fileEmpty = true
+      }
+
+      function hasEmptyValue(obj) {
+
+        if (Array.isArray(obj)) {
+          if (obj.length === 0)
+            return true
+          else
+            return obj.some(item => hasEmptyValue(item));
+        }
+        else if (typeof obj == "object" && obj !== null) {
+          return Object.values(obj).some(value => typeof value === 'object' ? hasEmptyValue(value) : !value);
+        }
+        else {
+          return obj == null || obj === "";
+        }
+      }
+
+      let type = this.getTypes.find(type => type.id === this.getDocument.type_id)?.fields
+      for (let item in this.getDocument){
+        if (type.includes(item)){
+          // console.log('each: '+item,this.getDocument[item])
+          this.invalidAreas[item] = hasEmptyValue(this.getDocument[item])
+        }
+
+      }
+      return Object.values(this.invalidAreas).some(value => !!value) || this.fileEmpty
+
+
     },
     resetDocument() {
 
@@ -98,6 +160,11 @@ export default {
 </script>
 
 <style>
+
+.add-keyword-btn:hover{
+  border: 1px solid #535353;
+  color: #333333;
+}
 
 .card-top{
   font-size: 1em;
@@ -222,6 +289,28 @@ export default {
   color: red;
 }
 
+.btn-control-panel
+{
+  margin-top: 15px;
+  display: flex;
+  flex-flow: column;
+  width: 100%;
+  align-items: center;
+}
+
+.btn-control-panel{
+  position: relative;
+  padding-top: 20px;
+}
+.btn-control-panel:after{
+  content: "";
+  position: absolute;
+  background: rgba(154, 154, 154, 0.5);
+  width: 100%;
+  height: 1px;
+  top: 0;
+  right: 0;
+}
 
 .author-fill-list{
   border-left: 1px solid #BBBBBB;
@@ -537,7 +626,7 @@ export default {
 }
 
 .conclusion-btn{
-  margin: 20px auto;
+  width: fit-content;
   padding: 10px 50px;
   font-size: 1em;
   background: #4694f1;
@@ -552,11 +641,34 @@ export default {
 }
 
 .fill-areas-document {
+  position: relative;
   padding-bottom: 2rem;
   height: 100%;
   display: flex;
   flex-wrap: wrap;
   margin-top: 1rem;
+}
+
+.to-archive{
+  /*position: absolute;*/
+  margin: 10px 0;
+  background: transparent;
+  /*border: 1px solid #525252;*/
+  border-bottom: 1px solid #323232;
+  padding: 5px;
+  /*border-radius: 4px;*/
+}
+.to-archive:hover{
+
+}
+
+.save-error{
+  /*position: absolute;*/
+  /*bottom: 0;*/
+  /*right: 100px;*/
+  margin-top: 20px;
+  padding: 5px;
+  border: 1px solid rgba(217, 39, 27, 0.87);
 }
 
 .fill-areas-document > div:first-child{
@@ -569,6 +681,15 @@ export default {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+}
+
+.areas-name{
+  text-transform: lowercase;
+  padding: 2px;
+}
+
+.error-area-text{
+  margin: 5px;
 }
 
 .fill-areas-document > div {

@@ -2,6 +2,12 @@
   <div>
     <title-field wrong-input=""/>
     <type-field />
+    <div>
+      <p>Документи в архіві</p>
+      <div v-if="drafts">
+        {{drafts}}
+      </div>
+    </div>
     <div style="clear: both">
       <button @click="$emit('next')" class="choose-type choose-btn-able" :class="['choose-type',{'disable-btn':loader||!BtnValid}]" :disabled="loader||!BtnValid">Обрати</button>
     </div>
@@ -15,12 +21,13 @@
 import TitleField from "@/components/DocumentMake/Fields/TitleField";
 import TypeField from "@/components/DocumentMake/Fields/TypeField";
 import Loader from "@/components/additional/loader"
-import {mapGetters} from "vuex";
+import {mapGetters, mapState} from "vuex";
 export default {
   data(){
     return{
       loader:false,
-      btn_enabled: false
+      btn_enabled: false,
+      drafts:[]
     }
   },
   emits:['next','loader'],
@@ -31,12 +38,24 @@ export default {
   },
   computed:{
     ...mapGetters(['getDocument']),
+    ...mapState(['api_url_v1']),
     BtnValid(){
       return this.btn_enabled = !!(this.getDocument.type_id && this.getDocument.title);
+    },
+    getArchiveDocs(){
+      axios.get(this.api_url_v1+'/drafts').then((response) => {
+        this.drafts = response.data
+      }).then(error => {
+        console.log(error);
+      })
     }
   },
   name: "DocumentType",
-  components: {TypeField, TitleField, Loader}
+  components: {TypeField, TitleField, Loader},
+
+  mounted() {
+    this.getArchiveDocs
+  }
 }
 </script>
 
@@ -63,10 +82,5 @@ export default {
 .choose-btn-able{
   /*background-image: linear-gradient(to right, #77A1D3 0%, #79CBCA  51%, #77A1D3  100%);*/
   background: #0969DA;
-}
-.disable-btn{
-  /*background-image: linear-gradient(to right, rgba(129, 131, 132, 0.36) 0%, rgba(103, 116, 116, 0.33) 51%, rgba(129, 131, 132, 0.33) 100%);*/
-  background: rgba(129, 131, 132, 0.36);
-  cursor: default;
 }
 </style>

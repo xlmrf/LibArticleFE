@@ -266,7 +266,11 @@ input {
   position: absolute;
   color: red;
 }
-
+.disable-btn{
+  /*background-image: linear-gradient(to right, rgba(129, 131, 132, 0.36) 0%, rgba(103, 116, 116, 0.33) 51%, rgba(129, 131, 132, 0.33) 100%);*/
+  background: rgba(129, 131, 132, 0.36);
+  cursor: default;
+}
 
 .author-item-link{
   color: #0969DA;
