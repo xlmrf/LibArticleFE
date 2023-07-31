@@ -11,7 +11,7 @@
     <div class="context-document-item">
       <div class="first-piece">
         <h3>
-          <router-link :to="'/document/'+document.id">
+          <router-link :to="'/document/'+ (type === 'draft' ? 'make/' : '') +document.id">
            {{document.title}}
           </router-link>
         </h3>
@@ -26,23 +26,22 @@
           </span>
         </div>
 
-        <span class="document-list-keywords" v-if="!isProfile">
+        <span class="document-list-keywords" v-if="type === 'searcher'">
           <span v-for="keyword in document.keywords">
           {{keyword}}
           </span>
         </span>
         <span class="profile-file-download-link" >
-          <svg xmlns="http://www.w3.org/2000/svg" v-if="isProfile" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#999999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" v-if="type === 'profile'" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#999999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
 
-          <span v-if="isProfile && views.document_views">{{views.document_views.value}}</span>
+          <span v-if="type === 'profile' && views.document_views">{{views.document_views.value}}</span>
 
-          <span v-if="!isProfile">
-            <router-link class="file-download-link" :to="''"  v-if="true">
-
+          <span v-if="type === 'searcher'">
+            <router-link class="file-download-link" :to="''">
               Завантажити
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3684DD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15v4c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-4M17 9l-5 5-5-5M12 12.8V2.5"/></svg>
             </router-link>
-            <span v-else>Доступ до файлу закритий</span>
+<!--            <span v-else>Доступ до файлу закритий</span>-->
           </span>
 
 <!--          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#50ADBE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <circle cx="12" cy="12" r="10"/><path d="M16 12l-4 4-4-4M12 8v7"/></svg>-->
@@ -65,7 +64,7 @@ import {mapGetters, mapState} from "vuex";
 import axios from "axios";
 
 export default {
-  props:['document','isProfile'],
+  props:['document','type'],
 
   data(){
     return{

@@ -1,25 +1,42 @@
 <template>
   <div class="top">
     <h2>Назва документу</h2>
-    <label for="title" v-if="wrongInput">{{wrongInput}}</label>
-    <input type="text" required name="title" :class="['title-input',{'alert-input':wrongInput}]" id="title" placeholder="Навчальний посібник з дисципліни «Теорія ймовірностей, імовірнісні процеси та математична статистика». Курс лекцій" v-model="getDocument.title">
+    <input type="text" required name="title" :class="['title-input',{'alert-input':error}]" id="title" placeholder="Навчальний посібник з дисципліни «Теорія ймовірностей, імовірнісні процеси та математична статистика». Курс лекцій" v-model="getDocument.title">
+    <label for="title" v-if="error">{{ getErrorMessage[error] }}</label>
   </div>
 </template>
 
 <script>
+
 import {mapGetters} from "vuex";
+import {inject} from "vue";
 
 export default {
-  props:['wrongInput'],
+  props:['error'],
+  data(){
+    return{
+      textError:{}
+    }
+  },
+ // setup(){
+ //    let titleFieldError = inject('titleFieldError')
+ //   return{
+ //      titleFieldError
+ //   }
+ // },
   watch:{
     'data.title':{
       handler(){
-        this.wrongInput = ''
+
       }
-    }
+    },
+    // titleFieldError(){
+    //   console.log('awoeifnaweoifgn')
+    // }
   },
+  // inject:['titleFieldError'],
   computed: {
-    ...mapGetters(['getDocument'])
+    ...mapGetters(['getDocument', 'getErrorMessage']),
   },
 }
 </script>
@@ -31,6 +48,7 @@ export default {
   color: #212121;
   width: 100%;
   margin: 20px;
+  padding-bottom: 10px;
 }
 .top{
   display: flex;

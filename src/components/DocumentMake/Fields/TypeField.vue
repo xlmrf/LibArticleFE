@@ -46,12 +46,13 @@ export default {
   border: none;
   outline: none;
   overflow:hidden;
+  text-align: center;
   color: #212121
 }
 .manual-item::after{
   content:'';
   position:absolute;
-  width:70%;
+  width:100%;
   height:0.1rem;
   left:0;
   bottom:3px;
@@ -69,7 +70,6 @@ export default {
 }
 .document-types{
   border-radius: 4px;
-  background: #fff;
   display: flex;
   justify-content: space-around;
   width: 50%;
@@ -103,7 +103,8 @@ h3{
   overflow:hidden;
   outline: none;
   padding: 10px 0;
-
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
   /*height: 21px;*/
   /*color: #24292F;*/
   color: white;
@@ -122,6 +123,7 @@ h3{
   /*background: #f5f5f5;*/
   /*box-shadow: rgba(0, box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;*/
   position: relative;
+  padding: 0 10px;
   z-index: 9;
 }
 .item-category-collection li{
@@ -129,7 +131,6 @@ h3{
   list-style: none;
   cursor: default;
   padding: 0.7rem;
-  margin-left: 0.4rem;
   width: 50%;
   font-size: 1em;
   align-self: center;
@@ -163,6 +164,7 @@ h3{
 }
 .file-name{
   border: 2px solid transparent;
+  background: #ffffff;
   border-radius: 4px;
   border-image-slice: 1;
   padding: 7px;
@@ -179,7 +181,7 @@ h3{
   /*color: #F1F1F1;*/
 }
 .category-active{
-  background: #F1f1f1;
+  background: #e2e2e2;
   /*border-image-source: linear-gradient(to left, rgba(56, 56, 73, 0.44), rgba(28, 15, 43, 0.44));*/
 }
 .type-document-modal h2{
@@ -197,13 +199,6 @@ h3{
   align-items: center;
   justify-content: center;
   position: relative;
-}
-
-.top > label{
-  color: rgba(229, 50, 45, 0.8);
-  /*margin: 5px;*/
-  font-size: 14px;
-  position: absolute;
 }
 
 .title-input{
