@@ -64,7 +64,7 @@ export default {
   margin-right: auto;
   margin-left: auto;
   margin-top: 56px;
-  background: #F9F9F9;
+  /*background: #F9F9F9;*/
   /*overflow: scroll;*/
   /*overflow-y: auto;*/
   /*overflow-x: hidden;*/

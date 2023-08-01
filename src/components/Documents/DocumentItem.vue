@@ -8,7 +8,6 @@
       <div class="publication-date" v-if="type === 'draft'">
 <!--        {{getDate(document.publication_date)}}-->23.05.22
       </div>
-
       <div class="publication-date" v-else>
         {{getDate(documentItem.publication_date)}}
       </div>
@@ -89,16 +88,19 @@ export default {
       })
     },
     getDate(old_date){
-      let date_arr = old_date.split('-')
+      if (old_date) {
+        let date_arr = old_date.split('-')
 
-      const yyyy = date_arr[0]
-      let mm = date_arr[1]
-      let dd = date_arr[2]
+        const yyyy = date_arr[0]
+        let mm = date_arr[1]
+        let dd = date_arr[2]
 
-      // if (dd < 10) dd = '0' + dd
-      // if (mm < 10) mm = '0' + mm
+        // if (dd < 10) dd = '0' + dd
+        // if (mm < 10) mm = '0' + mm
 
-      return dd + '.' + mm + '.' + yyyy
+        return dd + '.' + mm + '.' + yyyy
+      }
+      return ''
     }
   },
 
