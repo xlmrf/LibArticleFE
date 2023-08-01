@@ -36,25 +36,13 @@ export default {
                 console.log(err.response)
             })
         },
-        createDocument(ctx, data) {
-            axios.post(ctx.rootState.api_url_v1 + '/document/make', {data: data}).then(response => {
-                // ctx.commit('documentCreated', response.data)
-                console.log('wef', response.data);
-                ctx.commit('updateDocument', response.data)
-                // localStorage.setItem('not_finished_document', JSON.stringify(response.data))
-                // router.push('new_document/'+response.data.id).catch(err => console.log('to new document:',err));
-            }, err => {
-                console.log('error info -', err.message);
-                ctx.commit('setInfo', err)
-            })
-        },
 
         requestDocument(ctx, id) {
 
             axios.get(ctx.rootState.api_url_v1 + '/document/' + id).then(response => {
                 ctx.commit('DocumentMutate', response.data)
             }, err => {
-                ctx.commit('catchInfo', err)
+                ctx.commit('catchError', err)
             })
         },
         deleteAuthor(ctx, data) {
@@ -72,7 +60,7 @@ export default {
 
     },
     mutations: {
-        catchInfo(ctx,data){
+        catchError(ctx,data){
             ctx.info = data
         },
         uploadResult(state, data){
@@ -81,7 +69,6 @@ export default {
 
         },
         updateDocument(state, data) {
-            router.push('/document/make/' + data.id)
             state.document = {...state.document, ...data}
         },
         DocumentMutate(state,data){
@@ -101,6 +88,9 @@ export default {
     getters: {
         getUncompletedDocument(ctx) {
             return ctx.uncompletedDocument
+        },
+        getDocumentMakeWarning(ctx){
+            return ctx.info
         },
         // getTypes(ctx) {
         //     // console.log('ctx:', ctx.categories);

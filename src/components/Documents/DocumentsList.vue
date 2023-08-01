@@ -6,7 +6,7 @@
     </div>
     <div class="not-found-document-panel" v-if="documents.total === 0">Документів не знайдено</div>
     <div v-else>
-      <document-item class="document-list-item" :document="document" v-for="document in documents.data"/>
+      <document-item class="document-list-item" :documentItem="document" v-for="document in documents.data"/>
       <pagination :paginate="paginate(documents)"/>
     </div>
   </div>

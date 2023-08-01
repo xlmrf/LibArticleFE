@@ -72,28 +72,7 @@ export default {
       console.log('is ready check')
     },
     coAuthor() {
-      let author = {
-        first_name:this.getUser.info.first_name,
-        last_name:this.getUser.info.last_name,
-        email: this.getUser.email
-      }
-      if (this.coAuthor) {
-        if (Object.values(this.getDocument.authors[0]).some(e => e)) {
-          this.getDocument.authors.unshift(author)
-        } else {
-          this.getDocument.authors[0] = author
-        }
-      } else {
-        this.getDocument.authors.shift()
-        if (!this.getDocument.authors[0]) {
-          this.getDocument.authors.unshift({
-            first_name: '',
-            last_name: '',
-            // middle_name: '',
-            email: ''
-          })
-        }
-      }
+      this.imCoAuthor()
     },
   },
   computed: {
@@ -118,10 +97,35 @@ export default {
       this.getProposeAuthors.splice(idx, 1);
 
     },
+
+    imCoAuthor(){
+      let author = {
+        first_name:this.getUser.info.first_name,
+        last_name:this.getUser.info.last_name,
+        email: this.getUser.email
+      }
+      if (this.coAuthor) {
+        if (Object.values(this.getDocument.authors[0]).some(e => e)) {
+          this.getDocument.authors.unshift(author)
+        } else {
+          this.getDocument.authors[0] = author
+        }
+      } else {
+        this.getDocument.authors.shift()
+        if (!this.getDocument.authors[0]) {
+          this.getDocument.authors.unshift({
+            first_name: '',
+            last_name: '',
+            // middle_name: '',
+            email: ''
+          })
+        }
+      }
+    }
+
   },
   mounted() {
-    if (this.getDocument.authors===undefined || !this.getDocument.authors || !this.getDocument.authors[0]) {
-      console.log('push');
+    if (!this.getDocument.authors || !this.getDocument.authors.length) {
       this.getDocument.authors = []
       this.getDocument.authors.push({})
     }
@@ -238,8 +242,8 @@ export default {
 }
 
 .check-coauthor > input:checked + span::before {
-  border-color: rgba(65, 159, 217, 0.45);
-  background-color: rgba(65, 159, 217, 0.45);
+  border-color: #318CE7;
+  background-color: #318CE7;
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
 }
 
@@ -272,8 +276,8 @@ export default {
   top: -1px;
   right: -1px;
   border: 1px solid #E1DBC8;
-  border-top-right-radius: 8px;
-  border-bottom-left-radius: 8px;
+  border-top-right-radius: 4px;
+  border-bottom-left-radius: 4px;
   width: fit-content;
   display: flex;
   align-items: end;

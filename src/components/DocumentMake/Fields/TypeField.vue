@@ -170,7 +170,7 @@ h3{
   padding: 7px;
   margin: 1px;
   cursor: pointer;
-  width: 98%;
+  width: 99%;
   align-self: center;
   height: auto;
   transition: .1s ease;

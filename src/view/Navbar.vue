@@ -36,12 +36,10 @@
       <user-notices></user-notices>
       <user-logo></user-logo>
     </div>
-    <!--    <new-document v-if="door" class="new-document-template"></new-document>-->
   </div>
 </template>
 
 <script>
-import NewDocument from "../components/new_document/select_type/NewDocumentBaseComponent"
 import UserLogo from "../components/navbar/NavUserMiniLogo"
 import UserNotices from "../components/navbar/UserNotifications"
 import {mapActions, mapGetters, mapMutations} from "vuex";
@@ -97,7 +95,7 @@ export default {
     }
 
   },
-  components: {UserLogo, UserNotices, NewDocument}
+  components: {UserLogo, UserNotices}
 }
 </script>
 

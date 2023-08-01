@@ -1,65 +1,56 @@
 <template>
   <div class="document-make-body">
+    <second-stage @prev="prev" v-if="!prev_stage && this.$route.params.id"/>
 
-<!--        <small v-if="getDocument.type_id">{{ getDocument }}</small>-->
-<!--    <p class="code">{{getDocument}}</p>-->
-    <first-stage v-if="prev_stage" @next="next"/>
-    <second-stage @prev="prev" v-else/>
+    <first-stage v-else @next="next"/>
+
   </div>
 </template>
 
 <script>
-import {mapGetters, mapActions, mapMutations} from "vuex"
+import {mapGetters, mapActions, mapMutations, mapState} from "vuex"
 import FirstStage from "@/components/DocumentMake/PrevMakeDocument";
 import SecondStage from "@/components/DocumentMake/EditDocument";
-import {computed, ref, provide, watch} from "vue";
+import axios from "axios";
+import router from "@/router";
 
 export default {
 
 
   data() {
     return{
-      prev_stage: true
+      prev_stage: true,
+      error: null
     }
   },
 
-  // setup(){
-  //
-  //   let titleError = ref(false)
-  //   let text = ref('')
-  //   const { getDocument } = mapGetters(['getDocument']);
-  //
-  //   provide('titleFieldError', titleError.value)
-  //
-  //   watch(() => text, (newTitle) => {
-  //
-  //   }, {deep: true});
-  //
-  //   console.log(getDocument);
-  //
-  //   return {
-  //     titleError,
-  //     text,
-  //     getDocument
-  //   }
-  //
-  // },
-
   methods: {
-    ...mapMutations(['DocumentMutate']),
-    ...mapActions(['createDocument', 'requestDocument']),
+    ...mapMutations(['DocumentMutate','updateDocument', 'catchError']),
+    ...mapActions(['requestDocument']),
     next() {
-        this.prev_stage = !this.prev_stage
-        if (!this.$route.params.id) {
-          this.createDocument(this.getDocument)
-        }
+      if (!this.$route.params.id) {
+        axios.post(this.api_url_v1 + '/document/make', {data: this.getDocument}).then(response => {
+          this.updateDocument( response.data)
+          this.prev_stage = false
+          router.push('/document/make/' + response.data.id)
+        }, err => {
+          console.log('error info -', err.message);
+          this.catchError(err.response.data.errors)
+
+        })
+      }
+      else {
+        this.prev_stage = false
+      }
+
     },
     prev() {
       this.prev_stage = true
     }
   },
   computed: {
-    ...mapGetters(['getDocument', 'getTypes'])
+    ...mapGetters(['getDocument', 'getTypes']),
+    ...mapState(['api_url_v1'])
   },
   watch: {
     '$route.params': {
@@ -82,7 +73,7 @@ export default {
     }
   },
   updated() {
-    if (this.$route.params.id !== ''&&!this.getDocument.id) {
+    if (this.$route.params.id !== '' && !this.getDocument.id) {
       console.log('beforeUpdate');
       // this.getDocumentById(this.$route.params.id);
       this.prev_stage = false

@@ -41,7 +41,7 @@ import Publication_dateField from "@/components/DocumentMake/Fields/DateField";
 import ReferencesField from "@/components/DocumentMake/Fields/ReferencesField";
 import UniversalField from "@/components/DocumentMake/Fields/UniversalField";
 import DescriptionField from "@/components/DocumentMake/Fields/DescriptionField";
-import {mapActions, mapGetters, mapState} from "vuex";
+import {mapActions, mapGetters, mapMutations, mapState} from "vuex";
 import loader from "@/components/additional/loader";
 import FilesFrameComponent from "@/components/DocumentMake/Fields/FilesFrameComponent";
 
@@ -67,7 +67,8 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['updateDocument']),
+    ...mapActions(['updateDocument', 'requestDocument']),
+    ...mapMutations(['DocumentMutate']),
 
     setFields(item) {
       if (item === 'place' || item === 'edition')
@@ -152,6 +153,21 @@ export default {
       // localStorage.setItem('reset_document',JSON.stringify(new_document))
     },
   },
+
+  beforeMount() {
+    console.log('item', this.getDocument, this.$route.params)
+    if (this.getDocument.id && this.getDocument.id != this.$route.params.id){
+      this.DocumentMutate({})
+      this.requestDocument(this.$route.params.id);
+    }
+  },
+  mounted() {
+    if (!this.getDocument.id) {
+      this.requestDocument(this.$route.params.id);
+    }
+  },
+
+
   components: {
     FilesFrameComponent,
     loader, Publication_dateField, KeywordsField, AuthorsField, PagesField, ReferencesField, UniversalField, DescriptionField

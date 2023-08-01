@@ -116,7 +116,7 @@ export default {
   align-items: center;
   /*justify-content: space-around;*/
   /*display: inline-block;*/
-  padding: 5px 0;
+  padding: 8px 5px;
   position: relative;
   width: 100%;
   text-decoration: none;

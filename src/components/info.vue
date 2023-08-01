@@ -1,6 +1,6 @@
 <template>
   <h3>Останні додані документи</h3>
-<!--  <item-list-document-component v-for="document in getLastDocuments" :document="document"></item-list-document-component>-->
+<!--  <item-list-document-component v-for="document in getLastDocuments" :documentItem="document"></item-list-document-component>-->
 </template>
 
 <script>
