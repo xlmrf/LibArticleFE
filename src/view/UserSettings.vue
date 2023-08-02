@@ -58,6 +58,7 @@ export default {
   flex: 1;
   border-radius: 5px;
   min-height: 500px;
+  margin: 20px 75px;
 }
 
 

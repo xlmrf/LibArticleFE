@@ -8,6 +8,7 @@ export default {
             last_documents: [],
             info: '',
             // types: [],
+            titleInputRef:null,
             propose_authors: [],
             newDocumentId: null,
             uncompletedDocument: '',
@@ -56,7 +57,7 @@ export default {
             // axios.get(ctx.rootState.api_url_v1 + '/last-documents').then(response => {
             //     ctx.commit('mutateLastDocuments', response.data)
             // })
-        },
+        }
 
     },
     mutations: {
@@ -83,6 +84,9 @@ export default {
         mutateLastDocuments(ctx, data) {
             ctx.last_documents = data
         },
+        updateTitle(ctx,data){
+            ctx.titleInputRef = data
+        }
 
     },
     getters: {
@@ -108,6 +112,9 @@ export default {
         getDocument(ctx) {
             return ctx.document
         },
+        getTitleInput(ctx){
+            return ctx.titleInputRef
+        }
 
     },
 

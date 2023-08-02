@@ -46,7 +46,7 @@ a{
 }
 
 .settings-sidebar-list:after{
-  content: '';
+  /*content: '';*/
   position:absolute;
   width: 1px;
   height:100%;

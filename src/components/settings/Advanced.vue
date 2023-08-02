@@ -98,7 +98,7 @@ export default {
   background: white;
   flex-flow: row;
   justify-content: space-between;
-  background: rgba(49, 140, 231, 0.05);
+  /*background: rgba(49, 140, 231, 0.05);*/
   font-size: 18px;
 }
 

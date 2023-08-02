@@ -20,7 +20,7 @@
       <span><loader width="4" radius="20"></loader></span>
     </div>
 
-    <title-warning v-if="titleModal" @close-modal="titleModal = false"/>
+    <title-warning v-if="titleModal" @close-modal="titleModal = false" @createToDespite="createDocument()"/>
   </div>
 </template>
 

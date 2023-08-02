@@ -56,10 +56,11 @@ export default {
   height:0.1rem;
   left:0;
   bottom:3px;
-  background: #1C75DD;
+  background: #B8EBFF;
 }
 .manual-item::after{
-  transform:scale(0.9,0.5);
+  transform:scale(0.8,1);
+  border-radius: 22px;
 }
 .type-document-modal{
   padding: 3rem;
@@ -79,7 +80,7 @@ export default {
   /*box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;*/
 }
 .type-description{
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  /*box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;*/
   background: #fcfcfc;
   display: flex;
   flex-flow: column;

@@ -1,14 +1,14 @@
 <template>
   <div class="top">
     <h2>Назва документу</h2>
-    <input type="text" required name="title" :class="['title-input',{'alert-input':error}]" id="title" placeholder="Навчальний посібник з дисципліни «Теорія ймовірностей, імовірнісні процеси та математична статистика». Курс лекцій" v-model="getDocument.title">
+    <input ref="titleInput" type="text" required name="title" :class="['title-input',{'alert-input':error}]" id="title" placeholder="Навчальний посібник з дисципліни «Теорія ймовірностей, імовірнісні процеси та математична статистика». Курс лекцій" v-model="getDocument.title">
     <label for="title" v-if="error">{{ getErrorMessage[error] }}</label>
   </div>
 </template>
 
 <script>
 
-import {mapGetters} from "vuex";
+import {mapGetters, mapState} from "vuex";
 import {inject} from "vue";
 
 export default {
@@ -36,8 +36,19 @@ export default {
   },
   // inject:['titleFieldError'],
   computed: {
-    ...mapGetters(['getDocument', 'getErrorMessage']),
+    ...mapState(['titleInputRef']),
+    ...mapGetters(['getDocument', 'getErrorMessage', 'getTitleInput']),
   },
+  // methods(){
+  //
+  // },
+  created() {
+    // this.getTitleInput = this.$refs.titleInput
+  },
+  mounted() {
+    this.$store.commit('updateTitle', this.$refs.titleInput)
+    console.log('title',this.getTitleInput)
+  }
 }
 </script>
 
