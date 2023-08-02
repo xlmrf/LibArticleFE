@@ -40,7 +40,7 @@
             <line x1="18" y1="6" x2="6" y2="18"></line>
             <line x1="6" y1="6" x2="18" y2="18"></line></svg>
       </span>
-      <div class="break"></div>
+<!--      <div class="break">{{error}}</div>-->
       <div class="propose-authors">
         <span v-for="author in getProposeAuthors[idx]" @click="addExistAuthor(author,idx)">
           {{ author.last_name }} {{ author.first_name[0] }}.
@@ -56,6 +56,7 @@ import {mapActions, mapGetters} from "vuex";
 export default {
   props: ['authors','isReady'],
   // emits:['newAuthor'],
+  name:'authors',
   data() {
     return {
       emailValid: '',
@@ -64,7 +65,8 @@ export default {
         first_name:false,
         last_name:false
       },
-      coAuthor: false
+      coAuthor: false,
+      valid:false
     }
   },
   watch: {
@@ -76,7 +78,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(['getAuthor', 'getDocument', 'getUser', 'getProposeAuthors'])
+    ...mapGetters(['getDocument', 'getUser', 'getProposeAuthors'])
   },
   methods: {
     ...mapActions(['findAuthor', 'deleteAuthor']),

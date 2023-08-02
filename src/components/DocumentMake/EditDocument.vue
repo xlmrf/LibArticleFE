@@ -12,20 +12,21 @@
         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#BBBBBB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="14 2 18 6 7 17 3 17 3 13 14 2"></polygon><line x1="3" y1="22" x2="21" y2="22"></line></svg>
       </span>
     </div>
+    {{validationItems}}
     <div class="fill-areas-document">
       <files-frame-component :empty="fileEmpty"/>
       <div class="fill-areas">
         <div class="form-item" v-for="(item,idx) in getTypes.find(type => type.id === getDocument.type_id)?.fields"
              :key="idx" :class="{'universal-field': ['edition','place'].includes(item) }" >
-          <label :for="item">{{ translateAreas(item) }}</label>
-          <component :is="setFields(item)" :field="item" :is-ready="isReady"></component>
-          <small class="text-error error-area-text" v-if="invalidAreas[item]">Поле <span class="areas-name">{{ translateAreas(item) }}</span> не може бути пустим</small>
+          <label :for="item">{{ translateAreas(item) }}{{item}}</label>
+          <component :is="setFields(item)" :field="item" :is-ready="isReady" ref="childComponent"></component>
+          <small class="text-error error-area-text" v-if="validationItems.includes(item)">Поле <span class="areas-name">{{ translateAreas(item) }}</span> не може бути пустим</small>
         </div>
         <div class="btn-control-panel">
           <button class="button conclusion-btn" :class="{'disable-btn': isComplete}" @click="update()">
             Зберегти документ
           </button>
-          <button class="button to-archive" @click="toArchive">Занести в архів</button>
+          <button class="button to-archive" @click="check()">Занести в архів</button><!--toArchive-->
           <small class="text-error save-error" v-if="serverError">{{ serverError }}</small>
         </div>
       </div>
@@ -54,7 +55,8 @@ export default {
       isComplete: false,
       invalidAreas:{},
       fileEmpty:false,
-      serverError:null
+      serverError:null,
+      validationItems:[]
     }
   },
   watch:{
@@ -69,6 +71,14 @@ export default {
   methods: {
     ...mapActions(['updateDocument', 'requestDocument']),
     ...mapMutations(['DocumentMutate']),
+
+    check(){
+      this.$refs.childComponent.map(childComponent => childComponent.valid ? this.validationItems.push(childComponent.$options.name) : '')
+    },
+
+    validate(item){
+      this.validationItems.push(item)
+    },
 
     setFields(item) {
       if (item === 'place' || item === 'edition')

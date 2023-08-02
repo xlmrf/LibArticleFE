@@ -27,9 +27,13 @@ export default {
   methods: {
     ...mapMutations(['DocumentMutate','updateDocument', 'catchError']),
     ...mapActions(['requestDocument']),
-    next() {
+    next(type) {
+      let key = '?'
+      if (type === 'forced'){
+        key += 'forced=true'
+      }
       if (!this.$route.params.id) {
-        axios.post(this.api_url_v1 + '/document/make', {data: this.getDocument}).then(response => {
+        axios.post(this.api_url_v1 + '/document/make'+ key!=='?' ? key : '', {data: this.getDocument}).then(response => {
           this.updateDocument( response.data)
           this.prev_stage = false
           router.push('/document/make/' + response.data.id)

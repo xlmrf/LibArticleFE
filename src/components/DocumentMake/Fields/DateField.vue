@@ -48,12 +48,13 @@ import moment from "moment";
 import {mapGetters} from "vuex";
 
 export default {
-  name: "DatePicker",
+  name: "publication_date",
 
   props:['isReady'],
   data() {
     return {
       formatDate: 'date',
+      valid: false,
       dateExist: true,
       years: [],
       year: new Date().getFullYear(),

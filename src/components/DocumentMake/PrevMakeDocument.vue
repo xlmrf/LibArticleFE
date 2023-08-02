@@ -20,7 +20,7 @@
       <span><loader width="4" radius="20"></loader></span>
     </div>
 
-    <title-warning v-if="titleModal" @close-modal="titleModal = false" @createToDespite="createDocument()"/>
+    <title-warning v-if="titleModal" @close-modal="titleModal = false" @createToDespite="createDocument"/>
   </div>
 </template>
 
@@ -60,13 +60,13 @@ export default {
       this.getDraftDocs
       this.draftTumbler = !this.draftTumbler
     },
-    createDocument(){
+    createDocument(e){
       if (!this.getDocument.title){
         this.titleError = 'empty_field'
       }
       else{
         console.log("prev");
-        this.$emit('next')
+        this.$emit('next', e)
       }
     },
     // showAllCites(){
