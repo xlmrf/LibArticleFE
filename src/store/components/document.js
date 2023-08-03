@@ -30,13 +30,6 @@ export default {
         //         ctx.commit('types', response.data)
         //     })
         // },
-        findAuthor(ctx, data) {
-            axios.get(ctx.rootState.api_url_v1 + '/author?email=' + data.email,).then(response => {
-                ctx.commit('upAuthor', {res:response.data,idx:data.idx})
-            }).catch(err => {
-                console.log(err.response)
-            })
-        },
 
         requestDocument(ctx, id) {
 
@@ -81,9 +74,6 @@ export default {
         // types(state, data) {
         //     state.types = data
         // },
-        upAuthor(ctx, data) {
-            ctx.propose_authors[data.idx] = data.res
-        },
         mutateLastDocuments(ctx, data) {
             ctx.last_documents = data
         },

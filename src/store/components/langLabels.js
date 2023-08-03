@@ -81,6 +81,23 @@ export default {
 
                         'btn_save_settings': "Зберегти",
                     }
+                },
+
+                document_make:{
+                    field_error:{
+                        'partially_filled': 'Необхідно заповнити всі поля',
+                        'none_author': 'Потрібно внести хоча б одного автора',
+                        'none_edition': 'Науковий напрямок відсутній',
+                        'none_place':'Місце публікації відсутнє',
+                        'none_publication_date': 'Дата публікації не вказана',
+                        'none_keywords': 'Не вказані ключові слова',
+                        'none_references': 'Не вказані посилання',
+                        'none_file': 'Файл відсутній',
+                        'none_description': 'Опис відсутній',
+                        'not_enough':'Недостатньо символів',
+                        'email_not_correct': 'Не корректний email'
+
+                    }
                 }
             },
 
@@ -163,6 +180,22 @@ export default {
                         'select_lang_en': "English",
 
                         'btn_save_settings': "Save"
+
+                    }
+                },
+                document_make:{
+                    field_error:{
+                        'partially_filled': 'Fill in all fields',
+                        'none_author': 'At least one author must be entered',
+                        'none_edition': 'Edition is missing',
+                        'none_place':'Place is missing',
+                        'none_publication_date': 'Publication date is missing',
+                        'none_keywords': 'Keywords are absent',
+                        'none_references': 'References are absent',
+                        'none_file': 'There is no main file',
+                        'none_description': 'Write an abstract',
+                        'not_enough': 'Not enough characters',
+                        'email_not_correct': 'Email not correct'
 
                     }
                 }

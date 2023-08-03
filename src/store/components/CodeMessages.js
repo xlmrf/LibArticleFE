@@ -10,7 +10,8 @@ export default {
                 'different_pass': 'Паролі не збігаються',
                 'incorrect_pass': 'Не вірний пароль',
                 'not_enough_symbols': 'Поле повинно включати більше символів',
-                'empty_field': 'Поле не може бути пустим'
+                'empty_field': 'Поле не може бути пустим',
+
             },
             NotesCodeMessage: {
                 'recovery-password': 'Форма підтвердження про відновлення паролю відправлено на вказану почту.',

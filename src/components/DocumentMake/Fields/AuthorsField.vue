@@ -6,15 +6,14 @@
           <span class="label">Я співавтор</span>
         </label>
         <span class="new-author-btn" @click="addAuthor">Додати автора</span>
-      </span>
-    {{isReady}}
+    </span>
     <div v-for="(author,idx) in getDocument.authors?.filter(item=>!item.delete)" :key="idx" class="author-list-item">
       <div>
         <label for="author_email">Email</label>
         <input type="text" :disabled="idx === 0 ? coAuthor : false"
                name="author_email" id="author_email" required
                v-model="author.email"
-               @blur="author.email !== '' ? findAuthor({email:author.email,idx:idx}): false"
+               @blur="author.email !== '' ? findAuthorByEmail({email:author.email,idx:idx}): false"
                :class="{'sample-input-error':authorError.email}"
                class='sample-input'>
       </div>
@@ -41,33 +40,33 @@
             <line x1="18" y1="6" x2="6" y2="18"></line>
             <line x1="6" y1="6" x2="18" y2="18"></line></svg>
       </span>
-<!--      <div class="break">{{error}}</div>-->
-      <div class="propose-authors">
-        <span v-for="author in getProposeAuthors[idx]" @click="addExistAuthor(author,idx)">
-          {{ author.last_name }} {{ author.first_name[0] }}.
+      <span class="text-error error-area-text author-error" v-if="this.authorError[idx]">{{ this.$store.getters.getLanguage.document_make.field_error[this.authorError[idx]] }}</span>
+      <div class="propose-authors" v-if="proposeAuthors[idx] && Object.keys(proposeAuthors[idx]).length>0">
+        <span v-for="(author) in proposeAuthors[idx]" @click="addExistAuthor(author, idx)">
+          {{ author.last_name }} {{ author.first_name }}
         </span>
       </div>
     </div>
+    <div class="text-error error-area-text" v-if="this.invalid === 'none_author'">{{ this.$store.getters.getLanguage.document_make.field_error[this.invalid] }}</div>
   </div>
 </template>
 
 <script>
-import {mapActions, mapGetters, mapMutations} from "vuex";
+import {mapActions, mapGetters, mapMutations, mapState} from "vuex";
+import axios from "axios";
 
 export default {
   props: ['authors','isReady'],
-  emits:['checkField'],
+  emits:['catchValidate'],
+  mixins:['email'],
   name:'authors',
   data() {
     return {
       emailValid: '',
-      authorError:{
-        email:false,
-        first_name:false,
-        last_name:false
-      },
+      authorError:[],
       coAuthor: false,
-      invalid:false
+      invalid:'',
+      proposeAuthors:[]
     }
   },
   watch: {
@@ -80,18 +79,54 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getDocument', 'getUser', 'getProposeAuthors'])
+    ...mapGetters(['getDocument', 'getUser']),
+    ...mapState(['api_url_v1'])
   },
   methods: {
-    ...mapActions(['findAuthor', 'deleteAuthor']),
+    ...mapActions(['deleteAuthor']),
     ...mapMutations(['DocAuthors']),
-    addExistAuthor(author, idx) {
+
+    validation(){
+      this.authorError = []
+      if (this.getDocument.authors.length < 1 ||
+          (this.getDocument.authors.length < 2 && Object.keys(this.getDocument.authors[0]).length < 1)){
+        // this.$emit('checkField', this.$options.name)
+        this.invalid = 'none_author'
+        return this.$emit('catchValidate', this.$options.name)//if component has mistakes
+      }
+
+      for (let i in this.getDocument.authors){
+        let author = this.getDocument.authors[i]
+        if (Object.values(author)?.some(value => value === null || value === undefined || value === '')) {
+          this.invalid = 'partially_filled'
+          this.authorError[i] = this.invalid
+          this.$emit('catchValidate', this.$options.name)
+        } else if (this.checkEmail(this.getDocument.authors[i].email)) {
+          this.invalid = this.checkEmail(this.getDocument.authors[i].email)
+          this.authorError[i] = this.invalid
+          this.$emit('catchValidate', this.$options.name)
+        }
+      }
+    },
+
+    findAuthorByEmail(author) {
+      axios.get(this.api_url_v1 + '/author?email=' + author.email,).then(response => {
+        this.proposeAuthors[author.idx] = response.data
+      }).catch(err => {
+        console.log(err.response)
+      })
+    },
+    addExistAuthor(author,idx) {
       this.getDocument.authors[idx] = author;
-      this.getProposeAuthors[idx]=null;
+      this.proposeAuthors[idx] = null;
     },
     addAuthor() {
       console.log(this.getDocument);
-      this.getDocument.authors.push({})
+      this.getDocument.authors.push({
+        first_name:'',
+        last_name: '',
+        email:''
+      })
     },
     removeAuthor(idx, author) {
       if (author.id) {
@@ -111,6 +146,7 @@ export default {
       }
       if (this.coAuthor) {
         if (Object.values(this.getDocument.authors[0]).some(e => e)) {
+          this.authorError.unshift(null)
           this.getDocument.authors.unshift(author)
         } else {
           this.getDocument.authors[0] = author
@@ -128,13 +164,6 @@ export default {
       }
     },
 
-    validation(){
-      if (Object.keys(this.getDocument.authors[0]).length < 1 ||
-          Object.values(this.getDocument.authors[0])?.some(value => value === null || value === undefined || value === '')){
-        this.$emit('checkField', this.$options.name)
-        this.invalid = true
-      }
-    }
 
   },
   mounted() {
@@ -155,16 +184,21 @@ export default {
 
 .break{
   flex-basis: 100%;
-  height: 0;
+  /*height: 0;*/
 }
 .propose-authors{
-  /*border: 1px solid darkgrey;*/
+  display: flex;
+  flex-wrap: wrap;
+  flex-basis: 100%;
+  margin-top: 10px;
+  padding: 5px 10px;
+  border-radius: 4px;
 }
 
 .propose-authors > *{
   cursor: pointer;
   color: #0d2839;
-  padding: 3px 5px;
+  padding: 5px 8px;
   margin-right: 5px;
   margin-bottom: 5px;
   border-radius: 6px;
@@ -265,7 +299,7 @@ export default {
   display: flex;
   margin-top: auto;
   align-self: center;
-  top: 38%;
+  top: 25px;
   right: -30px;
   position: absolute;
   /*right: -30px;*/
@@ -303,6 +337,15 @@ export default {
 
 .author-control{
   background: #f8f8f8;
+}
+
+.author-error{
+  display: flex;
+  flex-basis: 100%;
+  margin-top: 10px;
+  border: 1px solid #EB4C42;
+  padding: 5px 10px;
+  border-radius: 4px;
 }
 
 .author-control > label{

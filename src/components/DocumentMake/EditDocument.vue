@@ -19,8 +19,8 @@
         <div class="form-item" v-for="(item,idx) in getTypes.find(type => type.id === getDocument.type_id)?.fields"
              :key="idx" :class="{'universal-field': ['edition','place'].includes(item) }" >
           <label :for="item">{{ translateAreas(item) }}{{item}}</label>
-          <component :is="setFields(item)" :key="idx" :field="item" :is-ready="isReady" @checkField="fieldValid"></component>
-          <small class="text-error error-area-text" v-if="validationItems.includes(item)">Поле <span class="areas-name">{{ translateAreas(item) }}</span> не може бути пустим</small>
+          <component :is="setFields(item)" :key="idx" :field="item" :is-ready="isReady" @catchValidate="validate"></component>
+<!--          <small class="text-error error-area-text" v-if="validationItems.includes(item)">Поле <span class="areas-name">{{ translateAreas(item) }}</span> не може бути пустим</small>-->
         </div>
         <div class="btn-control-panel">
           <button class="button conclusion-btn" :class="{'disable-btn': isComplete}" @click="update()">
@@ -72,13 +72,26 @@ export default {
     ...mapActions(['updateDocument', 'requestDocument']),
     ...mapMutations(['DocumentMutate']),
 
-    check(){
-      // this.$refs.childComponent.map(childComponent => childComponent.valid = true)
-      // console.log('check')
-      // this.$refs.childComponent.map(childComponent => childComponent.invalid ? this.validationItems.push(childComponent.$options.name) : '')
-      this.validationItems = []
-      this.isReady = true
+    validate(name){
+      this.validationItems.push(name)
+      this.isReady = false
+      // try {
+      //   await this.$refs.documentFields.map(component => component.invalid ? this.validationItems.push(component.$options.name) : '')
+      // }
+      // catch (error){
+      //
+      // }
+      console.log('check')
 
+
+    },
+
+    check(){
+      this.isReady = true
+      this.validationItems = []
+      // catch (error){
+      //   console.log('something wrong with field validation', error)
+      // }
     },
 
     setFields(item) {
