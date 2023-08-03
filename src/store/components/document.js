@@ -75,6 +75,9 @@ export default {
         DocumentMutate(state,data){
             state.document = data
         },
+        DocAuthors(state,data){
+            state.document.authors = data
+        },
         // types(state, data) {
         //     state.types = data
         // },

@@ -19,7 +19,7 @@
         <div class="form-item" v-for="(item,idx) in getTypes.find(type => type.id === getDocument.type_id)?.fields"
              :key="idx" :class="{'universal-field': ['edition','place'].includes(item) }" >
           <label :for="item">{{ translateAreas(item) }}{{item}}</label>
-          <component :is="setFields(item)" :field="item" :is-ready="isReady" ref="childComponent"></component>
+          <component :is="setFields(item)" :key="idx" :field="item" :is-ready="isReady" @checkField="fieldValid"></component>
           <small class="text-error error-area-text" v-if="validationItems.includes(item)">Поле <span class="areas-name">{{ translateAreas(item) }}</span> не може бути пустим</small>
         </div>
         <div class="btn-control-panel">
@@ -73,11 +73,12 @@ export default {
     ...mapMutations(['DocumentMutate']),
 
     check(){
-      this.$refs.childComponent.map(childComponent => childComponent.valid ? this.validationItems.push(childComponent.$options.name) : '')
-    },
+      // this.$refs.childComponent.map(childComponent => childComponent.valid = true)
+      // console.log('check')
+      // this.$refs.childComponent.map(childComponent => childComponent.invalid ? this.validationItems.push(childComponent.$options.name) : '')
+      this.validationItems = []
+      this.isReady = true
 
-    validate(item){
-      this.validationItems.push(item)
     },
 
     setFields(item) {
@@ -86,16 +87,10 @@ export default {
       else
         return item + '-field';
     },
-    setAuthors(value) {
-      this.document.authors = value
-    },
-    fontSize(e, text) {
-      if (e.refTitle != undefined) {
-        console.log(text.length);
-        console.log(e.refTitle.clientWidth);
-      }
-      // console.log(this.$el.contains(e.target))
-      return '22px';
+
+    fieldValid(item){
+      this.validationItems.push(item)
+      this.isReady = false
     },
 
     update(){

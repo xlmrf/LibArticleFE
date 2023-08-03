@@ -7,6 +7,7 @@
         </label>
         <span class="new-author-btn" @click="addAuthor">Додати автора</span>
       </span>
+    {{isReady}}
     <div v-for="(author,idx) in getDocument.authors?.filter(item=>!item.delete)" :key="idx" class="author-list-item">
       <div>
         <label for="author_email">Email</label>
@@ -51,11 +52,11 @@
 </template>
 
 <script>
-import {mapActions, mapGetters} from "vuex";
+import {mapActions, mapGetters, mapMutations} from "vuex";
 
 export default {
   props: ['authors','isReady'],
-  // emits:['newAuthor'],
+  emits:['checkField'],
   name:'authors',
   data() {
     return {
@@ -66,22 +67,24 @@ export default {
         last_name:false
       },
       coAuthor: false,
-      valid:false
+      invalid:false
     }
   },
   watch: {
     isReady(){
-      console.log('is ready check')
+      if (this.isReady)
+        this.validation()
     },
     coAuthor() {
       this.imCoAuthor()
-    },
+    }
   },
   computed: {
     ...mapGetters(['getDocument', 'getUser', 'getProposeAuthors'])
   },
   methods: {
     ...mapActions(['findAuthor', 'deleteAuthor']),
+    ...mapMutations(['DocAuthors']),
     addExistAuthor(author, idx) {
       this.getDocument.authors[idx] = author;
       this.getProposeAuthors[idx]=null;
@@ -123,13 +126,22 @@ export default {
           })
         }
       }
+    },
+
+    validation(){
+      if (Object.keys(this.getDocument.authors[0]).length < 1 ||
+          Object.values(this.getDocument.authors[0])?.some(value => value === null || value === undefined || value === '')){
+        this.$emit('checkField', this.$options.name)
+        this.invalid = true
+      }
     }
 
   },
   mounted() {
     if (!this.getDocument.authors || !this.getDocument.authors.length) {
-      this.getDocument.authors = []
-      this.getDocument.authors.push({})
+      // this.DocAuthors([{}])
+      // this.getDocument.authors = []
+      // this.getDocument.authors.push({})
     }
   }
 }
