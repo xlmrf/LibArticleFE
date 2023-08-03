@@ -76,6 +76,12 @@ export default {
     },
     coAuthor() {
       this.imCoAuthor()
+    },
+    'getDocument.authors':{
+      handler(){
+        this.authorError = []
+      },
+      deep:true
     }
   },
   computed: {

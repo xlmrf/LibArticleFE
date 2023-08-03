@@ -18,7 +18,7 @@
       <div class="fill-areas">
         <div class="form-item" v-for="(item,idx) in getTypes.find(type => type.id === getDocument.type_id)?.fields"
              :key="idx" :class="{'universal-field': ['edition','place'].includes(item) }" >
-          <label :for="item">{{ translateAreas(item) }}{{item}}</label>
+          <label :for="item">{{ translateAreas(item) }}</label>
           <component :is="setFields(item)" :key="idx" :field="item" :is-ready="isReady" @catchValidate="validate"></component>
 <!--          <small class="text-error error-area-text" v-if="validationItems.includes(item)">Поле <span class="areas-name">{{ translateAreas(item) }}</span> не може бути пустим</small>-->
         </div>

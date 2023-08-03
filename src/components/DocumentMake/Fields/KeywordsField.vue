@@ -28,8 +28,11 @@
 import {mapGetters} from "vuex";
 
 export default {
+  name:'keywords',
 
   props:['isReady'],
+  emits:['catchValidate'],
+
   data() {
     return {
       keyword: '',
@@ -37,6 +40,11 @@ export default {
     }
   },
   methods: {
+
+    validation(){
+
+    },
+
     addKeyword() {
       if (this.keyword === '' || this.keyword === undefined) {
         this.error = 'Введіть значення'

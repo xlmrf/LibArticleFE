@@ -95,7 +95,7 @@ export default {
                         'none_file': 'Файл відсутній',
                         'none_description': 'Опис відсутній',
                         'not_enough':'Недостатньо символів',
-                        'email_not_correct': 'Не корректний email'
+                        'email_not_correct': 'Не коректний email'
 
                     }
                 }
