@@ -403,6 +403,11 @@ input {
 }
 
 .text-error{
+  width: 95%;
+  margin-top: 10px;
+  /*border: 1px solid #EB4C42;*/
+  /*padding: 5px 10px;*/
+  border-radius: 4px;
   color: rgba(217, 39, 27, 0.87);
 }
 

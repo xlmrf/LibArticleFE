@@ -100,7 +100,6 @@ export default {
     ...mapGetters(['getDocument'])
   },
   beforeMount() {
-    console.log('ReF11111111111111111111111111');
     if (!this.getDocument.references) {
       this.getDocument.references = []
     }

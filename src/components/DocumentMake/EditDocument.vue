@@ -87,6 +87,7 @@ export default {
     },
 
     check(){
+      console.log('document: ', this.getDocument)
       this.isReady = true
       this.validationItems = []
       // catch (error){
@@ -293,7 +294,7 @@ export default {
 }
 
 .form-item > div{
-  padding: 5px 10px 0 10px;
+  /*padding: 5px 10px 0 10px;*/
 }
 
 .form-item > label{
@@ -723,7 +724,7 @@ export default {
 }
 
 .error-area-text{
-  margin: 5px;
+  margin: 0 5px;
 }
 
 .fill-areas-document > div {

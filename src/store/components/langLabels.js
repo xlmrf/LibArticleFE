@@ -4,6 +4,10 @@ export default {
     state() {
         return {
             ua:{
+                common:{
+                    'empty_field': 'Введіть значення',
+                    'too_few_characters': 'Мінімальне значення символів: '
+                },
                 navbar:{
                     nav_menu:{
                         'account': "Акаунт",
@@ -104,6 +108,10 @@ export default {
 
 
             en: {
+                common:{
+                    'empty_field': 'Enter a value',
+                    'too_few_characters': 'Minimum character count: '
+                },
                 navbar:{
                     nav_menu:{
                         'account': "Account",

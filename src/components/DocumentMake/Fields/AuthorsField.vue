@@ -40,14 +40,15 @@
             <line x1="18" y1="6" x2="6" y2="18"></line>
             <line x1="6" y1="6" x2="18" y2="18"></line></svg>
       </span>
-      <span class="text-error error-area-text author-error" v-if="this.authorError[idx]">{{ this.$store.getters.getLanguage.document_make.field_error[this.authorError[idx]] }}</span>
+      <span class="text-error error-area-text author-error" v-if="authorError[idx]">{{ $store.getters.getLanguage.document_make.field_error[authorError[idx]] }}</span>
       <div class="propose-authors" v-if="proposeAuthors[idx] && Object.keys(proposeAuthors[idx]).length>0">
+        {{proposeAuthors}}
         <span v-for="(author) in proposeAuthors[idx]" @click="addExistAuthor(author, idx)">
           {{ author.last_name }} {{ author.first_name }}
         </span>
       </div>
     </div>
-    <div class="text-error error-area-text" v-if="this.invalid === 'none_author'">{{ this.$store.getters.getLanguage.document_make.field_error[this.invalid] }}</div>
+    <div class="text-error error-area-text" v-if="invalid === 'none_author'">{{ $store.getters.getLanguage.document_make.field_error[invalid] }}</div>
   </div>
 </template>
 
@@ -56,7 +57,7 @@ import {mapActions, mapGetters, mapMutations, mapState} from "vuex";
 import axios from "axios";
 
 export default {
-  props: ['authors','isReady'],
+  props: ['isReady'],
   emits:['catchValidate'],
   mixins:['email'],
   name:'authors',
@@ -140,7 +141,9 @@ export default {
       } else {
         this.getDocument.authors.splice(idx, 1)
       }
-      this.getProposeAuthors.splice(idx, 1);
+      if (this.proposeAuthors[idx]){
+        this.proposeAuthors[idx] = null
+      }
 
     },
 
@@ -348,10 +351,9 @@ export default {
 .author-error{
   display: flex;
   flex-basis: 100%;
-  margin-top: 10px;
-  border: 1px solid #EB4C42;
-  padding: 5px 10px;
-  border-radius: 4px;
+  /*border: 1px solid #EB4C42;*/
+  /*padding: 5px 10px;*/
+  /*border-radius: 4px;*/
 }
 
 .author-control > label{
