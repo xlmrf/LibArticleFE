@@ -2,6 +2,7 @@
   <div>
     <input type="text" class="sample-input" name="" id="" v-model="getDocument[field]">
     <div class="text-error error-area-text" v-if="invalid">{{ $store.getters.getLanguage.document_make.field_error[invalid] }}</div>
+{{componentName}}awef
   </div>
 </template>
 
@@ -13,13 +14,19 @@ export default {
   name: 'universal',
   data(){
     return{
-      invalid:''
+      invalid:'',
+      componentName: this.getDocument
     }
   },
   watch:{
     isReady(){
       if (this.isReady)
         this.validation()
+    },
+    componentName:{
+      handler(i){
+        console.log(i)
+      }
     },
   },
   methods: {

@@ -22,14 +22,16 @@
             <line x1="6" y1="6" x2="18" y2="18"></line>
           </svg>
         </small>
+      <small class="local-error-text">{{ localError }}</small>
     </span>
 <!--    <ol>-->
 <!--      <li v-for="(el,idx) in getDocument.references.filter(item=>!item.delete)" :key="idx">-->
 
 <!--      </li>-->
 <!--    </ol>-->
-    <small>{{ error }}</small>
+
   </div>
+  <div class="text-error error-area-text" v-if="invalid">{{ $store.getters.getLanguage.document_make.field_error[invalid] }}</div>
   <!--  <div>-->
   <!--    <small>keywords</small>-->
   <!--    <input type="text" name="" id="" v-model="getDocument.keywords">-->
@@ -41,16 +43,48 @@ import {mapGetters} from "vuex";
 
 export default {
 
-  props:['isReady'],
+  name: 'references',
+  props:['isReady', 'field'],
+  emits:['catchValidate'],
 
   data() {
     return {
       reference: '',
-      error: '',
-      edit: false,
+      localError: '',
+      invalid:'',
+      edit:false
     }
   },
+
+  watch:{
+    keyword(){
+      this.localError = ''
+    },
+    isReady(){
+      if (this.isReady)
+        this.validation()
+    },
+    'getDocument.references':{
+      handler(){
+        if (this.getDocument.references && this.getDocument.references.length > 0) {
+          this.invalid = ''
+        }
+      },
+      deep:true
+    }
+  },
+
   methods: {
+
+    validation(){
+
+      if (!this.getDocument.references || this.getDocument.references.length < 1){
+        this.invalid = 'none_references'
+        this.$emit('catchValidate', this.$options.name)
+        this.getDocument.keywords = []
+      }
+    },
+
     deleteReferenceIntup() {
       this.getDocument.references.find(item => {
         delete item.edit
