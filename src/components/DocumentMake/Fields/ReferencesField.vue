@@ -2,7 +2,7 @@
   <div class="complex-item-control">
     <span>
       <input type="text" class="sample-input" v-model="reference" @keypress.enter="addKeyword">
-       <small @click="deleteReferenceIntup()" class="delete-ref-btn delete-item" v-if="reference!==''">
+       <small @click="deleteReferenceIntup()" class="delete-ref-btn delete-item" v-if="reference!==''" ref="referencesPort">
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
                stroke="#9A9A9A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -12,9 +12,12 @@
       <span class="add-keyword-btn" @click="addKeyword">{{ edit ? "Зберегти" : 'Додати' }}</span>
     </span>
     <span class="reference-item" v-for="(el,idx) in getDocument.references.filter(item=>!item.delete)" :key="idx">
-      <span @dblclick="editRef(el)" :class="{'italic':el.edit}">{{
+      <span :class="{'italic':el.edit}">{{
         idx + 1
       }}. {{ el.bibliographic_description }}</span>
+      <small  @click="editRef(el)" class="change-ref-title">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9A9A9A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="16 3 21 8 8 21 3 21 3 16 16 3"></polygon></svg>
+      </small>
         <small @click="deleteKeyword(idx,el)" class="delete-item">
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
                stroke="#9A9A9A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -99,6 +102,11 @@ export default {
       this.reference = el.bibliographic_description
       el.edit = true
       this.edit = true
+      console.log("refs: ",this.$refs,"Reference port: ",this.$refs.referencesPort);
+      if (this.$refs.referencesPort) {
+        // Only try to focus if the ref exists
+        this.$refs.referencesPort.focus();
+      }
     },
     addKeyword() {
       if (this.reference === '' || this.reference === undefined) {
@@ -149,7 +157,8 @@ export default {
 .reference-item{
   margin: 6px 2px;
   font-size: 18px;
-  background: #bbbbbb;
+  padding: 8px 10px;
+  border: 1px solid #a1a1a1;
   width: 100%;
 }
 .complex-item-control > span{
@@ -167,9 +176,16 @@ export default {
 li{
   position: relative;
 }
-
-.delete-item{
+.change-ref-title{
   margin-left: auto;
+  padding: 0 5px;
+  cursor: pointer;
+}
+.change-ref-title:hover > svg{
+  stroke: #1C75DD;
+}
+.delete-item{
+  margin-left: 10px;
 }
 
 </style>
