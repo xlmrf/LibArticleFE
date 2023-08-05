@@ -1,15 +1,15 @@
 <template>
   <div class="complex-item-control">
     <span>
-      <input type="text" class="sample-input" v-model="reference" @keypress.enter="addKeyword">
-       <small @click="deleteReferenceIntup()" class="delete-ref-btn delete-item" v-if="reference!==''" ref="referencesPort">
+      <input type="text" class="sample-input" v-model="reference" @keypress.enter="addReference" ref="referencesPort">
+       <small @click="deleteReferenceIntup()" class="delete-ref-btn delete-item" v-if="reference!==''">
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
                stroke="#9A9A9A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <line x1="18" y1="6" x2="6" y2="18"></line>
             <line x1="6" y1="6" x2="18" y2="18"></line>
           </svg>
         </small>
-      <span class="add-keyword-btn" @click="addKeyword">{{ edit ? "Зберегти" : 'Додати' }}</span>
+      <span class="add-keyword-btn" @click="addReference">{{ edit ? "Зберегти" : 'Додати' }}</span>
     </span>
     <span class="reference-item" v-for="(el,idx) in getDocument.references.filter(item=>!item.delete)" :key="idx">
       <span :class="{'italic':el.edit}">{{
@@ -25,8 +25,8 @@
             <line x1="6" y1="6" x2="18" y2="18"></line>
           </svg>
         </small>
-      <small class="local-error-text">{{ localError }}</small>
     </span>
+    <small class="local-error-text">{{ localError }}</small>
 <!--    <ol>-->
 <!--      <li v-for="(el,idx) in getDocument.references.filter(item=>!item.delete)" :key="idx">-->
 
@@ -55,7 +55,7 @@ export default {
       reference: '',
       localError: '',
       invalid:'',
-      edit:false
+      edit:false,
     }
   },
 
@@ -95,6 +95,7 @@ export default {
       this.edit = false;
       this.reference = '';
     },
+
     editRef(el) {
       this.getDocument.references.find(item => {
         delete item.edit
@@ -102,18 +103,21 @@ export default {
       this.reference = el.bibliographic_description
       el.edit = true
       this.edit = true
-      console.log("refs: ",this.$refs,"Reference port: ",this.$refs.referencesPort);
-      if (this.$refs.referencesPort) {
-        // Only try to focus if the ref exists
-        this.$refs.referencesPort.focus();
-      }
+      console.log("refs: ",this.$refs,"Reference port: ",this.$refs);
+      this.$refs.referencesPort.focus();
     },
-    addKeyword() {
-      if (this.reference === '' || this.reference === undefined) {
-        this.error = 'Введіть значення'
-      } else {
-        if (this.error) {
-          this.error = ''
+
+    addReference() {
+      console.log(this.reference)
+      if (!this.reference) {
+        this.localError = 'Введіть значення'
+      }
+      else if(this.getDocument.references.find(item => item.bibliographic_description === this.reference)) {
+        this.localError = 'Посилання існує'
+      }
+      else {
+        if (this.localError) {
+          this.localError = ''
         }
         if (this.getDocument.references === undefined || this.getDocument.references === null) {
           this.getDocument.references = [];
@@ -129,6 +133,8 @@ export default {
         this.reference = ''
       }
     },
+
+
     deleteKeyword(idx, reference) {
       console.log("item", idx);
       if (reference.id) {
@@ -137,18 +143,36 @@ export default {
         this.getDocument.references.splice(idx, 1)
       }
     },
+
+    handleEscKeyPress(event) {
+      if (this.edit && event.key === "Escape") {
+        this.getDocument.references.find(item => {
+          delete item.edit
+        })
+        this.edit = false
+        this.reference = ''
+        console.log("Esc key pressed! Execute your functions here.");
+      }
+    },
   },
+
+
   computed: {
     ...mapGetters(['getDocument'])
   },
+
+
   beforeMount() {
     if (!this.getDocument.references) {
       this.getDocument.references = []
     }
+    document.removeEventListener("keydown", this.handleEscKeyPress);
   },
   mounted() {
-
+    document.addEventListener("keydown", this.handleEscKeyPress);
   }
+
+
 }
 </script>
 
