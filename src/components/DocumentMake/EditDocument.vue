@@ -3,8 +3,6 @@
     <span><loader width="4" radius="20"></loader></span>
   </div>
   <div v-else>
-{{validationItems}}
-    {{isReady}}
     <div class="card-top">
       <h2 :style="{ 'font-size': '22px' }" ref="refTitle">{{ getDocument.title }}</h2>
       <h4>{{ getTypes.find(type => type.id === getDocument.type_id)?.name }}</h4>
@@ -26,7 +24,7 @@
           <button class="button conclusion-btn" :class="{'disable-btn': false}" @click="update()">
             Зберегти документ
           </button>
-          <button class="button to-archive" @click="check()">Занести в архів</button><!--toArchive-->
+          <button class="button to-archive" @click="toArchive()">Занести в архів</button><!--toArchive-->
           <small class="text-error save-error" v-if="serverError">{{ serverError }}</small>
         </div>
       </div>

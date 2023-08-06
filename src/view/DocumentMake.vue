@@ -32,12 +32,17 @@ export default {
       if (type === 'forced'){
         key += 'forced=true'
       }
+
       if (!this.$route.params.id) {
+
         axios.post(this.api_url_v1 + '/document/make'+ (key!=='?' ? key : ''), {data: this.getDocument}).then(response => {
+
           this.updateDocument( response.data)
           this.prev_stage = false
+
           router.push('/document/make/' + response.data.id)
         }, err => {
+
           console.log('error info -', err.message);
           this.catchError(err.response.data.errors)
 
