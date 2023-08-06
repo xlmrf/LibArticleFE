@@ -3,7 +3,8 @@
     <span><loader width="4" radius="20"></loader></span>
   </div>
   <div v-else>
-
+{{validationItems}}
+    {{isReady}}
     <div class="card-top">
       <h2 :style="{ 'font-size': '22px' }" ref="refTitle">{{ getDocument.title }}</h2>
       <h4>{{ getTypes.find(type => type.id === getDocument.type_id)?.name }}</h4>
@@ -13,7 +14,7 @@
       </span>
     </div>
     <div class="fill-areas-document">
-      <files-frame-component :empty="fileEmpty"/>
+      <files-frame-component :empty="fileEmpty" @fileLoad="this.fileEmpty = false"/>
       <div class="fill-areas">
         <div class="form-item" v-for="(item,idx) in getTypes.find(type => type.id === getDocument.type_id)?.fields"
              :key="idx" :class="{'universal-field': ['edition','place'].includes(item) }" >
@@ -22,7 +23,7 @@
 <!--          <small class="text-error error-area-text" v-if="validationItems.includes(item)">Поле <span class="areas-name">{{ translateAreas(item) }}</span> не може бути пустим</small>-->
         </div>
         <div class="btn-control-panel">
-          <button class="button conclusion-btn" :class="{'disable-btn': isComplete}" @click="update()">
+          <button class="button conclusion-btn" :class="{'disable-btn': false}" @click="update()">
             Зберегти документ
           </button>
           <button class="button to-archive" @click="check()">Занести в архів</button><!--toArchive-->
@@ -50,48 +51,41 @@ export default {
   mixins: ['translate'],
   data() {
     return {
-      isReady: false,
       isComplete: false,
       invalidAreas:{},
-      fileEmpty:false,
       serverError:null,
-      validationItems:[]
+
+      fileEmpty:false,
+
+      validationItems:[],
+      isReady: false,
     }
   },
   watch:{
-    getDocument:{
+    // getDocument:{
+    //   handler() {
+    //     this.invalidAreas = {}
+    //     this.fileEmpty = false
+    //   },
+    //   deep:true
+    // },
+    getFiles:{
       handler() {
-        this.invalidAreas = {}
+        console.log('getFiles',this.getFiles);
         this.fileEmpty = false
       },
       deep:true
     }
+
   },
   methods: {
     ...mapActions(['updateDocument', 'requestDocument']),
-    ...mapMutations(['DocumentMutate']),
+    ...mapMutations(['DocumentMutate', 'FilePusher']),
 
     validate(name){
       this.validationItems.push(name)
       this.isReady = false
-      // try {
-      //   await this.$refs.documentFields.map(component => component.invalid ? this.validationItems.push(component.$options.name) : '')
-      // }
-      // catch (error){
-      //
-      // }
       console.log('check')
-
-
-    },
-
-    check(){
-      console.log('document: ', this.getDocument)
-      this.isReady = true
-      this.validationItems = []
-      // catch (error){
-      //   console.log('something wrong with field validation', error)
-      // }
     },
 
     setFields(item) {
@@ -101,17 +95,15 @@ export default {
         return item + '-field';
     },
 
-    fieldValid(item){
-      this.validationItems.push(item)
-      this.isReady = false
-    },
-
-    update(){
-      this.isReady = true
-      this.serverError = null
+    async update(){
+      await this.check()
       let document = this.getDocument
-      document.files = this.getFiles
-      !this.docValidate ? this.updateDocument(document) : this.docValidate
+
+      if (Object.keys(this.validationItems).length === 0 && !this.fileEmpty){
+        console.log('upd doc not work')
+        document.files = this.getFiles
+        this.updateDocument(document)
+      }
     },
 
     toArchive(){
@@ -124,46 +116,26 @@ export default {
         this.serverError = error
         console.log(error);
       })
-    }
+    },
+    check(){
+      console.log('CHECK FUNCTION')
+      this.validationItems = []
+      this.serverError = null
+      this.isReady = true
+      setTimeout(() => {
+
+        if (!this.getFiles.main || !this.getFiles.main.url){
+          this.fileEmpty = true
+          // this.point = false
+          this.isReady = false
+        }
+      },300)
+    },
   },
   computed: {
     ...mapGetters(['getDocument', 'getTypes','getFiles']),
     ...mapState(['api_url_v1']),
 
-    docValidate(){
-
-      if (Object.keys(this.getFiles.main).length === 0){
-        this.fileEmpty = true
-      }
-
-      function hasEmptyValue(obj) {
-
-        if (Array.isArray(obj)) {
-          if (obj.length === 0)
-            return true
-          else
-            return obj.some(item => hasEmptyValue(item));
-        }
-        else if (typeof obj == "object" && obj !== null) {
-          return Object.values(obj).some(value => typeof value === 'object' ? hasEmptyValue(value) : !value);
-        }
-        else {
-          return obj == null || obj === "";
-        }
-      }
-
-      let type = this.getTypes.find(type => type.id === this.getDocument.type_id)?.fields
-      for (let item in this.getDocument){
-        if (type.includes(item)){
-          // console.log('each: '+item,this.getDocument[item])
-          this.invalidAreas[item] = hasEmptyValue(this.getDocument[item])
-        }
-
-      }
-      return Object.values(this.invalidAreas).some(value => !!value) || this.fileEmpty
-
-
-    },
     resetDocument() {
 
       // let document = JSON.parse(localStorage.getItem('not_finished_document'))
@@ -672,6 +644,10 @@ export default {
 
 .conclusion-btn:hover{
   background: #5a9cea;
+}
+
+.disable-btn:hover{
+  background: rgba(129, 131, 132, 0.25);
 }
 
 .fill-areas-document {

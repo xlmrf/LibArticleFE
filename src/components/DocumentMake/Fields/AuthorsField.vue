@@ -40,7 +40,7 @@
             <line x1="18" y1="6" x2="6" y2="18"></line>
             <line x1="6" y1="6" x2="18" y2="18"></line></svg>
       </span>
-      <span class="text-error error-area-text author-error" v-if="authorError[idx]">{{ $store.getters.getLanguage.document_make.field_error[authorError[idx]] }}</span>
+      <span class="text-error error-area-text author-error" v-if="authorError[idx]">{{ authorError[idx] }}</span>
       <div class="propose-authors" v-if="proposeAuthors[idx] && Object.keys(proposeAuthors[idx]).length>0">
         {{proposeAuthors}}
         <span v-for="(author) in proposeAuthors[idx]" @click="addExistAuthor(author, idx)">
@@ -104,15 +104,40 @@ export default {
 
       for (let i in this.getDocument.authors){
         let author = this.getDocument.authors[i]
-        if (Object.values(author)?.some(value => value === null || value === undefined || value === '')) {
-          this.invalid = 'partially_filled'
-          this.authorError[i] = this.invalid
-          this.$emit('catchValidate', this.$options.name)
-        } else if (this.checkEmail(this.getDocument.authors[i].email)) {
-          this.invalid = this.checkEmail(this.getDocument.authors[i].email)
-          this.authorError[i] = this.invalid
-          this.$emit('catchValidate', this.$options.name)
+        const missingFields = [];
+        if (!author.first_name) {
+          missingFields.push('first name');
         }
+
+        if (!author.last_name) {
+          missingFields.push('last name');
+        }
+
+        if (!author.email) {
+          missingFields.push('email');
+        }
+
+        this.invalid = 'partially_filled'
+        this.authorError[i] = missingFields.length === 0 ? null
+            : `${this.$store.getters.getLanguage.document_make.field_error[this.invalid]}: ${missingFields.join(', ')}`;
+        console.log('missing fields', this.authorError)
+        if (!this.authorError[i]){
+          if (this.checkEmail(this.getDocument.authors[i].email)){
+              this.invalid = this.checkEmail(this.getDocument.authors[i].email)
+              this.authorError[i] = this.$store.getters.getLanguage.document_make.field_error[this.invalid]
+              this.$emit('catchValidate', this.$options.name)
+          }
+        }
+
+        // if (Object.values(author)?.some(value => value === null || value === undefined || value === '')) {
+        //   this.invalid = 'partially_filled'
+        //   this.authorError[i] = this.invalid
+        //   this.$emit('catchValidate', this.$options.name)
+        // } else if (this.checkEmail(this.getDocument.authors[i].email)) {
+        //   this.invalid = this.checkEmail(this.getDocument.authors[i].email)
+        //   this.authorError[i] = this.invalid
+        //   this.$emit('catchValidate', this.$options.name)
+        // }
       }
     },
 
@@ -154,7 +179,11 @@ export default {
         email: this.getUser.email
       }
       if (this.coAuthor) {
-        if (Object.values(this.getDocument.authors[0]).some(e => e)) {
+        if (!this.getDocument.authors[0]){
+          this.authorError.unshift(null)
+          this.getDocument.authors.unshift(author)
+        }
+        else if (Object.values(this.getDocument.authors[0]).some(e => e)) {
           this.authorError.unshift(null)
           this.getDocument.authors.unshift(author)
         } else {

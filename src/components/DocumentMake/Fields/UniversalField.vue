@@ -21,9 +21,14 @@ export default {
       if (this.isReady)
         this.validation()
     },
-    componentName:{
+    'getDocument.edition':{
       handler(i){
-        console.log(i)
+        this.invalid = ''
+      }
+    },
+    'getDocument.place':{
+      handler(i){
+        this.invalid = ''
       }
     },
   },
@@ -34,7 +39,6 @@ export default {
       if (!this.getDocument[this.field]) {
         this.invalid = 'none_'+this.field
         this.$emit('catchValidate', this.field)
-        this.getDocument.keywords = []
       }
     },
   },

@@ -50,7 +50,8 @@ import {mapGetters} from "vuex";
 export default {
   name: "publication_date",
 
-  props:['isReady'],
+  props:['isReady', 'field'],
+  emits:['catchValidate'],
   data() {
     return {
       formatDate: 'date',

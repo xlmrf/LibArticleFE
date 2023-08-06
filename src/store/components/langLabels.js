@@ -89,7 +89,7 @@ export default {
 
                 document_make:{
                     field_error:{
-                        'partially_filled': 'Необхідно заповнити всі поля',
+                        'partially_filled': 'Необхідно заповнити поля',
                         'none_author': 'Потрібно внести хоча б одного автора',
                         'none_edition': 'Науковий напрямок відсутній',
                         'none_place':'Місце публікації відсутнє',
@@ -99,7 +99,10 @@ export default {
                         'none_file': 'Файл відсутній',
                         'none_description': 'Опис відсутній',
                         'not_enough':'Недостатньо символів',
-                        'email_not_correct': 'Не коректний email'
+                        'email_not_correct': 'Не коректний email',
+                        'none_first_name': "Введіть ім'я",
+                        'none_last_name': "Введіть прізвище",
+                        'none_email': "Введіть email"
 
                     }
                 }
@@ -108,6 +111,17 @@ export default {
 
 
             en: {
+                areas:{
+                    'title': 'Title',
+                    'type': 'Type',
+                    'last name': 'Last name',
+                    'first name': 'First_name',
+                    'email': 'Email',
+                    'description': 'Description',
+                    'keywords': 'Keywords',
+                    'references': 'References',
+
+                },
                 common:{
                     'empty_field': 'Enter a value',
                     'too_few_characters': 'Minimum character count: '
@@ -193,7 +207,7 @@ export default {
                 },
                 document_make:{
                     field_error:{
-                        'partially_filled': 'Fill in all fields',
+                        'partially_filled': 'Fields are required',
                         'none_author': 'At least one author must be entered',
                         'none_edition': 'Edition is missing',
                         'none_place':'Place is missing',
@@ -203,8 +217,10 @@ export default {
                         'none_file': 'There is no main file',
                         'none_description': 'Write an abstract',
                         'not_enough': 'Not enough characters',
-                        'email_not_correct': 'Email not correct'
-
+                        'email_not_correct': 'Email not correct',
+                        'none_first_name': 'Enter first name',
+                        'none_last_name': 'Enter last name',
+                        'none_email': 'Enter email'
                     }
                 }
             }

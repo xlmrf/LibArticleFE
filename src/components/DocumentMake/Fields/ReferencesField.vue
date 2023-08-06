@@ -84,7 +84,7 @@ export default {
       if (!this.getDocument.references || this.getDocument.references.length < 1){
         this.invalid = 'none_references'
         this.$emit('catchValidate', this.$options.name)
-        this.getDocument.keywords = []
+        this.getDocument.references = []
       }
     },
 

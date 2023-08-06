@@ -40,10 +40,10 @@ export default {
         this.invalid = 'none_keywords'
         this.$emit('catchValidate', this.$options.name)
       }
-      else if (this.getDocument.description?.length < 40){
-        this.invalid = 'too_few_characters'+'40'
-        this.$emit('catchValidate', this.$options.name)
-      }
+      // else if (this.getDocument.description?.length < 40){
+      //   this.invalid = 'too_few_characters'
+      //   this.$emit('catchValidate', this.$options.name)
+      // }
     },
   },
   computed: {

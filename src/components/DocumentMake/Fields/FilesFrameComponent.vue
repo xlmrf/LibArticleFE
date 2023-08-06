@@ -72,6 +72,7 @@ import axios from "axios";
 export default {
 
   props:['isReady', 'empty'],
+  emits:['file-load'],
 
   data() {
     return {
@@ -126,6 +127,9 @@ export default {
     getProcess() {
       console.log(this.getProcess);
     },
+    empty(){
+      console.log('empttyyy not work', this.empty)
+    }
   },
   methods: {
     ...mapMutations(['FilePusher', 'updateFiles']),
@@ -183,7 +187,6 @@ export default {
     },
 
     pushFile(data){
-      console.log('push file',data)
       axios.post('https://s1.libarticle.polidar.in.ua/api/v1/file', data, {
         onUploadProgress: progressEvent => {
           if (progressEvent.lengthComputable){
@@ -198,6 +201,7 @@ export default {
         else {
           this.getFiles.add.push(response.data)
         }
+        this.$emit('fileLoad')
       }, error => {
         this.loadError = error
         console.log('error in add files:', error);
@@ -268,6 +272,12 @@ export default {
         }
       }
     }
+  },
+  mounted() {
+    this.updateFiles({
+      main:{},
+      add:[]
+    })
   },
   components: {loader}
 }
