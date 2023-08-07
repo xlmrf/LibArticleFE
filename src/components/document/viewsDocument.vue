@@ -1,6 +1,6 @@
 <template>
 <div>
-  <span class="view-frame" v-if="views.document_views">Перегляди <span>{{ views.document_views.value }}</span></span>
+  <span class="view-frame frame" v-if="views.document_views">{{ this.$store.getters.getLanguage.document.characteristic.views }} <span>{{ views.document_views.value }}</span></span>
 </div>
 </template>
 

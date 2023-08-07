@@ -85,7 +85,7 @@ input {
   width:100%;
   height:1px;
   left:0;
-  bottom:3px;
+  bottom:1px;
   background: #bfbfbfb0;
 }
 

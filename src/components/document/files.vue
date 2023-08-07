@@ -114,7 +114,7 @@ export default {
 
 .cites-modal {
   display: block;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.6);
   position: fixed;
   top: 0;
   left: 0;

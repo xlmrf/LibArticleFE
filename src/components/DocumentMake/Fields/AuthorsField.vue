@@ -14,7 +14,7 @@
                name="author_email" id="author_email" required
                v-model="author.email"
                @blur="author.email !== '' ? findAuthorByEmail({email:author.email,idx:idx}): false"
-               :class="{'sample-input-error':authorError.email}"
+               :class="{'sample-input-error': authorError[idx]?.includes('email')}"
                class='sample-input'>
       </div>
       <div>
@@ -22,7 +22,7 @@
         <input type="text" :disabled="idx === 0 ? coAuthor : false"
                name="last_name" id="last_name" required
                v-model="author.last_name"
-               :class="{'sample-input-error':authorError.last_name}"
+               :class="{'sample-input-error':authorError[idx]?.includes('last_name')}"
                class='sample-input'>
       </div>
       <div>
@@ -30,7 +30,7 @@
         <input type="text" :disabled="idx === 0 ? coAuthor : false"
                name="first_name" id="first_name" required
                v-model="author.first_name"
-               :class="{'sample-input-error':authorError.first_name}"
+               :class="{'sample-input-error':authorError[idx]?.includes('first_name')}"
                class='sample-input'>
       </div>
       <span class="user-remove-btn" v-if="getDocument.authors?.filter(item=>!item.delete).length>1"
@@ -40,7 +40,7 @@
             <line x1="18" y1="6" x2="6" y2="18"></line>
             <line x1="6" y1="6" x2="18" y2="18"></line></svg>
       </span>
-      <span class="text-error error-area-text author-error" v-if="authorError[idx]">{{ authorError[idx] }}</span>
+      <span class="text-error error-area-text author-error" v-if="authorError[idx]">{{getMistakes(authorError[idx])}}</span>
       <div class="propose-authors" v-if="proposeAuthors[idx] && Object.keys(proposeAuthors[idx]).length>0">
         <span v-for="(author) in proposeAuthors[idx]" @click="addExistAuthor(author, idx)">
           {{ author.last_name }} {{ author.first_name }}
@@ -65,7 +65,7 @@ export default {
       emailValid: '',
       authorError:[],
       coAuthor: false,
-      invalid:'',
+      invalid:[],
       proposeAuthors:[]
     }
   },
@@ -86,14 +86,17 @@ export default {
   },
   computed: {
     ...mapGetters(['getDocument', 'getUser']),
-    ...mapState(['api_url_v1'])
+    ...mapState(['api_url_v1']),
+
   },
   methods: {
     ...mapActions(['deleteAuthor']),
     ...mapMutations(['DocAuthors']),
 
     validation(){
+      console.log('validation')
       this.authorError = []
+      this.invalid = ''
       if (this.getDocument.authors.length < 1 ||
           (this.getDocument.authors.length < 2 && Object.keys(this.getDocument.authors[0]).length < 1)){
         // this.$emit('checkField', this.$options.name)
@@ -103,41 +106,35 @@ export default {
 
       for (let i in this.getDocument.authors){
         let author = this.getDocument.authors[i]
-        const missingFields = [];
-        if (!author.first_name) {
-          missingFields.push('first name');
-        }
+        if (author.first_name === '' || author.last_name === '' || author.email === '')
+          this.authorError[i] = []
+        if (!author.first_name)
+          this.authorError[i].push('first_name');
+        if (!author.last_name)
+          this.authorError[i].push('last_name');
+        if (!author.email)
+          this.authorError[i].push('email');
 
-        if (!author.last_name) {
-          missingFields.push('last name');
-        }
-
-        if (!author.email) {
-          missingFields.push('email');
-        }
-
-        this.invalid = 'partially_filled'
-        this.authorError[i] = missingFields.length === 0 ? null
-            : `${this.$store.getters.getLanguage.document_make.field_error[this.invalid]}: ${missingFields.join(', ')}`;
-        console.log('missing fields', this.authorError)
-        if (!this.authorError[i]){
+        this.invalid = !this.authorError[i] ? '' : 'partially_filled'
+        if (!this.invalid){
           if (this.checkEmail(this.getDocument.authors[i].email)){
               this.invalid = this.checkEmail(this.getDocument.authors[i].email)
-              this.authorError[i] = this.$store.getters.getLanguage.document_make.field_error[this.invalid]
+              this.authorError[i] = this.invalid
               this.$emit('catchValidate', this.$options.name)
           }
         }
-
-        // if (Object.values(author)?.some(value => value === null || value === undefined || value === '')) {
-        //   this.invalid = 'partially_filled'
-        //   this.authorError[i] = this.invalid
-        //   this.$emit('catchValidate', this.$options.name)
-        // } else if (this.checkEmail(this.getDocument.authors[i].email)) {
-        //   this.invalid = this.checkEmail(this.getDocument.authors[i].email)
-        //   this.authorError[i] = this.invalid
-        //   this.$emit('catchValidate', this.$options.name)
-        // }
       }
+    },
+
+    getMistakes(arr){
+      let txt = []
+      if (typeof arr === 'string')
+        return `${this.$store.getters.getLanguage.document_make.field_error[this.invalid]}`
+      for (let item in arr){
+        txt.push(this.$store.getters.getLanguage.settings.account_titles[arr[item]])
+      }
+      return `${this.$store.getters.getLanguage.document_make.field_error[this.invalid]}: ${txt.reverse().join(', ')}`
+
     },
 
     findAuthorByEmail(author) {

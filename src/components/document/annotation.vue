@@ -1,7 +1,7 @@
 <template>
   <div class="doc-annotation doc-list-item">
     <h3 @click="hide_annotation = !hide_annotation">
-      Анотації
+      {{ this.$store.getters.getLanguage.document.topics.annotation }}
       <tumbler-filter-button :toggle="!hide_annotation"/>
     </h3>
     <div class="annotation-body" :class="{'display-none':hide_annotation}">

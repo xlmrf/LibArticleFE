@@ -41,8 +41,9 @@ export default {
                     },
                     account_titles:{
                         'bio': "Про себе",
-                        'name': "Ім`я",
+                        'first_name': "Ім`я",
                         'last_name': "Прізвище",
+                        'email': 'Email',
                         'middle_name': "По батькові",
                         'city': "Місце проживання",
                         'university': "Університет",
@@ -86,7 +87,25 @@ export default {
                         'btn_save_settings': "Зберегти",
                     }
                 },
-
+                document:{
+                    topics:{
+                        'annotation': 'Опис',
+                        'document_references': 'Посилання',
+                        'comments': 'Коментарі',
+                        'edit': 'Редагувати'
+                    },
+                    characteristic:{
+                        'publisher': 'Опублікував',
+                        'authors': 'Автори',
+                        'keywords': 'Ключові слова',
+                        'publication_date': 'Дата публікації',
+                        'views': 'Перегляди',
+                        'cites': 'Цитування',
+                        'copy': 'копіювати',
+                        'copied': 'скопійовано',
+                        'document': 'документ'
+                    }
+                },
                 document_make:{
                     field_error:{
                         'partially_filled': 'Необхідно заповнити поля',
@@ -159,9 +178,10 @@ export default {
                     },
                     account_titles: {
                         'bio': "Bio",
-                        'name': "Name",
+                        'first_name': "Name",
                         'last_name': "Last name",
                         'middle_name': "Middle name",
+                        'email': 'Email',
                         'city': "Place of residence",
                         'university': "University",
 
@@ -203,6 +223,25 @@ export default {
 
                         'btn_save_settings': "Save"
 
+                    }
+                },
+                document:{
+                    topics:{
+                        'annotation': 'Abstract',
+                        'document_references': 'Document references',
+                        'comments': 'Comments',
+                        'edit': 'Edit'
+                    },
+                    characteristic:{
+                        'publisher': 'Publisher',
+                        'authors': 'Authors',
+                        'keywords': 'Keywords',
+                        'publication_date': 'Publication date',
+                        'views': 'Views',
+                        'cites': 'Cites',
+                        'copy': 'copy',
+                        'copied': 'copied',
+                        'document': 'document'
                     }
                 },
                 document_make:{

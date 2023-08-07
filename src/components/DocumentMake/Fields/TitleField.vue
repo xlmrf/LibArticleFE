@@ -1,7 +1,8 @@
 <template>
   <div class="top">
     <h2>Назва документу</h2>
-    <input ref="titleInput" type="text" required name="title" :class="['title-input',{'alert-input':error}]" id="title" placeholder="Навчальний посібник з дисципліни «Теорія ймовірностей, імовірнісні процеси та математична статистика». Курс лекцій" v-model="getDocument.title">
+    <input ref="titleInput" type="text" required name="title" :class="['title-input',{'alert-input':error}]" id="title" placeholder="Навчальний посібник з дисципліни «Теорія ймовірностей, імовірнісні процеси та математична статистика». Курс лекцій"
+           v-model="getDocument.title">
     <label for="title" v-if="error">{{ getErrorMessage[error] }}</label>
   </div>
 </template>
@@ -15,7 +16,8 @@ export default {
   props:['error'],
   data(){
     return{
-      textError:{}
+      textError:{},
+      // title:''
     }
   },
  // setup(){

@@ -4,7 +4,7 @@
     <div class="top-document-info">
       <span class="document-type" @click="smooth()">{{getTypes.find(item => item.id === getDocument.type_id)?.name}}</span>
       <router-link v-if="getDocument.authors.map(item => item.user_id === getUser.id).includes(true)" class="remake-link" :to="'/document/make/'+$route.params.id" >
-        Редагувати
+        {{ this.$store.getters.getLanguage.document.topics.edit }}
       </router-link>
     </div>
 
@@ -13,22 +13,22 @@
       <div class="doc-main-info">
         <div class="left-side-info">
           <div class="under-title-info">
-            <span>Опублікував: Ходаніцький Олексій Олексійович</span>
+            <span>{{ this.$store.getters.getLanguage.document.characteristic.publisher }}: Ходаніцький Олексій Олексійович</span>
           </div>
 
           <div class="authors">
-            Автори:
+            {{ this.$store.getters.getLanguage.document.characteristic.authors }}:
             <span v-for="(author,idx) in getDocument.authors">
               <router-link class="author-item-link" :to="'/profile/'+author.user_id" v-if="author.user_id">{{ author.first_name[0] }}. {{ author.last_name }} </router-link>
               <span v-else>{{ author.first_name[0] }}. {{ author.last_name }} </span><span v-if="idx+1 < getDocument.authors.length">; </span>
             </span>
           </div>
 
-          <div>Ключові слова:
+          <div>{{ this.$store.getters.getLanguage.document.characteristic.keywords }}:
             <span v-for="keyword in getDocument.keywords">{{keyword}}; </span>
           </div>
 
-          <div>Дата публікації:
+          <div>{{ this.$store.getters.getLanguage.document.characteristic.publication_date }}:
             <span>{{new Date(Date.parse(getDocument.publication_date)).toDateString()}}</span>
 <!--            {{this.getDocument.authors.map(item => item.user_id === 1).includes(true)}}-->
           </div>
@@ -108,9 +108,11 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 
-
+.frame{
+  min-width: 90px;
+}
 
 .left-side-info > div{
   margin: 15px 0;
@@ -156,7 +158,7 @@ export default {
 
 
 .document-wrapper{
-  background: rgba(241, 241, 241, 0.4);
+  /*background: rgba(241, 241, 241, 0.4);*/
   font-size: 1.1em;
   width: 80%;
   display: flex;

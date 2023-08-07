@@ -1,6 +1,6 @@
 <template>
   <div>
-    <input type="text" class="sample-input" name="" id="" v-model="getDocument[field]">
+    <input type="text" class="sample-input" name="" id="" v-model="getDocument[field]" :class="{'sample-input-error':invalid}">
     <div class="text-error error-area-text" v-if="invalid">{{ $store.getters.getLanguage.document_make.field_error[invalid] }}</div>
   </div>
 </template>

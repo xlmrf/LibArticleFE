@@ -1,6 +1,6 @@
 <template>
 <div >
-  <span class="cite-frame" v-if="cites.document_citation" @click="showAllCites">Посилань<span>{{ cites.document_citation.value }}</span></span>
+  <span class="cite-frame frame" v-if="cites.document_citation" @click="showAllCites">{{ this.$store.getters.getLanguage.document.characteristic.cites }}<span>{{ cites.document_citation.value }}</span></span>
   <cites-modal v-if="openModal" @close-modal="openModal = false"/>
 </div>
 </template>

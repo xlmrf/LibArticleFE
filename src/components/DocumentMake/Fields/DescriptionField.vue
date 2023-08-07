@@ -37,7 +37,7 @@ export default {
     validation() {
 
       if (!this.getDocument.description) {
-        this.invalid = 'none_keywords'
+        this.invalid = 'none_description'
         this.$emit('catchValidate', this.$options.name)
       }
       // else if (this.getDocument.description?.length < 40){

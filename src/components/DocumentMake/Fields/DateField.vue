@@ -40,6 +40,9 @@
         </option>
       </select>
     </div>
+    <div class="native-date">
+    {{new Date(Date.parse(getDocument.publication_date)).toDateString()}}
+    </div>
   </div>
 </template>
 
@@ -75,7 +78,10 @@ export default {
     emitDate() {
       const {year, month, day} = this;
       this.getDocument.publication_date = `${year}-${month}-${day}`
-      console.log(new Date(year, month, day).toString())
+      if (this.formatDate === 'year'){
+        this.getDocument.publication_date = `${year}`
+      }
+      // console.log(new Date(year, month, day).toString())
     }
   },
   watch: {
@@ -215,6 +221,12 @@ export default {
   cursor: pointer;
   line-height: 1.1;
   background-color: #fff;
+}
+
+.native-date{
+  position: relative;
+  margin: auto;
+  right: 1rem;
 }
 
 
