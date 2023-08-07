@@ -268,7 +268,7 @@ export default {
 
 .form-item > label{
   position: relative;
-  top: -20px;
+  /*top: -20px;*/
   color: #333333;
   /*background: #FBFBFB;*/
   display: flex;
@@ -276,12 +276,13 @@ export default {
   left: 10px;
   padding: 0 3px;
   /*font-weight: bold;*/
-  font-size: 18px;
+  font-size: 20px;
+  margin-bottom: 20px;
 }
 
 .form-item label{
-  margin: 3px;
-  color: #313131;
+  color: #444444;
+
 }
 
 .universal-field{

@@ -135,24 +135,59 @@ export default {
 <style scoped>
 
 .date-format-block{
+  position: absolute;
+  right: 0;
+  top: 0;
   display: flex;
+
 }
 
 .date-format-block > span{
+  position: relative;
   cursor: pointer;
-  padding: 5px 10px;
-  margin: 10px 5px 10px 0;
+  padding: 9px 15px;
+  margin-right: 1px;
+  /*margin: 10px 5px 10px 0;*/
 
-  border: 1px solid #bbb;
-  border-radius: 6px;
+  /*border: 1px solid #bbb;*/
+  border-radius: 3px;
 }
 
-.active_date_format{
-  /*background: rgba(9, 127, 218, 0.95);*/
-  background: #dedede;
-  /*background: #E3F1F9;*/
-  /*color: white;*/
+
+.active_date_format:after{
+  content: '';
+  background: #5a9cea;
+  height: 4px;
+  width: 80%;
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+
+  position:absolute;
+  /*margin-left: 15px;*/
+  bottom:0;
+  left: 11%;
 }
+/*.date-format-block > span:last-child:after{*/
+/*  content: '';*/
+/*  background: transparent;*/
+/*  height: 70%;*/
+/*  width: 2px;*/
+
+/*  position:absolute;*/
+/*  margin-left: 14px;*/
+/*  bottom:5px;*/
+/*}*/
+.date-format-block > span:hover{
+  background: rgba(205, 205, 205, 0.28);
+}
+
+
+/*.active_date_format{*/
+/*  !*background: rgba(9, 127, 218, 0.95);*!*/
+/*  background: #dedede;*/
+/*  !*background: #E3F1F9;*!*/
+/*  !*color: white;*!*/
+/*}*/
 
 .date-format-block input{
   display: none;
@@ -160,15 +195,20 @@ export default {
 
 .date-picker {
   display: flex;
+  margin-left: 1.2rem;
+}
+.date-picker label{
+  text-align: center;
+  margin-right: 5px;
 }
 .date-picker > div{
   display: inherit;
   flex-flow: column;
-  margin-right: 0.5rem;
+  margin-right: 1rem;
 }
 
 .date-picker select{
-  border: 1px solid #bbb;
+  border-bottom: 1px solid #bbb;
   border-radius: 3px;
   padding: 0.25rem 0.5rem;
   font-size: 1.2rem;

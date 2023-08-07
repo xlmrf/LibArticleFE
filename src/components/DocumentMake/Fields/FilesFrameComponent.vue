@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h3 v-if="chosenLink.originalNameFile">{{ chosenLink.originalNameFile }}.{{ chosenLink.typeFile }}</h3>
     <form class="card" @submit.prevent enctype="multipart/form-data">
       <input
           name="file"

@@ -42,7 +42,6 @@
       </span>
       <span class="text-error error-area-text author-error" v-if="authorError[idx]">{{ authorError[idx] }}</span>
       <div class="propose-authors" v-if="proposeAuthors[idx] && Object.keys(proposeAuthors[idx]).length>0">
-        {{proposeAuthors}}
         <span v-for="(author) in proposeAuthors[idx]" @click="addExistAuthor(author, idx)">
           {{ author.last_name }} {{ author.first_name }}
         </span>
