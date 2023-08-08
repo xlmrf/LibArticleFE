@@ -123,8 +123,42 @@ export default {
                         'none_last_name': "Введіть прізвище",
                         'none_email': "Введіть email"
 
+                    },
+                    signs:{
+                        'authors': 'Автори',
+                        'im_coauthor': "Я співавтор",
+                        'add_author': 'Додати автора',
+                        'email': 'Email',
+                        'last_name': 'Прізвище',
+                        'first_name': "Ім'я",
+                        'edition': 'Науковий напрямок',
+                        'place': 'Місце публікації',
+                        'publication_date': 'Дата публікації',
+                        'only_year': 'рік',
+                        'full_date': 'повна дата',
+                        'none_date': 'без дати',
+                        'year': 'Рік',
+                        'month': 'Місяць',
+                        'day': 'День',
+
+
+                        'keywords': 'Ключові слова',
+                        'references': 'Посилання',
+                        'save_draft_btn': 'Зберегти у сховище',
+                        'publish_btn': 'Опублікувати',
+                        'add_btn': 'Додати',
+                        'save_btn': 'Зберегти',
+
+                        'put_doc_area': 'Щоб завантажити файл перетягніть його у поле або натисність сюди'
+                    },
+                    file_field:{
+                        'put_doc_area': 'Щоб завантажити файл перетягніть його у поле або натисність сюди',
+                        'file_required': "Файл обов'язковий",
+                        'put_file': 'Опускайте сюди',
+                        'invalid_type': 'Тип файлу некоректний'
                     }
-                }
+                },
+
             },
 
 
@@ -260,6 +294,38 @@ export default {
                         'none_first_name': 'Enter first name',
                         'none_last_name': 'Enter last name',
                         'none_email': 'Enter email'
+                    },
+                    signs:{
+                        'authors': 'Authors',
+                        'im_coauthor': "I'm coauthor",
+                        'add_author': 'Add author',
+                        'email': 'Email',
+                        'last_name': 'Last name',
+                        'first_name': 'First name',
+                        'edition': 'Edition',
+                        'place': 'Publication place',
+                        'publication_date': 'Publication date',
+                        'publication_year': 'year',
+                        'full_date': 'full date',
+                        'only_year': 'year',
+                        'none_date': 'none',
+                        'year': 'Year',
+                        'month': 'Month',
+                        'day': 'Day',
+
+                        'keywords': 'Keywords',
+                        'references': 'References',
+                        'save_draft_btn': 'Save to depository',
+                        'publish_btn': 'Publish',
+                        'add_btn': 'Push',
+                        'save_btn': 'Save',
+
+                    },
+                    file_field:{
+                        'put_doc_area': 'To upload a file, drag it into the area or click here',
+                        'file_required': 'File is required',
+                        'put_file': 'Put it here',
+                        'invalid_type': 'Type of file is incorrect'
                     }
                 }
             }

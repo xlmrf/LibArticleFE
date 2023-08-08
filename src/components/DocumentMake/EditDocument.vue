@@ -16,15 +16,15 @@
       <div class="fill-areas">
         <div class="form-item" v-for="(item,idx) in getTypes.find(type => type.id === getDocument.type_id)?.fields"
              :key="idx" :class="{'universal-field': ['edition','place'].includes(item) }" >
-          <label :for="item">{{ translateAreas(item) }}</label>
+          <label :for="item">{{this.$store.getters.getLanguage.document_make.signs[item] }}</label>
           <component :is="setFields(item)" :key="idx" :field="item" :is-ready="isReady" @catchValidate="validate"></component>
 <!--          <small class="text-error error-area-text" v-if="validationItems.includes(item)">Поле <span class="areas-name">{{ translateAreas(item) }}</span> не може бути пустим</small>-->
         </div>
         <div class="btn-control-panel">
           <button class="button conclusion-btn" :class="{'disable-btn': false}" @click="update()">
-            Зберегти документ
+            {{ this.$store.getters.getLanguage.document_make.signs.publish_btn}}
           </button>
-          <button class="button to-archive" @click="toArchive()">Занести в архів</button><!--toArchive-->
+          <button class="button to-archive" @click="toArchive()">{{ this.$store.getters.getLanguage.document_make.signs.save_draft_btn}}</button><!--toArchive-->
           <small class="text-error save-error" v-if="serverError">{{ serverError }}</small>
         </div>
       </div>
@@ -108,12 +108,7 @@ export default {
       this.serverError = null
       let document = this.getDocument
       document.files = this.getFiles
-      axios.post(this.api_url_v1+'/make/draft', document).then(() => {
-
-      }).catch(error => {
-        this.serverError = error
-        console.log(error);
-      })
+      this.updateDocument(document)
     },
     check(){
       console.log('CHECK FUNCTION')
@@ -143,13 +138,14 @@ export default {
   },
 
   beforeMount() {
-    console.log('item', this.getDocument, this.$route.params)
+    // console.log('edit document mount doc, params: ', this.getDocument, this.$route.params)
     if (this.getDocument.id && this.getDocument.id != this.$route.params.id){
       this.DocumentMutate({})
       this.requestDocument(this.$route.params.id);
     }
   },
   mounted() {
+    console.log('edit document mount doc, params: ', this.getDocument, this.$route.params)
     if (!this.getDocument.id) {
       this.requestDocument(this.$route.params.id);
     }
@@ -464,7 +460,7 @@ export default {
   /*border: 1px solid #BBBBBB;*/
   margin: 5px 0;
   border-radius: 4px;
-  padding: 0.5rem;
+  padding-top: 0.2rem;
   color: #525252;
 }
 .list-able{
@@ -713,6 +709,10 @@ export default {
 }
 .complex-item-control > span{
   width: 100%;
+}
+
+.reference-list{
+  padding: 0.4rem 0 0.2rem 0;
 }
 
 </style>

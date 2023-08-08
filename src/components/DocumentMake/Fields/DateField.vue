@@ -1,20 +1,20 @@
 <template>
   <div class="date-format-block">
     <span @click="this.$refs.full_date.click()" :class="{active_date_format:formatDate==='date'}">
-      повна дата <input type="radio" v-model="formatDate" ref="full_date" value="date">
+      {{ this.$store.getters.getLanguage.document_make.signs.full_date}} <input type="radio" v-model="formatDate" ref="full_date" value="date">
     </span>
     <span @click="this.$refs.only_year.click()" :class="{active_date_format:formatDate==='year'}">
-      рік
+      {{ this.$store.getters.getLanguage.document_make.signs.only_year}}
       <input type="radio" v-model="formatDate" ref="only_year" value="year">
     </span>
     <span @click="this.$refs.none_date.click()" :class="{active_date_format:formatDate==='null'}">
-      без дати <input type="radio" v-model="formatDate" ref="none_date" value="null">
+      {{ this.$store.getters.getLanguage.document_make.signs.none_date}} <input type="radio" v-model="formatDate" ref="none_date" value="null">
     </span>
   </div>
 
   <div class="date-picker" v-if="formatDate==='date'||formatDate==='year'">
     <div>
-      <label>Рік</label>
+      <label>{{ this.$store.getters.getLanguage.document_make.signs.year}}</label>
       <br/>
       <select v-model="year">
         <option v-for="y in years" :key="y">
@@ -23,7 +23,7 @@
       </select>
     </div>
     <div v-if="formatDate==='date'">
-      <label>Місяць</label>
+      <label>{{ this.$store.getters.getLanguage.document_make.signs.month}}</label>
       <br/>
       <select v-model="month">
         <option v-for="m in 12" :key="m" :value="String(m).length>1?m:'0'+m">
@@ -32,7 +32,7 @@
       </select>
     </div>
     <div v-if="formatDate==='date'">
-      <label>День</label>
+      <label>{{ this.$store.getters.getLanguage.document_make.signs.day}}</label>
       <br/>
       <select v-model="day">
         <option v-for="d in maxDate" :key="d" :value="String(d).length>1?d:'0'+d">

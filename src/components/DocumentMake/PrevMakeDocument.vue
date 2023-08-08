@@ -80,7 +80,7 @@ export default {
       //   console.log('error23');
         this.titleModal = true
       // }
-    }
+    },
   },
   computed:{
     ...mapGetters(['getDocument','getErrorMessage', 'getDocumentMakeWarning']),

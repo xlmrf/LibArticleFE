@@ -9,8 +9,9 @@
             <line x1="6" y1="6" x2="18" y2="18"></line>
           </svg>
         </small>
-      <span class="add-keyword-btn" @click="addReference">{{ edit ? "Зберегти" : 'Додати' }}</span>
+      <span class="add-keyword-btn" @click="addReference">{{ edit ? $store.getters.getLanguage.document_make.signs.save_btn : $store.getters.getLanguage.document_make.signs.add_btn }}</span>
     </span>
+    <div class="complex-item-control reference-list" v-if="getDocument.references.length > 0">
     <span class="reference-item" v-for="(el,idx) in getDocument.references.filter(item=>!item.delete)" :key="idx">
       <span :class="{'italic':el.edit}">{{
         idx + 1
@@ -26,6 +27,7 @@
           </svg>
         </small>
     </span>
+    </div>
     <small class="local-error-text">{{ localError }}</small>
 <!--    <ol>-->
 <!--      <li v-for="(el,idx) in getDocument.references.filter(item=>!item.delete)" :key="idx">-->

@@ -3,13 +3,13 @@
     <span class="author-control">
         <label class="check-coauthor">
           <input type="checkbox" name="save-user" id="co-author" v-model="coAuthor">
-          <span class="label">Я співавтор</span>
+          <span class="label">{{ this.$store.getters.getLanguage.document_make.signs.im_coauthor}}</span>
         </label>
-        <span class="new-author-btn" @click="addAuthor">Додати автора</span>
+        <span class="new-author-btn" @click="addAuthor">{{ this.$store.getters.getLanguage.document_make.signs.add_author}}</span>
     </span>
     <div v-for="(author,idx) in getDocument.authors?.filter(item=>!item.delete)" :key="idx" class="author-list-item">
       <div>
-        <label for="author_email">Email</label>
+        <label for="author_email">{{ this.$store.getters.getLanguage.document_make.signs.email}}</label>
         <input type="text" :disabled="idx === 0 ? coAuthor : false"
                name="author_email" id="author_email" required
                v-model="author.email"
@@ -18,7 +18,7 @@
                class='sample-input'>
       </div>
       <div>
-        <label for="last_name">Прізвище</label>
+        <label for="last_name">{{ this.$store.getters.getLanguage.document_make.signs.last_name}}</label>
         <input type="text" :disabled="idx === 0 ? coAuthor : false"
                name="last_name" id="last_name" required
                v-model="author.last_name"
@@ -26,7 +26,7 @@
                class='sample-input'>
       </div>
       <div>
-        <label for="first_name">Ім'я</label>
+        <label for="first_name">{{ this.$store.getters.getLanguage.document_make.signs.first_name}}</label>
         <input type="text" :disabled="idx === 0 ? coAuthor : false"
                name="first_name" id="first_name" required
                v-model="author.first_name"

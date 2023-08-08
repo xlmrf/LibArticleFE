@@ -19,12 +19,14 @@
             @drop="drop">
 
           <label class="file-label" @dragover="dragover" >
-            <div class="text-predict" v-if="isDragging" >Опускайте файл</div>
-            <div class="text-error" v-else-if="file_type_error" >Тип документу не коректний</div>
+            <div class="text-predict" v-if="isDragging" >{{ this.$store.getters.getLanguage.document_make.file_field.put_file}}</div>
+            <div class="text-error" v-else-if="file_type_error" >{{ this.$store.getters.getLanguage.document_make.file_field.invalid_type}}</div>
             <div class="file-loader" v-else-if="this.getProgressLoadingFile !== 0 && this.getProgressLoadingFile !== 100" ><loader width="3" radius="12" /></div>
-            <div class="file-drop-text" v-else >
-              <p class="not-file-error" v-if="empty">Файл обов'язковий</p>
-              Щоб завантажити файл, перетягніть файл в поле або <u @click="addFile()">натисніть сюди</u>.</div>
+            <div class="file-drop-text" v-else @click="addFile()">
+              <p class="not-file-error" v-if="empty">{{ this.$store.getters.getLanguage.document_make.file_field.file_required}}</p>
+              {{ this.$store.getters.getLanguage.document_make.file_field.put_doc_area}}
+<!--              Щоб завантажити файл, перетягніть файл в поле або <u >натисніть сюди</u>.-->
+            </div>
           </label>
         </div>
         <div class="box-frame" v-else>
@@ -454,6 +456,7 @@ body {
 
 .file-drop-text{
   position: relative;
+  cursor: pointer;
 }
 
 .select-input {

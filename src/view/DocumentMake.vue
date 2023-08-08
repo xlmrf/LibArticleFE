@@ -98,12 +98,12 @@ export default {
           : this.api_url_v1 + '/document/make' + key;
 
       try {
-        const response = await axios[id ? 'patch' : 'post'](url, { data: this.getDocument });
-
-        this.updateDocument(response.data);
+        const response = await axios[id ? 'patch' : 'post'](url, { title: this.getDocument.title, type_id: this.getDocument.type_id });
         this.prev_stage = false;
-
-        router.push('/document/make/' + response.data.id);
+        if (response.data !== 'update'){
+          this.updateDocument(response.data);
+          router.push('/document/make/' + response.data.id);
+        }
       } catch (err) {
         console.error('error info -', err.message);
         this.catchError(err.response?.data?.errors);
@@ -122,7 +122,8 @@ export default {
     '$route.params': {
       handler(item) {
         this.prev_stage = !item.id;
-      }
+      },
+      deep: true
     },
     'getDocument':{
       handler(){

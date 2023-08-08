@@ -2,7 +2,7 @@
   <div class="complex-item-control">
     <span>
       <input type="text" class="sample-input" :id="keyword" v-model="keyword" @keypress.enter="addKeyword" :class="{'sample-input-error':localError}">
-      <span class="add-keyword-btn" @click="addKeyword">Додати</span>
+      <span class="add-keyword-btn" @click="addKeyword">{{ this.$store.getters.getLanguage.document_make.signs.add_btn}}</span>
     </span>
     <small class="local-error-text">{{ localError }}</small>
     <div :class="['list-keywords',{'list-able':this.getDocument.keywords}]" v-if="this.getDocument.keywords?.length > 0">
