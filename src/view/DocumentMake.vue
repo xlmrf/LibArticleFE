@@ -98,11 +98,10 @@ export default {
           : this.api_url_v1 + '/document/make' + key;
 
       try {
-        let data = { title: this.getDocument.title, type_id: this.getDocument.type_id }
 
-        const response = await axios[id ? 'patch' : 'post'](url, {data:data});  //{ title: this.getDocument.title, type_id: this.getDocument.type_id }
+        const response = await axios[id ? 'patch' : 'post'](url, { title: this.getDocument.title, type_id: this.getDocument.type_id });  //{ title: this.getDocument.title, type_id: this.getDocument.type_id }
         this.prev_stage = false;
-        if (response.data !== 'update'){
+        if (response.data.message !== 'update'){
           this.updateDocument(response.data);
           router.push('/document/make/' + response.data.id);
         }

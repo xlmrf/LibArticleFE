@@ -14,7 +14,7 @@
 
     </div>
     <div style="clear: both">
-      <button @click="createDocument()" class="choose-type choose-btn-able" :class="['choose-type',{'disable-btn':loader||!BtnValid}]" :disabled="loader">{{$route.params.id ? 'Перейти' : 'Створити'}}</button>
+      <button @click="createDocument()" class="choose-type choose-btn-able" :class="['choose-type',{'disable-btn':loader||!BtnValid}]" :disabled="loader">{{$route.params.id ? $store.getters.getLanguage.document_make.warnings.move : $store.getters.getLanguage.document_make.warnings.create}}</button>
     </div>
     <div class="middle-spinner" v-if="loader">
       <span><loader width="4" radius="20"></loader></span>

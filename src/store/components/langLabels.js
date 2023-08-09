@@ -141,7 +141,7 @@ export default {
                         'month': 'Місяць',
                         'day': 'День',
 
-
+                        'document_name': 'Назва документу',
                         'keywords': 'Ключові слова',
                         'references': 'Посилання',
                         'save_draft_btn': 'Зберегти у сховище',
@@ -156,6 +156,13 @@ export default {
                         'file_required': "Файл обов'язковий",
                         'put_file': 'Опускайте сюди',
                         'invalid_type': 'Тип файлу некоректний'
+                    },
+                    warnings:{
+                        'document_exists':'Документ з такою назвою існує серед ваших документів',
+                        'create':'Створити',
+                        'change_title': 'Змінити назву',
+                        'view': 'переглянути',
+                        'move': 'Перейти'
                     }
                 },
 
@@ -313,6 +320,7 @@ export default {
                         'month': 'Month',
                         'day': 'Day',
 
+                        'document_name': 'Document title',
                         'keywords': 'Keywords',
                         'references': 'References',
                         'save_draft_btn': 'Save to depository',
@@ -326,6 +334,13 @@ export default {
                         'file_required': 'File is required',
                         'put_file': 'Put it here',
                         'invalid_type': 'Type of file is incorrect'
+                    },
+                    warnings:{
+                        'document_exists':'The document with this title exists.',
+                        'create':'Create',
+                        'change_title': 'Change title',
+                        'view': 'view',
+                        'move': 'Move on'
                     }
                 }
             }
