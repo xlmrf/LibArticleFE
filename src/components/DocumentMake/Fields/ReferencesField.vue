@@ -36,7 +36,7 @@
 <!--    </ol>-->
 
   </div>
-  <div class="text-error error-area-text" v-if="invalid">{{ $store.getters.getLanguage.document_make.field_error[invalid] }}</div>
+  <div class="text-error error-area-text border-error" v-if="invalid">{{ $store.getters.getLanguage.document_make.field_error[invalid] }}</div>
   <!--  <div>-->
   <!--    <small>keywords</small>-->
   <!--    <input type="text" name="" id="" v-model="getDocument.keywords">-->

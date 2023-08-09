@@ -24,8 +24,10 @@
           <button class="button conclusion-btn" :class="{'disable-btn': false}" @click="update()">
             {{ this.$store.getters.getLanguage.document_make.signs.publish_btn}}
           </button>
+
+          <div class="loader-3 center"><span></span></div>
           <button class="button to-archive" @click="toArchive()">{{ this.$store.getters.getLanguage.document_make.signs.save_draft_btn}}</button><!--toArchive-->
-          <small class="text-error save-error" v-if="serverError">{{ serverError }}</small>
+          <small class="text-error save-error border-error" v-if="serverError">{{ serverError }}</small>
         </div>
       </div>
     </div>
@@ -668,11 +670,15 @@ export default {
 }
 
 .save-error{
+  margin-top: 20px;
+  /*padding: 5px;*/
+}
+.border-error{
   /*position: absolute;*/
   /*bottom: 0;*/
   /*right: 100px;*/
-  margin-top: 20px;
-  padding: 5px;
+
+  padding: 8px 10px;
   border: 1px solid rgba(217, 39, 27, 0.87);
 }
 
@@ -714,5 +720,6 @@ export default {
 .reference-list{
   padding: 0.4rem 0 0.2rem 0;
 }
+
 
 </style>

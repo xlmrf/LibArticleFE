@@ -1,22 +1,17 @@
 <template>
   <div>
-    <h3 v-if="chosenLink.originalNameFile">{{ chosenLink.originalNameFile }}.{{ chosenLink.typeFile }}</h3>
+    <h3 v-if="chosenLink?.originalNameFile">{{ chosenLink.originalNameFile }}.{{ chosenLink.typeFile }}</h3>
     <form class="card" @submit.prevent enctype="multipart/form-data">
-      <input
-          name="file"
-          class="form-control select-input" type="file" id="files" @change="selectedFiles()"
-          ref="files" :multiple="getFiles.main.url" :accept="typeOfFile"
-      />
+      <input name="file" class="form-control select-input" type="file" id="files" @change="selectedFiles()"
+          ref="files" :multiple="getFiles.main.url" :accept="typeOfFile"/>
 
       <div class="document-files-wrapper">
-        <p v-if="chosenLink.chosenLink">{{ chosenLink.originalNameFile }}</p>
+        <p v-if="chosenLink?.chosenLink">{{ chosenLink.originalNameFile }}</p>
         <span v-if="loadError">{{loadError}}</span>
-        <div v-if="!getFiles.main.url"
-            class="dropzone-container"
+
+        <div v-if="!getFiles.main.url && (getProgressLoadingFile === 0 || getProgressLoadingFile === 100)" class="dropzone-container"
             :class="{'dropzone-active':isDragging, 'dropzone-error':file_type_error || empty}"
-            @dragover="dragover"
-            @dragleave="dragleave"
-            @drop="drop">
+            @dragover="dragover" @dragleave="dragleave" @drop="drop">
 
           <label class="file-label" @dragover="dragover" >
             <div class="text-predict" v-if="isDragging" >{{ this.$store.getters.getLanguage.document_make.file_field.put_file}}</div>
@@ -29,12 +24,15 @@
             </div>
           </label>
         </div>
+        <div v-else-if="getProgressLoadingFile !== 0 && getProgressLoadingFile !== 100" class="progress-bar" :style="'background:radial-gradient(closest-side, white 75%, transparent 80%), conic-gradient(#535353 '+getProgressLoadingFile+'%, #BBBBBB 0);'">
+          <span></span>
+        </div>
         <div class="box-frame" v-else>
 <!--          <iframe :src='frameUrl(getFiles[file_id])+"#view=FitH"'></iframe>-->
           <iframe :src="chosenLink.url" frameborder="0">Не вийшло завантажити файл</iframe>
 
         </div>
-        <hr class="top-load-line" :style="'width:'+getProgressLoadingFile+'%'">
+<!--        <hr class="top-load-line" :style="'width:'+getProgressLoadingFile+'%'">-->
 
       </div>
     </form>
@@ -434,10 +432,15 @@ body {
   background: #eef1f3;
 }
 
+
+
 .progress-bar {
-  border-radius: 60px;
-  overflow: hidden;
-  width: 100%;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  align-self: center;
+  position: relative;
+  top: 100px;
 }
 
 .progress-bar span {

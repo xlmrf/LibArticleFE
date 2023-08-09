@@ -98,7 +98,9 @@ export default {
           : this.api_url_v1 + '/document/make' + key;
 
       try {
-        const response = await axios[id ? 'patch' : 'post'](url, { title: this.getDocument.title, type_id: this.getDocument.type_id });
+        let data = { title: this.getDocument.title, type_id: this.getDocument.type_id }
+
+        const response = await axios[id ? 'patch' : 'post'](url, {data:data});  //{ title: this.getDocument.title, type_id: this.getDocument.type_id }
         this.prev_stage = false;
         if (response.data !== 'update'){
           this.updateDocument(response.data);

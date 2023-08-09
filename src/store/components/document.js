@@ -6,7 +6,7 @@ export default {
         return {
             document: {},
             last_documents: [],
-            info: '',
+            info: [],
             // types: [],
             titleInputRef:null,
             propose_authors: [],

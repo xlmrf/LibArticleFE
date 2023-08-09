@@ -65,7 +65,7 @@ export default {
       emailValid: '',
       authorError:[],
       coAuthor: false,
-      invalid:[],
+      invalid:'',
       proposeAuthors:[]
     }
   },
@@ -80,6 +80,7 @@ export default {
     'getDocument.authors':{
       handler(){
         this.authorError = []
+        this.invalid = ''
       },
       deep:true
     }
