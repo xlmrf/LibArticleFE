@@ -2,7 +2,7 @@
   <div class="pulse-loader">
     <div class="snippet" data-title="dot-pulse">
       <div class="stage">
-        <div class="dot-pulse"></div>
+        <div class="dot-pulse" :class="{'pulse-style':pulseStyle}"></div>
       </div>
     </div>
   </div>
@@ -10,6 +10,7 @@
 
 <script>
 export default {
+  props:['pulseStyle']
 
 }
 </script>
@@ -38,6 +39,13 @@ export default {
   border-radius: 50%;
   color: #3a3a3b;
 }
+.pulse-style{
+  color: #3eaf7c;
+}
+.pulse-style::before, .pulse-style::after{
+  color: #3eaf7c;
+}
+
 .dot-pulse::before {
   box-shadow: 9984px 0 0 -5px;
   animation: dot-pulse-before 1.2s infinite linear;

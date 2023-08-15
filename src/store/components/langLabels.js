@@ -144,7 +144,7 @@ export default {
                         'document_name': 'Назва документу',
                         'keywords': 'Ключові слова',
                         'references': 'Посилання',
-                        'save_draft_btn': 'Зберегти у сховище',
+                        'save_draft_btn': 'Зберегти в чернетки',
                         'publish_btn': 'Опублікувати',
                         'add_btn': 'Додати',
                         'save_btn': 'Зберегти',
@@ -165,6 +165,23 @@ export default {
                         'move': 'Перейти'
                     }
                 },
+                documents:{
+                    side_filter:{
+                        'all': 'Всі',
+
+                    },
+                    nav_filter:{
+                        'sort_by': 'Сортувати по',
+                        'applied_filters': 'Застосовані фільтри',
+                        'showing': 'Переглядаються',
+                        'clear': 'очистити',
+
+                        'date': 'даті',
+                        'alphabet': 'назві',
+                        'match': 'пошуку',
+                        'views': 'переглядах'
+                    }
+                }
 
             },
 
@@ -341,6 +358,19 @@ export default {
                         'change_title': 'Change title',
                         'view': 'view',
                         'move': 'Move on'
+                    }
+                },
+                documents:{
+                    nav_filter:{
+                        'sort_by': 'Sort by',
+                        'applied_filters': 'Applied filters',
+                        'showing': 'Showing',
+                        'clear': 'clear',
+
+                        'date': 'date',
+                        'alphabet': 'A-z',
+                        'match': 'match',
+                        'views': 'views'
                     }
                 }
             }

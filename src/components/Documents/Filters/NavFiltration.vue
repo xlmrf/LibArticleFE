@@ -1,10 +1,10 @@
 <template>
   <div class="used-filters" v-if="JSON.stringify(checkFilter) !== '{}'">
-<!--    <span class="top-filter-panel">-->
-      <span>Застосовані фільтри:</span>
-<!--    </span>-->
-    <span class="filter-panel" v-for="(item,k) in checkFilter">
-      {{ translateFilters(k) }}
+    <div class="top-filter-panel">
+      <span>{{ $store.getters.getLanguage.documents.nav_filter.applied_filters}}:</span><span class="clear-filter-btn" @click="clearFilter()">{{ $store.getters.getLanguage.documents.nav_filter.clear}}</span>
+    </div>
+    <div class="filter-panel" v-for="(item,k) in checkFilter">
+      <p class="filter-panel-name">{{ translateFilters(k) }}</p>
       <span v-for="(el, i) in textFilter(item, k)">
       {{ el }}
           <small @click="deleteFilter(k,i)" class="delete-item">
@@ -15,8 +15,7 @@
             </svg>
           </small>
       </span>
-    </span>
-    <span class="clear-filter-btn" @click="clearFilter()">очистити</span>
+    </div>
   </div>
 </template>
 
@@ -118,6 +117,17 @@ export default {
 
 <style scoped>
 
+.top-filter-panel{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 18px;
+}
+.top-filter-panel > span{
+  /*flex: 1;*/
+
+}
+
 .used-filters {
   margin-top: 1rem;
   /*display: flex;*/
@@ -128,6 +138,13 @@ export default {
 .filter-panel{
   display: flex;
   align-items: center;
+  list-style: none;
+  flex-wrap: wrap;
+  /*border: 1px solid #BBBBBB;*/
+  margin: 5px 0;
+  border-radius: 4px;
+  padding-top: 0.2rem;
+  color: #363232;
 }
 
 .filter-panel > span {
@@ -135,9 +152,9 @@ export default {
   cursor: default;
   width: fit-content;
   /*font-size: 1em;*/
-  margin: 0 0.2rem;
-  color: #20B2AA;
-  padding: 4px 8px;
+  /*margin: 0 0.1rem;*/
+  color: #048e9e;
+  padding: 4px 6px;
   border-radius: 40px;
   /*background: rgba(16, 89, 255, 0.25);*/
   /*background: rgba(119, 169, 222, 0.59);*/
@@ -157,9 +174,9 @@ export default {
 }
 
 .clear-filter-btn{
-  position: absolute;
-  top: calc(50% - 20px);
-  right: 20px;
+  /*position: absolute;*/
+  /*top: calc(50% - 20px);*/
+  margin-right: 20px;
   border: 1px solid #bbbbbb;
   color: #535353;
   cursor: pointer;
@@ -171,4 +188,14 @@ export default {
   border: 1px solid #535353;
   color: #333333;
 }
+
+.filter-panel-name{
+  font-size: 20px;
+  display: flex;
+  align-self: start;
+  position: relative;
+  top: -1px;
+}
+
+
 </style>

@@ -15,7 +15,7 @@
               <line x1="18" y1="6" x2="6" y2="18"></line>
               <line x1="6" y1="6" x2="18" y2="18"></line>
             </svg></small>
-          <span class="comment-date">{{new Date(Date.parse(comment.created_at)).toUTCString().slice(0,-4)}}</span>
+          <span class="comment-date">{{comment.created_at}}</span>
 <!--        </div>-->
       </div>
       <h5 class="noun-comments" v-if="getComments.length <= 0">Додайте перший коментар до документа</h5>

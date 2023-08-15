@@ -1,9 +1,9 @@
 <template>
   <div class="documents-header">
     <div class="sort-filter">
-      <div class="showed-items">Показано<span>{{ documents.total!==0 ? documents.per_page*(documents.current_page-1)+1 : '0' }}</span> - <span>{{ documents.per_page*(documents.current_page-1)+documents.data.length }}</span>документи із<span>{{ documents.total }}</span>знайдених</div>
+      <div class="showed-items">{{ $store.getters.getLanguage.documents.nav_filter.showing }}<span>{{ documents.total!==0 ? documents.per_page*(documents.current_page-1)+1 : '0' }}</span> - <span>{{ documents.per_page*(documents.current_page-1)+documents.data.length }}</span>документи із<span>{{ documents.total }}</span>знайдених</div>
       <div class="select-control">
-        <label class="top-filter-label">Сортувати по</label>
+        <label class="top-filter-label">{{ $store.getters.getLanguage.documents.nav_filter.sort_by }}</label>
         <select class="select top-filter-select" v-model="sortSelect">
 <!--          <option selected value> &#45;&#45; select an option &#45;&#45; </option>-->
           <option class="filter-option" v-for="value in sortDocuments" :key="value">
@@ -33,10 +33,11 @@ export default {
     return{
       per_page:this.$route.query.perPage ? this.$route.query.perPage : 10,
       sortDocuments: {
-        popular: 'переглядах',
-        date_start: 'даті ↓',
-        date_end: 'даті ↑',
-        name: 'назві',
+        popular: this.$store.getters.getLanguage.documents.nav_filter.views,
+        date_start: this.$store.getters.getLanguage.documents.nav_filter.date,
+        // date_end: 'даті ↑',
+        name: this.$store.getters.getLanguage.documents.nav_filter.alphabet,
+        match: this.$store.getters.getLanguage.documents.nav_filter.match
       },
       sortSelect: 'переглядах'
     }

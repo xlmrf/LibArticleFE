@@ -44,9 +44,7 @@
 <!--        </label>-->
 <!--    </div>-->
 
-
-
-    <button @click="saveOptions" :class="{'btn-loading': saveLoading}">{{this.$store.getters.getLanguage.settings.other_settings_titles.btn_save_settings}} <loader class="loader" width="1.5" radius="8" loader_class="save-session-loader" v-if="saveLoading" /></button>
+    <button @click="saveOptions" class="save-settings-btn" :class="{'btn-loading': saveLoading}">{{this.$store.getters.getLanguage.settings.other_settings_titles.btn_save_settings}} <loader width="1.2" radius="9" loader_class="save-session-loader loader" v-if="saveLoading"/></button>
 
 <!--    <div class="alert alert-warning" >-->
 <!--      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#5795e3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>-->
@@ -60,6 +58,7 @@
 <script>
 import Loader from "@/components/additional/loader";
 import {mapGetters, mapMutations} from "vuex";
+import PulseLoader from "@/components/additional/pulseLoader";
 export default {
   data(){
     return{
@@ -87,7 +86,7 @@ export default {
   },
 
 
-  components: {Loader}
+  components: {PulseLoader, Loader}
 
 }
 </script>
@@ -186,6 +185,22 @@ export default {
   cursor: pointer;
   border: 1px solid #EB4C42;
   border-radius: 4px;
+}
+
+.save-settings-btn{
+  position: relative;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  padding: 10px 35px;
+}
+
+.loader{
+  position: absolute;
+  right: 30px;
+  bottom:14px;
+  /*margin-top: 5px;*/
+  /*margin-right: 5px;*/
 }
 
 </style>

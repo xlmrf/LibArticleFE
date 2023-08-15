@@ -45,7 +45,7 @@ export default {
       this.openNavMenu = !this.openNavMenu
     },
     close (e) {
-      if (!this.$el.contains(e.target) || e.target.localName === 'a')
+      if (!this.$el.contains(e.target) || e.target.localName === 'span')
       {
         this.openNavMenu = false
       }

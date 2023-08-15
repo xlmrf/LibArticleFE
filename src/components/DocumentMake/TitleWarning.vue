@@ -19,8 +19,11 @@
           <button class="btn" @click="changeTitle()">{{ $store.getters.getLanguage.document_make.warnings.change_title}}</button>
           <button class="btn" @click="$emit('create-to-despite', 'forced')">{{ $store.getters.getLanguage.document_make.warnings.create}}</button>
         </div>
+
       </div>
+
     </div>
+
   </div>
 </template>
 
