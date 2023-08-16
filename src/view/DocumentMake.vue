@@ -27,56 +27,6 @@ export default {
     ...mapMutations(['DocumentMutate','updateDocument', 'catchError']),
     ...mapActions(['requestDocument']),
 
-    // next(type) {   old
-    //   let key = '?'
-    //   const id = this.$route.params.id
-    //   if (id){
-    //     key += 'first-stage=true'
-    //   }
-    //
-    //   if (type === 'forced') {
-    //     if (key !== '?')
-    //       key += '&'
-    //     key += 'forced=true'
-    //   }
-    //
-    //   if (id){
-    //     console.log('document patch')
-    //     axios.patch(this.api_url_v1 + '/document/make/'+ id + (key!=='?' ? key : ''), {data: this.getDocument}).then(response => {
-    //
-    //       this.updateDocument( response.data)
-    //       this.prev_stage = false
-    //
-    //       router.push('/document/make/' + response.data.id)
-    //     }, err => {
-    //
-    //       console.log('error info -', err.message);
-    //       this.catchError(err.response.data.errors)
-    //
-    //     })
-    //   }
-    //   else {
-    //     console.log('document post')
-    //     axios.post(this.api_url_v1 + '/document/make' + (key !== '?' ? key : ''), {data: this.getDocument}).then(response => {
-    //
-    //       this.updateDocument(response.data)
-    //       this.prev_stage = false
-    //
-    //       router.push('/document/make/' + response.data.id)
-    //     }, err => {
-    //
-    //       console.log('error info -', err.message);
-    //       this.catchError(err.response.data.errors)
-    //
-    //     })
-    //   }
-    //
-    //   // else {
-    //   //   this.prev_stage = false
-    //   // }
-    //
-    // },
-
     async next(type) {
       const id = this.$route.params.id;
       const keyParts = [];

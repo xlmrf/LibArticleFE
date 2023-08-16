@@ -141,15 +141,28 @@ export default {
                         'month': 'Місяць',
                         'day': 'День',
 
+
                         'document_name': 'Назва документу',
                         'keywords': 'Ключові слова',
                         'references': 'Посилання',
+                        'description': 'Опис/Абстракція',
                         'save_draft_btn': 'Зберегти в чернетки',
                         'publish_btn': 'Опублікувати',
                         'add_btn': 'Додати',
+                        'search_in_lib': 'Пошук у системі',
                         'save_btn': 'Зберегти',
 
                         'put_doc_area': 'Щоб завантажити файл перетягніть його у поле або натисність сюди'
+                    },
+                    hint_description:{
+                        'authors': 'Автори, що напряму причетні до вмісту документу',
+                        'edition': 'Тематика документу, конкретна наукова область, наприклад: Tesla coil або TDOA',
+                        'place': 'Місце першого опублікування документу',
+                        'publication_date': 'Дата першого опублікування документу',
+
+                        'keywords': 'Основні ключові слова, навколо яких описувалась робота',
+                        'references': 'Документи та ресурси на які посилались автори',
+                        'description': 'Наведення стислого опису документу',
                     },
                     file_field:{
                         'put_doc_area': 'Щоб завантажити файл перетягніть його у поле або натисність сюди',
@@ -340,11 +353,23 @@ export default {
                         'document_name': 'Document title',
                         'keywords': 'Keywords',
                         'references': 'References',
+                        'description': 'Description/Abstract',
                         'save_draft_btn': 'Save to depository',
                         'publish_btn': 'Publish',
                         'add_btn': 'Push',
+                        'search_in_lib': 'Search in the system',
                         'save_btn': 'Save',
 
+                    },
+                    hint_description:{
+                        'authors': 'Автори, що напряму причетні до вмісту документу',
+                        'edition': 'Тематика документу, конкретна наукова область, наприклад: Tesla coil або TDOA',
+                        'place': 'Місце першого опублікування документу',
+                        'publication_date': 'Дата першого опублікування документу',
+
+                        'keywords': 'Основні ключові слова, навколо яких описувалась робота',
+                        'references': 'Документи та ресурси на які посилались автори',
+                        'description': 'Наведення стислого опису документу',
                     },
                     file_field:{
                         'put_doc_area': 'To upload a file, drag it into the area or click here',

@@ -18,7 +18,7 @@
           <div class="complex-item-control" v-else-if="item === 'keywords' || item === 'references'">
                 <span>
                   <input type="text" class="sample-input" :id="item" v-model="comprehensive[item]" @keypress.enter="addItem(item)" >
-                  <span class="add-keyword-btn" @click="addItem(item)">Додати</span>
+                  <span class="add-btn" @click="addItem(item)">Додати</span>
                 </span>
             <div :class="[{'list-keywords':item === 'keywords'},{'list-references':item === 'references'},{'list-able':this.document.keywords.length}]">
               <li v-for="(el,idx) in document[item]"><span v-if="item === 'references'">{{idx+1}}.</span>{{el}}

@@ -9,7 +9,8 @@
             <line x1="6" y1="6" x2="18" y2="18"></line>
           </svg>
         </small>
-      <span class="add-keyword-btn" @click="addReference">{{ edit ? $store.getters.getLanguage.document_make.signs.save_btn : $store.getters.getLanguage.document_make.signs.add_btn }}</span>
+      <span class="add-btn add-ref-btn" @click="addReference">{{ edit ? $store.getters.getLanguage.document_make.signs.save_btn : $store.getters.getLanguage.document_make.signs.add_btn }}</span>
+      <span class="add-btn search-in-system-btn" @click="searchReference">{{ $store.getters.getLanguage.document_make.signs.search_in_lib }}</span>
     </span>
     <div class="complex-item-control reference-list" v-if="getDocument.references.length > 0">
     <span class="reference-item" v-for="(el,idx) in getDocument.references.filter(item=>!item.delete)" :key="idx">
@@ -135,7 +136,9 @@ export default {
         this.reference = ''
       }
     },
+    searchReference(){
 
+    },
 
     deleteKeyword(idx, reference) {
       console.log("item", idx);
@@ -214,4 +217,27 @@ li{
   margin-left: 10px;
 }
 
+.search-in-system-btn{
+  flex: 1;
+  position: absolute;
+  border-radius: 4px;
+  margin: 0 5%;
+  bottom: 140%;
+  left: 160px;
+  padding: 5px 10px;
+  overflow: hidden;
+  background: white;
+  text-align: center;
+  border: 1px solid #444444;
+  outline: none;
+  color: #444444;
+}
+
+.search-in-system-btn:hover{
+  /*color: white;*/
+  /*border: 1px solid transparent;*/
+}
+.add-ref-btn{
+
+}
 </style>

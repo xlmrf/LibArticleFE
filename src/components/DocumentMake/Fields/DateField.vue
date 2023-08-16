@@ -1,20 +1,22 @@
 <template>
   <div class="date-format-block">
     <span @click="this.$refs.full_date.click()" :class="{active_date_format:formatDate==='date'}">
-      {{ this.$store.getters.getLanguage.document_make.signs.full_date}} <input type="radio" v-model="formatDate" ref="full_date" value="date">
+      {{ this.$store.getters.getLanguage.document_make.signs.full_date }} <input type="radio" v-model="formatDate"
+                                                                                 ref="full_date" value="date">
     </span>
     <span @click="this.$refs.only_year.click()" :class="{active_date_format:formatDate==='year'}">
-      {{ this.$store.getters.getLanguage.document_make.signs.only_year}}
+      {{ this.$store.getters.getLanguage.document_make.signs.only_year }}
       <input type="radio" v-model="formatDate" ref="only_year" value="year">
     </span>
-    <span @click="this.$refs.none_date.click()" :class="{active_date_format:formatDate==='null'}">
-      {{ this.$store.getters.getLanguage.document_make.signs.none_date}} <input type="radio" v-model="formatDate" ref="none_date" value="null">
+    <span v-if="!getTypes.find(type => type.id === getDocument.type_id)?.rules.publication_date.includes('required')" @click="this.$refs.none_date.click()" :class="{active_date_format:formatDate==='null'}">
+      {{ this.$store.getters.getLanguage.document_make.signs.none_date }} <input type="radio" v-model="formatDate"
+                                                                                 ref="none_date" value="null">
     </span>
   </div>
 
   <div class="date-picker" v-if="formatDate==='date'||formatDate==='year'">
     <div>
-      <label>{{ this.$store.getters.getLanguage.document_make.signs.year}}</label>
+      <label>{{ this.$store.getters.getLanguage.document_make.signs.year }}</label>
       <br/>
       <select v-model="year">
         <option v-for="y in years" :key="y">
@@ -23,7 +25,7 @@
       </select>
     </div>
     <div v-if="formatDate==='date'">
-      <label>{{ this.$store.getters.getLanguage.document_make.signs.month}}</label>
+      <label>{{ this.$store.getters.getLanguage.document_make.signs.month }}</label>
       <br/>
       <select v-model="month">
         <option v-for="m in 12" :key="m" :value="String(m).length>1?m:'0'+m">
@@ -32,7 +34,7 @@
       </select>
     </div>
     <div v-if="formatDate==='date'">
-      <label>{{ this.$store.getters.getLanguage.document_make.signs.day}}</label>
+      <label>{{ this.$store.getters.getLanguage.document_make.signs.day }}</label>
       <br/>
       <select v-model="day">
         <option v-for="d in maxDate" :key="d" :value="String(d).length>1?d:'0'+d">
@@ -40,8 +42,11 @@
         </option>
       </select>
     </div>
-    <div class="native-date">
-    {{new Date(Date.parse(getDocument.publication_date)).toDateString()}}
+    <div class="native-date" v-if="formatDate==='date'">
+      {{ new Date(Date.parse(getDocument.publication_date)).toDateString() }}
+    </div>
+    <div class="native-date" v-else-if="formatDate==='year'">
+      {{ new Date(Date.parse(getDocument.publication_date)).getFullYear() }}
     </div>
   </div>
 </template>
@@ -53,8 +58,8 @@ import {mapGetters} from "vuex";
 export default {
   name: "publication_date",
 
-  props:['isReady', 'field'],
-  emits:['catchValidate'],
+  props: ['isReady', 'field'],
+  emits: ['catchValidate'],
   data() {
     return {
       formatDate: 'date',
@@ -78,7 +83,7 @@ export default {
     emitDate() {
       const {year, month, day} = this;
       this.getDocument.publication_date = `${year}-${month}-${day}`
-      if (this.formatDate === 'year'){
+      if (this.formatDate === 'year') {
         this.getDocument.publication_date = `${year}`
       }
       // console.log(new Date(year, month, day).toString())
@@ -105,7 +110,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getDocument']),
+    ...mapGetters(['getDocument', 'getTypes']),
     maxDate() {
       const {month} = this;
       if (['01', '03', '05', '07', '08', '10', '12'].includes(month)) {
@@ -140,7 +145,7 @@ export default {
 
 <style scoped>
 
-.date-format-block{
+.date-format-block {
   position: absolute;
   right: 0;
   top: 0;
@@ -148,7 +153,7 @@ export default {
 
 }
 
-.date-format-block > span{
+.date-format-block > span {
   position: relative;
   cursor: pointer;
   padding: 9px 15px;
@@ -160,7 +165,7 @@ export default {
 }
 
 
-.active_date_format:after{
+.active_date_format:after {
   content: '';
   background: #5a9cea;
   height: 4px;
@@ -168,11 +173,12 @@ export default {
   border-top-right-radius: 4px;
   border-top-left-radius: 4px;
 
-  position:absolute;
+  position: absolute;
   /*margin-left: 15px;*/
-  bottom:0;
+  bottom: 0;
   left: 11%;
 }
+
 /*.date-format-block > span:last-child:after{*/
 /*  content: '';*/
 /*  background: transparent;*/
@@ -183,7 +189,7 @@ export default {
 /*  margin-left: 14px;*/
 /*  bottom:5px;*/
 /*}*/
-.date-format-block > span:hover{
+.date-format-block > span:hover {
   background: rgba(205, 205, 205, 0.28);
 }
 
@@ -195,7 +201,7 @@ export default {
 /*  !*color: white;*!*/
 /*}*/
 
-.date-format-block input{
+.date-format-block input {
   display: none;
 }
 
@@ -203,17 +209,19 @@ export default {
   display: flex;
   margin-left: 1.2rem;
 }
-.date-picker label{
+
+.date-picker label {
   text-align: center;
   margin-right: 5px;
 }
-.date-picker > div{
+
+.date-picker > div {
   display: inherit;
   flex-flow: column;
   margin-right: 1rem;
 }
 
-.date-picker select{
+.date-picker select {
   border-bottom: 1px solid #bbb;
   border-radius: 3px;
   padding: 0.25rem 0.5rem;
@@ -223,7 +231,7 @@ export default {
   background-color: #fff;
 }
 
-.native-date{
+.native-date {
   position: relative;
   margin: auto;
   right: 1rem;

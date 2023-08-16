@@ -16,7 +16,20 @@
       <div class="fill-areas">
         <div class="form-item" v-for="(item,idx) in getTypes.find(type => type.id === getDocument.type_id)?.fields"
              :key="idx" :class="{'universal-field': ['edition','place'].includes(item) }" >
-          <label :for="item">{{this.$store.getters.getLanguage.document_make.signs[item] }}</label>
+          <label :for="item">
+            {{this.$store.getters.getLanguage.document_make.signs[item] }}
+            <span class="area-hint">
+              <svg xmlns="http://www.w3.org/2000/svg"
+                   @mouseover="hintTicket = idx" @mouseout="hintTicket = -1"
+                   width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#b5b5b5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+              </svg>
+            </span>
+            <span class="helper-hint-text" :class="{'helper-hint-text-show': hintTicket === idx}" >
+              {{this.$store.getters.getLanguage.document_make.hint_description[item] }}
+            </span>
+          </label>
           <component :is="setFields(item)" :key="idx" :field="item" :is-ready="isReady" @catchValidate="validate"></component>
 <!--          <small class="text-error error-area-text" v-if="validationItems.includes(item)">Поле <span class="areas-name">{{ translateAreas(item) }}</span> не може бути пустим</small>-->
         </div>
@@ -54,6 +67,7 @@ export default {
       isComplete: false,
       invalidAreas:{},
       serverError:null,
+      hintTicket: -1,
 
       fileEmpty:false,
 
@@ -116,15 +130,19 @@ export default {
       console.log('CHECK FUNCTION')
       this.validationItems = []
       this.serverError = null
+      const rules = this.getTypes.find(type => type.id === this.getDocument.type_id)?.rules
+      const requiredKeys = Object.keys(rules).filter(key => rules[key].includes('required'));
       this.isReady = true
       setTimeout(() => {
-
         if (!this.getFiles.main || !this.getFiles.main.url){
           this.fileEmpty = true
           // this.point = false
           this.isReady = false
         }
-      },300)
+        if (this.validationItems.length >! 0 && !this.validationItems.every(item => requiredKeys.includes(item))) {
+          this.isReady = false
+        }
+      },500)
     },
   },
   computed: {
@@ -163,10 +181,12 @@ export default {
 
 <style>
 
-.add-keyword-btn:hover{
+.add-btn:hover{
   border: 1px solid #535353;
   color: #333333;
 }
+
+
 
 .card-top{
   font-size: 1em;
@@ -276,6 +296,42 @@ export default {
   /*font-weight: bold;*/
   font-size: 20px;
   margin-bottom: 20px;
+}
+
+.area-hint{
+  position: absolute;
+  right: -18px;
+  top: 3px;
+}
+.area-hint > svg{
+  cursor: pointer;
+  /*stroke: #b5b5b5;*/
+  /*-webkit-transition: 0.22s;*/
+  /*-moz-transition:    0.22s;*/
+  /*-ms-transition:     0.22s;*/
+  /*-o-transition:      0.22s;*/
+  /*transition:         0.22s;*/
+}
+.area-hint > svg:hover{
+
+  stroke: #1C75DD;
+}
+
+.helper-hint-text{
+  font-size: 16px;
+
+  display: none;
+  width: max-content;
+  box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+  z-index: 9;
+  position: absolute;
+  top: 33px;
+  left: -20px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.95);
+}
+.helper-hint-text-show{
+  display: flex;
 }
 
 .form-item label{
@@ -529,7 +585,7 @@ export default {
   width: 50%;
 }
 
-.add-keyword-btn{
+.add-btn{
   flex: 1;
   position: relative;
   cursor: pointer;
@@ -542,7 +598,9 @@ export default {
   border: 1px solid #A9A9A9;
   outline: none;
   color: #525252;
+  align-self: center;
 }
+
 .btn-control{
   display: flex;
   align-self: center;
