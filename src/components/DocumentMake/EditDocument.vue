@@ -27,7 +27,8 @@
               </svg>
             </span>
             <span class="helper-hint-text" :class="{'helper-hint-text-show': hintTicket === idx}" >
-              {{this.$store.getters.getLanguage.document_make.hint_description[item] }}
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#539DE7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+              <span>{{this.$store.getters.getLanguage.document_make.hint_description[item] }}</span>
             </span>
           </label>
           <component :is="setFields(item)" :key="idx" :field="item" :is-ready="isReady" @catchValidate="validate"></component>
@@ -300,7 +301,7 @@ export default {
 
 .area-hint{
   position: absolute;
-  right: -18px;
+  right: -20px;
   top: 3px;
 }
 .area-hint > svg{
@@ -322,16 +323,20 @@ export default {
 
   display: none;
   width: max-content;
-  box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
   z-index: 9;
   position: absolute;
   top: 33px;
   left: -20px;
-  padding: 10px;
+  padding: 15px 20px;
   background: rgba(255, 255, 255, 0.95);
 }
 .helper-hint-text-show{
   display: flex;
+  align-items: center;
+}
+.helper-hint-text > svg{
+  margin: 1px 5px;
 }
 
 .form-item label{

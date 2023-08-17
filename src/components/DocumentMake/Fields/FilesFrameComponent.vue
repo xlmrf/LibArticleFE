@@ -28,7 +28,7 @@
           <span></span>
         </div>
         <div class="box-frame" v-else>
-<!--          <iframe :src='frameUrl(getFiles[file_id])+"#view=FitH"'></iframe>-->
+<!--          <iframe :src='frameUrl(getFiles[file_id])+"#view=                                                                                                 FitH"'></iframe>-->
           <iframe :src="chosenLink.url" frameborder="0">Не вийшло завантажити файл</iframe>
 
         </div>
@@ -37,25 +37,28 @@
       </div>
     </form>
     <div class="files-control-panel" v-if="getFiles.main.url">
-
       <label class="label-file-category">Головний файл</label>
 
-      <div class="inside-file-item main-item-file" @click="chosenFileKey = -1">
+      <div class="inside-file-item main-item-file" :class="{'active-file':chosenFileKey === -1}" @click="chosenFileKey = -1">
         <span class="file-name">
           {{ getFiles.main.originalNameFile }}.{{ getFiles.main.typeFile }}
         </span>
-        <span class="label-file-size">{{ checkSize(getFiles.main.sizeFile)}}</span>
-        <span class="remove-item-file" @click="RemoveFile()">Видалити</span>
+        <span class="file-item-end">
+          <span class="label-file-size">{{ checkSize(getFiles.main.sizeFile)}}</span>
+          <span class="remove-item-file" @click.stop="RemoveFile()">Видалити</span>
+        </span>
       </div>
 
       <label class="label-file-category" v-if="getFiles.add[0]">Додаткові файли</label>
 
-      <div class="inside-file-item" v-if="getFiles.add[0]" v-for="(file,idx) in getFiles.add" @click="chosenFileKey = idx">
+      <div class="inside-file-item" :class="{'active-file':chosenFileKey === idx}" v-if="getFiles.add[0]" v-for="(file,idx) in getFiles.add" @click="chosenFileKey = idx">
         <span class="file-name">
           {{ file.originalNameFile }}.{{ file.typeFile }}
         </span>
-        <span class="label-file-size">{{ checkSize(file.sizeFile)}}</span>
-        <span class="remove-item-file" @click="RemoveFile(idx)">Видалити</span>
+        <span class="file-item-end">
+          <span class="label-file-size">{{ checkSize(file.sizeFile)}}</span>
+          <span class="remove-item-file" @click.stop="RemoveFile(idx)">Видалити</span>
+        </span>
       </div>
 
       <p @click="addFile()" class="inside-file-item add-extra-under-files">Добавити додаткові файли</p>
@@ -93,6 +96,7 @@ export default {
 
     chosenLink(){
 
+      console.log('fileKey', this.chosenFileKey)
       if (this.chosenFileKey === -1) {
         return this.getFiles.main
       }
@@ -130,6 +134,9 @@ export default {
     },
     empty(){
       console.log('empttyyy not work', this.empty)
+    },
+    chosenFileKey(){
+      this.chosenLink
     }
   },
   methods: {
@@ -215,8 +222,12 @@ export default {
         this.getFiles.main = {}
       }
       else {
-         this.getFiles.add.splice(idx,1)
+        if (this.chosenFileKey >= idx){
+          this.chosenFileKey = idx - 1
+        }
+        this.getFiles.add.splice(idx,1)
       }
+      console.log('remove file',idx,this.chosenFileKey)
     },
 
     validate(file) {
@@ -299,8 +310,16 @@ export default {
 .inside-file-item{
   cursor: pointer;
   display: flex;
-  padding: 10px 5px;
   border-radius: 3px;
+  position: relative;
+}
+
+.inside-file-item > span{
+  padding: 10px;
+}
+
+.inside-file-item:hover{
+  background: #f1f1f1;
 }
 
 .inside-file-item > span{
@@ -311,19 +330,41 @@ export default {
   margin-bottom: 20px;
 }
 
-.label-file-size{
+.active-file:after {
+  content: '';
+  background: #5a9cea;
+  height: 76%;
+  width: 4px;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  position: absolute;
+  /*margin-left: 15px;*/
+  bottom: 12%;
+  left: 0;
+}
+
+.file-item-end{
   margin-left: auto;
   padding: 0 10px;
 }
 
-.not-file-error{
-  margin: 10px auto;
-  color: #e32b20;
+.label-file-size{
+  margin-left: auto;
+  padding: 0 10px;
 }
-
 .remove-item-file{
   color: #d2443b;
   margin: 0 10px;
+  z-index: 3;
+}
+.remove-item-file:hover{
+  text-decoration: underline;
+}
+
+
+.not-file-error{
+  margin: 10px auto;
+  color: #e32b20;
 }
 
 .label-file-category{
@@ -332,11 +373,6 @@ export default {
   top: -5px;
   margin: 5px;
 }
-
-.remove-item-file:hover{
-  text-decoration: underline;
-}
-
 .remove-file{
   padding: 6px;
   position: absolute;
@@ -358,10 +394,6 @@ export default {
 .no-files{
   text-align: center;
   padding: 20px 0;
-}
-
-.inside-file-item:hover{
-  background: #f1f1f1;
 }
 
 .dropzone-container {
@@ -736,7 +768,7 @@ li {
 .add-extra-under-files{
   margin-top: 20px;
   color: #264050;
-  padding-left: 20px;
+  padding: 10px 10px 10px 20px;
   border: 1px solid rgba(13, 40, 57, 0.15);
 }
 
