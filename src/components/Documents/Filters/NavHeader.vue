@@ -6,7 +6,7 @@
         <label class="top-filter-label">{{ $store.getters.getLanguage.documents.nav_filter.sort_by }}</label>
         <select class="select top-filter-select" v-model="sortSelect">
 <!--          <option selected value> &#45;&#45; select an option &#45;&#45; </option>-->
-          <option class="filter-option" v-for="value in sortDocuments" :key="value">
+          <option class="filter-option" v-for="value in sortDocuments" :key="value" :value="value">
             {{ value }}
           </option>
         </select>
@@ -39,7 +39,7 @@ export default {
         name: this.$store.getters.getLanguage.documents.nav_filter.alphabet,
         match: this.$store.getters.getLanguage.documents.nav_filter.match
       },
-      sortSelect: 'переглядах'
+      sortSelect: this.$store.getters.getLanguage.documents.nav_filter.match
     }
   },
   computed: {

@@ -21,6 +21,8 @@
     </div>
 
     <title-warning v-if="titleModal" @close-modal="titleModal = false" @createToDespite="createDocument"/>
+
+    <modal-window v-if="openModal" @close-modal="openModal = false" component="draftModal" />
   </div>
 </template>
 
@@ -34,6 +36,8 @@ import {mapGetters, mapState} from "vuex";
 import DocumentsList from "@/components/Documents/DocumentsList";
 import DocumentItem from "@/components/Documents/DocumentItem";
 import PulseLoader from "@/components/additional/pulseLoader";
+import DraftModal from "@/components/DocumentMake/draftModal";
+import ModalWindow from "@/components/additional/modalWindow";
 export default {
   data(){
     return{
@@ -42,7 +46,8 @@ export default {
       btn_enabled: false,
       draftTumbler: false,
       titleError: '',
-      drafts:[]
+      drafts:[],
+      openModal: true
     }
   },
   emits:['next','loader'],
@@ -57,6 +62,7 @@ export default {
       }
     },
     showDrafts(){
+      this.openModal = true
       this.getDraftDocs
       this.draftTumbler = !this.draftTumbler
     },
@@ -98,7 +104,9 @@ export default {
     }
   },
   name: "DocumentType",
-  components: {PulseLoader, DocumentItem, DocumentsList, TypeField, TitleField, Loader, TitleWarning},
+  components: {
+    ModalWindow,
+    DraftModal, PulseLoader, DocumentItem, DocumentsList, TypeField, TitleField, Loader, TitleWarning},
   mounted() {
     window.addEventListener('click', this.closeDraftWindow, false)
   },
@@ -201,6 +209,136 @@ export default {
 }
 .drafts-loader{
   margin: 0 auto;
+  padding: 10px;
+}
+
+.item-reference{
+  margin-top: 15px;
+}
+
+.top-modal-window{
+  display: flex;
+  position: relative;
+  flex-flow: column;
+  justify-content: center;
+  padding: 10px;
+  border-bottom: 1px solid #A9A9A995;
+}
+
+.top-modal-window > input{
+  margin-top: 15px;
+  padding: 5px 6px;
+  font-size: 1em;
+}
+
+.top-modal-window > svg{
+  position: absolute;
+  right: 20px;
+  bottom: 15px;
+}
+
+.cites-modal {
+  display: block;
+  background: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+.modalActive {
+  position: absolute;
+  overflow-y: auto;
+  width: 60%;
+  top: 60px;
+  left: 20%;
+  border-radius: 3px;
+  background-color: rgb(255, 255, 255);
+  z-index: 999;
+  min-height: 300px;
+  height: calc(100% - 65px);
+}
+
+.modalClose {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 5px;
+  top: 9px;
+  width: 30px;
+  height: 30px;
+  border-radius: 3px;
+  cursor: pointer;
+  z-index: 99;
+}
+
+.modalClose:hover{
+  /*stroke: #222222;*/
+  background: rgba(169, 169, 169, 0.4);
+}
+
+.modalWindow {
+  display: flex;
+  flex-flow: column;
+  position: relative;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.top-modal-window > h3{
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: normal;
+}
+
+.cite-frame{
+  display: flex;
+}
+
+.cite-frame > span{
+  font-weight: bold;
+  color: #333333;
+}
+
+
+.files-tape{
+  /*box-shadow: rgba(0, 0, 0, 0.35) 0px -8px 12px -8px inset;*/
+  /*box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;*/
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  font-size: 0.8em;
+  overflow: auto;
+  /*overflow-y: hidden;*/
+  /*scrollbar-width: thin;*/
+  z-index: 10;
+}
+.files-tape > div{
+  padding: 15px;
+  /*border-radius: 3px;*/
+  /*border: 1px solid #0048BA;*/
+  font-size: 18px;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.files-tape > button{
+  display: flex;
+  width: fit-content;
+  margin: 8px auto;
+  background: transparent;
+  font-size: 1.1em;
+  padding: 2px;
+  color: #222222;
+  border-bottom: 1px solid #222222;
+  cursor: pointer;
+}
+
+.pulse-loader{
+  display: flex;
+  justify-content: center;
   padding: 10px;
 }
 

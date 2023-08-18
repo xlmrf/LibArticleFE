@@ -1,7 +1,7 @@
 <template>
 <div >
   <span class="cite-frame frame" v-if="cites.document_citation" @click="showAllCites">{{ this.$store.getters.getLanguage.document.characteristic.cites }}<span>{{ cites.document_citation.value }}</span></span>
-  <cites-modal v-if="openModal" @close-modal="openModal = false"/>
+  <modal-window component="citesModal" v-if="openModal" @close-modal="openModal = false"/>
 </div>
 </template>
 
@@ -12,9 +12,10 @@ import axios from "axios";
 import DocumentRefs from "@/components/document/documentRefs";
 import PulseLoader from "@/components/additional/pulseLoader";
 import CitesModal from "@/components/document/citesModal";
+import ModalWindow from "@/components/additional/modalWindow";
 
 export default {
-  components: {CitesModal, PulseLoader, DocumentRefs},
+  components: {ModalWindow, CitesModal, PulseLoader, DocumentRefs},
   props:['getDocument'],
 
   data(){
@@ -44,6 +45,7 @@ export default {
     ...mapState(['api_url_v1']),
   },
   mounted() {
+    console.log('cites docu')
     this.citesDocument()
   }
 }
