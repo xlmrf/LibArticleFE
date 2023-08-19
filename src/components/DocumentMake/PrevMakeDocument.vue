@@ -4,13 +4,11 @@
     <type-field  />
     {{getDocumentMakeWarning?.errors?.find(item => item.attribute === 'title')}}
     <div class="drafts">
-      <span class="drafts-label" :class="{'drafts-label-active':draftTumbler}" @click="showDrafts"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg><span>Незакінченні</span></span>
-      <div class="drafts-panel" v-if="draftTumbler">
-        <div v-for="draft in drafts" v-if="drafts.length > 0">
-          <document-item :documentItem="draft" type="draft" />
-        </div>
-        <pulse-loader class="drafts-loader" v-else/>
-      </div>
+      <span class="drafts-label" :class="{'drafts-label-active':draftTumbler}" @click="showDrafts">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#394DBB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>
+        <span>Чернетки</span>
+      </span>
+      <modal-window v-if="draftTumbler" @close-modal="draftTumbler = false" component="draftModal" />
 
     </div>
     <div style="clear: both">
@@ -22,7 +20,6 @@
 
     <title-warning v-if="titleModal" @close-modal="titleModal = false" @createToDespite="createDocument"/>
 
-    <modal-window v-if="openModal" @close-modal="openModal = false" component="draftModal" />
   </div>
 </template>
 
@@ -46,8 +43,6 @@ export default {
       btn_enabled: false,
       draftTumbler: false,
       titleError: '',
-      drafts:[],
-      openModal: true
     }
   },
   emits:['next','loader'],
@@ -63,7 +58,6 @@ export default {
     },
     showDrafts(){
       this.openModal = true
-      this.getDraftDocs
       this.draftTumbler = !this.draftTumbler
     },
     createDocument(e){
@@ -95,13 +89,6 @@ export default {
       return this.btn_enabled = !!(this.getDocument.type_id && this.getDocument.title);
     },
 
-    getDraftDocs(){
-      axios.get(this.api_url_v1+'/drafts').then((response) => {
-        this.drafts = response.data
-      }).then(error => {
-        console.log(error);
-      })
-    }
   },
   name: "DocumentType",
   components: {
@@ -155,19 +142,25 @@ export default {
   right: 20px;
   margin-left: auto;
   border-radius: 6px;
-  padding: 5px;
+  padding: 5px 8px;
   align-items: center;
   /*width: 42px;*/
   height: 42px;
   display: flex;
   cursor: pointer;
 }
+.drafts-label > svg{
+  position: relative;
+  top: 1px;
+}
 .drafts-label > span{
   font-size: 1.1em;
   margin: 0 5px;
+  font-weight: bold;
+  color: #394DBB;
 }
 .drafts-label:hover{
-  background: #ececec;
+  background: rgba(148, 154, 187, 0.22);
 }
 
 .drafts-label-active{

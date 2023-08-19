@@ -8,11 +8,9 @@
       </svg>
     </small>
     <div class="modalActive">
-      <div class="modalWindow">
-
+<!--      <div class="modalWindow">-->
         <component :is="component" />
-        <pulse-loader class="pulse-loader" />
-      </div>
+<!--      </div>-->
     </div>
   </div>
 </template>
