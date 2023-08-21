@@ -3,11 +3,11 @@
 
     <div class="select-search-area">
       <h4>Вибрати документи:</h4>
-        <label class="save-session">
+        <label class="checkbox-item">
           <input type="radio" v-model="only_own" value="false" @change="query({only_own: only_own})" name="only_own" id="">
           <span class="label">Всі</span>
         </label>
-        <label class="save-session">
+        <label class="checkbox-item">
           <input type="radio" v-model="only_own" value="true" @change="query({only_own: only_own})" name="only_own" id="save-user">
           <span class="label">Тільки мої</span>
         </label>
@@ -23,7 +23,7 @@
     <div>
       <h4>Категорії</h4>
       <span class="files-tape">
-        <label v-for="(category,key) in getTypes.filter(e => filter.categories.includes(e.id))" class="save-session">
+        <label v-for="(category,key) in getTypes.filter(e => filter.categories.includes(e.id))" class="checkbox-item">
             <input type="checkbox"
                    @input="selected_categories.find(e => e === category.name) ?
                            selected_categories.splice(selected_categories.indexOf(category.name),1) :
@@ -38,7 +38,7 @@
     <div>
       <h4>Автори</h4>
       <span class="document-list">
-          <label class="save-session" v-for="author in filter.authors">
+          <label class="checkbox-item" v-for="author in filter.authors">
             <input type="checkbox" name="author" >
             <span class="label">{{ author }}</span>
           </label>
@@ -152,19 +152,19 @@ export default {
   margin: 0.5rem 0.8rem;
 }
 
-.save-session>input{
+.checkbox-item>input{
   opacity: 0;
   position: absolute;
   z-index: -1;
 }
-.save-session>span{
+.checkbox-item>span{
   display: inline-flex;
   align-items: center;
   user-select: none;
   font-size: 16px;
 }
 
-.save-session>span::before {
+.checkbox-item>span::before {
   content: '';
   display: inline-block;
   width: 1em;
@@ -178,10 +178,10 @@ export default {
   background-position: center center;
   background-size: 50% 50%;
 }
-.save-session>input:not(:disabled):not(:checked)+span:hover::before {
+.checkbox-item>input:not(:disabled):not(:checked)+span:hover::before {
   /*border-color: #4E5477;*/
 }
-.save-session>input:checked+span::before {
+.checkbox-item>input:checked+span::before {
   border-color: transparent;
   background-color: rgba(74, 158, 242, 0.85);
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");

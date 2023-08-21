@@ -13,9 +13,9 @@ export default {
 </script>
 
 <style scoped>
-.spinner-box{
-  position: relative;
-}
+/*.spinner-box{*/
+/*  position: relative;*/
+/*}*/
 
 .spinner {
   animation: rotate 2s linear infinite;

@@ -6,6 +6,10 @@
     <range-year />
     <select-type />
 <!--    <select-keywords />-->
+    <div class="selected-refs-panel" style="flex-flow: row" v-if="$route.query.refs_doc_id && JSON.parse($route.query.refs_doc_id).length > 0">
+      <span>Selected refs: {{  JSON.parse($route.query.refs_doc_id).length  }}</span>
+      <span @click="clearRefs">clear</span>
+    </div>
   </div>
 </template>
 
@@ -17,11 +21,42 @@ import SelectType from "@/components/Documents/Filters/SelectType";
 import SelectKeywords from "@/components/Documents/Filters/SelectKeywords";
 
 export default {
-  components:{SelectKeywords, SelectType, RangeYear, PersonalToggle,SelectAuthor}
+  components:{SelectKeywords, SelectType, RangeYear, PersonalToggle,SelectAuthor},
+
+
+  methods:{
+    clearRefs(){
+      let q = Object.assign({}, this.$route.query);
+
+      console.log('qqq',q);
+
+      delete q.refs_doc_id
+
+      this.$router.replace({
+        name: 'documents',
+        query: {...q, ...{refs_doc_id:'[]'}}
+      })
+    }
+  }
+
 }
 </script>
 
 <style>
+
+.selected-refs-panel{
+  align-items: baseline;
+  margin-top: 20px;
+}
+
+.selected-refs-panel > span:last-child{
+  margin-left: auto;
+  cursor: pointer;
+  background: #EB4C42;
+  padding: 5px 12px;
+  border-radius: 4px;
+  color: white;
+}
 
 .filter-title{
   display: flex;

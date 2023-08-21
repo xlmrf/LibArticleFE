@@ -19,7 +19,7 @@
     <h2 class="item-underline">{{this.$store.getters.getLanguage.settings.other_settings_titles.title_notices}}</h2>
     <div class="setting-block">
       <span class="setting-item-reason">{{this.$store.getters.getLanguage.settings.other_settings_titles.send_email_advice}}</span>
-      <span class="setting-item-option"><label class="save-session">
+      <span class="setting-item-option"><label class="checkbox-item">
         <input type="checkbox" name="send-notice" v-model="sendMessageBox">
         <span class="label">{{this.$store.getters.getLanguage.settings.other_settings_titles.send_email_box}}</span>
       </label></span>
@@ -134,7 +134,7 @@ export default {
   font-size: 1.1em;
 }
 
-.save-session > span{
+.checkbox-item > span{
   font-weight: bold;
   font-size: 1.1em;
 }
@@ -162,7 +162,7 @@ export default {
   border: 1px solid rgb(140, 220, 216);
 }
 
-.save-session{
+.checkbox-item{
   font-size: 15px;
   margin-left: auto;
   cursor: pointer;
@@ -171,7 +171,7 @@ export default {
   border-radius: 4px;
 }
 
-.save-session > span::before{
+.checkbox-item > span::before{
   width: 1.1em;
   height: 1.1em;
 }

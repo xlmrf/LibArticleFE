@@ -65,7 +65,7 @@ export default {
       // console.log();
       let url = this.$route.path + '?';
       let paginate = this.paginate
-      let query = Object.assign({}, this.$route.query);
+      let query = Object.assign({}, this.$route.query);``
       delete query.page;
 
       for (let e in query) {

@@ -1,6 +1,11 @@
 <template>
-  <div class="document-item" :class="{'document-draft': type === 'draft'}" v-if="documentItem.title">
-    <div><input type="checkbox" name="" id=""></div>
+  <div class="document-item" :class="{'document-draft': type === 'draft' || this.$route.query.refs_doc_id}" v-if="documentItem.title">
+    <div class="check-item" v-if="this.$route.query.refs_doc_id">
+      <label class="checkbox-item filter-checkbox select-type-checkbox">
+        <input type="checkbox" :value="documentItem.id" v-model="checkItem">
+        <span class="label"></span>
+      </label>
+    </div>
     <div class="list-document-type" :class="{'draft-type-style': type === 'draft'}">
       <span>
         {{getTypes.find(item => item.id === documentItem.type_id)?.name}}
@@ -76,10 +81,44 @@ export default {
   data(){
     return{
       views:{},
-      pointDocument: null
+      pointDocument: null,
+      checkItem: this.$route.query.refs_doc_id && JSON.parse(this.$route.query.refs_doc_id).find(id => id === this.documentItem.id) !== undefined
     }
   },
 
+  watch:{
+    checkItem(){
+
+
+      let query = Object.assign({}, this.$route.query);
+
+      let refs = query.refs_doc_id !== undefined ? JSON.parse(query.refs_doc_id) : []
+
+      // console.log(query.refs_doc_id,refs);
+
+      const catchItem = (id) => {
+        let idx = refs.findIndex(item => item === id)
+        if (idx !== -1){
+          refs.splice(idx, 1)
+        }
+        else{
+          refs.push(id)
+        }
+      }
+
+      refs === [] ? refs.push(this.documentItem.id) : catchItem(this.documentItem.id)
+
+      console.log('refs',query.refs_doc_id,refs);
+
+      this.$router.replace({
+        name: 'documents',
+        query: {...query, ...{refs_doc_id:JSON.stringify(refs)}}
+      })
+
+
+
+    }
+  },
   methods:{
     viewsDocument(){
       axios.get(this.api_url_v1 + '/report/document-views/' + this.documentItem.id).then(response => {
@@ -112,7 +151,13 @@ export default {
   mounted() {
     if (this.type !== 'draft')
       this.viewsDocument()
+
+    if (this.$route.query.refs_doc_id){
+
+    }
+
   },
+
 
   components:{viewsDocument}
 }
@@ -121,9 +166,15 @@ export default {
 <style scoped>
 
 .document-item{
-  padding: 0.1rem 1rem;
+  position: relative;
+  padding: 0.5rem 1rem;
   overflow:hidden;
   outline: none;
+}
+.check-item{
+  position: absolute;
+  left: 0.8rem;
+  top: calc(50% - 9px);
 }
 
 .context-document-item{
@@ -192,6 +243,7 @@ export default {
   color: #55B8CA;
 }
 .draft-type-style > span{
+
   padding: 0;
   border: 1px solid transparent;
 }
@@ -242,6 +294,7 @@ export default {
 
 .document-draft{
   background: white;
+  padding: 0.1rem 0.5rem 0.1rem 3rem;
   margin-bottom: 5px;
   border-radius: 4px;
 }

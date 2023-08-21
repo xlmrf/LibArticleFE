@@ -5,6 +5,7 @@
     <div class="manual">
       <input type="text" name="search" id="search" class="input searcher" required v-model="keywords"
              @keydown.enter="query(keywords)">
+      <span class="search-by-refs" v-if="$route.query.refs_doc_id">посилання</span>
       <span class="search-icon" @click="query(keywords)">
         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"
              viewBox="0 0 24 24" fill="none" stroke="#B2B2B2"
@@ -17,7 +18,7 @@
       <small class="title-error" v-if="false">Enter value</small>
       <!--      <button :class="['btn search-btn',{'valid-btn':keyword}]" >Пошук</button>-->
       <label v-if="mistake">{{ mistake }}</label>
-
+      <span class="btn-in-search" @click="addRefs" v-if="$route.query.refs_doc_id && JSON.parse($route.query.refs_doc_id).length > 0">Додати {{JSON.parse($route.query.refs_doc_id).length}}</span>
       <!--      <router-link to="/profile" class="manual-item">-->
       <!--        <span>Акаунт</span>-->
       <!--      </router-link>-->
@@ -51,9 +52,14 @@ export default {
       mistake: '',
     }
   },
-  computed: {},
+  computed: {
+    addRefs(){
+
+    },
+  },
   methods: {
-    ...mapMutations(['updateUser']),
+    ...mapMutations(['updateUser', 'makeDocument']),
+
     query(keywords) {
 
       const {...query} = this.$route.query;
@@ -100,11 +106,24 @@ export default {
 </script>
 
 <style scoped>
+
+.btn-in-search{
+  position: absolute;
+  left: calc(100% + 20px);
+  top: calc(50% - 20px);
+  border-radius: 4px;
+  padding: 8px 21px;
+  background: #1C75DD;
+  cursor: pointer;
+  color: white;
+  white-space: nowrap;
+}
+
 .search-icon {
   position: relative;
   display: flex;
   align-self: center;
-  margin-left: -36px;
+  margin-left: -42px;
   color: rgba(33, 33, 33, 0.65);
   cursor: pointer;
 }
@@ -153,6 +172,7 @@ export default {
 
 .manual {
   display: flex;
+  position: relative;
 }
 
 .dropdown-content > span {
@@ -234,6 +254,17 @@ export default {
   cursor: pointer;
 }
 
+.search-by-refs{
+  position: absolute;
+  right: 1px;
+  top: 1px;
+  padding: 9px;
+  padding-right: 60px;
+  color: #333333;
+  padding-left: 15px;
+  cursor: default;
+  background: rgba(0, 135, 255, 0.15)
+}
 
 /*.manual-item{*/
 /*  padding:10px 20px;*/

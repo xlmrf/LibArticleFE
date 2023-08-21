@@ -5,7 +5,7 @@
     </span>
     <div :class="['filter-area',{filter_open:AuthorsFilterOpen}]" v-if="getAuthors.data">
       <input type="text" class="authors-searcher" v-model="search" placeholder="Tovkach">
-      <label class="save-session filter-checkbox" v-for="(author,idx) in getAuthors.data" >
+      <label class="checkbox-item filter-checkbox" v-for="(author,idx) in getAuthors.data" >
         <input type="checkbox" :value="author" v-model="chosen" id="test">
         <span class="label">{{ author.first_name }} {{ author.last_name }}</span>
       </label>

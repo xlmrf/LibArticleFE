@@ -46,6 +46,7 @@ export default {
                 console.log('error delete author', err.response.data)
             })
         },
+
         lastDocuments(ctx) {
             // axios.get(ctx.rootState.api_url_v1 + '/last-documents').then(response => {
             //     ctx.commit('mutateLastDocuments', response.data)
@@ -56,6 +57,9 @@ export default {
     mutations: {
         catchError(ctx,data){
             ctx.info = data
+        },
+        makeDocument(ctx,data){
+            console.log('make document data:', data)
         },
         uploadResult(state, data){
            // state.document = data
