@@ -1,5 +1,6 @@
 <template>
   <div class="document-item" :class="{'document-draft': type === 'draft'}" v-if="documentItem.title">
+    <div><input type="checkbox" name="" id=""></div>
     <div class="list-document-type" :class="{'draft-type-style': type === 'draft'}">
       <span>
         {{getTypes.find(item => item.id === documentItem.type_id)?.name}}

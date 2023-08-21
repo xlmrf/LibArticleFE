@@ -1,7 +1,7 @@
 <template>
   <div class="modal-component draft-modal">
     <h3>top modal</h3>
-    <div class="drafts-panel">
+    <div class="modal-component-body drafts-panel">
       <div v-for="draft in drafts" v-if="drafts.length > 0">
         <document-item :documentItem="draft" type="draft" />
       </div>
@@ -48,4 +48,8 @@ export default {
 
 <style scoped>
 
+.drafts-panel{
+
+
+}
 </style>

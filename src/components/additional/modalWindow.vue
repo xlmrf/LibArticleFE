@@ -122,7 +122,6 @@ export default {
 }
 .modalActive {
   position: absolute;
-  overflow-y: auto;
   width: 60%;
   top: 60px;
   left: 20%;
@@ -150,6 +149,21 @@ export default {
 .modalClose:hover{
   /*stroke: #222222;*/
   background: rgba(236, 236, 236, 0.2);
+}
+
+.modal-component-body{
+
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  margin-top: 5px;
+  height: 90%;
+  width: -moz-available;
+  position: absolute;
+  /*font-size: 0.8em;*/
+  overflow: auto;
+  z-index: 10;
+
 }
 
 .modalWindow {
