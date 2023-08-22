@@ -8,7 +8,7 @@
       {{ this.$store.getters.getLanguage.document_make.signs.only_year }}
       <input type="radio" v-model="formatDate" ref="only_year" value="year">
     </span>
-    <span v-if="!getTypes.find(type => type.id === getDocument.type_id)?.rules.publication_date.includes('required')" @click="this.$refs.none_date.click()" :class="{active_date_format:formatDate==='null'}">
+    <span v-if="!getTypes.find(type => type.id === getMakeDocument.type_id)?.rules.publication_date.includes('required')" @click="this.$refs.none_date.click()" :class="{active_date_format:formatDate==='null'}">
       {{ this.$store.getters.getLanguage.document_make.signs.none_date }} <input type="radio" v-model="formatDate"
                                                                                  ref="none_date" value="null">
     </span>
@@ -43,10 +43,10 @@
       </select>
     </div>
     <div class="native-date" v-if="formatDate==='date'">
-      {{ new Date(Date.parse(getDocument.publication_date)).toDateString() }}
+      {{ new Date(Date.parse(getMakeDocument.publication_date)).toDateString() }}
     </div>
     <div class="native-date" v-else-if="formatDate==='year'">
-      {{ new Date(Date.parse(getDocument.publication_date)).getFullYear() }}
+      {{ new Date(Date.parse(getMakeDocument.publication_date)).getFullYear() }}
     </div>
   </div>
 </template>
@@ -82,9 +82,9 @@ export default {
     // },
     emitDate() {
       const {year, month, day} = this;
-      this.getDocument.publication_date = `${year}-${month}-${day}`
+      this.getMakeDocument.publication_date = `${year}-${month}-${day}`
       if (this.formatDate === 'year') {
-        this.getDocument.publication_date = `${year}`
+        this.getMakeDocument.publication_date = `${year}`
       }
       // console.log(new Date(year, month, day).toString())
     }
@@ -92,11 +92,11 @@ export default {
   watch: {
     formatDate() {
       if (this.formatDate === 'date') {
-        this.getDocument.publication_date = `${this.year}-${this.month}-${this.day}`
+        this.getMakeDocument.publication_date = `${this.year}-${this.month}-${this.day}`
       } else if (this.formatDate === 'year') {
-        this.getDocument.publication_date = `${this.year}-01-01`
+        this.getMakeDocument.publication_date = `${this.year}-01-01`
       } else {
-        this.getDocument.publication_date = null
+        this.getMakeDocument.publication_date = null
       }
     },
     year() {
@@ -110,7 +110,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getDocument', 'getTypes']),
+    ...mapGetters(['getMakeDocument', 'getTypes']),
     maxDate() {
       const {month} = this;
       if (['01', '03', '05', '07', '08', '10', '12'].includes(month)) {
@@ -123,14 +123,14 @@ export default {
   },
   mounted() {
 
-    this.dateExist = !this.getDocument.publication_date;
+    this.dateExist = !this.getMakeDocument.publication_date;
 
     const currentYear = new Date().getFullYear();
     for (let i = -100; i <= 0; i++) {
       this.years.push(currentYear + i);
     }
 
-    const d = moment(this.getDocument.publication_date || new Date());
+    const d = moment(this.getMakeDocument.publication_date || new Date());
     this.year = d.format("YYYY");
     this.month = d.format("MM");
     console.log(this.month);

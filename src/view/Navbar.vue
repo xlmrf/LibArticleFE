@@ -53,12 +53,29 @@ export default {
     }
   },
   computed: {
+    ...mapGetters(['getMakeDocument']),
     addRefs(){
+
+
+      // this.getMakeDocument.references
+      //
+      // console.log('search docs log:',this.$route.query,this.getMakeDocument.references);
+
+      let q = Object.assign({}, this.$route.query)
+      const id = this.$route.query.from
+      this.$router.push({
+        name: 'documents',
+        query: {...q, ...{confirm_refs:true}}
+      })
+      // setTimeout(() => {
+      //   this.$router.push('/document/make/'+id)
+      // },100)
+
 
     },
   },
   methods: {
-    ...mapMutations(['updateUser', 'makeDocument']),
+    ...mapMutations(['updateUser']),
 
     query(keywords) {
 
@@ -98,6 +115,9 @@ export default {
   mounted() {
     if (this.$route.query.search) {
       this.keywords = this.$route.query.search
+    }
+    if (this.$route.query.from && this.getMakeDocument.id !== this.$route.query.from){
+      this.$router.push('/document/make/'+this.$route.query.from)
     }
 
   },

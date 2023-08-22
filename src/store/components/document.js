@@ -5,13 +5,13 @@ export default {
     state() {
         return {
             document: {},
-            last_documents: [],
-            info: [],
-            // types: [],
+            makeDocument: {},
+
+            warnings: [],
             titleInputRef:null,
+
             propose_authors: [],
-            newDocumentId: null,
-            uncompletedDocument: '',
+
         }
     },
     actions: {
@@ -25,11 +25,6 @@ export default {
                 ctx.commit('setInfo', err)
             })
         },
-        // requestTypes(ctx) {
-        //     axios.get(ctx.rootState.api_url_v1 + '/document-types').then(response => {
-        //         ctx.commit('types', response.data)
-        //     })
-        // },
 
         requestDocument(ctx, id) {
 
@@ -56,59 +51,49 @@ export default {
     },
     mutations: {
         catchError(ctx,data){
-            ctx.info = data
+            ctx.warnings = data
         },
-        makeDocument(ctx,data){
-            console.log('make document data:', data)
-        },
-        uploadResult(state, data){
+        uploadResult(ctx, data){
            // state.document = data
             router.push('/document/' + data.id)
 
         },
-        updateDocument(state, data) {
-            state.document = {...state.document, ...data}
+
+        updateStoreDocument(ctx, data) {
+            data === {} ? ctx.makeDocument = {} : ctx.makeDocument = {...ctx.makeDocument, ...data}
         },
-        DocumentMutate(state,data){
-            state.document = data
+
+        DocumentMutate(ctx,data){
+            ctx.document = data
         },
-        DocAuthors(state,data){
-            state.document.authors = data
+
+        DocAuthors(ctx,data){
+            ctx.document.authors = data
         },
-        // types(state, data) {
-        //     state.types = data
-        // },
-        mutateLastDocuments(ctx, data) {
-            ctx.last_documents = data
-        },
+
         updateTitle(ctx,data){
             ctx.titleInputRef = data
         }
 
     },
     getters: {
-        getUncompletedDocument(ctx) {
-            return ctx.uncompletedDocument
-        },
+
+
+
         getDocumentMakeWarning(ctx){
-            return ctx.info
+            return ctx.warnings
         },
-        // getTypes(ctx) {
-        //     // console.log('ctx:', ctx.categories);
-        //     return ctx.types;
-        // },
-        getProposeAuthors(ctx) {
-            return ctx.propose_authors
-        },
-        getNewDocumentId(ctx) {
-            return ctx.newDocumentId
-        },
-        getLastDocuments(ctx) {
-            return ctx.last_documents
-        },
+
         getDocument(ctx) {
             return ctx.document
         },
+
+        getMakeDocument(ctx){
+            return ctx.makeDocument
+        },
+
+
+        // get title input into MD (MakeDocument)
         getTitleInput(ctx){
             return ctx.titleInputRef
         }

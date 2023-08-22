@@ -1,6 +1,7 @@
 <template>
   <div class="document-make-body">
-    <second-stage @prev="prev" v-if="!prev_stage && this.$route.params.id"/>
+    <loader class="loader middle-spinner" width="3" radius="15" v-if="loader" />
+    <second-stage @prev="prev" v-else-if="!prev_stage && this.$route.params.id"/>
     <first-stage v-else @next="next"/>
 <!--    {{this.getDocument.title}}-->
   </div>
@@ -12,6 +13,7 @@ import FirstStage from "@/components/DocumentMake/PrevMakeDocument";
 import SecondStage from "@/components/DocumentMake/EditDocument";
 import axios from "axios";
 import router from "@/router";
+import Loader from "@/components/additional/loader";
 
 export default {
 
@@ -19,25 +21,24 @@ export default {
   data() {
     return{
       prev_stage: true,
-      error: null
+      error: null,
+      loader: false
     }
   },
 
   methods: {
-    ...mapMutations(['DocumentMutate','updateDocument', 'catchError']),
+    ...mapMutations(['DocumentMutate','updateStoreDocument', 'catchError']),
     ...mapActions(['requestDocument']),
 
-    async next(type) {
+    async next(forced = '') {
       const id = this.$route.params.id;
       const keyParts = [];
-
-      console.log(this.getDocument)
 
       if (id) {
         keyParts.push('first-stage=true');
       }
 
-      if (type === 'forced') {
+      if (forced === 'forced') {
         keyParts.push('forced=true');
       }
 
@@ -49,10 +50,11 @@ export default {
 
       try {
 
-        const response = await axios[id ? 'patch' : 'post'](url, { title: this.getDocument.title, type_id: this.getDocument.type_id });  //{ title: this.getDocument.title, type_id: this.getDocument.type_id }
+        // create or update document
+        const response = await axios[id ? 'patch' : 'post'](url, { title: this.getMakeDocument.title, type_id: this.getMakeDocument.type_id });  //{ title: this.getMakeDocument.title, type_id: this.getMakeDocument.type_id }
         this.prev_stage = false;
         if (response.data.message !== 'update'){
-          this.updateDocument(response.data);
+          this.updateStoreDocument(response.data);
           router.push('/document/make/' + response.data.id);
         }
       } catch (err) {
@@ -66,7 +68,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getDocument', 'getTypes']),
+    ...mapGetters(['getMakeDocument', 'getTypes']),
     ...mapState(['api_url_v1'])
   },
   watch: {
@@ -76,47 +78,41 @@ export default {
       },
       deep: true
     },
-    'getDocument':{
+    'getMakeDocument':{
       handler(){
         this.titleError = false
       },
       deep:true
     }
   },
-  mounted() {
+
+  async mounted() {
     this.DocumentMutate({})
+    this.updateStoreDocument({});
     if (this.$route.params.id !== '') {
-      this.requestDocument(this.$route.params.id);
-      this.prev_stage = false
-    }
-    console.log('id:',this.$route.params.id);
-  },
-  updated() {
-    if (this.$route.params.id !== '' && !this.getDocument.id) {
-      console.log('beforeUpdate');
-      // this.getDocumentById(this.$route.params.id);
+      this.loader = true
+      await axios.get(this.api_url_v1 + '/document/' + this.$route.params.id).then(response =>
+          this.updateStoreDocument(response.data), err => this.catchError(err.response))
+      this.loader = false
       this.prev_stage = false
     }
   },
 
   name: "DocumentMake",
-  components: {SecondStage, FirstStage}
+  components: {Loader, SecondStage, FirstStage}
 }
 </script>
 
 <style scoped>
-.code{
-  border: 1px solid #bbb;
-  color: #0e710e;
-  border-radius: 2px;
-  padding: 5px;
-  margin: 5px;
-}
 
 .document-make-body {
   height: 100%;
   /*background: #FCFCFC;*/
   /*border:1px solid #0d2839;*/
+}
+
+.loader{
+  display: flex;
 }
 
 .document-make-body > div{

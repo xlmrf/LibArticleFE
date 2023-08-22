@@ -1,7 +1,7 @@
 <template>
   <div>
     <textarea cols="30" rows="10" class="sample-input document-description-area"
-              v-model="getDocument.description"></textarea>
+              v-model="getMakeDocument.description"></textarea>
     <div class="text-error error-area-text" v-if="invalid">
       {{ $store.getters.getLanguage.document_make.field_error[invalid] }}
     </div>
@@ -25,7 +25,7 @@ export default {
       if (this.isReady)
         this.validation()
     },
-    'getDocument.description': {
+    'getMakeDocument.description': {
       handler() {
         this.invalid = ''
       },
@@ -36,7 +36,7 @@ export default {
 
     validation() {
 
-      if (!this.getDocument.description) {
+      if (!this.getMakeDocument.description) {
         this.invalid = 'none_description'
         this.$emit('catchValidate', this.$options.name)
       }
@@ -47,7 +47,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(['getDocument'])
+    ...mapGetters(['getMakeDocument'])
   },
 }
 </script>

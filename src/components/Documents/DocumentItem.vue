@@ -117,6 +117,18 @@ export default {
 
 
 
+    },
+    '$route':{
+      handler(item){
+        console.log('router watcher:',item)
+        if (item.query.confirm_refs && item.query.refs_doc_id === this.documentItem.id){
+          this.getMakeDocument.references.push({
+            reference_document_id:this.documentItem.id,
+            bibliographic_description: this.documentItem.title
+          })
+        }
+      },
+      deep:true
     }
   },
   methods:{
@@ -145,7 +157,7 @@ export default {
   },
 
   computed:{
-    ...mapGetters(['getTypes']),
+    ...mapGetters(['getTypes','getMakeDocument']),
     ...mapState(['api_url_v1'])
   },
   mounted() {

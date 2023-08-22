@@ -12,8 +12,8 @@
       <span class="add-btn add-ref-btn" @click="addReference">{{ edit ? $store.getters.getLanguage.document_make.signs.save_btn : $store.getters.getLanguage.document_make.signs.add_btn }}</span>
       <span class="add-btn search-in-system-btn" @click="searchReference">{{ $store.getters.getLanguage.document_make.signs.search_in_lib }}</span>
     </span>
-    <div class="complex-item-control reference-list" v-if="getDocument.references.length > 0">
-    <span class="reference-item" v-for="(el,idx) in getDocument.references.filter(item=>!item.delete)" :key="idx">
+    <div class="complex-item-control reference-list" v-if="getMakeDocument.references.length > 0">
+    <span class="reference-item" v-for="(el,idx) in getMakeDocument.references.filter(item=>!item.delete)" :key="idx">
       <span :class="{'italic':el.edit}">{{
         idx + 1
       }}. {{ el.bibliographic_description }}</span>
@@ -70,9 +70,9 @@ export default {
       if (this.isReady)
         this.validation()
     },
-    'getDocument.references':{
+    'getMakeDocument.references':{
       handler(){
-        if (this.getDocument.references && this.getDocument.references.length > 0) {
+        if (this.getMakeDocument.references && this.getMakeDocument.references.length > 0) {
           this.invalid = ''
         }
       },
@@ -84,15 +84,15 @@ export default {
 
     validation(){
 
-      if (!this.getDocument.references || this.getDocument.references.length < 1){
+      if (!this.getMakeDocument.references || this.getMakeDocument.references.length < 1){
         this.invalid = 'none_references'
         this.$emit('catchValidate', this.$options.name)
-        this.getDocument.references = []
+        this.getMakeDocument.references = []
       }
     },
 
     deleteReferenceIntup() {
-      this.getDocument.references.find(item => {
+      this.getMakeDocument.references.find(item => {
         delete item.edit
       })
       this.edit = false;
@@ -100,7 +100,7 @@ export default {
     },
 
     editRef(el) {
-      this.getDocument.references.find(item => {
+      this.getMakeDocument.references.find(item => {
         delete item.edit
       })
       this.reference = el.bibliographic_description
@@ -115,43 +115,43 @@ export default {
       if (!this.reference) {
         this.localError = 'Введіть значення'
       }
-      else if(this.getDocument.references.find(item => item.bibliographic_description === this.reference)) {
+      else if(this.getMakeDocument.references.find(item => item.bibliographic_description === this.reference)) {
         this.localError = 'Посилання існує'
       }
       else {
         if (this.localError) {
           this.localError = ''
         }
-        if (this.getDocument.references === undefined || this.getDocument.references === null) {
-          this.getDocument.references = [];
+        if (this.getMakeDocument.references === undefined || this.getMakeDocument.references === null) {
+          this.getMakeDocument.references = [];
         }
-        let editEl = this.getDocument.references.find(item => item.edit === true);
+        let editEl = this.getMakeDocument.references.find(item => item.edit === true);
         if (editEl) {
           editEl.bibliographic_description = this.reference;
           delete editEl.edit
           this.edit = false;
         } else {
-          this.getDocument.references.push({bibliographic_description: this.reference});
+          this.getMakeDocument.references.push({bibliographic_description: this.reference});
         }
         this.reference = ''
       }
     },
     searchReference(){
-
+      this.$router.push('/documents?from='+this.getMakeDocument.id+'&refs_doc_id=[]')
     },
 
     deleteKeyword(idx, reference) {
       console.log("item", idx);
       if (reference.id) {
-        this.getDocument.references[idx]['delete'] = true;
+        this.getMakeDocument.references[idx]['delete'] = true;
       } else {
-        this.getDocument.references.splice(idx, 1)
+        this.getMakeDocument.references.splice(idx, 1)
       }
     },
 
     handleEscKeyPress(event) {
       if (this.edit && event.key === "Escape") {
-        this.getDocument.references.find(item => {
+        this.getMakeDocument.references.find(item => {
           delete item.edit
         })
         this.edit = false
@@ -163,13 +163,13 @@ export default {
 
 
   computed: {
-    ...mapGetters(['getDocument'])
+    ...mapGetters(['getMakeDocument'])
   },
 
 
   beforeMount() {
-    if (!this.getDocument.references) {
-      this.getDocument.references = []
+    if (!this.getMakeDocument.references) {
+      this.getMakeDocument.references = []
     }
     document.removeEventListener("keydown", this.handleEscKeyPress);
   },

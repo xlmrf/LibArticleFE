@@ -2,7 +2,7 @@
   <div class="top">
     <h2>{{ $store.getters.getLanguage.document_make.signs.document_name }}</h2>
     <input ref="titleInput" type="text" required name="title" :class="['title-input',{'alert-input':error}]" id="title" placeholder="Навчальний посібник з дисципліни «Теорія ймовірностей, імовірнісні процеси та математична статистика». Курс лекцій"
-           v-model="getDocument.title">
+           v-model="getMakeDocument.title">
     <label for="title" v-if="error">{{ getErrorMessage[error] }}</label>
   </div>
 </template>
@@ -39,7 +39,7 @@ export default {
   // inject:['titleFieldError'],
   computed: {
     ...mapState(['titleInputRef']),
-    ...mapGetters(['getDocument', 'getErrorMessage', 'getTitleInput']),
+    ...mapGetters(['getMakeDocument', 'getErrorMessage', 'getTitleInput']),
   },
   // methods(){
   //

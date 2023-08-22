@@ -28,8 +28,6 @@ export default {
     clearRefs(){
       let q = Object.assign({}, this.$route.query);
 
-      console.log('qqq',q);
-
       delete q.refs_doc_id
 
       this.$router.replace({
@@ -52,10 +50,17 @@ export default {
 .selected-refs-panel > span:last-child{
   margin-left: auto;
   cursor: pointer;
-  background: #EB4C42;
+  background: rgba(235, 76, 66, 0.97);
   padding: 5px 12px;
   border-radius: 4px;
   color: white;
+
+  transition: box-shadow 0.12s ease-in-out;
+  display: inline-block;
+}
+
+.selected-refs-panel > span:last-child:hover {
+  box-shadow: 0px 2px 2px rgba(255, 0, 0, 0.5); /* Тінь: offsetX offsetY blurColor shadowColor */
 }
 
 .filter-title{

@@ -1,12 +1,13 @@
 <template>
-  <div class="middle-spinner" v-if="!this.getDocument.id">
+  <div class="middle-spinner" v-if="!this.getMakeDocument.id">
     <span><loader width="4" radius="20"></loader></span>
   </div>
   <div v-else>
+    {{getMakeDocument}}
     <div class="card-top">
-      <h2 :style="{ 'font-size': '22px' }" ref="refTitle">{{ getDocument.title }}</h2>
-      <h4>{{ getTypes.find(type => type.id === getDocument.type_id)?.name }}</h4>
-      <!--      <h4>{{getDocument}}</h4>-->
+      <h2 :style="{ 'font-size': '22px' }" ref="refTitle">{{ getMakeDocument.title }}</h2>
+      <h4>{{ getTypes.find(type => type.id === getMakeDocument.type_id)?.name }}</h4>
+      <!--      <h4>{{getMakeDocument}}</h4>-->
       <span class="rename-title-btn" @click="$emit('prev')">
         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#BBBBBB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="14 2 18 6 7 17 3 17 3 13 14 2"></polygon><line x1="3" y1="22" x2="21" y2="22"></line></svg>
       </span>
@@ -14,7 +15,7 @@
     <div class="fill-areas-document">
       <files-frame-component :empty="fileEmpty" @fileLoad="this.fileEmpty = false"/>
       <div class="fill-areas">
-        <div class="form-item" v-for="(item,idx) in getTypes.find(type => type.id === getDocument.type_id)?.fields"
+        <div class="form-item" v-for="(item,idx) in getTypes.find(type => type.id === getMakeDocument.type_id)?.fields"
              :key="idx" :class="{'universal-field': ['edition','place'].includes(item) }" >
           <label :for="item">
             {{this.$store.getters.getLanguage.document_make.signs[item] }}
@@ -77,7 +78,7 @@ export default {
     }
   },
   watch:{
-    // getDocument:{
+    // getMakeDocument:{
     //   handler() {
     //     this.invalidAreas = {}
     //     this.fileEmpty = false
@@ -95,7 +96,7 @@ export default {
   },
   methods: {
     ...mapActions(['updateDocument', 'requestDocument']),
-    ...mapMutations(['DocumentMutate', 'FilePusher']),
+    ...mapMutations(['DocumentMutate', 'FilePusher', "updateStoreDocument"]),
 
     validate(name){
       this.validationItems.push(name)
@@ -112,7 +113,7 @@ export default {
 
     async update(){
       await this.check()
-      let document = this.getDocument
+      let document = this.getMakeDocument
 
       if (Object.keys(this.validationItems).length === 0 && !this.fileEmpty){
         console.log('upd doc not work')
@@ -123,7 +124,7 @@ export default {
 
     toArchive(){
       this.serverError = null
-      let document = this.getDocument
+      let document = this.getMakeDocument
       document.files = this.getFiles
       this.updateDocument(document)
     },
@@ -131,7 +132,7 @@ export default {
       console.log('CHECK FUNCTION')
       this.validationItems = []
       this.serverError = null
-      const rules = this.getTypes.find(type => type.id === this.getDocument.type_id)?.rules
+      const rules = this.getTypes.find(type => type.id === this.getMakeDocument.type_id)?.rules
       const requiredKeys = Object.keys(rules).filter(key => rules[key].includes('required'));
       this.isReady = true
       setTimeout(() => {
@@ -147,7 +148,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(['getDocument', 'getTypes','getFiles']),
+    ...mapGetters(['getMakeDocument', 'getTypes','getFiles']),
     ...mapState(['api_url_v1']),
 
     resetDocument() {
@@ -159,16 +160,18 @@ export default {
   },
 
   beforeMount() {
-    // console.log('edit document mount doc, params: ', this.getDocument, this.$route.params)
-    if (this.getDocument.id && this.getDocument.id != this.$route.params.id){
-      this.DocumentMutate({})
+    // console.log('edit document mount doc, params: ', this.getMakeDocument, this.$route.params)
+    if (this.getMakeDocument.id && this.getMakeDocument.id != this.$route.params.id){
+      this.updateStoreDocument({})
       this.requestDocument(this.$route.params.id);
     }
   },
   mounted() {
-    console.log('edit document mount doc, params: ', this.getDocument, this.$route.params)
-    if (!this.getDocument.id) {
-      this.requestDocument(this.$route.params.id);
+    console.log('edit document mount doc, params: ', this.getMakeDocument, this.$route.params)
+    if (!this.getMakeDocument.id) {
+      axios.get(this.api_url_v1+'/document/' + this.$route.params.id).then(response =>
+          this.updateStoreDocument(response.data), err => console.log(err.response)
+      )
     }
   },
 

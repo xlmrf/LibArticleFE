@@ -61,7 +61,7 @@ export default {
       this.draftTumbler = !this.draftTumbler
     },
     createDocument(e){
-      if (!this.getDocument.title){
+      if (!this.getMakeDocument.title){
         this.titleError = 'empty_field'
       }
       else{
@@ -83,10 +83,10 @@ export default {
     },
   },
   computed:{
-    ...mapGetters(['getDocument','getErrorMessage', 'getDocumentMakeWarning']),
+    ...mapGetters(['getMakeDocument','getErrorMessage', 'getDocumentMakeWarning']),
     ...mapState(['api_url_v1']),
     BtnValid(){
-      return this.btn_enabled = !!(this.getDocument.type_id && this.getDocument.title);
+      return this.btn_enabled = !!(this.getMakeDocument.type_id && this.getMakeDocument.title);
     },
 
   },

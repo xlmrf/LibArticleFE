@@ -101,9 +101,10 @@ export default {
       })
     },
     clearFilter(){
+      const id = this.$route.query.from
       this.$router.replace({
         name: 'documents',
-        query: {}
+        query: {...{from:id}, ...{refs_doc_id:this.$route.query.refs_doc_id}}
       })
     }
   },

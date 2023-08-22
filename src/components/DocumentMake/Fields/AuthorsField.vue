@@ -7,7 +7,7 @@
         </label>
         <span class="new-author-btn" @click="addAuthor">{{ this.$store.getters.getLanguage.document_make.signs.add_author}}</span>
     </span>
-    <div v-for="(author,idx) in getDocument.authors?.filter(item=>!item.delete)" :key="idx" class="author-list-item">
+    <div v-for="(author,idx) in getMakeDocument.authors?.filter(item=>!item.delete)" :key="idx" class="author-list-item">
       <div>
         <label for="author_email">{{ this.$store.getters.getLanguage.document_make.signs.email}}</label>
         <input type="text" :disabled="idx === 0 ? coAuthor : false"
@@ -33,7 +33,7 @@
                :class="{'sample-input-error':authorError[idx]?.includes('first_name')}"
                class='sample-input'>
       </div>
-      <span class="user-remove-btn" v-if="getDocument.authors?.filter(item=>!item.delete).length>1"
+      <span class="user-remove-btn" v-if="getMakeDocument.authors?.filter(item=>!item.delete).length>1"
             @click="removeAuthor(idx, author)">
           <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
                stroke="#9A9A9A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -77,7 +77,7 @@ export default {
     coAuthor() {
       this.imCoAuthor()
     },
-    'getDocument.authors':{
+    'getMakeDocument.authors':{
       handler(){
         this.authorError = []
         this.invalid = ''
@@ -86,7 +86,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getDocument', 'getUser']),
+    ...mapGetters(['getMakeDocument', 'getUser']),
     ...mapState(['api_url_v1']),
 
   },
@@ -98,15 +98,15 @@ export default {
       console.log('validation')
       this.authorError = []
       this.invalid = ''
-      if (this.getDocument.authors.length < 1 ||
-          (this.getDocument.authors.length < 2 && Object.keys(this.getDocument.authors[0]).length < 1)){
+      if (this.getMakeDocument.authors.length < 1 ||
+          (this.getMakeDocument.authors.length < 2 && Object.keys(this.getMakeDocument.authors[0]).length < 1)){
         // this.$emit('checkField', this.$options.name)
         this.invalid = 'none_author'
         return this.$emit('catchValidate', this.$options.name)//if component has mistakes
       }
 
-      for (let i in this.getDocument.authors){
-        let author = this.getDocument.authors[i]
+      for (let i in this.getMakeDocument.authors){
+        let author = this.getMakeDocument.authors[i]
         if (author.first_name === '' || author.last_name === '' || author.email === '')
           this.authorError[i] = []
         if (!author.first_name)
@@ -118,8 +118,8 @@ export default {
 
         this.invalid = !this.authorError[i] ? '' : 'partially_filled'
         if (!this.invalid){
-          if (this.checkEmail(this.getDocument.authors[i].email)){
-              this.invalid = this.checkEmail(this.getDocument.authors[i].email)
+          if (this.checkEmail(this.getMakeDocument.authors[i].email)){
+              this.invalid = this.checkEmail(this.getMakeDocument.authors[i].email)
               this.authorError[i] = this.invalid
               this.$emit('catchValidate', this.$options.name)
           }
@@ -146,12 +146,12 @@ export default {
       })
     },
     addExistAuthor(author,idx) {
-      this.getDocument.authors[idx] = author;
+      this.getMakeDocument.authors[idx] = author;
       this.proposeAuthors[idx] = null;
     },
     addAuthor() {
-      console.log(this.getDocument);
-      this.getDocument.authors.push({
+      console.log(this.getMakeDocument);
+      this.getMakeDocument.authors.push({
         first_name:'',
         last_name: '',
         email:''
@@ -159,9 +159,9 @@ export default {
     },
     removeAuthor(idx, author) {
       if (author.id) {
-        this.getDocument.authors[idx]['delete'] = true;
+        this.getMakeDocument.authors[idx]['delete'] = true;
       } else {
-        this.getDocument.authors.splice(idx, 1)
+        this.getMakeDocument.authors.splice(idx, 1)
       }
       if (this.proposeAuthors[idx]){
         this.proposeAuthors[idx] = null
@@ -176,20 +176,20 @@ export default {
         email: this.getUser.email
       }
       if (this.coAuthor) {
-        if (!this.getDocument.authors[0]){
+        if (!this.getMakeDocument.authors[0]){
           this.authorError.unshift(null)
-          this.getDocument.authors.unshift(author)
+          this.getMakeDocument.authors.unshift(author)
         }
-        else if (Object.values(this.getDocument.authors[0]).some(e => e)) {
+        else if (Object.values(this.getMakeDocument.authors[0]).some(e => e)) {
           this.authorError.unshift(null)
-          this.getDocument.authors.unshift(author)
+          this.getMakeDocument.authors.unshift(author)
         } else {
-          this.getDocument.authors[0] = author
+          this.getMakeDocument.authors[0] = author
         }
       } else {
-        this.getDocument.authors.shift()
-        if (!this.getDocument.authors[0]) {
-          this.getDocument.authors.unshift({
+        this.getMakeDocument.authors.shift()
+        if (!this.getMakeDocument.authors[0]) {
+          this.getMakeDocument.authors.unshift({
             first_name: '',
             last_name: '',
             // middle_name: '',
@@ -202,7 +202,7 @@ export default {
 
   },
   mounted() {
-    if (!this.getDocument.authors || !this.getDocument.authors.length) {
+    if (!this.getMakeDocument.authors || !this.getMakeDocument.authors.length) {
       // this.DocAuthors([{}])
       // this.getDocument.authors = []
       // this.getDocument.authors.push({})

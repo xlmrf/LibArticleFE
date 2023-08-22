@@ -419,6 +419,12 @@ input {
   bottom: -20px;
   position: absolute;
 }
-
+.code{
+  border: 1px solid #bbb;
+  color: #0e710e;
+  border-radius: 2px;
+  padding: 5px;
+  margin: 5px;
+}
 
 </style>

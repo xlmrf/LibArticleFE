@@ -5,8 +5,8 @@
       <span class="add-btn" @click="addKeyword">{{ this.$store.getters.getLanguage.document_make.signs.add_btn}}</span>
     </span>
     <small class="local-error-text">{{ localError }}</small>
-    <div :class="['list-keywords',{'list-able':this.getDocument.keywords}]" v-if="this.getDocument.keywords?.length > 0">
-      <li v-for="(el,idx) in getDocument.keywords">
+    <div :class="['list-keywords',{'list-able':this.getMakeDocument.keywords}]" v-if="this.getMakeDocument.keywords?.length > 0">
+      <li v-for="(el,idx) in getMakeDocument.keywords">
         {{ el }}
         <small @click="deleteKeyword(idx)">
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
@@ -21,7 +21,7 @@
   <div class="text-error error-area-text border-error" v-if="invalid">{{ $store.getters.getLanguage.document_make.field_error[invalid] }}</div>
   <!--  <div>-->
   <!--    <small>keywords</small>-->
-  <!--    <input type="text" name="" id="" v-model="getDocument.keywords">-->
+  <!--    <input type="text" name="" id="" v-model="getMakeDocument.keywords">-->
   <!--  </div>-->
 </template>
 
@@ -49,9 +49,9 @@ export default {
       if (this.isReady)
         this.validation()
     },
-    'getDocument.keywords':{
+    'getMakeDocument.keywords':{
       handler(){
-        if (this.getDocument.keywords && this.getDocument.keywords.length > 0) {
+        if (this.getMakeDocument.keywords && this.getMakeDocument.keywords.length > 0) {
           this.invalid = ''
         }
       },
@@ -62,10 +62,10 @@ export default {
 
     validation(){
 
-      if (!this.getDocument.keywords || this.getDocument.keywords.length < 1){
+      if (!this.getMakeDocument.keywords || this.getMakeDocument.keywords.length < 1){
         this.invalid = 'none_keywords'
         this.$emit('catchValidate', this.$options.name)
-        this.getDocument.keywords = []
+        this.getMakeDocument.keywords = []
       }
     },
 
@@ -80,22 +80,22 @@ export default {
         if (this.localError) {
           this.localError = ''
         }
-        if (this.getDocument.keywords === undefined||this.getDocument.keywords === null) {
-          this.getDocument.keywords = [];
+        if (this.getMakeDocument.keywords === undefined||this.getMakeDocument.keywords === null) {
+          this.getMakeDocument.keywords = [];
         }
-        this.getDocument.keywords.push(this.keyword)
+        this.getMakeDocument.keywords.push(this.keyword)
         this.keyword = ''
       }
     },
     deleteKeyword(idx) {
-      this.getDocument.keywords.splice(idx, 1)
+      this.getMakeDocument.keywords.splice(idx, 1)
     },
   },
   computed: {
-    ...mapGetters(['getDocument'])
+    ...mapGetters(['getMakeDocument'])
   },
   // mounted() {
-  //   if (!this.getDocument.keywords){
+  //   if (!this.getMakeDocument.keywords){
   //     this.getDocument.keywords = []
   //     console.log(this.getDocument.keywords.length);
   //   }

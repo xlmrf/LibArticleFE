@@ -12,7 +12,7 @@
         <p class="modal-text-warning">
 <!--          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"></polygon><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>-->
           <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
-          <span>{{ $store.getters.getLanguage.document_make.warnings.document_exists}}<router-link :to="'/document/'+getDocumentMakeWarning[0]?.documents[0]" class="link-to-doc" target="_blank">
+          <span>{{ $store.getters.getLanguage.document_make.warnings.document_exists}}<router-link :to="'/document/'+getMakeDocument[0]?.documents[0]" class="link-to-doc" target="_blank">
             {{ $store.getters.getLanguage.document_make.warnings.view}} <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#318CE7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 17l5-5-5-5M6 17l5-5-5-5"/></svg></router-link></span>
         </p>
         <div class="btn-panel">
