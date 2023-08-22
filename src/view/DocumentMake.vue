@@ -87,14 +87,16 @@ export default {
   },
 
   async mounted() {
-    this.DocumentMutate({})
-    this.updateStoreDocument({});
+    // this.DocumentMutate({})
+    // this.updateStoreDocument({});
     if (this.$route.params.id !== '') {
-      this.loader = true
-      await axios.get(this.api_url_v1 + '/document/' + this.$route.params.id).then(response =>
-          this.updateStoreDocument(response.data), err => this.catchError(err.response))
-      this.loader = false
       this.prev_stage = false
+      if (this.$route.params.id != this.getMakeDocument.id) {
+        this.loader = true
+        await axios.get(this.api_url_v1 + '/document/' + this.$route.params.id).then(response =>
+            this.updateStoreDocument(response.data), err => this.catchError(err.response))
+        this.loader = false
+      }
     }
   },
 

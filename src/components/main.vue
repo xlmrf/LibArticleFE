@@ -29,7 +29,7 @@ export default {
     '$route.fullPath':{
       handler(){
         console.log('route: ',this.$route.fullPath);
-        this.scrollToTop()
+        // this.scrollToTop()
       }
     }
   },
@@ -40,12 +40,12 @@ export default {
         this.updateTypes(response.data)
       })
     },
-    scrollToTop() {
-      window.scrollTo({top: 0});
-    },
-    handleScroll() {
-      const scrollBtn = this.$refs.scrollTopButton;
-    },
+    // scrollToTop() {
+    //   window.scrollTo({top: 0});
+    // },
+    // handleScroll() {
+    //   const scrollBtn = this.$refs.scrollTopButton;
+    // },
   },
 
   mounted() {

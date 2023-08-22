@@ -20,15 +20,37 @@ export default {
   },
   name: "Documents",
   watch: {
-    '$route.fullPath': {
-      handler(item) {
-        let q = '';
-        if (this.$route.fullPath.split('?')[1]) {
-          q = '?' + this.$route.fullPath.split('?')[1];
+    '$route': {
+      handler(route) {
+        let search = localStorage.getItem('search')
+
+        let arr = []
+        let filteredArr = []
+        arr.push(route.fullPath.split('?'))
+        search ? arr.push(search.split('?')) : ''
+        for (let item in arr) {
+          if (item.length > 1) {
+            const query = item[1]
+            const params = query.split('&')
+            const filteredParams = params.filter(param => !param.startsWith('refs_doc_id='))
+            const outputText = `${item[0]}?${filteredParams.join('&')}`
+            filteredArr.push(outputText)
+          }
         }
-        this.DocumentsMutate({})
-        this.DocumentSearcher(q);
-      }
+
+        if (!route.query.refs_doc_id || (filteredArr[1] && filteredArr[0] !== filteredArr[1])){
+          // console.log('watcher44',!(filteredArr[1] && filteredArr[0] !== filteredArr[1]))
+          let q = '';
+          if (route.fullPath.split('?')[1]) {
+            q = '?' + route.fullPath.split('?')[1];
+          }
+          this.DocumentsMutate({})
+          this.DocumentSearcher(q);
+        }
+
+        localStorage.setItem('search',route.fullPath)
+      },
+      deep:true
     }
   },
   methods: {
@@ -51,6 +73,9 @@ export default {
     }
     this.DocumentSearcher(q);
     // this.requestTypes()
+  },
+  beforeUnmount() {
+    localStorage.removeItem('search')
   }
 }
 </script>

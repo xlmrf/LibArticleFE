@@ -63,13 +63,13 @@ export default {
 
       let q = Object.assign({}, this.$route.query)
       const id = this.$route.query.from
-      this.$router.push({
+      this.$router.replace({
         name: 'documents',
         query: {...q, ...{confirm_refs:true}}
       })
-      // setTimeout(() => {
-      //   this.$router.push('/document/make/'+id)
-      // },100)
+      setTimeout(() => {
+        this.$router.push('/document/make/'+id)
+      },1000)
 
 
     },

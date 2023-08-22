@@ -90,7 +90,6 @@ export default {
     this.sortSelect = this.$route.query.sort ? this.sortDocuments[this.$route.query.sort] : 'за популярністю'
     let i = Object.assign({},this.documents)
     // i.splice(i.indexOf(i.data), 1);
-    console.log('i', i);
   }
 }
 </script>

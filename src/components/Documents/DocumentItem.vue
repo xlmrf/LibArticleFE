@@ -120,8 +120,7 @@ export default {
     },
     '$route':{
       handler(item){
-        console.log('router watcher:',item)
-        if (item.query.confirm_refs && item.query.refs_doc_id === this.documentItem.id){
+        if (item.query.confirm_refs && JSON.parse(item.query.refs_doc_id).includes(this.documentItem.id)){
           this.getMakeDocument.references.push({
             reference_document_id:this.documentItem.id,
             bibliographic_description: this.documentItem.title

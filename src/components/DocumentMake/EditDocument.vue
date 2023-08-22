@@ -161,17 +161,15 @@ export default {
 
   beforeMount() {
     // console.log('edit document mount doc, params: ', this.getMakeDocument, this.$route.params)
-    if (this.getMakeDocument.id && this.getMakeDocument.id != this.$route.params.id){
-      this.updateStoreDocument({})
-      this.requestDocument(this.$route.params.id);
+    if (this.getMakeDocument.id && this.getMakeDocument.id !== this.$route.params.id){
+      console.log('document removed')
+      // this.updateStoreDocument({})
+      // this.requestDocument(this.$route.params.id);
     }
   },
   mounted() {
-    console.log('edit document mount doc, params: ', this.getMakeDocument, this.$route.params)
-    if (!this.getMakeDocument.id) {
-      axios.get(this.api_url_v1+'/document/' + this.$route.params.id).then(response =>
-          this.updateStoreDocument(response.data), err => console.log(err.response)
-      )
+    if (!this.getMakeDocument.id ) {
+      this.$emit('prev')
     }
   },
 
