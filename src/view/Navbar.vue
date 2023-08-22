@@ -5,7 +5,7 @@
     <div class="manual">
       <input type="text" name="search" id="search" class="input searcher" required v-model="keywords"
              @keydown.enter="query(keywords)">
-      <span class="search-by-refs" v-if="$route.query.refs_doc_id">посилання</span>
+      <span class="search-by-refs" v-if="$route.query.refs_doc_id">{{this.$store.getters.getLanguage.navbar.add_refs_btn }}</span>
       <span class="search-icon" @click="query(keywords)">
         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"
              viewBox="0 0 24 24" fill="none" stroke="#B2B2B2"
@@ -18,7 +18,10 @@
       <small class="title-error" v-if="false">Enter value</small>
       <!--      <button :class="['btn search-btn',{'valid-btn':keyword}]" >Пошук</button>-->
       <label v-if="mistake">{{ mistake }}</label>
-      <span class="btn-in-search" @click="addRefs" v-if="$route.query.refs_doc_id && JSON.parse($route.query.refs_doc_id).length > 0">Додати {{JSON.parse($route.query.refs_doc_id).length}}</span>
+      <span class="btn-in-search" @click="addRefs" v-if="$route.query.refs_doc_id && JSON.parse($route.query.refs_doc_id).length > 0">
+        {{this.$store.getters.getLanguage.navbar.add_refs_btn }} {{JSON.parse($route.query.refs_doc_id).length}}</span>
+      <span class="btn-in-search" @click="backToDoc" v-if="$route.query.refs_doc_id && JSON.parse($route.query.refs_doc_id).length < 1" >
+        {{this.$store.getters.getLanguage.navbar.back_to_doc_btn }}</span>
       <!--      <router-link to="/profile" class="manual-item">-->
       <!--        <span>Акаунт</span>-->
       <!--      </router-link>-->
@@ -56,7 +59,6 @@ export default {
     ...mapGetters(['getMakeDocument']),
     addRefs(){
 
-
       // this.getMakeDocument.references
       //
       // console.log('search docs log:',this.$route.query,this.getMakeDocument.references);
@@ -69,10 +71,14 @@ export default {
       })
       setTimeout(() => {
         this.$router.push('/document/make/'+id)
-      },1000)
+      },150)
 
 
     },
+    backToDoc(){
+      this.$router.push('/document/make/'+this.$route.query.from)
+    }
+
   },
   methods: {
     ...mapMutations(['updateUser']),

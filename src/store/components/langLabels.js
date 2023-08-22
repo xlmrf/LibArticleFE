@@ -19,7 +19,15 @@ export default {
                     nav_notices:{
                         'none_messages': "Переглянути всі",
                         'new_messages': "Переглянути нові"
-                    }
+                    },
+
+                    search_type:{
+                        'references': 'посилання'
+                    },
+
+                    add_refs_btn:'Додати',
+                    back_to_doc_btn:'Назад'
+
                 },
 
                 actions:{
@@ -227,7 +235,14 @@ export default {
                     nav_notices:{
                         'none_messages': "See all",
                         'new_messages': "See new"
-                    }
+                    },
+
+                    search_type:{
+                        'references': 'references'
+                    },
+
+                    add_refs_btn:'Add',
+                    back_to_doc_btn:'Back'
                 },
 
                 actions:{

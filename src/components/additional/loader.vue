@@ -25,6 +25,7 @@ export default {
   margin: 25px;
 }
 .mid-top > svg{
+  margin-top: 50px;
   left: 50%;
 }
 .over-wall{
