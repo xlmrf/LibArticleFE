@@ -1,6 +1,6 @@
 <template>
   <div class="documents-wrapper" v-if="getDocuments && getTypes">
-    {{getSelectedRefs}}
+<!--    {{getSelectedRefs}}-->
     <filter-options class="filters-side" />
     <documents-list :documents="getDocuments" v-if="Object.keys(getDocuments).length > 0"/>
     <loader :loader_class="['mid-top']" width="4" radius="20" v-else/>
