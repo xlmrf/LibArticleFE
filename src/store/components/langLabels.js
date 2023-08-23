@@ -187,8 +187,21 @@ export default {
                     }
                 },
                 documents:{
-                    side_filter:{
+                    sidebar:{
+                        'search_area':'Область пошуку',
+
                         'all': 'Всі',
+                        'only_my': 'Тільки мої',
+                        'im_author': "Я автор",
+
+                        'authors': 'Автори',
+                        'publication_year': 'Роки публікації',
+                        'types': 'Типи',
+
+
+                        'selected_refs': 'Посилання',
+                        'clear_btn': 'очистити',
+
 
                     },
                     nav_filter:{
@@ -401,6 +414,24 @@ export default {
                     }
                 },
                 documents:{
+
+                    sidebar:{
+                        'search_area':'Search area',
+
+                        'all': 'All',
+                        'only_my': 'Only my',
+                        'im_author': "I am author",
+
+                        'authors': 'Authors',
+                        'publication_year': 'Publication years',
+                        'types': 'Types',
+
+
+                        'selected_refs': 'Selected refs',
+                        'clear_btn': 'Clear',
+
+                    },
+
                     nav_filter:{
                         'sort_by': 'Sort by',
                         'applied_filters': 'Applied filters',

@@ -1,5 +1,6 @@
 <template>
   <div class="documents-wrapper" v-if="getDocuments && getTypes">
+    {{getSelectedRefs}}
     <filter-options class="filters-side" />
     <documents-list :documents="getDocuments" v-if="Object.keys(getDocuments).length > 0"/>
     <loader :loader_class="['mid-top']" width="4" radius="20" v-else/>
@@ -22,24 +23,28 @@ export default {
   watch: {
     '$route': {
       handler(route) {
-        let search = localStorage.getItem('search')
+        if (route.query.refs_doc_id && !route.query.from){
+          this.$router.push('/documents')
+        }
 
+        let search = localStorage.getItem('search')
         let arr = []
         let filteredArr = []
         arr.push(route.fullPath.split('?'))
         search ? arr.push(search.split('?')) : ''
         for (let item in arr) {
-          if (item.length > 1) {
-            const query = item[1]
+
+          if (arr[item].length > 1) {
+            const query = arr[item][1]
             const params = query.split('&')
             const filteredParams = params.filter(param => !param.startsWith('refs_doc_id='))
-            const outputText = `${item[0]}?${filteredParams.join('&')}`
+            const outputText = `${arr[item][0]}?${filteredParams.join('&')}`
             filteredArr.push(outputText)
           }
         }
-
-        if (!route.query.refs_doc_id || (filteredArr[1] && filteredArr[0] !== filteredArr[1])){
-          // console.log('watcher44',!(filteredArr[1] && filteredArr[0] !== filteredArr[1]))
+        console.log('check',!((route.query.refs_doc_id && Object.keys(route.query).length < 3) || (filteredArr[1] && filteredArr[0] === filteredArr[1])));
+        if (!((route.query.refs_doc_id && Object.keys(route.query).length < 3) || (filteredArr[1] && filteredArr[0] === filteredArr[1]))){
+          console.log('watcher11',filteredArr)
           let q = '';
           if (route.fullPath.split('?')[1]) {
             q = '?' + route.fullPath.split('?')[1];
@@ -55,10 +60,10 @@ export default {
   },
   methods: {
     ...mapActions(['DocumentSearcher']),
-    ...mapMutations(['DocumentsMutate'])
+    ...mapMutations(['DocumentsMutate','updateSelectedRefs'])
   },
   computed: {
-    ...mapGetters(['getDocuments', 'getTypes'])
+    ...mapGetters(['getDocuments', 'getTypes', 'getSelectedRefs'])
   },
   components: {Loader, DocumentsList, FilterOptions},
   mounted() {
@@ -75,6 +80,7 @@ export default {
     // this.requestTypes()
   },
   beforeUnmount() {
+    this.updateSelectedRefs([])
     localStorage.removeItem('search')
   }
 }

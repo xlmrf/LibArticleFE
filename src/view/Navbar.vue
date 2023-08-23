@@ -5,7 +5,7 @@
     <div class="manual">
       <input type="text" name="search" id="search" class="input searcher" required v-model="keywords"
              @keydown.enter="query(keywords)">
-      <span class="search-by-refs" v-if="$route.query.refs_doc_id">{{this.$store.getters.getLanguage.navbar.add_refs_btn }}</span>
+      <span class="search-by-refs" v-if="$route.query.refs_doc_id">{{this.$store.getters.getLanguage.navbar.search_type.references }}</span>
       <span class="search-icon" @click="query(keywords)">
         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"
              viewBox="0 0 24 24" fill="none" stroke="#B2B2B2"
@@ -22,18 +22,6 @@
         {{this.$store.getters.getLanguage.navbar.add_refs_btn }} {{JSON.parse($route.query.refs_doc_id).length}}</span>
       <span class="btn-in-search" @click="backToDoc" v-if="$route.query.refs_doc_id && JSON.parse($route.query.refs_doc_id).length < 1" >
         {{this.$store.getters.getLanguage.navbar.back_to_doc_btn }}</span>
-      <!--      <router-link to="/profile" class="manual-item">-->
-      <!--        <span>Акаунт</span>-->
-      <!--      </router-link>-->
-      <!--      <router-link to="/library" class="manual-item">-->
-      <!--        <span>Документи</span>-->
-      <!--      </router-link>-->
-      <!--      <router-link to="/new_document" class="manual-item">-->
-      <!--        <span>Додати</span>-->
-      <!--      </router-link>-->
-      <!--      <router-link to="/history" class="manual-item">-->
-      <!--        <span>Історія</span>-->
-      <!--      </router-link>-->
 
     </div>
     <div class="user-icon">
@@ -46,6 +34,7 @@
 <script>
 import UserLogo from "../components/navbar/NavUserMiniLogo"
 import UserNotices from "../components/navbar/UserNotifications"
+import {apa} from "@/styleLib"
 import {mapActions, mapGetters, mapMutations} from "vuex";
 
 export default {
@@ -56,22 +45,31 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getMakeDocument']),
+    ...mapGetters(['getMakeDocument','getSelectedRefs']),
     addRefs(){
-
-      // this.getMakeDocument.references
-      //
-      // console.log('search docs log:',this.$route.query,this.getMakeDocument.references);
 
       let q = Object.assign({}, this.$route.query)
       const id = this.$route.query.from
-      this.$router.replace({
-        name: 'documents',
-        query: {...q, ...{confirm_refs:true}}
-      })
-      setTimeout(() => {
-        this.$router.push('/document/make/'+id)
-      },150)
+
+      for (let item in this.getSelectedRefs){
+        if (this.getMakeDocument.references.find(ref => ref.reference_document_id === this.getSelectedRefs[item].id) === undefined) {
+          this.getMakeDocument.references.push({
+            reference_document_id: this.getSelectedRefs[item].id,
+            bibliographic_description: apa(this.getSelectedRefs[item])
+            // this.getSelectedRefs[item].title
+          })
+        }
+        else{
+          // alert that the document has an reference(s)
+        }
+      }
+
+      // this.$router.replace({
+      //   name: 'documents',
+      //   query: {...q, ...{confirm_refs:true}}
+      // })
+
+      this.$router.push('/document/make/'+id)
 
 
     },
@@ -100,8 +98,6 @@ export default {
         name = 'my-documents';
       }
 
-      localStorage.setItem('searcher', JSON.stringify({'request1':'Hello'}))
-
       this.$router.push({
         name: name,
         query: {...query, ...data}
@@ -124,6 +120,9 @@ export default {
     }
     if (this.$route.query.from && this.getMakeDocument.id !== this.$route.query.from){
       this.$router.push('/document/make/'+this.$route.query.from)
+    }
+    if (this.$route.query.refs_doc_id && !this.$route.query.from){
+      this.$router.push('/documents')
     }
 
   },

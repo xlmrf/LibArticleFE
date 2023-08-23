@@ -17,5 +17,5 @@ export function apa(item) {
         }
         l_i !== author ? apa += ', ' : ''
     })
-    return apa += `(${item.year}). ${item.title}. ${item.place}`;
+    return apa += `(${item.publication_date? item.publication_date.substring(0, 4) : ''}). ${item.title}. ${item.place}`;
 }

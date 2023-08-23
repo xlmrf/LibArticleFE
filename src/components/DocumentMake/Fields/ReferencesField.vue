@@ -10,14 +10,12 @@
           </svg>
         </small>
       <span class="add-btn add-ref-btn" @click="addReference">{{ edit ? $store.getters.getLanguage.document_make.signs.save_btn : $store.getters.getLanguage.document_make.signs.add_btn }}</span>
-      <span class="add-btn search-in-system-btn" @click="searchReference">{{ $store.getters.getLanguage.document_make.signs.search_in_lib }}</span>
+      <span class="search-in-system-btn" @click="searchReference">{{ $store.getters.getLanguage.document_make.signs.search_in_lib }}</span>
     </span>
     <div class="complex-item-control reference-list" v-if="getMakeDocument.references.length > 0">
     <span class="reference-item" v-for="(el,idx) in getMakeDocument.references.filter(item=>!item.delete)" :key="idx">
-      <span :class="{'italic':el.edit}">{{
-        idx + 1
-      }}. {{ el.bibliographic_description }}</span>
-      <small  @click="editRef(el)" class="change-ref-title">
+      <span :class="[{'italic':el.edit}, {'system-ref': el.reference_document_id}]">{{el.bibliographic_description }}</span>
+      <small v-if="!el.reference_document_id" @click="editRef(el)" class="change-ref-title">
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9A9A9A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="16 3 21 8 8 21 3 21 3 16 16 3"></polygon></svg>
       </small>
         <small @click="deleteKeyword(idx,el)" class="delete-item">
@@ -137,7 +135,11 @@ export default {
       }
     },
     searchReference(){
-      this.$router.push('/documents?from='+this.getMakeDocument.id+'&refs_doc_id=[]')
+
+      const refs_arr = this.getMakeDocument.references.map(item => item.reference_document_id ? item.reference_document_id : '')
+      console.log('refs array',refs_arr)
+
+      this.$router.push('/documents?from='+this.getMakeDocument.id+'&refs_doc_id='+JSON.stringify(refs_arr))
     },
 
     deleteKeyword(idx, reference) {
@@ -202,6 +204,10 @@ export default {
   hyphens: auto;
   font-style: italic;
 }
+.system-ref{
+  color: #1C75DD;
+}
+
 li{
   position: relative;
 }
@@ -214,6 +220,7 @@ li{
   stroke: #1C75DD;
 }
 .delete-item{
+  height: fit-content;
   margin-left: 10px;
 }
 
@@ -221,20 +228,24 @@ li{
   flex: 1;
   position: absolute;
   border-radius: 4px;
-  margin: 0 5%;
+
   bottom: 140%;
-  left: 160px;
-  padding: 5px 10px;
+
+  left: calc(50% - 72px);
+  padding: 7px 12px;
   overflow: hidden;
-  background: white;
+  background: #4694f1;
   text-align: center;
-  border: 1px solid #444444;
+  /*border: 1px solid #444444;*/
   outline: none;
-  color: #444444;
+  color: white;
+  /*color: #444444;*/
+  cursor: pointer;
 }
 
 .search-in-system-btn:hover{
   /*color: white;*/
+  background: #5a9cea;
   /*border: 1px solid transparent;*/
 }
 .add-ref-btn{

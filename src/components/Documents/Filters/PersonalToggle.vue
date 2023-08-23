@@ -1,17 +1,17 @@
 <template>
   <div class="select-search-area">
-    <h3>Обрати документи:</h3>
+    <h3>{{this.$store.getters.getLanguage.documents.sidebar.search_area }}:</h3>
     <span @click="this.$refs.all.click()" :class="{active_date_format:only_own===false}">
       <input type="radio" v-model="only_own" :value="false" @change="query(only_own)" name="all" ref="all">
-      <span class="label">Всі</span>
+      <span class="label">{{this.$store.getters.getLanguage.documents.sidebar.all }}</span>
     </span>
     <span @click="this.$refs.only_own.click()" :class="{active_date_format:only_own==='my'}">
       <input type="radio" v-model="only_own" value="my" @change="query(only_own)" name="only_own" ref="only_own">
-      <span class="label">Тільки мої</span>
+      <span class="label">{{this.$store.getters.getLanguage.documents.sidebar.only_my }}</span>
     </span >
     <span @click="this.$refs.im_author.click()" :class="{active_date_format:only_own==='author'}">
       <input type="radio" v-model="only_own" value="author" @change="query(only_own)" name="im_author" ref="im_author">
-      <span class="label">Я автор</span>
+      <span class="label">{{this.$store.getters.getLanguage.documents.sidebar.im_author }}</span>
     </span>
   </div>
 </template>

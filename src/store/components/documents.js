@@ -10,6 +10,7 @@ export default {
             years: {},
             filter_types: [],
             page_paginate_count:[10,25,50,100],
+            selected_refs:[],
             info:''
         }
     },
@@ -87,6 +88,9 @@ export default {
         errorsDocument(state, data){
             state.info = data
         },
+        updateSelectedRefs(state, data){
+            state.selected_refs = data
+        }
     },
 
     getters:{
@@ -107,6 +111,9 @@ export default {
         },
         getPageCountPaginate(ctx){
             return ctx.page_paginate_count
+        },
+        getSelectedRefs(ctx){
+            return ctx.selected_refs
         }
     }
 }

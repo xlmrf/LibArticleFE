@@ -7,8 +7,8 @@
     <select-type />
 <!--    <select-keywords />-->
     <div class="selected-refs-panel" style="flex-flow: row" v-if="$route.query.refs_doc_id && JSON.parse($route.query.refs_doc_id).length > 0">
-      <span>Selected refs: {{  JSON.parse($route.query.refs_doc_id).length  }}</span>
-      <span @click="clearRefs">clear</span>
+      <span>{{this.$store.getters.getLanguage.documents.sidebar.selected_refs }}: {{  JSON.parse($route.query.refs_doc_id).length  }}</span>
+      <span @click="clearRefs">{{this.$store.getters.getLanguage.documents.sidebar.clear_btn }}</span>
     </div>
   </div>
 </template>
@@ -19,16 +19,20 @@ import SelectAuthor from "@/components/Documents/Filters/SelectAuthor";
 import RangeYear from "@/components/Documents/Filters/RangeYear";
 import SelectType from "@/components/Documents/Filters/SelectType";
 import SelectKeywords from "@/components/Documents/Filters/SelectKeywords";
+import {mapMutations} from "vuex";
 
 export default {
   components:{SelectKeywords, SelectType, RangeYear, PersonalToggle,SelectAuthor},
 
 
   methods:{
+    ...mapMutations(['updateSelectedRefs']),
     clearRefs(){
       let q = Object.assign({}, this.$route.query);
 
       delete q.refs_doc_id
+
+      this.updateSelectedRefs([])
 
       this.$router.replace({
         name: 'documents',

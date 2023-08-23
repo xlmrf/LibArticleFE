@@ -72,7 +72,7 @@
 
 <script>
 import viewsDocument from "@/components/document/viewsDocument";
-import {mapGetters, mapState} from "vuex";
+import {mapGetters, mapMutations, mapState} from "vuex";
 import axios from "axios";
 
 export default {
@@ -89,48 +89,43 @@ export default {
   watch:{
     checkItem(){
 
-
       let query = Object.assign({}, this.$route.query);
+      // this.updateSelectedRefs(query.refs_doc_id !== undefined ? JSON.parse(query.refs_doc_id) : [])
 
-      let refs = query.refs_doc_id !== undefined ? JSON.parse(query.refs_doc_id) : []
-
-      // console.log(query.refs_doc_id,refs);
-
-      const catchItem = (id) => {
-        let idx = refs.findIndex(item => item === id)
+      const catchItem = () => {
+        let idx = this.getSelectedRefs.findIndex(item => item.id === this.documentItem.id)
         if (idx !== -1){
-          refs.splice(idx, 1)
+          this.getSelectedRefs.splice(idx, 1)
         }
         else{
-          refs.push(id)
+          this.getSelectedRefs.push(this.documentItem)
         }
       }
 
-      refs === [] ? refs.push(this.documentItem.id) : catchItem(this.documentItem.id)
+      this.getSelectedRefs === []
+        ? this.getSelectedRefs.push({id:this.documentItem.id, title:this.documentItem.title})
+        : catchItem()
 
-      console.log('refs',query.refs_doc_id,refs);
+      const refs_idx = this.getSelectedRefs.map(item => item.id);
 
       this.$router.replace({
         name: 'documents',
-        query: {...query, ...{refs_doc_id:JSON.stringify(refs)}}
+        query: {...query, ...{refs_doc_id:JSON.stringify(refs_idx)}}
       })
 
 
 
     },
-    '$route':{
+    'getSelectedRefs':{
       handler(item){
-        if (item.query.confirm_refs && JSON.parse(item.query.refs_doc_id).includes(this.documentItem.id)){
-          this.getMakeDocument.references.push({
-            reference_document_id:this.documentItem.id,
-            bibliographic_description: this.documentItem.title
-          })
-        }
-      },
-      deep:true
+
+        // console.log('itemmm',item);
+        // this.checkItem = this.getSelectedRefs.find(item => item.id === this.documentItem.id) !== undefined
+      }
     }
   },
   methods:{
+    ...mapMutations(['updateSelectedRefs']),
     viewsDocument(){
       axios.get(this.api_url_v1 + '/report/document-views/' + this.documentItem.id).then(response => {
         this.views = response.data
@@ -156,7 +151,7 @@ export default {
   },
 
   computed:{
-    ...mapGetters(['getTypes','getMakeDocument']),
+    ...mapGetters(['getTypes','getMakeDocument','getSelectedRefs']),
     ...mapState(['api_url_v1'])
   },
   mounted() {

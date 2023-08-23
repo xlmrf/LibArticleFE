@@ -63,6 +63,13 @@ export default {
       }
     },
 
+    async getDocument(){
+      this.loader = true
+      await axios.get(this.api_url_v1 + '/document/' + this.$route.params.id).then(response =>
+          this.updateStoreDocument(response.data), err => this.catchError(err.response))
+      this.loader = false
+    },
+
     prev() {
       this.prev_stage = true
     }
@@ -74,6 +81,9 @@ export default {
   watch: {
     '$route.params': {
       handler(item) {
+        console.log('watch route in DM',item)
+        if (item.id !== this.getMakeDocument.id)
+          this.getDocument()
         this.prev_stage = !item.id;
       },
       deep: true
@@ -89,13 +99,10 @@ export default {
   async mounted() {
     // this.DocumentMutate({})
     // this.updateStoreDocument({});
-    if (this.$route.params.id !== '') {
+    if(this.$route.params.id !== '') {
       this.prev_stage = false
       if (this.$route.params.id != this.getMakeDocument.id) {
-        this.loader = true
-        await axios.get(this.api_url_v1 + '/document/' + this.$route.params.id).then(response =>
-            this.updateStoreDocument(response.data), err => this.catchError(err.response))
-        this.loader = false
+        await this.getDocument()
       }
     }
   },
