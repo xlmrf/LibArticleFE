@@ -113,8 +113,6 @@ export default {
         query: {...query, ...{refs_doc_id:JSON.stringify(refs_idx)}}
       })
 
-
-
     },
     'getSelectedRefs':{
       handler(item){
