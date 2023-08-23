@@ -78,13 +78,7 @@ export default {
     }
   },
   watch:{
-    // getMakeDocument:{
-    //   handler() {
-    //     this.invalidAreas = {}
-    //     this.fileEmpty = false
-    //   },
-    //   deep:true
-    // },
+
     getFiles:{
       handler() {
         console.log('getFiles',this.getFiles);
