@@ -184,6 +184,9 @@ export default {
                         'change_title': 'Змінити назву',
                         'view': 'переглянути',
                         'move': 'Перейти'
+                    },
+                    draftModal:{
+                        'topTitle': 'Не закінчені документи',
                     }
                 },
                 documents:{
@@ -411,6 +414,9 @@ export default {
                         'change_title': 'Change title',
                         'view': 'view',
                         'move': 'Move on'
+                    },
+                    draftModal:{
+                        'topTitle': 'Unfinished documents',
                     }
                 },
                 documents:{

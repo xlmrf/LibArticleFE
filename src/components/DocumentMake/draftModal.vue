@@ -1,6 +1,9 @@
 <template>
   <div class="modal-component draft-modal">
-    <h3>top modal</h3>
+    <div class="top-modal">
+      <h3>{{$store.getters.getLanguage.document_make.draftModal.topTitle}}</h3>
+      <span>{{drafts.length}}</span>
+    </div>
     <div class="modal-component-body drafts-panel">
       <div v-for="draft in drafts" v-if="drafts.length > 0">
         <document-item :documentItem="draft" type="draft" />
@@ -52,4 +55,12 @@ export default {
 
 
 }
+
+.top-modal{
+  padding: 20px;
+  font-size: 1.2em;
+  color: #232323;
+}
+
+
 </style>
