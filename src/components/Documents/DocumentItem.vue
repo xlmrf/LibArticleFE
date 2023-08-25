@@ -2,10 +2,11 @@
   <div class="document-item" :class="{'document-draft': type === 'draft' || this.$route.query.refs_doc_id}" v-if="documentItem.title">
     <div class="check-item" v-if="this.$route.query.refs_doc_id">
       <label class="checkbox-item filter-checkbox select-type-checkbox">
-        <input type="checkbox" :value="documentItem.id" v-model="checkItem">
+        <input type="checkbox" v-model="checkItem">
         <span class="label"></span>
       </label>
     </div>
+    {{checkItem}}
     <div class="list-document-type" :class="{'draft-type-style': type === 'draft'}">
       <span>
         {{getTypes.find(item => item.id === documentItem.type_id)?.name}}
@@ -87,8 +88,10 @@ export default {
   },
 
   watch:{
-    checkItem(){
+    '$route.query.refs_doc_id':{
 
+    },
+    checkItem(){
       let query = Object.assign({}, this.$route.query);
       // this.updateSelectedRefs(query.refs_doc_id !== undefined ? JSON.parse(query.refs_doc_id) : [])
 
@@ -103,8 +106,8 @@ export default {
       }
 
       this.getSelectedRefs === []
-        ? this.getSelectedRefs.push({id:this.documentItem.id, title:this.documentItem.title})
-        : catchItem()
+          ? this.getSelectedRefs.push({id:this.documentItem.id, title:this.documentItem.title})
+          : catchItem()
 
       const refs_idx = this.getSelectedRefs.map(item => item.id);
 
@@ -112,17 +115,7 @@ export default {
         name: 'documents',
         query: {...query, ...{refs_doc_id:JSON.stringify(refs_idx)}}
       })
-
     },
-    'getSelectedRefs':{
-      handler(item){
-
-        // i must change value in getSelectedRefs through v-model in each item
-        
-        // console.log('itemmm',item);
-        // this.checkItem = this.getSelectedRefs.find(item => item.id === this.documentItem.id) !== undefined
-      }
-    }
   },
   methods:{
     ...mapMutations(['updateSelectedRefs']),
@@ -159,7 +152,7 @@ export default {
       this.viewsDocument()
 
     if (this.$route.query.refs_doc_id){
-
+      this.updateSelectedRefs(JSON.parse(this.$route.query.refs_doc_id))
     }
 
   },

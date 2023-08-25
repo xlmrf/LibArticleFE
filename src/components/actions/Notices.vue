@@ -62,7 +62,7 @@ export default {
         const element = document.querySelector(anchor);
         if (element) {
           // Прокручування до повного повідомлення
-          element.scrollIntoView({behavior: 'smooth'});
+          // element.scrollIntoView({behavior: 'smooth'});
         }
       }
     },

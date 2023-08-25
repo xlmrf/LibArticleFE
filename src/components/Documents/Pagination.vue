@@ -47,6 +47,9 @@
           d="M9 18l6-6-6-6"/></svg>
       </span>
   </div>
+  <span class="to-top-btn" @click="topTop()">
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V6M5 12l7-7 7 7"/></svg>
+  </span>
 </template>
 
 <script>
@@ -61,6 +64,10 @@ export default {
   name: "Documents",
   props: ['paginate'],
   methods: {
+    topTop(){
+
+      this.scrollToTop()
+    },
     thePath(page) {
       // console.log();
       let url = this.$route.path + '?';
@@ -80,7 +87,7 @@ export default {
       // else if(page === 'next'){
       //   url+='page='+(paginate.current_page+1)
       // }
-      this.scrollToTop()
+
       return url;
       // '/documents?page='+getDocuments.last_page
 
@@ -128,13 +135,6 @@ export default {
   /*width: 100%;*/
 }
 
-.paginate a {
-  padding: 0.4rem 0.8rem;
-  /*width: 1rem;*/
-  /*height: 1rem;*/
-  /*width: 100%;*/
-}
-
 .paginate span {
   /*border: 1px solid fuchsia;*/
   margin: 0.3rem;
@@ -154,5 +154,19 @@ export default {
 
 .disable_link svg {
   stroke: #bbbbbb;
+}
+
+
+.to-top-btn{
+  position: relative;
+  margin-left: auto;
+  border-radius: 999px;
+  padding: 26px 11px 7px 11px;
+  left: 100%;
+  bottom: 50px;
+  cursor: pointer;
+}
+.to-top-btn:hover{
+  background: #F1F1F1;
 }
 </style>
