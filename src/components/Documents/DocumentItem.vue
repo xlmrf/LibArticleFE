@@ -113,12 +113,12 @@ export default {
         query: {...query, ...{refs_doc_id:JSON.stringify(refs_idx)}}
       })
 
-
-
     },
     'getSelectedRefs':{
       handler(item){
 
+        // i must change value in getSelectedRefs through v-model in each item
+        
         // console.log('itemmm',item);
         // this.checkItem = this.getSelectedRefs.find(item => item.id === this.documentItem.id) !== undefined
       }
