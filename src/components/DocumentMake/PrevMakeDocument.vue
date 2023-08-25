@@ -178,8 +178,6 @@ export default {
   flex-direction: column;
   margin-top: 5px;
   font-size: 0.8em;
-  height: 220px;
-  width: 200px;
   overflow: auto;
   scrollbar-width: thin;
   z-index: 10;

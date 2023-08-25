@@ -129,6 +129,7 @@ export default {
   background-color: rgb(255, 255, 255);
   z-index: 999;
   min-height: 300px;
+  padding: 0 10px;
   height: calc(100% - 65px);
 }
 
@@ -139,8 +140,8 @@ export default {
   position: absolute;
   right: 20px;
   top: 72px;
-  width: 30px;
-  height: 30px;
+  width: 50px;
+  height: 50px;
   border-radius: 3px;
   cursor: pointer;
   z-index: 99;

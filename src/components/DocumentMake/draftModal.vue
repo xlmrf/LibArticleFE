@@ -2,10 +2,11 @@
   <div class="modal-component draft-modal">
     <div class="top-modal">
       <h3>{{$store.getters.getLanguage.document_make.draftModal.topTitle}}</h3>
-      <span>{{drafts.length}}</span>
+      <span v-if="drafts.length > 0">{{drafts.length}}</span>
     </div>
     <div class="modal-component-body drafts-panel">
-      <div v-for="draft in drafts" v-if="drafts.length > 0">
+      <div v-for="(draft,idx) in drafts" v-if="drafts.length > 0">
+        <span class="doc-counter">{{idx+1}}.</span>
         <document-item :documentItem="draft" type="draft" />
       </div>
       <pulse-loader class="drafts-loader" v-else/>
@@ -51,16 +52,41 @@ export default {
 
 <style scoped>
 
-.drafts-panel{
-
+.drafts-panel > div{
+  position: relative;
 
 }
 
 .top-modal{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 20px;
-  font-size: 1.2em;
-  color: #232323;
+  font-size: 1.3em;
+  color: #333333;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
 }
 
+.top-modal > h3{
+  font-weight: lighter;
+}
+
+.top-modal > span{
+  position: absolute;
+  margin: 0 10px;
+  font-size: 1.2em;
+  right: 15px;
+}
+.doc-counter{
+  font-size: 1.3em;
+  position: absolute;
+  bottom: calc(50% - 21px);
+
+  color: #444444;
+  cursor: default;
+  right: calc(100% - 41px);
+  z-index: 8;
+}
 
 </style>
