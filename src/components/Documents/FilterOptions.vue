@@ -19,24 +19,27 @@ import SelectAuthor from "@/components/Documents/Filters/SelectAuthor";
 import RangeYear from "@/components/Documents/Filters/RangeYear";
 import SelectType from "@/components/Documents/Filters/SelectType";
 import SelectKeywords from "@/components/Documents/Filters/SelectKeywords";
-import {mapMutations} from "vuex";
+import {mapActions, mapMutations} from "vuex";
 
 export default {
   components:{SelectKeywords, SelectType, RangeYear, PersonalToggle,SelectAuthor},
 
 
   methods:{
-    ...mapMutations(['updateSelectedRefs']),
+    ...mapMutations(['updateSelectedRefs', 'DocumentsMutate']),
+    ...mapActions(['DocumentSearcher']),
     clearRefs(){
       let q = Object.assign({}, this.$route.query);
 
       delete q.refs_doc_id
+      q['refs_doc_id'] = '[]'
 
       this.updateSelectedRefs([])
 
+
       this.$router.replace({
         name: 'documents',
-        query: {...q, ...{refs_doc_id:'[]'}}
+        query: {...q}
       })
     }
   }

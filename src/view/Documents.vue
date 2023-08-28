@@ -42,9 +42,8 @@ export default {
             filteredArr.push(outputText)
           }
         }
-        console.log('check',!((route.query.refs_doc_id && Object.keys(route.query).length < 3) || (filteredArr[1] && filteredArr[0] === filteredArr[1])));
+
         if (!((route.query.refs_doc_id && Object.keys(route.query).length < 3) || (filteredArr[1] && filteredArr[0] === filteredArr[1]))){
-          console.log('watcher11',filteredArr)
           let q = '';
           if (route.fullPath.split('?')[1]) {
             q = '?' + route.fullPath.split('?')[1];

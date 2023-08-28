@@ -6,7 +6,6 @@
         <span class="label"></span>
       </label>
     </div>
-    {{checkItem}}
     <div class="list-document-type" :class="{'draft-type-style': type === 'draft'}">
       <span>
         {{getTypes.find(item => item.id === documentItem.type_id)?.name}}
@@ -75,6 +74,8 @@
 import viewsDocument from "@/components/document/viewsDocument";
 import {mapGetters, mapMutations, mapState} from "vuex";
 import axios from "axios";
+import {apa} from "@/styleLib"
+
 
 export default {
   props:['documentItem','type'],
@@ -83,42 +84,47 @@ export default {
     return{
       views:{},
       pointDocument: null,
-      checkItem: this.$route.query.refs_doc_id && JSON.parse(this.$route.query.refs_doc_id).find(id => id === this.documentItem.id) !== undefined
+      checkItem: false
     }
   },
 
   watch:{
-    '$route.query.refs_doc_id':{
-
-    },
+    // '$route.query.refs_doc_id':{
+    //     handler(item){
+    //       if (item && JSON.parse(item).length < 1)
+    //       this.catchItem()
+    //     }
+    // },
     checkItem(){
-      let query = Object.assign({}, this.$route.query);
-      // this.updateSelectedRefs(query.refs_doc_id !== undefined ? JSON.parse(query.refs_doc_id) : [])
+      if (this.$route.query.refs_doc_id){
+        let query = Object.assign({}, this.$route.query);
+        // this.updateSelectedRefs(query.refs_doc_id !== undefined ? JSON.parse(query.refs_doc_id) : [])
 
-      const catchItem = () => {
-        let idx = this.getSelectedRefs.findIndex(item => item.id === this.documentItem.id)
-        if (idx !== -1){
-          this.getSelectedRefs.splice(idx, 1)
-        }
-        else{
-          this.getSelectedRefs.push(this.documentItem)
-        }
+        this.catchItem()
+
+        const refs_idx = this.getSelectedRefs.map(item => item.id);
+
+        this.$router.replace({
+          name: 'documents',
+          query: {...query, ...{refs_doc_id:JSON.stringify(refs_idx)}}
+        })
       }
-
-      this.getSelectedRefs === []
-          ? this.getSelectedRefs.push({id:this.documentItem.id, title:this.documentItem.title})
-          : catchItem()
-
-      const refs_idx = this.getSelectedRefs.map(item => item.id);
-
-      this.$router.replace({
-        name: 'documents',
-        query: {...query, ...{refs_doc_id:JSON.stringify(refs_idx)}}
-      })
     },
   },
   methods:{
     ...mapMutations(['updateSelectedRefs']),
+    catchItem(){
+      let idx = this.getSelectedRefs.findIndex(item => item.id === this.documentItem.id)
+      if (idx !== -1){
+        this.checkItem = false
+        this.getSelectedRefs.splice(idx, 1)
+      }
+      else{
+        this.checkItem = true
+        this.getSelectedRefs.push(this.documentItem)
+      }
+    },
+
     viewsDocument(){
       axios.get(this.api_url_v1 + '/report/document-views/' + this.documentItem.id).then(response => {
         this.views = response.data
@@ -151,9 +157,16 @@ export default {
     if (this.type !== 'draft')
       this.viewsDocument()
 
-    if (this.$route.query.refs_doc_id){
-      this.updateSelectedRefs(JSON.parse(this.$route.query.refs_doc_id))
-    }
+    // if (this.$route.query.refs_doc_id){
+    //   this.updateSelectedRefs([])
+    //   this.checkItem = this.$route.query.refs_doc_id && JSON.parse(this.$route.query.refs_doc_id).find(id => id === this.documentItem.id) !== undefined
+    //   this.getSelectedRefs.push(
+    //       {
+    //         reference_document_id:this.documentItem.id,
+    //         bibliographic_description: apa(this.documentItem)
+    //       }
+    //   )
+    // }
 
   },
 
