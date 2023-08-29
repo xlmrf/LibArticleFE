@@ -2,7 +2,7 @@
   <div class="document-item" :class="{'document-draft': type === 'draft' || this.$route.query.refs_doc_id}" v-if="documentItem.title">
     <div class="check-item" v-if="this.$route.query.refs_doc_id">
       <label class="checkbox-item filter-checkbox select-type-checkbox">
-        <input type="checkbox" v-model="checkItem">
+        <input type="checkbox" v-model="checkItem" @click="checkItemM()">
         <span class="label"></span>
       </label>
     </div>
@@ -89,42 +89,40 @@ export default {
   },
 
   watch:{
-    // '$route.query.refs_doc_id':{
-    //     handler(item){
-    //       if (item && JSON.parse(item).length < 1)
-    //       this.catchItem()
-    //     }
-    // },
-    checkItem(){
-      if (this.$route.query.refs_doc_id){
-        let query = Object.assign({}, this.$route.query);
-        // this.updateSelectedRefs(query.refs_doc_id !== undefined ? JSON.parse(query.refs_doc_id) : [])
-
-        this.catchItem()
-
-        const refs_idx = this.getSelectedRefs.map(item => item.id);
-
-        this.$router.replace({
-          name: 'documents',
-          query: {...query, ...{refs_doc_id:JSON.stringify(refs_idx)}}
-        })
-      }
-    },
+    '$route.query.refs_doc_id':{
+        handler(item){
+          if(item && JSON.parse(item).length === 0){
+            console.log('refssssss', this.getSelectedRefs)
+            this.checkItem = false
+          }
+        }
+    }
+,
   },
   methods:{
     ...mapMutations(['updateSelectedRefs']),
     catchItem(){
       let idx = this.getSelectedRefs.findIndex(item => item.id === this.documentItem.id)
       if (idx !== -1){
-        this.checkItem = false
         this.getSelectedRefs.splice(idx, 1)
       }
       else{
-        this.checkItem = true
         this.getSelectedRefs.push(this.documentItem)
       }
     },
+    checkItemM(){
+      let query = Object.assign({}, this.$route.query);
+      // this.updateSelectedRefs(query.refs_doc_id !== undefined ? JSON.parse(query.refs_doc_id) : [])
 
+      this.catchItem()
+
+      const refs_idx = this.getSelectedRefs.map(item => item.id);
+
+      this.$router.replace({
+        name: 'documents',
+        query: {...query, ...{refs_doc_id:JSON.stringify(refs_idx)}}
+      })
+    },
     viewsDocument(){
       axios.get(this.api_url_v1 + '/report/document-views/' + this.documentItem.id).then(response => {
         this.views = response.data
