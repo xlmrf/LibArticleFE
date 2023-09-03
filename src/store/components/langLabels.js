@@ -153,7 +153,7 @@ export default {
                         'document_name': 'Назва документу',
                         'keywords': 'Ключові слова',
                         'references': 'Посилання',
-                        'description': 'Опис/Абстракція',
+                        'description': 'Опис/Анотація',
                         'save_draft_btn': 'Зберегти в чернетки',
                         'publish_btn': 'Опублікувати',
                         'add_btn': 'Додати',

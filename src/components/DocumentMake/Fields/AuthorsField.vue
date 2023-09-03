@@ -202,10 +202,15 @@ export default {
 
   },
   mounted() {
-    if (!this.getMakeDocument.authors || !this.getMakeDocument.authors.length) {
+    if (!this.getMakeDocument.authors || this.getMakeDocument.authors.length < 1) {
       // this.DocAuthors([{}])
       // this.getDocument.authors = []
-      // this.getDocument.authors.push({})
+      console.log('authors:',this.getMakeDocument.authors);
+      this.getMakeDocument.authors = [{
+        email:'',
+        first_name:'',
+        last_name:''
+      }]
     }
   }
 }

@@ -28,7 +28,7 @@ export default {
 
   methods: {
     ...mapMutations(['DocumentMutate','updateStoreDocument', 'catchError']),
-    ...mapActions(['requestDocument']),
+    ...mapActions(['requestDocumentMake']),
 
     async next(forced = '') {
       const id = this.$route.params.id;
@@ -65,7 +65,7 @@ export default {
 
     async getDocument(){
       this.loader = true
-      await axios.get(this.api_url_v1 + '/document/' + this.$route.params.id).then(response =>
+      await axios.get(this.api_url_v1 + '/document/make/' + this.$route.params.id).then(response =>
           this.updateStoreDocument(response.data), err => this.catchError(err.response))
       this.loader = false
     },
