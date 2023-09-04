@@ -91,6 +91,7 @@ export default {
     'getMakeDocument':{
       handler(){
         this.titleError = false
+        localStorage.setItem('makeDocument', JSON.stringify(this.getMakeDocument))
       },
       deep:true
     }
@@ -103,6 +104,9 @@ export default {
       this.prev_stage = false
       if (this.$route.params.id != this.getMakeDocument.id) {
         await this.getDocument()
+      }
+      if (this.$route.params.id === JSON.parse(localStorage.getItem('makeDocument')).id){
+        this.updateStoreDocument(JSON.parse(localStorage.getItem('makeDocument')))
       }
     }
   },
