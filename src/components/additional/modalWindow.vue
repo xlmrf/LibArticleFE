@@ -128,7 +128,7 @@ export default {
   border-radius: 3px;
   background-color: rgb(255, 255, 255);
   z-index: 999;
-  min-height: 300px;
+  min-height: 200px;
   padding: 0 10px;
   height: calc(100% - 65px);
 }

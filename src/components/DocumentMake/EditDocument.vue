@@ -121,6 +121,7 @@ export default {
       let document = this.getMakeDocument
       document.files = this.getFiles
       this.updateDocument(document)
+      this.$router.push('/profile/'+this.getUser.id)
     },
     check(){
       console.log('CHECK FUNCTION')
@@ -142,7 +143,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(['getMakeDocument', 'getTypes','getFiles']),
+    ...mapGetters(['getMakeDocument', 'getTypes','getFiles', 'getUser']),
     ...mapState(['api_url_v1']),
 
     resetDocument() {

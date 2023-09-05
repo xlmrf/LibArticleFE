@@ -31,6 +31,8 @@ export default {
     ...mapActions(['requestDocumentMake']),
 
     async next(forced = '') {
+
+
       const id = this.$route.params.id;
       const keyParts = [];
 

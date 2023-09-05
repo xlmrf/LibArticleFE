@@ -64,7 +64,7 @@ export default {
         },
         uploadResult(ctx, data){
            // state.document = data
-            router.push('/document/' + data.id)
+            router.push('/profile/' + data.pivot.user_id)
 
         },
 

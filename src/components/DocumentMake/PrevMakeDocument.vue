@@ -1,7 +1,7 @@
 <template>
   <div>
     <title-field :error="titleError"/>
-    <type-field  />
+    <type-field :error="typeError" />
     {{getDocumentMakeWarning?.errors?.find(item => item.attribute === 'title')}}
     <div class="drafts">
       <span class="drafts-label" :class="{'drafts-label-active':draftTumbler}" @click="showDrafts">
@@ -43,6 +43,7 @@ export default {
       btn_enabled: false,
       draftTumbler: false,
       titleError: '',
+      typeError: ''
     }
   },
   emits:['next','loader'],
@@ -62,12 +63,13 @@ export default {
     },
     createDocument(e){
       if (!this.getMakeDocument.title){
-        this.titleError = 'empty_field'
+        return this.titleError = 'empty_field'
       }
-      else{
-        console.log("prev");
-        this.$emit('next', e)
+      if (!this.getMakeDocument.type_id){
+        return this.typeError = 'not_select'
       }
+      console.log("prev");
+      this.$emit('next', e)
     },
     // showAllCites(){
     //   this.openModal = true
@@ -81,6 +83,16 @@ export default {
         this.titleModal = true
       // }
     },
+    'getMakeDocument.title':{
+      handler(){
+        this.titleError = ''
+      }
+    },
+    'getMakeDocument.type_id':{
+      handler(){
+        this.typeError = ''
+      }
+    }
   },
   computed:{
     ...mapGetters(['getMakeDocument','getErrorMessage', 'getDocumentMakeWarning']),
@@ -247,7 +259,7 @@ export default {
   border-radius: 3px;
   background-color: rgb(255, 255, 255);
   z-index: 999;
-  min-height: 300px;
+  min-height: 250px;
   height: calc(100% - 65px);
 }
 

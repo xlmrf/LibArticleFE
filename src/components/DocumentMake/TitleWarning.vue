@@ -115,8 +115,9 @@ export default {
 .modalActive {
   position: relative;
   width: 400px;
-  top: 200px;
-  height: 200px;
+  top: 25%;
+  height: 220px;
+  left: 0;
   margin: 0 auto;
   border-radius: 3px;
   background-color: white;

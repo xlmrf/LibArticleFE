@@ -16,7 +16,7 @@
           {{ translateAreas(item) }}
         </li>
       </ul>
-      <span class="item-category-collection mid-title" v-else>Оберіть категорію</span>
+      <span class="item-category-collection mid-title" :class="{'category-error':error}" v-else>Оберіть категорію</span>
     </div>
   </div>
 </template>
@@ -26,6 +26,7 @@ import {mapActions, mapGetters} from "vuex";
 
 export default {
   mixins: ['translate'],
+  props:['error'],
   computed: {
     ...mapGetters(['getMakeDocument', 'getTypes']),
     // ...mapActions(['requestTypes'])
@@ -276,6 +277,11 @@ h3{
   background-position: right center; /* change the direction of the change here */
   color: #fff;
   text-decoration: none;
+}
+
+.category-error{
+  transition: ease 0.2s;
+  color: #cd2d2d;
 }
 
 </style>
