@@ -15,7 +15,7 @@
     <div class="complex-item-control reference-list" v-if="getMakeDocument.references.length > 0">
     <span class="reference-item" v-for="(el,idx) in getMakeDocument.references.filter(item=>!item.delete)" :key="idx">
       <span :class="[{'italic':el.edit}, {'system-ref': el.reference_document_id}]">{{el.bibliographic_description }}</span>
-      <small v-if="!el.reference_document_id" @click="editRef(el)" class="change-ref-title">
+      <small  @click="editRef(el)" class="change-ref-title">
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9A9A9A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="16 3 21 8 8 21 3 21 3 16 16 3"></polygon></svg>
       </small>
         <small @click="deleteKeyword(idx,el)" class="delete-item">

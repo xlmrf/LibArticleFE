@@ -3,7 +3,7 @@
     <span><loader width="4" radius="20"></loader></span>
   </div>
   <div v-else>
-    {{getMakeDocument}}
+<!--    {{getMakeDocument}}-->
     <div class="card-top">
       <h2 :style="{ 'font-size': '22px' }" ref="refTitle">{{ getMakeDocument.title }}</h2>
       <h4>{{ getTypes.find(type => type.id === getMakeDocument.type_id)?.name }}</h4>
@@ -69,7 +69,7 @@ export default {
       isComplete: false,
       invalidAreas:{},
       serverError:null,
-      hintTicket: -1,
+      hintTicket: 2,
 
       fileEmpty:false,
 
@@ -323,16 +323,19 @@ export default {
   z-index: 9;
   position: absolute;
   top: 33px;
-  left: -20px;
+  left: -20%;
   padding: 15px 20px;
   background: rgba(255, 255, 255, 0.95);
 }
 .helper-hint-text-show{
   display: flex;
   align-items: center;
+  width: 300px;
 }
 .helper-hint-text > svg{
   margin: 1px 5px;
+  margin-right: 15px;
+  min-width: 20px;
 }
 
 .form-item label{
