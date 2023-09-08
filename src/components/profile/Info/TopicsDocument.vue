@@ -2,7 +2,7 @@
   <div class="document-topics" v-if="data[0]">
     <p class="chapter-header">Популярні публікації</p>
     <div class="document-topics-block">
-      <document-item class="s-document" v-for="item in data.slice(0,2) " :documentItem="item" type="profile"/>
+      <profile-document-item class="s-document" v-for="item in data.slice(0,2) " :documentItem="item" type="profile"/>
 <!--       <router-link :to="'/document/'+item.id">{{item.title}} </router-link> - {{item.views}}-->
     </div>
   </div>
@@ -12,9 +12,10 @@
 import axios from "axios";
 import DocumentItem from "@/components/Documents/DocumentItem";
 import {mapGetters} from "vuex";
+import ProfileDocumentItem from "@/components/profile/Info/ProfileDocumentItem";
 
 export default {
-  components: {DocumentItem},
+  components: {ProfileDocumentItem, DocumentItem},
   data() {
     return {
       data: []

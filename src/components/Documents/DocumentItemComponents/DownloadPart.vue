@@ -23,13 +23,6 @@ export default {
 
 <style scoped>
 
-.profile-file-download-link{
-  display: flex;
-  position: absolute;
-  bottom: 12px;
-  right: 110px;
-}
-
 .profile-file-download-link > span{
   padding-left: 5px;
   color: #999999;

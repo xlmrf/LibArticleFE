@@ -1,25 +1,24 @@
 <template>
   <div class="document-item" :class="{'document-draft': type === 'draft' || this.$route.query.refs_doc_id}" v-if="documentItem.title">
-<!--    <box-selector :doc="documentItem"  v-if="this.$route.query.refs_doc_id" />-->
     <div class="context-document-item">
       <type-part :article="documentItem" />
       <date-part :article="documentItem" />
     </div>
-      <div class="first-piece">
-        <title-part :article="documentItem" :type="type" />
-      </div>
-      <div class="second-piece">
-        <authors-part :article="documentItem" :type="type" />
-        <download-part :article="documentItem" :type="type" />
-        <views-part :document-id="documentItem.id" :type="type" />
-      </div>
+    <div class="first-piece">
+      <title-part :article="documentItem" :type="type" />
     </div>
+    <div class="second-piece">
+      <authors-part :article="documentItem" :type="type" />
+      <download-part :article="documentItem" :type="type" />
+      <views-part :document-id="documentItem.id" :type="type" />
+    </div>
+  </div>
 </template>
 
 <script>
 import viewsDocument from "@/components/document/viewsDocument";
-import {mapGetters, mapMutations, mapState} from "vuex";
-import BoxSelector from "@/components/Documents/DocumentItemComponents/BoxSelector";
+import {mapGetters, mapState} from "vuex";
+
 import DownloadPart from "@/components/Documents/DocumentItemComponents/DownloadPart";
 import TitlePart from "@/components/Documents/DocumentItemComponents/TitlePart";
 import TypePart from "@/components/Documents/DocumentItemComponents/TypePart";
@@ -77,7 +76,7 @@ export default {
   },
 
 
-  components:{ViewsPart, AuthorsPart, DatePart, TypePart, TitlePart, DownloadPart, BoxSelector, viewsDocument}
+  components:{ViewsPart, AuthorsPart, DatePart, TypePart, TitlePart, DownloadPart, viewsDocument}
 }
 </script>
 
@@ -99,7 +98,6 @@ export default {
   display: flex;
   position: relative;
   justify-content: space-between;
-  height: calc(100% - 49px);
 }
 
 .first-piece{
@@ -109,7 +107,7 @@ export default {
   height: calc(100% - 10px);
 }
 
-h3{
+.first-piece > h3{
   margin-bottom: 10px;
 }
 
@@ -193,13 +191,6 @@ h3{
   padding: 0.1rem 0.5rem 0.1rem 3rem;
   margin-bottom: 5px;
   border-radius: 4px;
-}
-
-.profile-file-download-link{
-  display: flex;
-  position: absolute;
-  bottom: 12px;
-  right: 110px;
 }
 
 </style>
