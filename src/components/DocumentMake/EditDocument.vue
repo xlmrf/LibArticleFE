@@ -69,7 +69,7 @@ export default {
       isComplete: false,
       invalidAreas:{},
       serverError:null,
-      hintTicket: 2,
+      hintTicket: -1,
 
       fileEmpty:false,
 

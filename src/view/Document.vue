@@ -212,9 +212,9 @@ export default {
   color: #222222;
 }
 
-.author-item{
-  font-size: 1.1rem;
-}
+/*.author-item{*/
+/*  font-size: 1.1rem;*/
+/*}*/
 
 .pin-all-authors{
   cursor: pointer;

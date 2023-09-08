@@ -1,57 +1,19 @@
 <template>
   <div class="document-item" :class="{'document-draft': type === 'draft' || this.$route.query.refs_doc_id}" v-if="documentItem.title">
-    <box-selector :doc="documentItem" />
-    <div class="list-document-type" :class="{'draft-type-style': type === 'draft'}">
-      <span>
-        {{getTypes.find(item => item.id === documentItem.type_id)?.name}}
-      </span>
-<!--      <div class="publication-date" v-if="type === 'draft'">-->
-<!--&lt;!&ndash;        {{getDate(document.publication_date)}}&ndash;&gt;23.05.22-->
-<!--      </div>-->
-      <div class="publication-date">
-        {{getDate(documentItem.publication_date)}}
-      </div>
-
-    </div>
+<!--    <box-selector :doc="documentItem"  v-if="this.$route.query.refs_doc_id" />-->
     <div class="context-document-item">
-      <div class="first-piece">
-        <h3>
-          <router-link :to="'/document/'+ (type === 'draft' ? 'make/' : '') +documentItem.id">
-           {{documentItem.title}}
-          </router-link>
-        </h3>
-
-        <div class="authors" v-if="type !== 'draft'">
-          <span class="author-item" v-for="author in documentItem.authors">
-            <router-link class="author-item-link" :to="'/profile/'+author.user_id" v-if="author.user_id">
-              {{author.last_name}} {{author.first_name?author.first_name[0]:''}}
-            </router-link>
-            <span v-else>
-              {{author.last_name}} {{author.first_name?author.first_name[0]:''}}.
-            </span>
-          </span>
-        </div>
-
-        <span class="document-list-keywords" v-if="type === 'searcher'">
-          <span v-for="keyword in documentItem.keywords">
-          {{keyword}}
-          </span>
-        </span>
-        <span class="profile-file-download-link" v-if="type !== 'draft'">
-          <svg xmlns="http://www.w3.org/2000/svg" v-if="type === 'profile'" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#999999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-          <span v-if="type === 'profile' && views.document_views">{{views.document_views.value}}</span>
-          <span v-if="type === 'searcher'">
-            <router-link class="file-download-link" :to="''">
-              Завантажити
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3684DD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15v4c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-4M17 9l-5 5-5-5M12 12.8V2.5"/></svg>
-            </router-link>
-<!--            <span v-else>Доступ до файлу закритий</span>-->
-          </span>
-        </span>
-      </div>
-      <download-part />
+      <type-part :article="documentItem" />
+      <date-part :article="documentItem" />
     </div>
-  </div>
+      <div class="first-piece">
+        <title-part :article="documentItem" :type="type" />
+      </div>
+      <div class="second-piece">
+        <authors-part :article="documentItem" :type="type" />
+        <download-part :article="documentItem" :type="type" />
+        <views-part :document-id="documentItem.id" :type="type" />
+      </div>
+    </div>
 </template>
 
 <script>
@@ -59,8 +21,13 @@ import viewsDocument from "@/components/document/viewsDocument";
 import {mapGetters, mapMutations, mapState} from "vuex";
 import axios from "axios";
 import {apa} from "@/styleLib"
-import BoxSelector from "@/components/DocumentMake/DocumentComponents/BoxSelector";
-import DownloadPart from "@/components/DocumentMake/DocumentComponents/DownloadPart";
+import BoxSelector from "@/components/Documents/DocumentItemComponents/BoxSelector";
+import DownloadPart from "@/components/Documents/DocumentItemComponents/DownloadPart";
+import TitlePart from "@/components/Documents/DocumentItemComponents/TitlePart";
+import TypePart from "@/components/Documents/DocumentItemComponents/TypePart";
+import DatePart from "@/components/Documents/DocumentItemComponents/DatePart";
+import AuthorsPart from "@/components/Documents/DocumentItemComponents/AuthorsPart";
+import ViewsPart from "@/components/Documents/DocumentItemComponents/ViewsPart";
 
 
 export default {
@@ -68,7 +35,6 @@ export default {
 
   data(){
     return{
-      views:{},
       pointDocument: null,
       type: 'searcher'
     }
@@ -82,21 +48,7 @@ export default {
         console.log('views error:',err);
       })
     },
-    getDate(old_date){
-      if (old_date) {
-        let date_arr = old_date.split('-')
 
-        const yyyy = date_arr[0]
-        let mm = date_arr[1]
-        let dd = date_arr[2]
-
-        // if (dd < 10) dd = '0' + dd
-        // if (mm < 10) mm = '0' + mm
-
-        return dd + '.' + mm + '.' + yyyy
-      }
-      return ''
-    }
   },
 
   computed:{
@@ -127,15 +79,15 @@ export default {
   },
 
 
-  components:{DownloadPart, BoxSelector, viewsDocument}
+  components:{ViewsPart, AuthorsPart, DatePart, TypePart, TitlePart, DownloadPart, BoxSelector, viewsDocument}
 }
 </script>
 
-<style scoped>
+<style >
 
 .document-item{
   position: relative;
-  padding: 0.5rem 1rem;
+  padding: 1rem;
   overflow:hidden;
   outline: none;
 }
@@ -164,7 +116,7 @@ export default {
 }
 
 .second-piece{
-  padding: 0 15px;
+  padding: 0 5px;
   display: inherit;
   align-items: center;
   justify-content: center;
@@ -198,8 +150,13 @@ export default {
 
 .list-document-type{
   display: flex;
-  font-size: 1rem;
-  margin-top: 10px;
+  font-size: 1.1em;
+}
+
+.publication-date{
+  color: #535353;
+  margin-left: auto;
+  font-size: 1em;
 }
 
 .list-document-type > span{
@@ -231,33 +188,6 @@ export default {
 
 .file-download-link > svg{
   margin-left: 5px;
-}
-
-.publication-date{
-  color: #535353;
-  margin-left: auto;
-  font-size: 0.8em;
-  margin-top: 4px;
-  /*margin: 0.25rem;*/
-}
-
-.profile-file-download-link{
-  display: flex;
-  position: absolute;
-  bottom: 15px;
-  right: 10px;
-}
-
-.profile-file-download-link > span{
-  padding-left: 5px;
-  color: #999999;
-  cursor: default;
-}
-
-.profile-file-download-link > a:hover{
-  color: rgba(28, 117, 221, 0.75);
-  stroke: #55B8CA;
-  cursor: pointer;
 }
 
 .document-draft{

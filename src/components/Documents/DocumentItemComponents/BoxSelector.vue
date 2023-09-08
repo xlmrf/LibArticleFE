@@ -1,5 +1,5 @@
 <template>
-  <div class="check-item" v-if="this.$route.query.refs_doc_id">
+  <div class="check-item">
     <label class="checkbox-item filter-checkbox select-type-checkbox">
       <input type="checkbox" v-model="checkItem" @click="checkItemM()">
       <span class="label"></span>
@@ -19,17 +19,19 @@ export default {
     }
   },
   watch:{
-    '$route.query.refs_doc_id':{
+    '$route.query':{
       handler(item){
-        if(item && JSON.parse(item).length === 0){
+
+        if(item.refs_doc_id && JSON.parse(item.refs_doc_id).length === 0){
           console.log('refssssss', this.getSelectedRefs)
           this.checkItem = false
         }
       }
     }
   },
-  computed:{
-    ...mapGetters(['getSelectedRefs'])
+  computed: {
+    ...mapGetters(['getSelectedRefs']),
+
   },
   methods:{
     ...mapMutations(['updateSelectedRefs']),
@@ -57,6 +59,11 @@ export default {
         query: {...query, ...{refs_doc_id:JSON.stringify(refs_idx)}}
       })
     },
+  },
+  mounted() {
+    if (JSON.parse(this.$route.query.refs_doc_id).length > 0 && JSON.parse(this.$route.query.refs_doc_id).includes(this.doc.id)) {
+      this.checkItem = !!JSON.parse(this.$route.query.refs_doc_id).includes(this.doc.id)
+    }
   }
 }
 </script>
