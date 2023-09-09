@@ -26,6 +26,7 @@ export default {
 }
 
 .chapter-header{
+  font-weight: bold;
   color: #222222;
   margin: 10px;
 }

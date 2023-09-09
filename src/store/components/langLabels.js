@@ -4,10 +4,33 @@ export default {
     state() {
         return {
             ua:{
+
+                areas:{
+                    'title': 'Назва',
+                    'type': 'Тип',
+                    'last name': 'Прізвище',
+                    'first name': "Ім'я",
+                    'email': 'Email',
+                    'description': 'Опис',
+                    'keywords': 'Ключові слова',
+                    'references': 'Посилання',
+
+                },
+
                 common:{
                     'empty_field': 'Введіть значення',
                     'too_few_characters': 'Мінімальне значення символів: '
                 },
+                types:{
+                    'Стаття': 'Стаття',
+                    'Тезис': 'Тезис',
+                    'Конспект': 'Конспект',
+                    'Дисертація': 'Дисертація',
+                    'Підручник': 'Підручник',
+                    'Монографія': 'Монографія'
+                },
+
+
                 navbar:{
                     nav_menu:{
                         'account': "Акаунт",
@@ -229,13 +252,23 @@ export default {
                     'title': 'Title',
                     'type': 'Type',
                     'last name': 'Last name',
-                    'first name': 'First_name',
+                    'first name': 'First name',
                     'email': 'Email',
                     'description': 'Description',
                     'keywords': 'Keywords',
                     'references': 'References',
 
                 },
+
+                types:{
+                    'Стаття': 'Article',
+                    'Тезис': 'Thesis',
+                    'Конспект': 'Compendium',
+                    'Дисертація': 'Dissertation',
+                    'Підручник': 'Textbook',
+                    'Монографія': 'Monograph'
+                },
+
                 common:{
                     'empty_field': 'Enter a value',
                     'too_few_characters': 'Minimum character count: '

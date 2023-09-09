@@ -17,4 +17,15 @@ export default {
 
 <style scoped>
 
+h3{
+  margin-bottom: 10px;
+}
+a:visited{
+  color: #3684DD;
+}
+a{
+  text-decoration: none;
+  /*color: #0F0F0F;*/
+  color: #0969DA;
+}
 </style>

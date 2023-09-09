@@ -1,0 +1,71 @@
+
+$violet: #9457EB;
+$gold: #749208;
+$aqua: #00AB66;
+$raspberry: #D70A53;
+$blue: #006DB0;
+$yellow: #FADA5E;
+
+
+.type-color-violet{
+  color: $violet;
+}
+.type-color-gold{
+  color: $gold;
+}
+.type-color-aqua{
+  color: $aqua;
+}
+.type-color-red{
+  color: $raspberry;
+}
+.type-color-blue{
+  color: $blue;
+}
+.type-color-yellow{
+  color: $yellow;
+}
+
+.type-border-color-violet{
+  border: 1px solid $violet;
+}
+.type-border-color-gold{
+  border: 1px solid $gold;
+}
+.type-border-color-aqua{
+  border: 1px solid $aqua;
+}
+.type-border-color-red{
+  border: 1px solid $raspberry;
+}
+.type-border-color-blue{
+  border: 1px solid $blue;
+}
+.type-border-color-yellow{
+  border: 1px solid $yellow;
+}
+
+.type-background-color-violet{
+  color: #ffffff;
+  background: $violet;
+}
+.type-background-color-gold{
+  color: #ffffff;
+  background: $gold;
+}
+.type-background-color-aqua{
+  color: #ffffff;
+  background: $aqua;
+}
+.type-background-color-red{
+  color: #ffffff;
+  background: $raspberry;
+}
+.type-background-color-blue{
+  color: #ffffff;
+  background: $blue;
+}
+.type-background-color-yellow{
+  color: #ffffff;
+  background: $yellow;
+}

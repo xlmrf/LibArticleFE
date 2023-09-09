@@ -29,7 +29,8 @@ export default createStore({
         CodeMessages,
         langLabels,
         actions,
-        notices
+        notices,
+
 
     },
     state: {
@@ -44,7 +45,16 @@ export default createStore({
             'txt':'text/plain'
         },
         types:[],
-        lang: localStorage.getItem('lang')
+        lang: localStorage.getItem('lang'),
+
+        TypesColor:{
+            'Стаття': 'violet',
+            'Тезис': 'gold',
+            'Конспект': 'aqua',
+            'Дисертація': 'red',
+            'Підручник': 'blue',
+            'Монографія': 'yellow'
+        }
     },
     mutations: {
         pageMessage(ctx, data) {
@@ -79,6 +89,9 @@ export default createStore({
             else {
                 return ctx.langLabels.en
             }
+        },
+        getTypesColor(ctx){
+            return ctx.TypesColor
         }
     }
 })

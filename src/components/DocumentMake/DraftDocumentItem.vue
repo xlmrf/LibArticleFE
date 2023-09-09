@@ -1,26 +1,21 @@
 <template>
-  <div class="document-item" :class="['type-border-color-'+ $store.getters.getTypesColor[getTypes.find(item => item.id === documentItem.type_id)?.name],{'document-draft': type === 'draft' || this.$route.query.refs_doc_id}]" v-if="documentItem.title">
+  <div class="document-item document-draft" v-if="documentItem.title">
+<!--    <box-selector :doc="documentItem"  />  selector for remove items    -->
     <div class="context-document-item">
-      <type-part :article="documentItem" />
+      <type-part :article="documentItem" :class="'type-border-color-'+this.$store.getters.getTypesColor[getTypes.find(item => item.id === documentItem?.type_id)?.name]" />
       <date-part :article="documentItem" />
     </div>
     <div class="first-piece">
       <title-part :article="documentItem" :type="type" />
-    </div>
-    <div class="second-piece">
-      <authors-part :article="documentItem" :type="type" />
-    </div>
-    <div class="third-piece">
-      <download-part :article="documentItem" :type="type" />
-      <views-part :document-id="documentItem.id" :type="type" />
+      <authors-part v-if="documentItem.authors && documentItem.authors.length > 0" :article="documentItem" :type="type" />
     </div>
   </div>
 </template>
 
 <script>
 import viewsDocument from "@/components/document/viewsDocument";
-import {mapGetters, mapState} from "vuex";
-
+import {mapGetters, mapMutations, mapState} from "vuex";
+import BoxSelector from "@/components/Documents/DocumentItemComponents/BoxSelector";
 import DownloadPart from "@/components/Documents/DocumentItemComponents/DownloadPart";
 import TitlePart from "@/components/Documents/DocumentItemComponents/TitlePart";
 import TypePart from "@/components/Documents/DocumentItemComponents/TypePart";
@@ -35,8 +30,7 @@ export default {
   data(){
     return{
       pointDocument: null,
-      type: 'searcher',
-
+      type: 'searcher'
     }
   },
 
@@ -53,7 +47,7 @@ export default {
 
   computed:{
     ...mapGetters(['getTypes','getMakeDocument','getSelectedRefs']),
-    ...mapState(['api_url_v1'])
+    ...mapState(['api_url_v1', 'TypesColor'])
   },
   beforeMount() {
     // if (this.$route.query.refs_doc_id){
@@ -79,74 +73,16 @@ export default {
   },
 
 
-  components:{ViewsPart, AuthorsPart, DatePart, TypePart, TitlePart, DownloadPart, viewsDocument}
+  components:{ViewsPart, AuthorsPart, DatePart, TypePart, TitlePart, DownloadPart, BoxSelector, viewsDocument}
 }
 </script>
 
-<style lang="scss" scoped>
-@import '../../../TypeColor.scss';
+<style scoped>
 
-.third-piece{
-  padding-top: 15px;
-  margin-top: auto;
-  display: flex;
-  justify-content: space-between;
-}
-.third-piece > div{
-  //margin-left: 1rem;
+.first-piece{
+  margin-left: 30px;
+  margin-top: 10px;
 }
 
-/*.document-item{*/
-/*  position: relative;*/
-/*  padding: 1rem;*/
-/*  overflow:hidden;*/
-/*  outline: none;*/
-/*}*/
-/*.check-item{*/
-/*  position: absolute;*/
-/*  left: 0.8rem;*/
-/*  top: calc(50% - 9px);*/
-/*}*/
-
-/*.context-document-item{*/
-/*  display: flex;*/
-/*  position: relative;*/
-/*  justify-content: space-between;*/
-/*}*/
-
-/*.first-piece{*/
-/*  display: inherit;*/
-/*  flex-flow: column;*/
-/*  margin: 10px 0;*/
-/*  height: calc(100% - 10px);*/
-/*}*/
-
-/*.second-piece{*/
-/*  padding: 0 5px;*/
-/*  display: inherit;*/
-/*  align-items: center;*/
-/*  justify-content: center;*/
-/*  flex-flow: column;*/
-/*}*/
-
-
-
-
-/*.draft-type-style > span{*/
-
-/*  padding: 0;*/
-/*  border: 1px solid transparent;*/
-/*}*/
-
-/*.document-draft{*/
-/*  background: white;*/
-/*  padding: 0.1rem 0.5rem 0.1rem 3rem;*/
-/*  margin-bottom: 5px;*/
-/*  border-radius: 4px;*/
-/*}*/
-
-/*.third-piece{*/
-/*  border: 1px solid black;*/
-/*}*/
 
 </style>

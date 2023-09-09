@@ -20,5 +20,7 @@ export default {
 </script>
 
 <style scoped>
-
+/*.authors{*/
+/*  margin-top: auto;*/
+/*}*/
 </style>

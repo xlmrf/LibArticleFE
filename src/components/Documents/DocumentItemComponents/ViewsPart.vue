@@ -40,19 +40,14 @@ export default {
 <style scoped>
 
 .views-part{
-  cursor: pointer;
-  position: absolute;
+  /*font-weight: bold;*/
   display: flex;
-  align-items: center;
-  font-size: 0.9rem;
-  width: fit-content;
-  left: calc(95% - 35px);
-  bottom: 12px;
+  cursor: pointer;
+  color: #444444;
 }
 
-.views-part > span{
-  /*font-weight: bold;*/
-  color: #444444;
+.views-part > svg{
+  position: relative;
   margin: 0 3px;
 }
 

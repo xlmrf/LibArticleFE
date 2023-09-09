@@ -3,9 +3,6 @@
     <div class="publication-date">
       {{getDate(article.publication_date)}}
     </div>
-<!--          <div class="publication-date" v-if="type === 'draft'">-->
-<!--    &lt;!&ndash;        {{getDate(document.publication_date)}}&ndash;&gt;23.05.22-->
-<!--          </div>-->
   </div>
 </template>
 
@@ -36,6 +33,9 @@ export default {
 
 <style scoped>
 
-
+.publication-date{
+  color: #535353;
+  font-size: 1em;
+}
 
 </style>

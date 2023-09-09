@@ -162,8 +162,8 @@ export default {
   margin-left: auto;
   border-radius: 999px;
   padding: 26px 11px 7px 11px;
-  left: 100%;
-  bottom: 50px;
+  left: calc(100% - 65px);
+  bottom: 65px;
   cursor: pointer;
 }
 .to-top-btn:hover{

@@ -427,4 +427,28 @@ input {
   margin: 5px;
 }
 
+/* document item */
+
+.document-item{
+  display: flex;
+  flex-flow: column;
+  position: relative;
+  padding: 0.7rem 1rem;
+  overflow:hidden;
+  outline: none;
+}
+
+.context-document-item{
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+  /*height: calc(100% - 49px);*/
+  align-items: center;
+  padding-bottom: 5px;
+}
+
+
+
+
+
 </style>
