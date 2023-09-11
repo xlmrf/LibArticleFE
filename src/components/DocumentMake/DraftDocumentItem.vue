@@ -1,6 +1,6 @@
 <template>
   <div class="document-item document-draft" v-if="documentItem.title">
-<!--    <box-selector :doc="documentItem"  />  selector for remove items    -->
+    <box-selector :doc="documentItem" class="draft-selector"  />
     <div class="context-document-item">
       <type-part :article="documentItem" :class="'type-border-color-'+this.$store.getters.getTypesColor[getTypes.find(item => item.id === documentItem?.type_id)?.name]" />
       <date-part :article="documentItem" />
@@ -83,6 +83,9 @@ export default {
   margin-left: 30px;
   margin-top: 10px;
 }
-
+.draft-selector{
+  position: absolute;
+  top: 59px;
+}
 
 </style>

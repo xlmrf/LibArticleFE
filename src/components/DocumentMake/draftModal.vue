@@ -6,7 +6,7 @@
     </div>
     <div class="modal-component-body drafts-panel">
       <div v-for="(draft,idx) in drafts" v-if="drafts.length > 0">
-        <span class="doc-counter">{{idx+1}}.</span>
+<!--        <span class="doc-counter">{{idx+1}}.</span>-->
         <draft-document-item :documentItem="draft" />
       </div>
       <pulse-loader class="drafts-loader" v-else/>
@@ -86,7 +86,7 @@ export default {
   font-size: 1.3em;
   position: absolute;
   /*bottom: calc(0 - 21px);*/
-
+  top: 54px;
   color: #444444;
   cursor: default;
   right: calc(100% - 41px);

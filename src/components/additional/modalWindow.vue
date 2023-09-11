@@ -129,7 +129,6 @@ export default {
   background-color: rgb(255, 255, 255);
   z-index: 999;
   min-height: 200px;
-  padding: 0 10px;
   height: calc(100% - 65px);
 }
 
@@ -158,10 +157,11 @@ export default {
   display: flex;
   flex-direction: column;
   margin-top: 5px;
-  height: 90%;
+  height: calc(100% - 77px);
   width: -moz-available;
   position: absolute;
   /*font-size: 0.8em;*/
+  box-shadow: rgba(0, 0, 0, 0.31) 0px -42px 33px -32px inset;
   overflow: auto;
   z-index: 10;
 
