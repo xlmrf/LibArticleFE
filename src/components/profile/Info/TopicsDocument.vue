@@ -60,7 +60,7 @@ p{
 
 .s-document{
   font-size: 0.8em;
-  /*border: 1px solid #BFBFBFD8;*/
+  border: 1px solid #BFBFBFD8;
   color: #9A9A9A;
   border-radius: 5px;
   margin: 5px;

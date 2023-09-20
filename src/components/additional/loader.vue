@@ -36,7 +36,7 @@ export default {
 .over-wall > svg{
   margin: -25px;
 }
-.spinner .path {
+.path {
     stroke: hsla(280, 48%, 6%, 0.89);
     stroke-linecap: round;
     animation: dash 1.6s ease-in-out infinite;
@@ -50,6 +50,10 @@ export default {
 
 .save-session-loader .path{
   stroke: hsl(177, 70%, 41%);
+}
+
+.loader-btn .path{
+  stroke: #ffffff;
 }
 
 @keyframes rotate {

@@ -45,12 +45,17 @@ export default createStore({
             'txt':'text/plain'
         },
         types:[],
+        DocumentItemTypes:{
+            drafts: 'drafts',
+            searcher: 'searcher',
+            profile: 'profile'
+        },
         lang: localStorage.getItem('lang'),
 
         TypesColor:{
             'Стаття': 'violet',
-            'Тезис': 'gold',
-            'Конспект': 'aqua',
+            'Тезис': 'aqua',
+            'Конспект': 'grass',
             'Дисертація': 'red',
             'Підручник': 'blue',
             'Монографія': 'yellow'

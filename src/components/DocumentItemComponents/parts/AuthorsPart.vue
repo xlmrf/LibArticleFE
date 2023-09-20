@@ -4,7 +4,7 @@
         <router-link class="author-item-link" :to="'/profile/'+author.user_id" v-if="author.user_id">
           {{author.last_name}} {{author.first_name?author.first_name[0]:''}}
         </router-link>
-        <span v-else>
+        <span v-else class="no-auth-author">
           {{author.last_name}} {{author.first_name?author.first_name[0]:''}}.
         </span>
       </span>
@@ -20,7 +20,8 @@ export default {
 </script>
 
 <style scoped>
-/*.authors{*/
-/*  margin-top: auto;*/
-/*}*/
+.no-auth-author{
+  cursor: default;
+}
+
 </style>

@@ -61,7 +61,7 @@ export default {
     },
   },
   mounted() {
-    if (JSON.parse(this.$route.query.refs_doc_id).length > 0 && JSON.parse(this.$route.query.refs_doc_id).includes(this.doc.id)) {
+    if ((this.$route.query.refs_doc_id && JSON.parse(this.$route.query.refs_doc_id).length > 0) && JSON.parse(this.$route.query.refs_doc_id).includes(this.doc.id)) {
       this.checkItem = !!JSON.parse(this.$route.query.refs_doc_id).includes(this.doc.id)
     }
   }

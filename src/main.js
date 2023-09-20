@@ -9,6 +9,7 @@ import dateConverter from "./mixins/dateConverter";
 import messages from "@/mixins/messages";
 // import '../style/theme.css';
 require('./bootstrap');
+import './TypeColor.scss'
 
 const app = createApp(App);
 app

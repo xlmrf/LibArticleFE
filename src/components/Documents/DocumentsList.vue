@@ -6,7 +6,7 @@
     </div>
     <div class="not-found-document-panel" v-if="documents.total === 0">Документів не знайдено</div>
     <div v-else>
-      <document-item class="document-list-item" :documentItem="document" v-for="document in documents.data"/>
+      <component :is="ItemComponent[ChooseItem]" class="document-list-item" :documentItem="document" v-for="document in documents.data"/>
       <pagination :paginate="paginate(documents)"/>
     </div>
   </div>
@@ -16,11 +16,23 @@
 import pagination from "@/components/Documents/Pagination"
 import citation from "../additional/CitationStyle"
 import DocumentItem from "@/components/Documents/DocumentItem";
+import DraftDocumentItem from "@/components/DocumentItemComponents/DraftDocumentItem";
+import ReferenceDocumentItem from "@/components/DocumentItemComponents/ReferenceDocumentItem";
 import {mapGetters} from "vuex";
 import NavFiltration from "@/components/Documents/Filters/NavFiltration";
 import NavHeader from "@/components/Documents/Filters/NavHeader";
 
 export default {
+
+  data(){
+    return{
+      ItemComponent:{
+        document:'document-item',
+        referenceDocument: 'reference-document-item'
+      }
+    }
+  },
+
   props: {
     documents: {
       type: Object
@@ -29,6 +41,9 @@ export default {
   },
   computed: {
     ...mapGetters(['getTypes','getPageCountPaginate']),
+    ChooseItem(){
+      return (this.$route.query.refs_doc_id && this.$route.query.from) ? 'referenceDocument' : 'document'
+    }
 
   },
   methods: {
@@ -42,6 +57,8 @@ export default {
     NavFiltration,
     DocumentItem,
     citation,
+    ReferenceDocumentItem,
+    DraftDocumentItem,
     pagination
   },
   mounted() {

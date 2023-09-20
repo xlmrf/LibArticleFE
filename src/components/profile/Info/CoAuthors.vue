@@ -8,7 +8,7 @@
   <!--        <router-link :to="'/profile/'+item.user_id">{{item.last_name}} </router-link> - {{item.count}}-->
 
         <div class="avatar">
-          <img :src="getAnonPhoto" class="user-avatar" alt="user photo">
+          <img :src="getAnonPhoto" class="user-avatar popular-coauthor-avatar" alt="user photo">
         </div>
         <router-link v-if="item.user_id" class="co-author profile-link" :to="'/profile/'+item.user_id">
           <span>{{item.last_name}}</span>
@@ -91,6 +91,7 @@ export default {
 .co-authors-block{
   margin-top: 20px;
   display: flex;
+  flex-wrap: wrap;
 }
 
 .co-authors-block > div{
@@ -100,7 +101,7 @@ export default {
   border: 1px solid #e7e7e7;
   border-radius: 4px;
   padding: 10px 15px;
-  margin: 0 10px;
+  margin: 0 10px 10px 10px;
 }
 
 .avatar {
@@ -117,10 +118,10 @@ export default {
   text-decoration: #212121 underline;
 }
 
-.user-avatar {
+.popular-coauthor-avatar {
   object-fit: cover;
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
 }
 </style>

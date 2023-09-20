@@ -247,38 +247,6 @@ h3{
   border: 1px solid rgba(229, 50, 45, 0.74);
 }
 
-.choose-type{
-
-  text-align: center;
-  text-transform: uppercase;
-  /*transition: 0.5s;*/
-  background-size: 200% auto;
-  color: white;
-  box-shadow: 0 0 20px #eee;
-  display: block;
-  font-size: 16px;
-  margin:2.5rem auto;
-  align-self: end;
-  padding: 1rem 5rem;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: 0.5s ease all;
-  -moz-transition: 0.5s ease all;
-  -webkit-transition: 0.5s ease all;
-}
-.choose-btn-able{
-  background-image: linear-gradient(to right, #77A1D3 0%, #79CBCA  51%, #77A1D3  100%);
-}
-.disable-btn{
-  background-image: linear-gradient(to right, rgba(129, 131, 132, 0.36) 0%, rgba(103, 116, 116, 0.33) 51%, rgba(129, 131, 132, 0.33) 100%);
-  cursor: default;
-}
-.choose-btn-able:hover{
-  background-position: right center; /* change the direction of the change here */
-  color: #fff;
-  text-decoration: none;
-}
-
 .category-error{
   transition: ease 0.2s;
   color: #cd2d2d;

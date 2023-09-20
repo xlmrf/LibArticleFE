@@ -1,7 +1,7 @@
 
 $violet: #9457EB;
-$gold: #749208;
-$aqua: #00AB66;
+$aqua: rgb(85, 184, 252);
+$grass: #00AB66;
 $raspberry: #D70A53;
 $blue: #006DB0;
 $yellow: #FADA5E;
@@ -10,11 +10,11 @@ $yellow: #FADA5E;
 .type-color-violet{
   color: $violet;
 }
-.type-color-gold{
-  color: $gold;
-}
 .type-color-aqua{
   color: $aqua;
+}
+.type-color-grass{
+  color: $grass;
 }
 .type-color-red{
   color: $raspberry;
@@ -29,11 +29,11 @@ $yellow: #FADA5E;
 .type-border-color-violet{
   border: 1px solid $violet;
 }
-.type-border-color-gold{
-  border: 1px solid $gold;
-}
 .type-border-color-aqua{
   border: 1px solid $aqua;
+}
+.type-border-color-grass{
+  border: 1px solid $grass;
 }
 .type-border-color-red{
   border: 1px solid $raspberry;
@@ -49,9 +49,9 @@ $yellow: #FADA5E;
   color: #ffffff;
   background: $violet;
 }
-.type-background-color-gold{
+.type-background-color-grass{
   color: #ffffff;
-  background: $gold;
+  background: $grass;
 }
 .type-background-color-aqua{
   color: #ffffff;

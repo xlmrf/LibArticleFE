@@ -4,7 +4,6 @@
     <form class="card" @submit.prevent enctype="multipart/form-data">
       <input name="file" class="form-control select-input" type="file" id="files" @change="selectedFiles()"
           ref="files" :multiple="getFiles.main.url" :accept="typeOfFile"/>
-
       <div class="document-files-wrapper">
         <p v-if="chosenLink?.chosenLink">{{ chosenLink.originalNameFile }}</p>
         <span v-if="loadError">{{loadError}}</span>
@@ -92,7 +91,7 @@ export default {
   },
   computed: {
     ...mapState(['access_file_types']),
-    ...mapGetters(['getFiles']),
+    ...mapGetters(['getFiles', 'getMakeDocument']),
 
     chosenLink(){
 
@@ -163,19 +162,6 @@ export default {
       e.preventDefault();
       this.$refs.files.files = e.dataTransfer.files;
       this.selectedFiles()
-      console.log('file transfer',this.$refs)
-      // let uploadedFiles = this.$refs.files.files;
-      // let formData = new FormData();
-      // let length = 0
-      // uploadedFiles.length > 5 ? length = 5 : length = uploadedFiles.length
-      // for (var i = 0; i < length; i++) {
-      //   let file = this.validate(uploadedFiles[i]);
-      //   formData.set('file', file);
-      //   if (file !== null) {
-      //     this.pushFile(formData)
-      //   }
-      // }
-      // this.pushFile(e.dataTransfer.files[0])
       this.isDragging = false;
     },
 
@@ -290,6 +276,12 @@ export default {
       main:{},
       add:[]
     })
+
+    if (this.$route.params.id && this.getMakeDocument.files.main){
+      this.updateFiles(this.getMakeDocument.files)
+    }
+
+
   },
   components: {loader}
 }

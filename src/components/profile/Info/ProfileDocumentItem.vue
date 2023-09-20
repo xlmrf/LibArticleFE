@@ -1,7 +1,7 @@
 <template>
   <div class="document-item" :class="['type-border-color-'+ $store.getters.getTypesColor[getTypes.find(item => item.id === documentItem.type_id)?.name],{'document-draft': type === 'draft' || this.$route.query.refs_doc_id}]" v-if="documentItem.title">
     <div class="context-document-item">
-      <type-part :article="documentItem" />
+      <type-part :article="documentItem" :type="type" />
       <date-part :article="documentItem" />
     </div>
     <div class="first-piece">
@@ -11,22 +11,29 @@
       <authors-part :article="documentItem" :type="type" />
     </div>
     <div class="third-piece">
+
+<!--      <span @click="copy('')" class="ref-copy-area">-->
+<!--        <span>{{ this.$store.getters.getLanguage.document.characteristic.copy }}</span>-->
+<!--&lt;!&ndash;        <svg xmlns="http://www.w3.org/2000/svg" v-if="copy_idx === idx" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#222222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>&ndash;&gt;-->
+<!--      </span>-->
+
       <download-part :article="documentItem" :type="type" />
-      <views-part :document-id="documentItem.id" :type="type" />
+      <views-part :article="documentItem" :type="type" />
     </div>
   </div>
 </template>
 
 <script>
 import viewsDocument from "@/components/document/viewsDocument";
+
 import {mapGetters, mapState} from "vuex";
 
-import DownloadPart from "@/components/Documents/DocumentItemComponents/DownloadPart";
-import TitlePart from "@/components/Documents/DocumentItemComponents/TitlePart";
-import TypePart from "@/components/Documents/DocumentItemComponents/TypePart";
-import DatePart from "@/components/Documents/DocumentItemComponents/DatePart";
-import AuthorsPart from "@/components/Documents/DocumentItemComponents/AuthorsPart";
-import ViewsPart from "@/components/Documents/DocumentItemComponents/ViewsPart";
+import DownloadPart from "@/components/DocumentItemComponents/parts/DownloadPart";
+import TitlePart from "@/components/DocumentItemComponents/parts/TitlePart";
+import TypePart from "@/components/DocumentItemComponents/parts/TypePart";
+import DatePart from "@/components/DocumentItemComponents/parts/DatePart";
+import AuthorsPart from "@/components/DocumentItemComponents/parts/AuthorsPart";
+import ViewsPart from "@/components/DocumentItemComponents/parts/ViewsPart";
 
 
 export default {
@@ -35,8 +42,8 @@ export default {
   data(){
     return{
       pointDocument: null,
-      type: 'searcher',
-
+      type: 'profile',
+      // copy_idx:-1,
     }
   },
 
@@ -48,7 +55,13 @@ export default {
         console.log('views error:',err);
       })
     },
-
+    async copy(text){
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch (err) {
+        console.error('Failed to copy: ', err);
+      }
+    },
   },
 
   computed:{
@@ -87,10 +100,10 @@ export default {
 @import '../../../TypeColor.scss';
 
 .third-piece{
-  padding-top: 15px;
+  padding-top: 5px;
   margin-top: auto;
   display: flex;
-  justify-content: space-between;
+  justify-content: right;
 }
 .third-piece > div{
   //margin-left: 1rem;

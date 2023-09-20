@@ -2,8 +2,8 @@
   <div class="document-wrapper" v-if="getDocument.authors && getTypes">
 
     <div class="top-document-info">
-      <span class="document-type" @click="smooth()">{{getTypes.find(item => item.id === getDocument.type_id)?.name}}</span>
-      <router-link v-if="getDocument.authors.map(item => item.user_id === getUser.id).includes(true)" class="remake-link" :to="'/document/make/'+$route.params.id" >
+      <span class="document-type type-in-document" :class="'type-background-color-' + $store.getters.getTypesColor[getTypes.find(item => item.id === getDocument.type_id)?.name]" @click="smooth()">{{getTypes.find(item => item.id === getDocument.type_id)?.name}}</span>
+      <router-link v-if="getDocument.authors.map(item => item.user_id === getUser.id).includes(true) || getDocument.owner.id === getUser.id" class="remake-link" :to="'/document/make/'+$route.params.id" >
         {{ this.$store.getters.getLanguage.document.topics.edit }}
       </router-link>
     </div>
@@ -13,7 +13,9 @@
       <div class="doc-main-info">
         <div class="left-side-info">
           <div class="under-title-info">
-            <span>{{ this.$store.getters.getLanguage.document.characteristic.publisher }}: Ходаніцький Олексій Олексійович</span>
+            <span>{{ this.$store.getters.getLanguage.document.characteristic.publisher }}:
+              <router-link class="link-to-owner" :to="'/profile/'+getDocument.owner.id" >{{getDocument.owner.info.last_name}} {{getDocument.owner.info.first_name}}</router-link>
+            </span>
           </div>
 
           <div class="authors">
@@ -65,7 +67,7 @@
 </template>
 
 <script>
-import {mapActions, mapGetters, mapMutations} from "vuex";
+import {mapActions, mapGetters, mapMutations, mapState} from "vuex";
 import info from "@/components/document/info";
 import files from "@/components/document/files";
 import comment from "@/components/document/comment";
@@ -95,6 +97,7 @@ export default {
     }
   },
   computed: {
+    ...mapState(['TypesColor']),
     ...mapGetters(['getDocument','getTypes', 'getUser']),
   },
   components:{Annotation, DocumentRefs, Authors, Loader, info,files,comment, citesDocument,viewsDocument},
@@ -220,6 +223,14 @@ export default {
   cursor: pointer;
   color: #1C75DD;
   margin-left: 15px;
+}
+
+.link-to-owner{
+  color: #1C75DD;
+  text-decoration: none;
+}
+.link-to-owner:hover{
+  text-decoration: underline;
 }
 
 </style>

@@ -89,6 +89,13 @@ export default {
   mounted() {
     this.sortSelect = this.$route.query.sort ? this.sortDocuments[this.$route.query.sort] : 'за популярністю'
     let i = Object.assign({},this.documents)
+    if (!this.$route.query?.sort){
+      let query = Object.assign({}, this.$route.query)
+      this.$router.push({
+        name: 'documents',
+        query: {...query, ...{'sort': 'match'}}
+      })
+    }
     // i.splice(i.indexOf(i.data), 1);
   }
 }

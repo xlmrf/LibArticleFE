@@ -18,7 +18,7 @@
 import DocumentItem from "@/components/Documents/DocumentItem";
 import pulseLoader from "@/components/additional/pulseLoader";
 import {mapState} from "vuex";
-import DraftDocumentItem from "@/components/DocumentMake/DraftDocumentItem";
+import DraftDocumentItem from "@/components/DocumentItemComponents/DraftDocumentItem";
 export default {
   components:{DraftDocumentItem, pulseLoader, DocumentItem},
 

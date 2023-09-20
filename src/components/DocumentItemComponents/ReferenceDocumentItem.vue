@@ -1,7 +1,7 @@
 <template>
   <div class="document-item" :class="{'document-draft': type === 'draft' || this.$route.query.refs_doc_id}" v-if="documentItem.title">
-<!--    <box-selector :doc="documentItem"  v-if="this.$route.query.refs_doc_id" />-->
     <div class="context-document-item">
+      <box-selector :doc="documentItem"  v-if="this.$route.query.refs_doc_id" />
       <type-part :article="documentItem" :class="'type-border-color-'+this.$store.getters.getTypesColor[getTypes.find(item => item.id === documentItem?.type_id)?.name]" />
       <date-part :article="documentItem" />
     </div>
@@ -85,10 +85,10 @@ export default {
 
 
 .first-piece{
-    display: inherit;
-    flex-flow: column;
-    margin: 10px 0;
-    height: calc(100% - 10px);
+  display: inherit;
+  flex-flow: column;
+  margin: 10px 0;
+  height: calc(100% - 10px);
 }
 
 .second-piece{

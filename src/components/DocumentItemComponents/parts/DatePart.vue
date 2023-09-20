@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="date-part">
     <div class="publication-date">
       {{getDate(article.publication_date)}}
     </div>

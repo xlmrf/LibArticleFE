@@ -441,13 +441,52 @@ input {
 .context-document-item{
   display: flex;
   position: relative;
-  justify-content: space-between;
+  /*justify-content: space-between;*/
   /*height: calc(100% - 49px);*/
   align-items: center;
   padding-bottom: 5px;
 }
 
+.main-btn{
+  text-align: center;
+  text-transform: uppercase;
+  /*transition: 0.5s;*/
+  background-size: 200% auto;
+  color: white;
+  box-shadow: 0 0 20px #eee;
+  display: block;
+  font-size: 16px;
+  margin:2.5rem auto;
+  align-self: end;
+  padding: 1rem 4rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.5s ease all;
+  -moz-transition: 0.5s ease all;
+  -webkit-transition: 0.5s ease all;
+}
 
+.btn-with-loader{
+  position: relative;
+}
+
+.date-part{
+  margin-left: auto;
+}
+
+.check-item{
+  position: relative;
+  top: 2px;
+}
+
+.loader-btn{
+  position: absolute;
+  right: 80px;
+  bottom: calc(26px + 50px);
+}
+.loader-btn circle{
+  stroke: #fff;
+}
 
 
 

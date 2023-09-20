@@ -12,7 +12,7 @@
 
     </div>
     <div style="clear: both">
-      <button @click="createDocument()" class="choose-type choose-btn-able" :class="['choose-type',{'disable-btn':loader||!BtnValid}]" :disabled="loader">{{$route.params.id ? $store.getters.getLanguage.document_make.warnings.move : $store.getters.getLanguage.document_make.warnings.create}}</button>
+      <button @click="createDocument()" class="main-btn choose-btn-able btn-with-loader" :class="[{'disable-btn':loader||!BtnValid}]" :disabled="loader">{{$route.params.id ? $store.getters.getLanguage.document_make.warnings.move : $store.getters.getLanguage.document_make.warnings.create}}<loader class="loader-btn" v-if="btnLoader" loader_class="loader-btn" width="2" radius="12" /></button>
     </div>
     <div class="middle-spinner" v-if="loader">
       <span><loader width="4" radius="20"></loader></span>
@@ -43,7 +43,8 @@ export default {
       btn_enabled: false,
       draftTumbler: false,
       titleError: '',
-      typeError: ''
+      typeError: '',
+      btnLoader: false
     }
   },
   emits:['next','loader'],
@@ -116,29 +117,6 @@ export default {
 </script>
 
 <style scoped>
-
-.choose-type{
-  text-align: center;
-  text-transform: uppercase;
-  /*transition: 0.5s;*/
-  background-size: 200% auto;
-  color: white;
-  box-shadow: 0 0 20px #eee;
-  display: block;
-  font-size: 16px;
-  margin:2.5rem auto;
-  align-self: end;
-  padding: 1rem 4rem;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: 0.5s ease all;
-  -moz-transition: 0.5s ease all;
-  -webkit-transition: 0.5s ease all;
-}
-.choose-btn-able{
-  /*background-image: linear-gradient(to right, #77A1D3 0%, #79CBCA  51%, #77A1D3  100%);*/
-  background: #0969DA;
-}
 
 .drafts{
   display: flex;
@@ -343,6 +321,11 @@ export default {
   display: flex;
   justify-content: center;
   padding: 10px;
+}
+
+.choose-btn-able{
+  /*background-image: linear-gradient(to right, #77A1D3 0%, #79CBCA  51%, #77A1D3  100%);*/
+  background: #0969DA;
 }
 
 </style>
