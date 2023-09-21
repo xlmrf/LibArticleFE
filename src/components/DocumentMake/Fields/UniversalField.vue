@@ -21,7 +21,7 @@ export default {
       if (this.isReady)
         this.validation()
     },
-    'getMakeDocument.edition':{
+    'getMakeDocument.subject_area':{
       handler(i){
         this.invalid = ''
       }

@@ -99,7 +99,7 @@ export default {
     },
 
     setFields(item) {
-      if (item === 'place' || item === 'edition')
+      if (item === 'place' || item === 'subject_area')
         return 'universal-field';
       else
         return item + '-field';

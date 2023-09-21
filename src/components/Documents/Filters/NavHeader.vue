@@ -39,7 +39,7 @@ export default {
         name: this.$store.getters.getLanguage.documents.nav_filter.alphabet,
         match: this.$store.getters.getLanguage.documents.nav_filter.match
       },
-      sortSelect: this.$store.getters.getLanguage.documents.nav_filter.match
+      sortSelect: 'пошуку'
     }
   },
   computed: {
