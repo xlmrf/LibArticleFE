@@ -5,6 +5,32 @@ export default {
         return {
             ua:{
 
+
+
+                type_areas:{
+                    signs:{
+                        type: 'Тип',
+                        fill_areas: 'Поля для заповнення'
+                    },
+
+                    areas:{
+                        'title': 'Назва',
+                        'subject_area': 'Науковий напрямок',
+                        'authors': 'Автори',
+                        'place' : 'Місце публікації',
+                        'publication_date' : 'Дата публікації',
+                        'keywords' : 'Ключові слова',
+                        'pages' : 'Сторінки',
+                        'references' : 'Посилання',
+                        'description' : 'Опис',
+                    },
+                    filter_areas:{
+                        'authors': 'автори:',
+                        'type_id': 'тип:',
+                        'publication_date': 'дата публікації:'
+                    }
+                },
+
                 areas:{
                     'title': 'Назва',
                     'type': 'Тип',
@@ -162,7 +188,7 @@ export default {
                         'email': 'Email',
                         'last_name': 'Прізвище',
                         'first_name': "Ім'я",
-                        'edition': 'Науковий напрямок',
+                        'subject_area': 'Науковий напрямок',
                         'place': 'Місце публікації',
                         'publication_date': 'Дата публікації',
                         'only_year': 'рік',
@@ -187,7 +213,7 @@ export default {
                     },
                     hint_description:{
                         'authors': 'Люди, що причетні до вмісту документу',
-                        'edition': 'Тематика документу, конкретна наукова область, наприклад: Tesla coil або TDOA',
+                        'subject_area': 'Тематика документу, конкретна наукова область, наприклад: Tesla coil або TDOA',
                         'place': 'Місце першого опублікування документу',
                         'publication_date': 'Дата першого опублікування документу',
 
@@ -248,6 +274,31 @@ export default {
 
 
             en: {
+
+                type_areas:{
+                    signs:{
+                        type: 'Type',
+                        fill_areas: 'Fields to fill'
+                    },
+
+                    areas:{
+                        'title': 'Title',
+                        'subject_area': 'Subject area',
+                        'authors': 'Authors',
+                        'place' : 'Publication place',
+                        'publication_date' : 'Publication date',
+                        'keywords' : 'Keywords',
+                        'pages' : 'Pages',
+                        'references' : 'References',
+                        'description' : 'Description',
+                    },
+                    filter_areas:{
+                        'authors': 'authors:',
+                        'type_id': 'type:',
+                        'publication_date': 'publication date:'
+                    }
+                },
+
                 areas:{
                     'title': 'Title',
                     'type': 'Type',
@@ -403,7 +454,7 @@ export default {
                         'email': 'Email',
                         'last_name': 'Last name',
                         'first_name': 'First name',
-                        'edition': 'Edition',
+                        'subject_area': 'Subject area',
                         'place': 'Publication place',
                         'publication_date': 'Publication date',
                         'publication_year': 'year',
@@ -426,14 +477,14 @@ export default {
 
                     },
                     hint_description:{
-                        'authors': 'Автори, що напряму причетні до вмісту документу',
-                        'edition': 'Тематика документу, конкретна наукова область, наприклад: Tesla coil або TDOA',
-                        'place': 'Місце першого опублікування документу',
-                        'publication_date': 'Дата першого опублікування документу',
+                        'authors': 'Authors involved in the content of the document',
+                        'subject_area': 'The topic of the document, a specific scientific field, for example: Tesla coil or TDOA',
+                        'place': 'Place of first publication of the document',
+                        'publication_date': 'The date of the first publication of the document',
 
-                        'keywords': 'Основні ключові слова, навколо яких описувалась робота',
-                        'references': 'Документи та ресурси на які посилались автори',
-                        'description': 'Наведення стислого опису документу',
+                        'keywords': 'The main keywords around which the work was described',
+                        'references': 'Documents and resources referred to by the authors',
+                        'description': 'Providing a brief description of the document',
                     },
                     file_field:{
                         'put_doc_area': 'To upload a file, drag it into the area or click here',

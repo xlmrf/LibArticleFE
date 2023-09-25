@@ -1,7 +1,7 @@
 <template>
   <div class="document-types" >
     <div>
-      <h3>Тип</h3>
+      <h3>{{this.$store.getters.getLanguage.type_areas.signs.type}}</h3>
       <div class="files-tape">
         <div v-for="(type,key) in getTypes" :key="key"
              :class="['file-name',{'category-active':getMakeDocument.type_id-1 === key}]"
@@ -10,10 +10,10 @@
       </div>
     </div>
     <div class="type-description">
-      <h3>Поля для заповнення</h3>
+      <h3>{{this.$store.getters.getLanguage.type_areas.signs.fill_areas}}</h3>
       <ul class="item-category-collection" v-if="getMakeDocument.type_id">
         <li class="manual-item" v-for="(item, key) in getTypes?.find(type => type.id === getMakeDocument.type_id)['fields']" :key="key">
-          {{ translateAreas(item) }}
+          {{ this.$store.getters.getLanguage.type_areas.areas[item] }}
         </li>
       </ul>
       <span class="item-category-collection mid-title" :class="{'category-error':error}" v-else>Оберіть категорію</span>

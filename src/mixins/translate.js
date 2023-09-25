@@ -31,8 +31,8 @@ export default {
             // }
         },
         translateFilters(e){
-            console.log('eee',this.filters_equal)
-            return this.filters_equal[e]
+            // console.log('eee',this.filters_equal)
+            return this.$store.getters.getLanguage.type_areas.filter_areas[e]
         }
     }
 }

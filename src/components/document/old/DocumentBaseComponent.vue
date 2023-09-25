@@ -10,7 +10,7 @@
       </div>
       <div class="document-areas" >
         <div class="form-item" v-for="(item,idx) in fromStorage ? JSON.parse(getDocument.category.areas) : getTypes.filter(x => x.name === getDocument.category).map(x => x['areas'])[0]"> <!-- find method not work -->
-          <label :for="item">{{translateAreas(item)}}</label>
+          <label :for="item">{{this.$store.getters.getLanguage.type_areas.areas[item]}}</label>
           <div class="author-fill-list" v-if="item === 'authors'">
             <author-fields :getUser="getUser" @newAuthor="setAuthors"></author-fields>
           </div>

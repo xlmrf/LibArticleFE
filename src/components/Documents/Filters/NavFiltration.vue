@@ -4,7 +4,7 @@
       <span>{{ $store.getters.getLanguage.documents.nav_filter.applied_filters}}:</span><span class="clear-filter-btn" @click="clearFilter()">{{ $store.getters.getLanguage.documents.nav_filter.clear}}</span>
     </div>
     <div class="filter-panel" v-for="(item,k) in checkFilter">
-      <p class="filter-panel-name">{{ translateFilters(k) }}</p>
+      <p class="filter-panel-name">{{ this.$store.getters.getLanguage.type_areas.filter_areas[k] }}</p>
       <span v-for="(el, i) in textFilter(item, k)">
       {{ el }}
           <small @click="deleteFilter(k,i)" class="delete-item">
