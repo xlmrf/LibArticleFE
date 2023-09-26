@@ -2,7 +2,7 @@
   <div class="check-item">
     <label class="checkbox-item filter-checkbox select-type-checkbox">
       <input type="checkbox" v-model="checkItem" @click="checkItemM()">
-      <span class="label"></span>
+      <span class="label">{{$route.query}}</span>
     </label>
   </div>
 </template>

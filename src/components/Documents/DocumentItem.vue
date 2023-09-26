@@ -39,13 +39,13 @@ export default {
   },
 
   methods:{
-    viewsDocument(){
-      axios.get(this.api_url_v1 + '/report/document-views/' + this.documentItem.id).then(response => {
-        this.views = response.data
-      }, err => {
-        console.log('views error:',err);
-      })
-    },
+    // viewsDocument(){
+    //   axios.get(this.api_url_v1 + '/report/document-views/' + this.documentItem.id).then(response => {
+    //     this.views = response.data
+    //   }, err => {
+    //     console.log('views error:',err);
+    //   })
+    // },
 
   },
 
@@ -60,8 +60,8 @@ export default {
   },
   mounted() {
 
-    if (this.type !== 'draft')
-      this.viewsDocument()
+    // if (this.type !== 'draft')
+      // this.viewsDocument()
 
     // if (this.$route.query.refs_doc_id){
     //   this.updateSelectedRefs([])

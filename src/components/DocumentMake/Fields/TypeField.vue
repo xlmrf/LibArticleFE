@@ -5,7 +5,7 @@
       <div class="files-tape">
         <div v-for="(type,key) in getTypes" :key="key"
              :class="['file-name',{'category-active':getMakeDocument.type_id-1 === key}]"
-             @click="getMakeDocument.type_id = type.id">{{ type.name }}
+             @click="getMakeDocument.type_id = type.id">{{ this.$store.getters.getLanguage.types[type.name] }}
         </div>
       </div>
     </div>
@@ -16,7 +16,7 @@
           {{ this.$store.getters.getLanguage.type_areas.areas[item] }}
         </li>
       </ul>
-      <span class="item-category-collection mid-title" :class="{'category-error':error}" v-else>Оберіть категорію</span>
+      <span class="item-category-collection mid-title" :class="{'category-error':error}" v-else>{{this.$store.getters.getLanguage.type_areas.signs.category_tip}}</span>
     </div>
   </div>
 </template>
