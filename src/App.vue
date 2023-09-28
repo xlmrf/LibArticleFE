@@ -51,7 +51,7 @@ body {
 }
 
 .subway {
-  margin-top: 75px;
+  margin-top: 55px;
   min-height: 42px;
   display: block;
 }

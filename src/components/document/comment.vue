@@ -1,10 +1,10 @@
 <template>
   <div class="doc-list-item doc-comments">
-    <h3 @click="hide_comments = !hide_comments">Коментарі <tumbler-filter-button :toggle="!hide_comments"/></h3>
+    <h3 @click="hide_comments = !hide_comments">{{ this.$store.getters.getLanguage.document.comments.title }} <tumbler-filter-button :toggle="!hide_comments"/></h3>
     <div class="comments-field" :class="{'display-none':hide_comments}">
       <div>
-        <input type="text" class="sample-input comment-input" :class="{'sample-input-error':comment_warning}" @keypress.enter="SendComment()" name="comment" v-model="comment" required>
-        <button @click="SendComment()">Додати</button>
+        <input type="text" :title="$store.getters.getLanguage.document.comments.input_hint" class="sample-input comment-input" :class="{'sample-input-error':comment_warning}" @keypress.enter="SendComment()" name="comment" v-model="comment" required>
+        <button @click="SendComment()">{{ this.$store.getters.getLanguage.document.comments.add_btn }}</button>
       </div>
       <div class="comment" v-for="(comment, index) in getComments">
         <div class="comment-text">{{comment.text}}</div>
@@ -18,7 +18,7 @@
           <span class="comment-date">{{comment.created_at}}</span>
 <!--        </div>-->
       </div>
-      <h5 class="noun-comments" v-if="getComments.length <= 0">Додайте перший коментар до документа</h5>
+      <h5 class="noun-comments" v-if="getComments.length <= 0">{{ this.$store.getters.getLanguage.document.comments.add_first_comment }}</h5>
     </div>
   </div>
 </template>
@@ -91,9 +91,10 @@ export default {
 }
 
 .noun-comments{
-  color: #222222;
+  color: #444444;
   text-align: center;
-  font-size: 0.8em;
+  font-size: 0.9em;
+  font-weight: normal;
 }
 
 .comment{

@@ -37,7 +37,8 @@ export default {
     },
 
     showAllCites(){
-      this.openModal = true
+      if (this.cites.document_citation.length > 0)
+        this.openModal = true
     },
   },
 

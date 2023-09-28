@@ -178,6 +178,12 @@ export default {
                         'doc_refs': 'Посилання документа',
                         'load_refs': 'Підвантажити посилання'
                     },
+                    comments:{
+                        'title': 'Коментарі',
+                        'add_btn': 'Додати',
+                        'input_hint': 'There is something interesting...',
+                        'add_first_comment': 'Додайте перший коментар'
+                    },
                     other:{
                         'views_hint': 'Унікальних переглядів: '
                     }
@@ -471,6 +477,12 @@ export default {
                     cites:{
                         'doc_refs': 'Document references',
                         'load_refs': 'Load more references'
+                    },
+                    comments:{
+                        'title': 'Comments',
+                        'add_btn': 'Add',
+                        'input_hint': 'There is something interesting...',
+                        'add_first_comment': 'Add the first comment'
                     },
                     other:{
                         'views_hint': 'unique views: '

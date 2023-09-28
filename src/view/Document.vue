@@ -49,17 +49,14 @@
       <comment />
     </div>
 
-
-<!--    <files>{{ getDocument.files }}</files>-->
-
-    <!--              <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24" fill="none" stroke="#24292F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/><path d="M14 3v5h5M16 13H8M16 17H8M10 9H8"/></svg>-->
-
-<!--    <span>-->
-<!--            Переглядати як:-->
-<!--            <select class="select-cite-format">-->
-<!--              <option value="apa">apa</option>-->
-<!--            </select>-->
-<!--          </span>-->
+    <div class="document-delete-panel">
+      <span>
+        You can delete your document from system
+      </span>
+      <span class="document-delete-link" @click="deleteDocument()">
+        I want to delete
+      </span>
+    </div>
 
   </div>
 
@@ -94,6 +91,9 @@ export default {
     },
     handleScroll() {
       const scrollBtn = this.$refs.scrollTopButton;
+    },
+    deleteDocument(){
+      alert('Document has been deleted (not real)')
     }
   },
   computed: {
@@ -230,6 +230,21 @@ export default {
   text-decoration: none;
 }
 .link-to-owner:hover{
+  text-decoration: underline;
+}
+
+.document-delete-panel{
+  margin-top: 2rem;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+.document-delete-link{
+  margin: 5px;
+  color: #E31313;
+  cursor: pointer;
+}
+.document-delete-link:hover{
   text-decoration: underline;
 }
 
