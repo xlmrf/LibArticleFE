@@ -6,7 +6,7 @@
 <!--    {{getMakeDocument}}-->
     <div class="card-top">
       <h2 :style="{ 'font-size': '22px' }" ref="refTitle">{{ getMakeDocument.title }}</h2>
-      <h4>{{ getTypes.find(type => type.id === getMakeDocument.type_id)?.name }}</h4>
+      <h4>{{ this.$store.getters.getLanguage.types[getTypes.find(type => type.id === getMakeDocument.type_id)?.name] }}</h4>
       <!--      <h4>{{getMakeDocument}}</h4>-->
       <span class="rename-title-btn" @click="$emit('prev')">
         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#BBBBBB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="14 2 18 6 7 17 3 17 3 13 14 2"></polygon><line x1="3" y1="22" x2="21" y2="22"></line></svg>
