@@ -109,6 +109,16 @@ input {
   border-radius: 50%;
 }
 
+.selectors-panel{
+  margin-left: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.selectors-panel > div{
+  margin-left: 20px;
+}
+
 
 /*others*/
 
@@ -488,6 +498,23 @@ input {
   stroke: #fff;
 }
 
-
+.items-tape{
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  font-size: 0.8em;
+  overflow: auto;
+  scrollbar-width: thin;
+  z-index: 10;
+}
+.items-tape > span{
+  /*border-radius: 3px;*/
+  /*border: 1px solid #0048BA;*/
+  font-size: 18px;
+  z-index: 10;
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+}
 
 </style>

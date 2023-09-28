@@ -9,7 +9,7 @@ export default {
             authors:[],
             years: {},
             filter_types: [],
-            page_paginate_count:[10,25,50,100],
+            page_paginate_count:[10,25,50],
             selected_refs:[],
             info:''
         }

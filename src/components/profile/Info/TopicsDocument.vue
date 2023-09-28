@@ -1,6 +1,6 @@
 <template>
   <div class="document-topics" v-if="data[0]">
-    <p class="chapter-header">Популярні публікації</p>
+    <p class="chapter-header">{{$store.getters.getLanguage.profile.headers.popular_publication}}</p>
     <div class="document-topics-block">
       <profile-document-item class="s-document" v-for="item in data.slice(0,2) " :documentItem="item" type="profile"/>
 <!--       <router-link :to="'/document/'+item.id">{{item.title}} </router-link> - {{item.views}}-->

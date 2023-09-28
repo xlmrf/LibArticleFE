@@ -5,7 +5,17 @@ export default {
         return {
             ua:{
 
+                profile:{
+                    headers:{
+                        'documents_load': 'Документів завантажено',
+                        'documents_author': 'Авторських документів',
+                        'cites': 'Процитовано',
+                        'views': 'Переглядів',
 
+                        'popular_publication': 'Популярні публікації',
+                        'popular_coauthors': 'Популярні співавтори'
+                    }
+                },
 
                 type_areas:{
                     signs:{
@@ -163,6 +173,13 @@ export default {
                         'copy': 'копіювати',
                         'copied': 'скопійовано',
                         'document': 'документ'
+                    },
+                    cites:{
+                        'doc_refs': 'Посилання документа',
+                        'load_refs': 'Підвантажити посилання'
+                    },
+                    other:{
+                        'views_hint': 'Унікальних переглядів: '
                     }
                 },
                 document_make:{
@@ -261,13 +278,19 @@ export default {
                     nav_filter:{
                         'sort_by': 'Сортувати по',
                         'applied_filters': 'Застосовані фільтри',
-                        'showing': 'Переглядаються',
+                        'find_documents_p1': 'Переглядаються ',
+                        'find_documents_p2': ' із ',
+                        'find_documents_p3': ' знайдених документів',
                         'clear': 'очистити',
-
-                        'date': 'даті',
+                        'date_start': 'нових',
+                        'date_end': 'старших',
                         'alphabet': 'назві',
                         'match': 'пошуку',
-                        'views': 'переглядах'
+                        'views': 'переглядах',
+                        'per_page': 'На сторінці ',
+                    },
+                    other:{
+                        'documents_not_found': 'Документів не знайдено'
                     }
                 }
 
@@ -276,6 +299,18 @@ export default {
 
 
             en: {
+
+                profile:{
+                    headers:{
+                        'documents_load': 'Documents uploaded',
+                        'documents_author': 'Author\'s documents',
+                        'cites': 'Cites',
+                        'views': 'Views',
+
+                        'popular_publication': 'Popular publications',
+                        'popular_coauthors': 'Popular coauthors'
+                    }
+                },
 
                 type_areas:{
                     signs:{
@@ -432,6 +467,13 @@ export default {
                         'copy': 'copy',
                         'copied': 'copied',
                         'document': 'document'
+                    },
+                    cites:{
+                        'doc_refs': 'Document references',
+                        'load_refs': 'Load more references'
+                    },
+                    other:{
+                        'views_hint': 'unique views: '
                     }
                 },
                 document_make:{
@@ -533,12 +575,16 @@ export default {
                         'find_documents_p2': ' out of ',
                         'find_documents_p3': ' found documents',
                         'clear': 'clear',
-                        'per_page': 'per page',
+                        'per_page': 'Per page',
 
-                        'date': 'date',
+                        'date_start': 'newest',
+                        'date_end': 'oldest',
                         'alphabet': 'A-z',
                         'match': 'match',
                         'views': 'views'
+                    },
+                    other:{
+                        'documents_not_found': 'Documents not found'
                     }
                 }
             }

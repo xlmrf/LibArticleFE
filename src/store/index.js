@@ -72,7 +72,6 @@ export default createStore({
             ctx.types = data
         },
         makeErrors(ctx, data) {
-
             if (data.response.status === 401) {
                 localStorage.removeItem('access_token')
                 router.push('/login')

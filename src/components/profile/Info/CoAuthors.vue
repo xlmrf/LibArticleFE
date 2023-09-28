@@ -1,6 +1,6 @@
 <template>
   <div class="co-authors-panel" v-if="data.coauthors && data.coauthors.value > 0">
-    <p class="chapter-header">Популярні співавтори
+    <p class="chapter-header">{{ $store.getters.getLanguage.profile.headers.popular_coauthors }}
 <!--      <span v-if="data.coauthors">{{data.coauthors.value}}</span>-->
     </p>
     <div class="co-authors-block" >

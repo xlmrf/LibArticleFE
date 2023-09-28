@@ -1,7 +1,7 @@
 <template>
   <div class="modal-component">
     <div class="top-modal-window">
-      <h3>Посилання документа</h3>
+      <h3>{{$store.getters.getLanguage.document.cites.doc_refs}}</h3>
       <input type="text" v-model="searchCites" placeholder="Estimation of radio...">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#777777" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
     </div>
@@ -9,7 +9,7 @@
       <div class="item-reference" v-for="(reference,idx) in document_cites">
         <span class="ref-body">{{idx+1}}. {{reference.bibliographic_description}}</span>
       </div>
-      <button v-if="this.lastPage > this.pageCounter" @click="scrolled=true;">Підвантажити посилання</button>
+      <button v-if="this.lastPage > this.pageCounter" @click="scrolled=true;">{{$store.getters.getLanguage.document.cites.load_refs}}</button>
     </div>
   </div>
 </template>
@@ -186,26 +186,26 @@ export default {
 }
 
 
-.files-tape{
-  /*box-shadow: rgba(0, 0, 0, 0.35) 0px -8px 12px -8px inset;*/
-  /*box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;*/
-  border-radius: 6px;
-  display: flex;
-  flex-direction: column;
-  font-size: 0.8em;
-  overflow: auto;
-  /*overflow-y: hidden;*/
-  /*scrollbar-width: thin;*/
-  z-index: 10;
-}
-.files-tape > div{
-  padding: 15px;
-  /*border-radius: 3px;*/
-  /*border: 1px solid #0048BA;*/
-  font-size: 18px;
-  display: inline-block;
-  text-decoration: none;
-}
+/*.files-tape{*/
+/*  !*box-shadow: rgba(0, 0, 0, 0.35) 0px -8px 12px -8px inset;*!*/
+/*  !*box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;*!*/
+/*  border-radius: 6px;*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*  font-size: 0.8em;*/
+/*  overflow: auto;*/
+/*  !*overflow-y: hidden;*!*/
+/*  !*scrollbar-width: thin;*!*/
+/*  z-index: 10;*/
+/*}*/
+/*.files-tape > div{*/
+/*  padding: 15px;*/
+/*  !*border-radius: 3px;*!*/
+/*  !*border: 1px solid #0048BA;*!*/
+/*  font-size: 18px;*/
+/*  display: inline-block;*/
+/*  text-decoration: none;*/
+/*}*/
 
 .files-tape > button{
   display: flex;

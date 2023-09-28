@@ -4,7 +4,7 @@
       <nav-header :documents="documents" />
       <nav-filtration v-if="$route.query" />
     </div>
-    <div class="not-found-document-panel" v-if="documents.total === 0">Документів не знайдено</div>
+    <div class="not-found-document-panel" v-if="documents.total === 0">{{$store.getters.getLanguage.documents.other.documents_not_found}}</div>
     <div v-else>
       <component :is="ItemComponent[ChooseItem]" class="document-list-item" :documentItem="document" v-for="document in documents.data"/>
       <pagination :paginate="paginate(documents)"/>

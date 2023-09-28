@@ -144,26 +144,6 @@ h3{
   font-size: 1.3rem;
 }
 
-.files-tape{
-  border-radius: 6px;
-  align-self: center;
-  display: flex;
-  flex-direction: column;
-  font-size: 0.8em;
-  height: 220px;
-  width: 200px;
-  overflow: auto;
-  scrollbar-width: thin;
-  z-index: 10;
-}
-.files-tape > div{
-  /*border-radius: 3px;*/
-  /*border: 1px solid #0048BA;*/
-  font-size: 18px;
-  display: inline-block;
-  text-align: center;
-  text-decoration: none;
-}
 .file-name{
   border: 2px solid transparent;
   background: #ffffff;

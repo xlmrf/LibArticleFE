@@ -3,25 +3,25 @@
     <router-link class="state-link" to="">
       <div class="state-upload">
         <span class="state-count">{{document_count}}</span>
-        <span class="sub-name-state">Завантажено документів</span>
+        <span class="sub-name-state">{{$store.getters.getLanguage.profile.headers.documents_load}}</span>
       </div>
     </router-link>
     <router-link class="state-link" to="">
       <div class="state-upload">
         <span class="state-count">{{document_count}}</span>
-        <span class="sub-name-state">Авторських документів</span>
+        <span class="sub-name-state">{{$store.getters.getLanguage.profile.headers.documents_author}}</span>
       </div>
     </router-link>
     <router-link class="state-link" to="">
       <div class="state-citation">
         <span class="state-count">0</span>
-        <span class="sub-name-state">Процитовано</span>
+        <span class="sub-name-state">{{$store.getters.getLanguage.profile.headers.cites}}</span>
       </div>
     </router-link>
     <router-link class="state-link" to="">
       <div class="state-views">
         <span class="state-count">{{ documents_views.views }}({{ documents_views.unique_views }})</span>
-        <span class="sub-name-state">Переглядів</span>
+        <span class="sub-name-state">{{$store.getters.getLanguage.profile.headers.views}}</span>
       </div>
     </router-link>
 
@@ -115,6 +115,7 @@ export default {
   display: flex;
   flex-flow: column;
   align-items: center;
+  min-width: 80px;
 }
 .state-link{
   text-decoration: none;
