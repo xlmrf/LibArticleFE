@@ -1,37 +1,17 @@
 <template>
 <div>
-  <span class="view-frame frame" v-if="views.document_views">{{ this.$store.getters.getLanguage.document.characteristic.views }} <span>{{ views.document_views.value }}</span></span>
+  <span class="view-frame frame" v-if="getDocument.views.views">{{ this.$store.getters.getLanguage.document.characteristic.views }} <span>{{ getDocument.views.views }}</span></span>
 </div>
 </template>
 
 <script>
-import router from "@/router";
-import {mapState} from 'vuex'
-import axios from "axios";
+
+import {mapGetters, mapState} from 'vuex'
 
 export default {
 
-  data(){
-    return{
-      views:{}
-    }
-  },
-
-  methods:{
-    viewsDocument(){
-      let id = router.currentRoute.value.params.id
-      axios.get(this.api_url_v1 + '/report/document-views/' + id).then(response => {
-        this.views = response.data
-      }, err => {
-        console.log('views error:',err);
-      })
-    },
-  },
   computed:{
-    ...mapState(['api_url_v1'])
-  },
-  mounted() {
-    this.viewsDocument()
+    ...mapGetters(['getDocument'])
   }
 }
 </script>

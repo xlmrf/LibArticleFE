@@ -3,7 +3,7 @@
 
     <div class="top-document-info">
       <span class="document-type type-in-document" :class="'type-background-color-' + $store.getters.getTypesColor[getTypes.find(item => item.id === getDocument.type_id)?.name]" @click="smooth()">{{getTypes.find(item => item.id === getDocument.type_id)?.name}}</span>
-      <router-link v-if="getDocument.authors.map(item => item.user_id === getUser.id).includes(true) || getDocument.owner.id === getUser.id" class="remake-link" :to="'/document/make/'+$route.params.id" >
+      <router-link v-if="getDocument.authors.map(item => item.user_id === getUser.id).includes(true) || getDocument.owner?.id === getUser.id" class="remake-link" :to="'/document/make/'+$route.params.id" >
         {{ this.$store.getters.getLanguage.document.topics.edit }}
       </router-link>
     </div>
@@ -14,7 +14,7 @@
         <div class="left-side-info">
           <div class="under-title-info">
             <span>{{ this.$store.getters.getLanguage.document.characteristic.publisher }}:
-              <router-link class="link-to-owner" :to="'/profile/'+getDocument.owner.id" >{{getDocument.owner.info.last_name}} {{getDocument.owner.info.first_name}}</router-link>
+              <router-link v-if="getDocument.owner?.id" class="link-to-owner" :to="'/profile/'+getDocument.owner.id" >{{getDocument.owner.info.last_name}} {{getDocument.owner.info.first_name}}</router-link>
             </span>
           </div>
 
