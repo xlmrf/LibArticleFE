@@ -6,35 +6,12 @@
 </template>
 
 <script>
-import router from "@/router";
-import {mapState} from 'vuex'
-import axios from "axios";
 
 export default {
   props:['article', 'type'],
 
-  data(){
-    return{
-      views:{}
-    }
-  },
-
-  methods:{
-    // viewsDocument(){
-    //   axios.get(this.api_url_v1 + '/report/document-views/' + this.documentId).then(response => {
-    //     this.views = response.data
-    //   }, err => {
-    //     console.log('views error:',err);
-    //   })
-    // },
-  },
-  computed:{
-    ...mapState(['api_url_v1'])
-  },
-  mounted() {
-    // this.viewsDocument()
-  }
 }
+
 </script>
 
 <style scoped>

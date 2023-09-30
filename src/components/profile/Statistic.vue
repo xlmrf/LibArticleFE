@@ -1,48 +1,33 @@
 <template>
   <div class="user-state-panel">
+
     <router-link class="state-link" to="">
       <div class="state-upload">
         <span class="state-count">{{document_count}}</span>
         <span class="sub-name-state">{{$store.getters.getLanguage.profile.headers.documents_load}}</span>
       </div>
     </router-link>
+
     <router-link class="state-link" to="">
       <div class="state-upload">
         <span class="state-count">{{document_count}}</span>
         <span class="sub-name-state">{{$store.getters.getLanguage.profile.headers.documents_author}}</span>
       </div>
     </router-link>
+
     <router-link class="state-link" to="">
       <div class="state-citation">
         <span class="state-count">0</span>
         <span class="sub-name-state">{{$store.getters.getLanguage.profile.headers.cites}}</span>
       </div>
     </router-link>
+
     <router-link class="state-link" to="">
       <div class="state-views">
         <span class="state-count">{{ documents_views.views }}({{ documents_views.unique_views }})</span>
         <span class="sub-name-state">{{$store.getters.getLanguage.profile.headers.views}}</span>
       </div>
     </router-link>
-
-
-<!-------old------>
-
-<!--    <div class="state-upload">-->
-<!--      <span class="sub-name-state">Завантажено документів</span>-->
-<!--      <hr />-->
-<!--      <span class="state-count">9</span>-->
-<!--    </div>-->
-<!--    <div class="state-citation">-->
-<!--      <span class="sub-name-state">Процитовано</span>-->
-<!--      <hr />-->
-<!--      <span class="state-count">2</span>-->
-<!--    </div>-->
-<!--    <div class="state-views">-->
-<!--      <span class="sub-name-state">Переглядів</span>-->
-<!--      <hr />-->
-<!--      <span class="state-count">277</span>-->
-<!--    </div>-->
 
 
   </div>
@@ -59,6 +44,7 @@ export default {
   // get: /report/documents-views/profile/{id}
   // get: /report/documents-top/profile/{id}
   // get: /report/co-author-top/profile/{id}
+
   data(){
     return{
       document_count:0,

@@ -17,7 +17,7 @@
 <!--&lt;!&ndash;        <svg xmlns="http://www.w3.org/2000/svg" v-if="copy_idx === idx" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#222222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>&ndash;&gt;-->
 <!--      </span>-->
 
-      <download-part :article="documentItem" :type="type" />
+<!--      <download-part :article="documentItem" :type="type" />-->
       <views-part :article="documentItem" :type="type" />
     </div>
   </div>
@@ -48,13 +48,6 @@ export default {
   },
 
   methods:{
-    // viewsDocument(){
-    //   axios.get(this.api_url_v1 + '/report/document-views/' + this.documentItem.id).then(response => {
-    //     this.views = response.data
-    //   }, err => {
-    //     console.log('views error:',err);
-    //   })
-    // },
     async copy(text){
       try {
         await navigator.clipboard.writeText(text);
@@ -74,10 +67,6 @@ export default {
     // }
   },
   mounted() {
-
-    // if (this.type !== 'draft')
-    //   this.viewsDocument()
-
     // if (this.$route.query.refs_doc_id){
     //   this.updateSelectedRefs([])
     //   this.checkItem = this.$route.query.refs_doc_id && JSON.parse(this.$route.query.refs_doc_id).find(id => id === this.documentItem.id) !== undefined

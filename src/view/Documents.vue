@@ -22,36 +22,38 @@ export default {
   watch: {
     '$route': {
       handler(route) {
-        if (route.query.refs_doc_id && !route.query.from){
-          this.$router.push('/documents')
-        }
-
-        let search = localStorage.getItem('search')
-        let arr = []
-        let filteredArr = []
-        arr.push(route.fullPath.split('?'))
-        search ? arr.push(search.split('?')) : ''
-        for (let item in arr) {
-
-          if (arr[item].length > 1) {
-            const query = arr[item][1]
-            const params = query.split('&')
-            const filteredParams = params.filter(param => !param.startsWith('refs_doc_id='))
-            const outputText = `${arr[item][0]}?${filteredParams.join('&')}`
-            filteredArr.push(outputText)
+        if (route.name === 'documents') {
+          if (route.query.refs_doc_id && !route.query.from) {
+            this.$router.push('/documents')
           }
-        }
 
-        if (!((route.query.refs_doc_id && Object.keys(route.query).length < 3) || (filteredArr[1] && filteredArr[0] === filteredArr[1]))){
-          let q = '';
-          if (route.fullPath.split('?')[1]) {
-            q = '?' + route.fullPath.split('?')[1];
+          let search = localStorage.getItem('search')
+          let arr = []
+          let filteredArr = []
+          arr.push(route.fullPath.split('?'))
+          search ? arr.push(search.split('?')) : ''
+          for (let item in arr) {
+
+            if (arr[item].length > 1) {
+              const query = arr[item][1]
+              const params = query.split('&')
+              const filteredParams = params.filter(param => !param.startsWith('refs_doc_id='))
+              const outputText = `${arr[item][0]}?${filteredParams.join('&')}`
+              filteredArr.push(outputText)
+            }
           }
-          this.DocumentsMutate({})
-          this.DocumentSearcher(q);
-        }
 
-        localStorage.setItem('search',route.fullPath)
+          if (!((route.query.refs_doc_id && Object.keys(route.query).length < 3) || (filteredArr[1] && filteredArr[0] === filteredArr[1]))) {
+            let q = '';
+            if (route.fullPath.split('?')[1]) {
+              q = '?' + route.fullPath.split('?')[1];
+            }
+            this.DocumentsMutate({})
+            this.DocumentSearcher(q);
+          }
+
+          localStorage.setItem('search', route.fullPath)
+        }
       },
       deep:true
     }
@@ -65,7 +67,6 @@ export default {
   },
   components: {Loader, DocumentsList, FilterOptions},
   mounted() {
-    console.log(this.$route)
 
     let q = '';
     if (this.$route.fullPath.split('?')[1]) {
@@ -77,6 +78,8 @@ export default {
     this.DocumentSearcher(q);
     // this.requestTypes()
   },
+
+
   beforeUnmount() {
     this.updateSelectedRefs([])
     localStorage.removeItem('search')

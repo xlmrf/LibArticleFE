@@ -55,7 +55,6 @@ export default {
         this.data = response.data;
       }, err => {
         console.log('error info -', err.message);
-        // ctx.commit('setInfo', err)
       })
     }
   },

@@ -1,5 +1,6 @@
 <template>
-  <div class="user-card">
+  <loader v-if="ProfileLoaderNotReady" width="2" radius="15" style="position:relative; top: 100px; left: 10%" />
+  <div class="user-card" v-else>
     <div class="avatar">
 <!--      <span class="user-avatar-loader" v-if="getProfile.image"><loader width="4" radius="20"></loader></span>-->
 <!--      <img class="user-avatar" v-else :src="getPhoto !== 'not_found'? 'http://s1.libarticle.loc/api/image/'+ getPhoto : 'http://s1.libarticle.loc/api/image/default-image'" alt="">-->
@@ -27,6 +28,12 @@ import Loader from "@/components/additional/loader";
 export default {
   components: {Loader},
   props:['getProfile'],
+
+  data(){
+    return{
+      ProfileLoaderNotReady: true
+    }
+  },
   computed:{
     ...mapGetters(['getAnonPhoto']),
   },

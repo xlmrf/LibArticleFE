@@ -54,6 +54,11 @@ export default {
     this.requestProfile(this.$route.params.id)
     // this.requestAuthorPhoto
   },
+
+  beforeUnmount() {
+    this.updateProfile({})
+  },
+
   components:{UserInfo, ProfileDocuments, Statistic, UserCard,loader}
 }
 </script>
