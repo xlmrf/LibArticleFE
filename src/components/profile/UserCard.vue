@@ -4,9 +4,10 @@
     <div class="avatar">
 <!--      <span class="user-avatar-loader" v-if="getProfile.image"><loader width="4" radius="20"></loader></span>-->
 <!--      <img class="user-avatar" v-else :src="getPhoto !== 'not_found'? 'http://s1.libarticle.loc/api/image/'+ getPhoto : 'http://s1.libarticle.loc/api/image/default-image'" alt="">-->
-      <img :src="getProfile.image === null ? getAnonPhoto : getProfile.image" class="user-avatar" alt="user photo">
+      <img :src="image" class="user-avatar" alt="user photo">
 <!--      <img src="http://s1.libarticle.loc/api/image/8ce89c4463c131a217ce60e4b437407c46279b5b5fff2c0d020d5ee51ee757ba" alt="">-->
     </div>
+    <h3>image:{{image}}</h3>
     <hr>
     <div class="personal-info">
       <div class="about-user">
@@ -24,6 +25,7 @@
 <script>
 import {mapActions, mapGetters, mapMutations} from "vuex";
 import Loader from "@/components/additional/loader";
+import axios from "axios";
 
 export default {
   components: {Loader},
@@ -31,12 +33,28 @@ export default {
 
   data(){
     return{
-      ProfileLoaderNotReady: true
+      ProfileLoaderNotReady: false,
+      image:''
     }
   },
+
   computed:{
     ...mapGetters(['getAnonPhoto']),
+    getImage(){
+      axios.get(this.getProfile.image).then(res => {
+        console.log('photo response', res)
+      })
+    }
   },
+
+  mounted() {
+    if (this.getProfile.image !== null){
+      this.ProfileLoaderNotReady = true
+      this.getImage
+    }
+    else
+      this.image = this.getAnonPhoto
+  }
 
 }
 </script>

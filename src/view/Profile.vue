@@ -4,9 +4,13 @@
   </div>
 
   <div class="profile-card" v-else>
+
+    <!--    just profile   -->
     <user-card :getProfile="getProfile" class="user-card-component"></user-card>
+
+    <!--    <statistic />-->
     <user-info />
-<!--    <statistic />-->
+
   </div>
 
 </template>

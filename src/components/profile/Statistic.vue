@@ -1,5 +1,6 @@
 <template>
-  <div class="user-state-panel">
+  <loader radius="10" width="2" v-if="statisticLoader" />
+  <div class="user-state-panel" v-else>
 
     <router-link class="state-link" to="">
       <div class="state-upload">
@@ -37,6 +38,7 @@
 <script>
 
 import axios from "axios";
+import Loader from "@/components/additional/loader";
 
 export default {
 
@@ -48,7 +50,8 @@ export default {
   data(){
     return{
       document_count:0,
-      documents_views:{}
+      documents_views:{},
+      statisticLoader: false
     }
   },
   watch: {
@@ -84,7 +87,7 @@ export default {
     this.getDocumentCount();
     this.getDocumentsViews();
   },
-  components:{}
+  components:{Loader}
 
 }
 </script>
