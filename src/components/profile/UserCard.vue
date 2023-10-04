@@ -7,7 +7,6 @@
       <img :src="image" class="user-avatar" alt="user photo">
 <!--      <img src="http://s1.libarticle.loc/api/image/8ce89c4463c131a217ce60e4b437407c46279b5b5fff2c0d020d5ee51ee757ba" alt="">-->
     </div>
-    <h3>image:{{image}}</h3>
     <hr>
     <div class="personal-info">
       <div class="about-user">
@@ -41,9 +40,16 @@ export default {
   computed:{
     ...mapGetters(['getAnonPhoto']),
     getImage(){
-      axios.get(this.getProfile.image).then(res => {
-        console.log('photo response', res)
-      })
+      const img = new Image();
+      img.src = this.getProfile.image;
+      img.onload = () => {
+        this.image = this.getProfile.image
+        this.ProfileLoaderNotReady = false;
+      };
+      img.onerror = () => {
+        this.ProfileLoaderNotReady = false;
+        this.image = this.getAnonPhoto
+      };
     }
   },
 
