@@ -81,12 +81,13 @@ export default {
     ...mapState(['api_url_v1'])
   },
   watch: {
-    '$route.params': {
+    '$route': {
       handler(item) {
-        console.log('watch route in DM',item)
-        if (item.id !== this.getMakeDocument.id)
-          this.getDocument()
-        this.prev_stage = !item.id;
+        if (item.name === 'DocumentMake') {
+          if (item.params.id !== this.getMakeDocument.id)
+            this.getDocument()
+          this.prev_stage = !item.params.id;
+        }
       },
       deep: true
     },

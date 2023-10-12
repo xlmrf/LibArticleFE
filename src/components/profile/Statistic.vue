@@ -55,14 +55,15 @@ export default {
     }
   },
   watch: {
-    '$route.params.id': {
+    '$route': {
       handler(item) {
-        if (this.$route.params.id !== undefined) {
-          this.getDocumentCount()
-          this.getDocumentsViews()
+        if (item.name === 'profile' && item.params.id) {
+          this.getDocumentCount();
+          this.getDocumentsViews();
         }
-      }
-    }
+      },
+      deep:true
+    },
   },
   methods: {
     getDocumentCount() {

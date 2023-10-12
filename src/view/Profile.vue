@@ -36,13 +36,15 @@ export default {
     }
   },
   watch: {
-    '$route.params.id': {
+
+    '$route': {
       handler(item) {
-        if (this.$route.params.id !== this.getUser.id && this.$route.params.id !== undefined) {
+        if (item.name === 'profile' && item.params.id && item.params.id !== this.getUser.id) {
           this.requestProfile(this.$route.params.id)
           this.updateProfile({})
         }
-      }
+      },
+      deep:true
     }
   },
 

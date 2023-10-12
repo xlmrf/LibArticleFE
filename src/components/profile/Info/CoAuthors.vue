@@ -40,14 +40,14 @@ export default {
     }
   },
   watch: {
-    '$route.params.id': {
+    '$route': {
       handler(item) {
-        this.data = []
-        if (this.$route.params.id !== undefined) {
-          this.getAuthors()
+        if (item.name === 'profile' && item.params.id) {
+          this.getAuthors();
         }
-      }
-    }
+      },
+      deep:true
+    },
   },
   methods: {
     getAuthors() {

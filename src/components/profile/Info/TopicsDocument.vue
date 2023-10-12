@@ -22,14 +22,15 @@ export default {
     }
   },
   watch: {
-    '$route.params.id': {
+    '$route': {
       handler(item) {
-        this.data = []
-        if (this.$route.params.id !== undefined) {
+        if (item.name === 'profile' && item.params.id) {
+          this.data = []
           this.getTopics()
         }
-      }
-    }
+      },
+      deep:true
+    },
   },
   methods: {
     getTopics() {
