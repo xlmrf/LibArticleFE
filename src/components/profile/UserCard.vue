@@ -2,9 +2,9 @@
   <loader v-if="ProfileLoaderNotReady" width="2" radius="15" style="position:relative; top: 100px; left: 10%" />
   <div class="user-card" v-else>
     <div class="avatar">
-<!--      <span class="user-avatar-loader" v-if="getProfile.image"><loader width="4" radius="20"></loader></span>-->
+      <span class="user-avatar-loader" v-if="!image || image === undefined"><loader width="4" radius="20"></loader></span>
 <!--      <img class="user-avatar" v-else :src="getPhoto !== 'not_found'? 'http://s1.libarticle.loc/api/image/'+ getPhoto : 'http://s1.libarticle.loc/api/image/default-image'" alt="">-->
-      <img :src="image" class="user-avatar" alt="user photo">
+      <img :src="image" class="user-avatar" alt="user photo" v-else>
 <!--      <img src="http://s1.libarticle.loc/api/image/8ce89c4463c131a217ce60e4b437407c46279b5b5fff2c0d020d5ee51ee757ba" alt="">-->
     </div>
     <hr>
@@ -37,9 +37,17 @@ export default {
     }
   },
 
+  watch:{
+    getProfile(){
+      this.getImage
+    }
+  },
+
   computed:{
     ...mapGetters(['getAnonPhoto']),
     getImage(){
+      if (!this.getProfile.image)
+        return this.image = this.getAnonPhoto
       const img = new Image();
       img.src = this.getProfile.image;
       img.onload = () => {
@@ -50,16 +58,12 @@ export default {
         this.ProfileLoaderNotReady = false;
         this.image = this.getAnonPhoto
       };
+
     }
   },
 
   mounted() {
-    if (this.getProfile.image !== null){
-      this.ProfileLoaderNotReady = true
-      this.getImage
-    }
-    else
-      this.image = this.getAnonPhoto
+    this.getImage
   }
 
 }
@@ -95,7 +99,8 @@ export default {
   position: relative;
 }
 .user-avatar-loader >*{
-  left: 50px;
+  left: 120px;
+  top: 40px;
   position: relative;
 }
 .user-avatar{

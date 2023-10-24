@@ -61,7 +61,7 @@ export default {
         }
       } catch (err) {
         console.error('error info -', err.message);
-        this.catchError(err.response?.data?.errors);
+        this.catchError(err.response?.data?.errors[0]);
       }
     },
 

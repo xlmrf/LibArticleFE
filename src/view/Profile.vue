@@ -4,7 +4,6 @@
   </div>
 
   <div class="profile-card" v-else>
-
     <!--    just profile   -->
     <user-card :getProfile="getProfile" class="user-card-component"></user-card>
 
@@ -24,24 +23,15 @@ import ProfileDocuments from "@/components/profile/ProfileDocuments";
 import UserInfo from "@/components/profile/UserInfo";
 
 export default {
-  data(){
-    return{
-      items:[
-        "Документів додано",
-        "Цього року додано",
-        "Прочитано ваших документів",
-        "Посилань на ваші документи",
-        "Ви співавтор у 22 документах",
-      ]
-    }
-  },
+
   watch: {
 
     '$route': {
       handler(item) {
-        if (item.name === 'profile' && item.params.id && item.params.id !== this.getUser.id) {
-          this.requestProfile(this.$route.params.id)
+        if (item.name === 'profile' && item.params.id && item.params.id != this.getProfile.id) {
+          console.log('prok')
           this.updateProfile({})
+          this.requestProfile(this.$route.params.id)
         }
       },
       deep:true
@@ -56,14 +46,22 @@ export default {
   computed:{
     ...mapGetters(['getUniversities','getProfile','getUser'])
   },
-  mounted() {
-    this.requestProfile(this.$route.params.id)
+  // mounted() {
     // this.requestAuthorPhoto
-  },
+  // },
 
-  beforeUnmount() {
-    this.updateProfile({})
+  beforeMount() {
+    if (!this.getProfile){
+      this.requestProfile(this.$route.params.id)
+    }
+    else if (this.getProfile && this.getProfile.id != this.$route.params.id){
+      this.updateProfile({})
+      this.requestProfile(this.$route.params.id)
+    }
+
   },
+  // beforeUnmount() {
+  // },
 
   components:{UserInfo, ProfileDocuments, Statistic, UserCard,loader}
 }

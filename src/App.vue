@@ -291,7 +291,7 @@ input {
 }
 .author-item{
   position: relative;
-  padding: 10px;
+  padding: 5px 10px;
 }
 .author-item:after{
   content: "";

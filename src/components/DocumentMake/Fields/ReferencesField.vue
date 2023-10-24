@@ -2,13 +2,13 @@
   <div class="complex-item-control">
     <span>
       <input type="text" class="sample-input" v-model="reference" @keypress.enter="addReference" ref="referencesPort">
-       <small @click="deleteReferenceIntup()" class="delete-ref-btn delete-item" v-if="reference!==''">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-               stroke="#9A9A9A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
-        </small>
+<!--       <small @click="deleteReferenceIntup()" class="delete-ref-btn delete-item" v-if="reference!==''">-->
+<!--          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"-->
+<!--               stroke="#9A9A9A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">-->
+<!--            <line x1="18" y1="6" x2="6" y2="18"></line>-->
+<!--            <line x1="6" y1="6" x2="18" y2="18"></line>-->
+<!--          </svg>-->
+<!--        </small>-->
       <span class="add-btn add-ref-btn" @click="addReference">{{ edit ? $store.getters.getLanguage.document_make.signs.save_btn : $store.getters.getLanguage.document_make.signs.add_btn }}</span>
       <span class="search-in-system-btn" @click="searchReference">{{ $store.getters.getLanguage.document_make.signs.search_in_lib }}</span>
     </span>
@@ -136,8 +136,10 @@ export default {
     },
     searchReference(){
 
-      const refs_arr = this.getMakeDocument.references.map(item => item.reference_document_id ? item.reference_document_id : '')
-      console.log('refs array',refs_arr)
+      console.log(this.getMakeDocument.references)
+      // alert('hello, '+ this.getMakeDocument.references)
+      const refs_arr = this.getMakeDocument.references.filter(obj => obj.reference_document_id !== 0).map(item => item.reference_document_id ? item.reference_document_id : '')
+      // console.log('refs array',refs_arr)
 
       this.$router.push('/documents?from='+this.getMakeDocument.id+'&refs_doc_id='+JSON.stringify(refs_arr))
     },

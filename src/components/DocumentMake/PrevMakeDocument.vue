@@ -1,5 +1,6 @@
 <template>
   <div>
+    {{$route.name}}
     <title-field :error="titleError"/>
     <type-field :error="typeError" />
     {{getDocumentMakeWarning?.errors?.find(item => item.attribute === 'title')}}
@@ -14,18 +15,18 @@
     <div style="clear: both">
       <button @click="createDocument()" class="main-btn choose-btn-able btn-with-loader" :class="[{'disable-btn':loader||!BtnValid}]" :disabled="loader">{{$route.params.id ? $store.getters.getLanguage.document_make.warnings.move : $store.getters.getLanguage.document_make.warnings.create}}<loader class="loader-btn" v-if="btnLoader" loader_class="loader-btn" width="2" radius="12" /></button>
     </div>
+
     <div class="middle-spinner" v-if="loader">
       <span><loader width="4" radius="20"></loader></span>
     </div>
 
-    <title-warning v-if="titleModal" @close-modal="titleModal = false" @createToDespite="createDocument"/>
+    <warning-template v-if="titleModal" @close-modal="titleModal = false" @createToDespite="createDocument"/>
 
   </div>
 </template>
 
 <script>
 
-import TitleWarning from "@/components/DocumentMake/TitleWarning";
 import TitleField from "@/components/DocumentMake/Fields/TitleField";
 import TypeField from "@/components/DocumentMake/Fields/TypeField";
 import Loader from "@/components/additional/loader"
@@ -35,6 +36,10 @@ import DocumentItem from "@/components/Documents/DocumentItem";
 import PulseLoader from "@/components/additional/pulseLoader";
 import DraftModal from "@/components/DocumentMake/draftModal";
 import ModalWindow from "@/components/additional/modalWindow";
+import WarningTemplate from "@/components/additional/WarningTemplate";
+
+
+
 export default {
   data(){
     return{
@@ -106,7 +111,7 @@ export default {
   name: "DocumentType",
   components: {
     ModalWindow,
-    DraftModal, PulseLoader, DocumentItem, DocumentsList, TypeField, TitleField, Loader, TitleWarning},
+    DraftModal, PulseLoader, DocumentItem, DocumentsList, TypeField, TitleField, Loader, WarningTemplate},
   mounted() {
     window.addEventListener('click', this.closeDraftWindow, false)
   },

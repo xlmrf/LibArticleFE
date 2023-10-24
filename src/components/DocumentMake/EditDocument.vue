@@ -19,7 +19,7 @@
              :key="idx" :class="{'universal-field': ['edition','place'].includes(item) }" >
           <label :for="item">
             {{this.$store.getters.getLanguage.document_make.signs[item] }}
-            <span class="area-hint">
+            <span class="area-hint" >
               <svg xmlns="http://www.w3.org/2000/svg"
                    @mouseover="hintTicket = idx" @mouseout="hintTicket = -1"
                    width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#b5b5b5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -112,6 +112,7 @@ export default {
       if (Object.keys(this.validationItems).length === 0 && !this.fileEmpty){
         console.log('upd doc not work')
         document.files = this.getFiles
+        document.ready = 1
         this.updateDocument(document)
       }
     },
@@ -594,7 +595,8 @@ export default {
   position: relative;
   cursor: pointer;
   border-radius: 4px;
-  margin: 0 5%;
+  margin-left: 40px;
+  margin-right: 10px;
   padding: 5px;
   overflow: hidden;
   background: none;

@@ -19,7 +19,7 @@
       </span>
 
       <span>
-        <label for="first_name">{{ this.$store.getters.getLanguage.settings.account_titles.name }}</label>
+        <label for="first_name">{{ this.$store.getters.getLanguage.settings.account_titles.first_name }}</label>
         <input class="sample-input" type="text" name="" id="first_name" v-model="getProfile.first_name">
       </span>
       <span>
@@ -180,7 +180,7 @@ export default {
   font-size: 14px;
   color: #333333;
   /*right: -50px;*/
-  width: 375px;
+  width: 80%;
   margin-top: 10px;
   cursor: default;
 }
@@ -225,8 +225,10 @@ export default {
 }
 
 .about-user > span label {
-  margin: 5px 2px;
+  margin: 6px;
   position: relative;
+  letter-spacing: 1px;
+  color: #272727;
   align-self: baseline;
   left: 10%;
 }

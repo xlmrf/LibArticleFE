@@ -4,6 +4,7 @@
 <!--      <span v-if="data.coauthors">{{data.coauthors.value}}</span>-->
     </p>
     <div class="co-authors-block" >
+      {{this.data}}
       <div v-if="data.coauthor_top" v-for="item in data.coauthor_top.value">
   <!--        <router-link :to="'/profile/'+item.user_id">{{item.last_name}} </router-link> - {{item.count}}-->
 

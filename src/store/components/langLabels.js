@@ -184,6 +184,11 @@ export default {
                         'input_hint': 'There is something interesting...',
                         'add_first_comment': 'Додайте перший коментар'
                     },
+                    delete_modal:{
+                        'delete_text': 'Ви хочете видалити документ?',
+                        'delete_btn': 'Видалити',
+                        'delete_cancel': 'Відмінити'
+                    },
                     other:{
                         'views_hint': 'Унікальних переглядів: '
                     }
@@ -237,12 +242,12 @@ export default {
                         'put_doc_area': 'Щоб завантажити файл перетягніть його у поле або натисність сюди'
                     },
                     hint_description:{
-                        'authors': 'Люди, що причетні до вмісту документу',
+                        'authors': 'Автори файлового контенту',
                         'subject_area': 'Тематика документу, конкретна наукова область, наприклад: Tesla coil або TDOA',
                         'place': 'Місце першого опублікування документу',
                         'publication_date': 'Дата першого опублікування документу',
 
-                        'keywords': 'Основні ключові слова, навколо яких описувалась робота',
+                        'keywords': 'Основні терміни або слова в роботі',
                         'references': 'Документи та ресурси на які посилались автори',
                         'description': 'Наведення стислого опису документу',
                     },
@@ -484,6 +489,11 @@ export default {
                         'input_hint': 'There is something interesting...',
                         'add_first_comment': 'Add the first comment'
                     },
+                    delete_modal:{
+                        'delete_text': `Delete the document from your account?`,
+                        'delete_btn': 'Delete',
+                        'delete_cancel': 'Cancel'
+                    },
                     other:{
                         'views_hint': 'unique views: '
                     }
@@ -535,12 +545,12 @@ export default {
 
                     },
                     hint_description:{
-                        'authors': 'Authors involved in the content of the document',
+                        'authors': 'File content authors',
                         'subject_area': 'The topic of the document, a specific scientific field, for example: Tesla coil or TDOA',
                         'place': 'Place of first publication of the document',
                         'publication_date': 'The date of the first publication of the document',
 
-                        'keywords': 'The main keywords around which the work was described',
+                        'keywords': 'Key terms or words in the document',
                         'references': 'Documents and resources referred to by the authors',
                         'description': 'Providing a brief description of the document',
                     },

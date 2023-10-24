@@ -73,6 +73,8 @@ export default {
 .avatar span {
   cursor: pointer;
   text-decoration: #212121 underline;
+  font-family: "Consolas, sans-serif";
+  letter-spacing: 1px;
 }
 
 .user-avatar {

@@ -20,9 +20,9 @@ export default {
     getStyleByType(){
       const textColor = 'type-color-' + this.$store.getters.getTypesColor[this.getTypes.find(item => item.id === this.article.type_id)?.name]
       const borderColor = 'type-border-color-' + this.$store.getters.getTypesColor[this.getTypes.find(item => item.id === this.article.type_id)?.name]
-      if (this.type === 'profile')
-        return [ textColor, borderColor ]
-      else
+      // if (this.type === 'profile')
+      //   return [ textColor, borderColor ]
+      // else
         return textColor
     }
   }

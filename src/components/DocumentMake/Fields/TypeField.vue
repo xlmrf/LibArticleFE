@@ -1,12 +1,36 @@
 <template>
   <div class="document-types" >
-    <div>
+    <div class="select-types-area">
       <h3>{{this.$store.getters.getLanguage.type_areas.signs.type}}</h3>
-      <div class="files-tape">
-        <div v-for="(type,key) in getTypes" :key="key"
-             :class="['file-name',{'category-active':getMakeDocument.type_id-1 === key}]"
-             @click="getMakeDocument.type_id = type.id">{{ this.$store.getters.getLanguage.types[type.name] }}
+      <div >
+<!--        <div class="files-tape">-->
+
+<!--        </div>-->
+        <h1>Оберіть тип та пункт:</h1>
+        <div class="custom-select">
+          <div class="types">
+            <label for="types">Тип:</label>
+            <select id="types">
+              <option value="a">Тип A</option>
+              <option value="b">Тип B</option>
+              <option value="c">Тип C</option>
+            </select>
+          </div>
+          <div class="points">
+            <label for="points">Пункт:</label>
+            <div id="points">
+              <div class="point" data-value="пункт1">Пункт 1</div>
+              <div class="point" data-value="пункт2">Пункт 2</div>
+              <div class="point" data-value="пункт3">Пункт 3</div>
+              <div class="point" data-value="пункт4">Пункт 4</div>
+            </div>
+          </div>
         </div>
+
+<!--        <div v-for="(type,key) in getTypes" :key="key"-->
+<!--             :class="['file-name',{'category-active':getMakeDocument.type_id-1 === key}]"-->
+<!--             @click="getMakeDocument.type_id = type.id">{{ this.$store.getters.getLanguage.types[type.name] }}-->
+<!--        </div>-->
       </div>
     </div>
     <div class="type-description">
@@ -232,4 +256,47 @@ h3{
   color: #cd2d2d;
 }
 
+.select-types-area{
+  min-width: 100px;
+}
+
+
+
+.custom-select {
+  display: inline-block;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 300px;
+  cursor: pointer;
+  margin: 20px;
+}
+
+.custom-select label {
+  display: block;
+  margin: 10px 0;
+}
+
+.custom-select select {
+  padding: 10px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#description {
+  margin-top: 20px;
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 5px;
+  background-color: #f5f5f5;
+}
+
+#description p {
+  margin: 0;
+}
+
+h1 {
+  font-size: 24px;
+}
 </style>

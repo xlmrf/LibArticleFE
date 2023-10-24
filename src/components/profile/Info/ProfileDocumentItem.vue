@@ -90,12 +90,21 @@ export default {
 
 .third-piece{
   padding-top: 5px;
-  margin-top: auto;
+  //margin-top: auto;
   display: flex;
   justify-content: right;
+  //position: absolute;
+  //right: 1rem;
+  //bottom: 0.7rem;
 }
 .third-piece > div{
   //margin-left: 1rem;
+}
+.second-piece{
+  margin-top: auto;
+}
+.second-piece > div{
+  display: flex;
 }
 
 /*.document-item{*/

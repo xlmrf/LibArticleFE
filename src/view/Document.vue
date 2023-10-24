@@ -49,18 +49,21 @@
       <comment />
     </div>
 
+
     <div class="document-delete-panel">
+
       <span>
         You can delete your document from system
       </span>
-      <span class="document-delete-link" @click="deleteDocument()">
-        I want to delete
+      <span class="document-delete-link" @click="deleteConfirm = true">
+        delete
       </span>
     </div>
 
   </div>
 
-  <loader class="middle-spinner" :width="4" :radius="20" v-else/>
+  <warning-template v-if="deleteConfirm" @close-modal="deleteConfirm = false"/>
+<!--  <loader class="middle-spinner" :width="4" :radius="20" v-else/>-->
 </template>
 
 <script>
@@ -74,13 +77,16 @@ import citesDocument from "@/components/document/citesDocument";
 import viewsDocument from "@/components/document/viewsDocument";
 import DocumentRefs from "@/components/document/documentRefs";
 import Annotation from "@/components/document/annotation";
+import axios from "axios";
+import WarningTemplate from "@/components/additional/WarningTemplate";
 
 export default {
-  // data(){
-  //   return{
-  //     openModalFile:false
-  //   }
-  // },
+  data(){
+    return{
+      // openModalFile:false,
+      deleteConfirm: false
+    }
+  },
   methods:{
     ...mapActions(['requestDocument'
     // 'requestTypes'
@@ -92,15 +98,15 @@ export default {
     handleScroll() {
       const scrollBtn = this.$refs.scrollTopButton;
     },
-    deleteDocument(){
-      alert('Document has been deleted (not real)')
-    }
+
   },
   computed: {
-    ...mapState(['TypesColor']),
+    ...mapState(['TypesColor', 'api_url_v1']),
     ...mapGetters(['getDocument','getTypes', 'getUser']),
   },
-  components:{Annotation, DocumentRefs, Authors, Loader, info,files,comment, citesDocument,viewsDocument},
+  components:{
+    WarningTemplate,
+    Annotation, DocumentRefs, Authors, Loader, info,files,comment, citesDocument,viewsDocument},
   mounted() {
     this.requestDocument(this.$route.params.id)
     // this.requestTypes()
@@ -211,7 +217,7 @@ export default {
   right: 0;
 }
 .remake-link:hover{
-  border-bottom: 1px solid #525252;
+  /*border-bottom: 1px solid #525252;*/
   color: #222222;
 }
 
