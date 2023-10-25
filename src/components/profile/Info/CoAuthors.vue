@@ -4,12 +4,11 @@
 <!--      <span v-if="data.coauthors">{{data.coauthors.value}}</span>-->
     </p>
     <div class="co-authors-block" >
-      {{this.data}}
       <div v-if="data.coauthor_top" v-for="item in data.coauthor_top.value">
   <!--        <router-link :to="'/profile/'+item.user_id">{{item.last_name}} </router-link> - {{item.count}}-->
 
         <div class="avatar">
-          <img :src="getAnonPhoto" class="user-avatar popular-coauthor-avatar" alt="user photo">
+          <img :src="item.image ? item.image : getAnonPhoto" class="user-avatar popular-coauthor-avatar" alt="user photo">
         </div>
         <router-link v-if="item.user_id" class="co-author profile-link" :to="'/profile/'+item.user_id">
           <span>{{item.last_name}}</span>
@@ -44,6 +43,7 @@ export default {
     '$route': {
       handler(item) {
         if (item.name === 'profile' && item.params.id) {
+          this.data = []
           this.getAuthors();
         }
       },
@@ -57,10 +57,10 @@ export default {
       }, err => {
         console.log('error info -', err.message);
       })
-    }
+    },
   },
   computed:{
-    ...mapGetters(['getAnonPhoto'])
+    ...mapGetters(['getAnonPhoto']),
   },
   mounted() {
     this.getAuthors();

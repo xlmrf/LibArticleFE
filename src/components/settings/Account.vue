@@ -91,11 +91,11 @@ export default {
       //    }
       // }
       // this.error = ''
-      // let info = this.data.info
-      // if (!info.last_name || !info.first_name || !info.location) {
-      //   return this.error = 'Заповніть усі поля'
-      // }
 
+      if (!this.getProfile.last_name || !this.getProfile.first_name || !this.getProfile.location) {
+        return this.error = 'Заповніть усі поля'
+      }
+      return false
     },
   },
   watch: {
@@ -116,7 +116,8 @@ export default {
       if (this.getTempPhoto.image !== '') {
         this.getProfile.image = this.getTempPhoto.image
       }
-      if (this.validate) {
+      if (!this.validate) {
+        console.log('upd user after')
         axios.patch(this.api_url_v1 + '/user', this.getProfile).then(res => {
           //this.updateUser(res.data)
           this.requestUser()

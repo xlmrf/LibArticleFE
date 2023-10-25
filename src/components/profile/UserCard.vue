@@ -46,19 +46,22 @@ export default {
   computed:{
     ...mapGetters(['getAnonPhoto']),
     getImage(){
-      if (!this.getProfile.image)
+      if (this.getProfile.id && this.getProfile.image == null) {
+        console.log('image is absent')
         return this.image = this.getAnonPhoto
-      const img = new Image();
-      img.src = this.getProfile.image;
-      img.onload = () => {
-        this.image = this.getProfile.image
-        this.ProfileLoaderNotReady = false;
-      };
-      img.onerror = () => {
-        this.ProfileLoaderNotReady = false;
-        this.image = this.getAnonPhoto
-      };
-
+      }
+      else {
+        console.log('image is ready', this.getProfile.id, this.getProfile.image)
+        const img = new Image();
+        img.src = this.getProfile.image;
+        img.onload = () => {
+          this.image = this.getProfile.image
+          this.ProfileLoaderNotReady = false;
+        };
+        img.onerror = () => {
+          this.ProfileLoaderNotReady = true;
+        };
+      }
     }
   },
 

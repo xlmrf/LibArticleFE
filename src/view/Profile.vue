@@ -1,5 +1,5 @@
 <template>
-  <div class="middle-spinner" v-if="!getProfile">
+  <div class="middle-spinner" v-if="!getProfile?.id">
     <span><loader width="4" radius="20"></loader></span>
   </div>
 
@@ -7,7 +7,7 @@
     <!--    just profile   -->
     <user-card :getProfile="getProfile" class="user-card-component"></user-card>
 
-    <!--    <statistic />-->
+<!--        <statistic />-->
     <user-info />
 
   </div>
@@ -51,7 +51,7 @@ export default {
   // },
 
   beforeMount() {
-    if (!this.getProfile){
+    if (!this.getProfile?.id){
       this.requestProfile(this.$route.params.id)
     }
     else if (this.getProfile && this.getProfile.id != this.$route.params.id){

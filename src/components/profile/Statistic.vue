@@ -2,16 +2,16 @@
   <loader radius="10" width="2" v-if="statisticLoader" />
   <div class="user-state-panel" v-else>
 
-    <router-link class="state-link" to="">
+    <router-link class="state-link" :to="toUserDocuments">
       <div class="state-upload">
-        <span class="state-count">{{document_count}}</span>
+        <span class="state-count">{{loader_documents_count}}</span>
         <span class="sub-name-state">{{$store.getters.getLanguage.profile.headers.documents_load}}</span>
       </div>
     </router-link>
 
-    <router-link class="state-link" to="">
+    <router-link class="state-link" :to="toAuthorDocuments">
       <div class="state-upload">
-        <span class="state-count">{{document_count}}</span>
+        <span class="state-count">{{author_documents_count}}</span>
         <span class="sub-name-state">{{$store.getters.getLanguage.profile.headers.documents_author}}</span>
       </div>
     </router-link>
@@ -49,7 +49,8 @@ export default {
 
   data(){
     return{
-      document_count:0,
+      loader_documents_count:0,
+      author_documents_count:0,
       documents_views:{},
       statisticLoader: false
     }
@@ -68,7 +69,8 @@ export default {
   methods: {
     getDocumentCount() {
       axios.get('https://libarticle.polidar.in.ua/api/v1/report/documents-count/profile/' + this.$route.params.id).then(response => {
-        this.document_count = response.data.count;
+        this.loader_documents_count = response.data.documents_count.loader_documents_count.loader;
+        this.author_documents_count = response.data.documents_count.author_documents_count;
       }, err => {
         console.log('error info -', err.message);
         // ctx.commit('setInfo', err)
@@ -83,6 +85,24 @@ export default {
       })
     },
 
+  },
+  computed:{
+    toUserDocuments(){
+      if (this.loader_documents_count > 0){
+        return '/documents?user_loader='+this.$route.params.id
+      }
+      else{
+        return ''
+      }
+    },
+    toAuthorDocuments(){
+      if (this.author_documents_count > 0){
+        return '/documents?user_author='+this.$route.params.id
+      }
+      else{
+        return ''
+      }
+    }
   },
   mounted() {
     this.getDocumentCount();
