@@ -4,21 +4,23 @@
 
     <router-link class="state-link" :to="toUserDocuments">
       <div class="state-upload">
-        <span class="state-count">{{loader_documents_count}}</span>
+        <loader v-if="counter_not_ready" />
+        <span v-else class="state-count">{{loader_documents_count}}</span>
         <span class="sub-name-state">{{$store.getters.getLanguage.profile.headers.documents_load}}</span>
       </div>
     </router-link>
 
     <router-link class="state-link" :to="toAuthorDocuments">
       <div class="state-upload">
-        <span class="state-count">{{author_documents_count}}</span>
+        <loader v-if="counter_not_ready" />
+        <span v-else class="state-count">{{author_documents_count}}</span>
         <span class="sub-name-state">{{$store.getters.getLanguage.profile.headers.documents_author}}</span>
       </div>
     </router-link>
 
-    <router-link class="state-link" to="">
+    <router-link class="state-link" :to="toCitesDocuments">
       <div class="state-citation">
-        <span class="state-count">0</span>
+        <span class="state-count">{{cites_documents_count}}</span>
         <span class="sub-name-state">{{$store.getters.getLanguage.profile.headers.cites}}</span>
       </div>
     </router-link>
@@ -51,6 +53,8 @@ export default {
     return{
       loader_documents_count:0,
       author_documents_count:0,
+      cites_documents_count:0,
+      counter_not_ready: false,
       documents_views:{},
       statisticLoader: false
     }
@@ -68,11 +72,18 @@ export default {
   },
   methods: {
     getDocumentCount() {
+      this.counter_not_ready = true
       axios.get('https://libarticle.polidar.in.ua/api/v1/report/documents-count/profile/' + this.$route.params.id).then(response => {
-        this.loader_documents_count = response.data.documents_count.loader_documents_count.loader;
+        this.loader_documents_count = response.data.documents_count.loader_documents_count;
         this.author_documents_count = response.data.documents_count.author_documents_count;
+        this.cites_documents_count = response.data.documents_count.cites_documents_count;
+        this.counter_not_ready = false
       }, err => {
         console.log('error info -', err.message);
+        this.counter_not_ready = false
+        this.loader_documents_count = 0
+        this.author_documents_count = 0
+        this.cites_documents_count = 0
         // ctx.commit('setInfo', err)
       })
     },
@@ -90,6 +101,14 @@ export default {
     toUserDocuments(){
       if (this.loader_documents_count > 0){
         return '/documents?user_loader='+this.$route.params.id
+      }
+      else{
+        return ''
+      }
+    },
+    toCitesDocuments(){
+      if (this.cites_documents_count > 0){
+        return '/documents?user_cites='+this.$route.params.id
       }
       else{
         return ''
@@ -121,7 +140,7 @@ export default {
 }
 .state-link > div{
   /*border:  1px solid red;*/
-  height: auto;
+  height: 100%;
   display: flex;
   flex-flow: column;
   align-items: center;
@@ -143,6 +162,7 @@ export default {
   flex: 1;
 }
 .sub-name-state{
+  margin-top: auto;
   white-space: nowrap;
   font-size: 0.9em;
   color: #2a2a2a;

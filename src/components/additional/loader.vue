@@ -22,7 +22,7 @@ export default {
   z-index: 2;
   position: absolute;
   width: 50px;
-  margin: 25px;
+  margin-left: -25px;
 }
 .mid-top > svg{
   margin-top: 50px;
