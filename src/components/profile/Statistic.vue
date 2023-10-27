@@ -1,38 +1,38 @@
 <template>
-  <loader radius="10" width="2" v-if="statisticLoader" />
-  <div class="user-state-panel" v-else>
 
-    <router-link class="state-link" :to="toUserDocuments">
-      <div class="state-upload">
-        <loader v-if="counter_not_ready" />
-        <span v-else class="state-count">{{loader_documents_count}}</span>
-        <span class="sub-name-state">{{$store.getters.getLanguage.profile.headers.documents_load}}</span>
-      </div>
-    </router-link>
+  <div class="statistic-panel" >
+    <loader class="statistic-loader" radius="20" width="3" v-if="Object.values(statisticLoader).includes(true)" />
+    <div class="user-state-panel item-underline" v-else >
 
-    <router-link class="state-link" :to="toAuthorDocuments">
-      <div class="state-upload">
-        <loader v-if="counter_not_ready" />
-        <span v-else class="state-count">{{author_documents_count}}</span>
-        <span class="sub-name-state">{{$store.getters.getLanguage.profile.headers.documents_author}}</span>
-      </div>
-    </router-link>
+      <router-link class="state-link" :to="toUserDocuments">
+        <div class="state-upload">
+          <span class="state-count">{{loader_documents_count}}</span>
+          <span class="sub-name-state">{{$store.getters.getLanguage.profile.headers.documents_load}}</span>
+        </div>
+      </router-link>
 
-    <router-link class="state-link" :to="toCitesDocuments">
-      <div class="state-citation">
-        <span class="state-count">{{cites_documents_count}}</span>
-        <span class="sub-name-state">{{$store.getters.getLanguage.profile.headers.cites}}</span>
-      </div>
-    </router-link>
+      <router-link class="state-link" :to="toAuthorDocuments">
+        <div class="state-upload">
+          <span class="state-count">{{author_documents_count}}</span>
+          <span class="sub-name-state">{{$store.getters.getLanguage.profile.headers.documents_author}}</span>
+        </div>
+      </router-link>
 
-    <router-link class="state-link" to="">
-      <div class="state-views">
-        <span class="state-count">{{ documents_views.views }}({{ documents_views.unique_views }})</span>
-        <span class="sub-name-state">{{$store.getters.getLanguage.profile.headers.views}}</span>
-      </div>
-    </router-link>
+      <router-link class="state-link" :to="toCitesDocuments">
+        <div class="state-citation">
+          <span class="state-count">{{cites_documents_count}}</span>
+          <span class="sub-name-state">{{$store.getters.getLanguage.profile.headers.cites}}</span>
+        </div>
+      </router-link>
 
+      <router-link class="state-link" to="">
+        <div class="state-views">
+          <span class="state-count">{{ documents_views.views }}({{ documents_views.unique_views }})</span>
+          <span class="sub-name-state">{{$store.getters.getLanguage.profile.headers.views}}</span>
+        </div>
+      </router-link>
 
+    </div>
   </div>
 
 </template>
@@ -54,9 +54,11 @@ export default {
       loader_documents_count:0,
       author_documents_count:0,
       cites_documents_count:0,
-      counter_not_ready: false,
       documents_views:{},
-      statisticLoader: false
+      statisticLoader: {
+        documents_loader:false,
+        views_loader: false
+      }
     }
   },
   watch: {
@@ -72,15 +74,15 @@ export default {
   },
   methods: {
     getDocumentCount() {
-      this.counter_not_ready = true
+      this.statisticLoader.documents_loader = true
       axios.get('https://libarticle.polidar.in.ua/api/v1/report/documents-count/profile/' + this.$route.params.id).then(response => {
         this.loader_documents_count = response.data.documents_count.loader_documents_count;
         this.author_documents_count = response.data.documents_count.author_documents_count;
         this.cites_documents_count = response.data.documents_count.cites_documents_count;
-        this.counter_not_ready = false
+        this.statisticLoader.documents_loader = false
       }, err => {
         console.log('error info -', err.message);
-        this.counter_not_ready = false
+        this.statisticLoader.documents_loader = false
         this.loader_documents_count = 0
         this.author_documents_count = 0
         this.cites_documents_count = 0
@@ -88,9 +90,14 @@ export default {
       })
     },
     getDocumentsViews() {
+      this.statisticLoader.views_loader = true
       axios.get('https://libarticle.polidar.in.ua/api/v1/report/documents-views/profile/' + this.$route.params.id).then(response => {
         this.documents_views = response.data;
+        this.statisticLoader.views_loader = false
       }, err => {
+        this.statisticLoader.views_loader = false
+        this.documents_views.views = 0
+        this.documents_views.unique_views = 0
         console.log('error info -', err.message);
         // ctx.commit('setInfo', err)
       })
@@ -133,7 +140,11 @@ export default {
 </script>
 
 <style scoped>
+.statistic-panel{
+  display: flex;
+}
 .user-state-panel{
+  width: 100%;
   display: flex;
   flex-flow: row;
   position: relative;
@@ -168,7 +179,14 @@ export default {
   color: #2a2a2a;
 }
 
+.statistic-loader{
+  position: relative;
+  left: 40%;
+}
 
+.item-underline:last-child:after{
+  background: #bfbfbfb0;
+}
 
 /*.state-count{*/
 /*  color: #525252;*/

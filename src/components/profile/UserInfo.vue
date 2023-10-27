@@ -1,6 +1,6 @@
 <template>
   <div class="info-panel">
-    <statistic class="item-underline"/>
+    <statistic />
 <!--    <topics-publication />-->
     <topics-document class="item-underline"/>
     <co-authors />

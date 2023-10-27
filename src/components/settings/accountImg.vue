@@ -1,9 +1,11 @@
 <template>
   <div class="avatar">
-    <img :class="['user-avatar']" :src="getTempPhoto.progress === 100 ? getTempPhoto.image : image" alt="">
+    <loader width="2" radius="21"  class="img-loader" v-if="imgLoader" />
+    <img :class="['user-avatar']" :src="getTempPhoto.progress === 100 ? getTempPhoto.image : image" alt="" v-else>
     <input class="photo-loader-input" type="file" id="files" @change="photoUpdate()" accept="image/jpeg,image/png"
            ref="image">
-    <span @click="changePhoto()">{{this.$store.getters.getLanguage.settings.account_titles.change_photo}}</span>
+    <span @click="changePhoto()" class="change-photo-btn">{{this.$store.getters.getLanguage.settings.account_titles.change_photo}}</span>
+    <span class="photo-load-error" v-if="loadError" ><small v-if="loadError === 413">photo is too large</small><small v-else>error loading photo</small></span>
     <!--          https://i.photographers.ua/images/pictures/45416/dsc_4556_1.jpg-->
   </div>
 </template>
@@ -11,11 +13,13 @@
 <script>
 import axios from "axios";
 import {mapGetters, mapState} from "vuex";
+import Loader from "@/components/additional/loader";
 
 export default {
-
+  components: {Loader},
   data(){
     return{
+      imgLoader: false,
       loadError:'',
       photo:''
     }
@@ -25,6 +29,7 @@ export default {
 
   methods:{
     photoUpdate() {
+      this.imgLoader = true
       let image = this.$refs.image.files;
       let form = new FormData();
       form.set('file', image[0]);
@@ -37,9 +42,11 @@ export default {
         }
       }).then(response => {
         this.getTempPhoto.image = response.data.url
+        this.imgLoader = false
       }, error => {
-        this.loadError = error
-        console.log('error in add files:', error);
+        this.loadError = error.response.status
+        this.imgLoader = false
+        console.log('error in add files:', error.response);
       });
       // axios.post('http://192.168.0.102/api/upload-image', form).then(response => {
       //   this.newPhoto = response.data.nameFile;
@@ -47,6 +54,7 @@ export default {
       // }, error => console.log('Server catch error', error));
     },
     changePhoto() {
+      this.loadError = ''
       this.valid = false
       this.$refs.image.click()
     },
@@ -70,7 +78,7 @@ export default {
   margin: 1rem;
 }
 
-.avatar span {
+.change-photo-btn{
   cursor: pointer;
   text-decoration: #212121 underline;
   font-family: "Consolas, sans-serif";
@@ -93,6 +101,19 @@ export default {
 .photo-loader-input {
   position: absolute;
   display: none;
+}
+
+.img-loader{
+  padding: 100px;
+  position: relative;
+  bottom: 10px;
+}
+
+.photo-load-error{
+  text-decoration: none;
+  color: #d43535;
+  text-transform: uppercase;
+  padding: 5px;
 }
 
 </style>
