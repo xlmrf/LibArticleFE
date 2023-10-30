@@ -55,7 +55,7 @@
       <span>
         You can delete your document from system
       </span>
-      <span class="document-delete-link" @click="deleteConfirm = true">
+      <span class="document-delete-link" @click="deleteDocument">
         delete
       </span>
     </div>
@@ -103,6 +103,9 @@ export default {
   computed: {
     ...mapState(['TypesColor', 'api_url_v1']),
     ...mapGetters(['getDocument','getTypes', 'getUser']),
+    deleteDocument(){
+      // deleteConfirm = true
+    }
   },
   components:{
     WarningTemplate,

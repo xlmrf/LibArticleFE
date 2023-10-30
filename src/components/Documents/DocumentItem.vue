@@ -10,7 +10,8 @@
       <authors-part :article="documentItem" :type="type" />
     </div>
     <div class="second-piece">
-      <download-part :article="documentItem" :type="type" />
+      <download-part :article="documentItem" :type="type" v-if="documentItem.files.main?.user_id === getUser.id" />
+      <div v-else></div>
       <views-part :article="documentItem" :type="type" />
     </div>
   </div>
@@ -50,7 +51,7 @@ export default {
   },
 
   computed:{
-    ...mapGetters(['getTypes','getMakeDocument','getSelectedRefs']),
+    ...mapGetters(['getTypes','getMakeDocument','getSelectedRefs', 'getUser']),
     ...mapState(['api_url_v1', 'TypesColor'])
   },
   beforeMount() {

@@ -464,6 +464,7 @@ input {
   background-size: 200% auto;
   color: white;
   box-shadow: 0 0 20px #eee;
+  letter-spacing: 1px;
   display: block;
   font-size: 16px;
   margin:2.5rem auto;

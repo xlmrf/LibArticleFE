@@ -1,38 +1,32 @@
 <template>
   <div class="document-types" >
-    <div class="select-types-area">
-      <h3>{{this.$store.getters.getLanguage.type_areas.signs.type}}</h3>
-      <div >
-<!--        <div class="files-tape">-->
+    <div class="select-type-left-side">
+      <div class="select-types-area left-side-cell">
+        <span>{{this.$store.getters.getLanguage.type_areas.signs.type}}</span>
 
-<!--        </div>-->
-        <h1>Оберіть тип та пункт:</h1>
-        <div class="custom-select">
-          <div class="types">
-            <label for="types">Тип:</label>
-            <select id="types">
-              <option value="a">Тип A</option>
-              <option value="b">Тип B</option>
-              <option value="c">Тип C</option>
-            </select>
-          </div>
-          <div class="points">
-            <label for="points">Пункт:</label>
-            <div id="points">
-              <div class="point" data-value="пункт1">Пункт 1</div>
-              <div class="point" data-value="пункт2">Пункт 2</div>
-              <div class="point" data-value="пункт3">Пункт 3</div>
-              <div class="point" data-value="пункт4">Пункт 4</div>
+        <div  class="type-selector">
+          <p @click="showTypesList = !showTypesList">
+            <span v-if="!getMakeDocument.type_id">Choose type</span>
+            <span v-else>{{$store.getters.getLanguage.types[getTypes[getMakeDocument.type_id-1]?.name]}}</span>
+            <svg v-if="!showTypesList" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#363636" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+            <svg v-else xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1f5361" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+          </p>
+          <div class="files-tape">
+            <div v-if="showTypesList" v-for="(type,key) in getTypes" :key="key"
+                 :class="['file-name' ,{'category-active':getMakeDocument.type_id-1 === key}]"
+                 @click="selectType(type)">{{ $store.getters.getLanguage.types[type.name] }}
             </div>
           </div>
         </div>
-
-<!--        <div v-for="(type,key) in getTypes" :key="key"-->
-<!--             :class="['file-name',{'category-active':getMakeDocument.type_id-1 === key}]"-->
-<!--             @click="getMakeDocument.type_id = type.id">{{ this.$store.getters.getLanguage.types[type.name] }}-->
-<!--        </div>-->
       </div>
+
+      <div>
+
+      </div>
+
     </div>
+
+
     <div class="type-description">
       <h3>{{this.$store.getters.getLanguage.type_areas.signs.fill_areas}}</h3>
       <ul class="item-category-collection" v-if="getMakeDocument.type_id">
@@ -51,6 +45,22 @@ import {mapActions, mapGetters} from "vuex";
 export default {
   mixins: ['translate'],
   props:['error'],
+
+  data(){
+    return{
+      showTypesList:false
+    }
+  },
+
+  methods:{
+    selectType(item){
+      this.getMakeDocument.type_id = item.id
+      console.log('dd',this.showTypesList);
+      this.showTypesList = false
+      console.log('ddaa',this.showTypesList);
+    }
+  },
+
   computed: {
     ...mapGetters(['getMakeDocument', 'getTypes']),
     // ...mapActions(['requestTypes'])
@@ -123,22 +133,22 @@ h3:after{
   background: rgba(191, 191, 191, 0.46);
 }
 
-h3{
-  background: #009FFF;
-  position: relative;
-  overflow:hidden;
-  outline: none;
-  padding: 10px 0;
-  border-top-right-radius: 4px;
-  border-top-left-radius: 4px;
-  /*height: 21px;*/
-  /*color: #24292F;*/
-  color: white;
-  font-size: 1.1em;
-  /*margin: 1rem 0;*/
-  /*color: #212121;*/
-  font-weight: normal;
-}
+/*h3{*/
+/*  background: #009FFF;*/
+/*  position: relative;*/
+/*  overflow:hidden;*/
+/*  outline: none;*/
+/*  padding: 10px 0;*/
+/*  border-top-right-radius: 4px;*/
+/*  border-top-left-radius: 4px;*/
+/*  !*height: 21px;*!*/
+/*  !*color: #24292F;*!*/
+/*  color: white;*/
+/*  font-size: 1.1em;*/
+/*  !*margin: 1rem 0;*!*/
+/*  !*color: #212121;*!*/
+/*  font-weight: normal;*/
+/*}*/
 .item-category-collection{
   display: inherit;
   flex-flow: column wrap;
@@ -260,43 +270,34 @@ h3{
   min-width: 100px;
 }
 
+.type-selector{
+  min-width: 150px;
+}
 
-
-.custom-select {
-  display: inline-block;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  width: 300px;
+.type-selector > p{
+  border: 1px solid #bbb;
+  padding: 8px 10px;
+  border-radius: 3px;
+  color: #333333;
   cursor: pointer;
-  margin: 20px;
+  display: flex;
+  justify-content: space-between;
 }
 
-.custom-select label {
-  display: block;
-  margin: 10px 0;
+.files-tape{
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  font-size: 0.8em;
+  overflow: auto;
+  height: auto;
+  max-height: 150px;
+  scrollbar-width: thin;
+  z-index: 10;
+}
+.files-tape > div{
+  display: inline-block;
+  text-decoration: none;
 }
 
-.custom-select select {
-  padding: 10px;
-  width: 100%;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-#description {
-  margin-top: 20px;
-  border: 1px solid #ccc;
-  padding: 20px;
-  border-radius: 5px;
-  background-color: #f5f5f5;
-}
-
-#description p {
-  margin: 0;
-}
-
-h1 {
-  font-size: 24px;
-}
 </style>
