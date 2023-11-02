@@ -19,7 +19,7 @@ export default {
 
                 type_areas:{
                     signs:{
-                        type: 'Тип',
+                        type: 'Тип документу',
                         fill_areas: 'Поля для заповнення',
                         category_tip: 'Оберіть категорію',
                         title_tip: 'Навчальний посібник з дисципліни «Теорія ймовірностей, імовірнісні процеси та математична статистика». Курс лекцій'
@@ -325,7 +325,7 @@ export default {
 
                 type_areas:{
                     signs:{
-                        type: 'Type',
+                        type: 'Type of document',
                         fill_areas: 'Fields to fill',
                         category_tip: 'Choose category',
                         title_tip: 'Filtration of UAV Movement Parameters Based on the Received Signal Strength Measurement Sensor Networks in the Presence of Anomalous Measurements of Unknown Power'

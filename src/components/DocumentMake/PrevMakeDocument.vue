@@ -68,7 +68,9 @@ export default {
       this.draftTumbler = !this.draftTumbler
     },
     createDocument(e){
+
       if (!this.getMakeDocument.title){
+        this.getTitleInput.select()
         return this.titleError = 'empty_field'
       }
       if (!this.getMakeDocument.type_id){
@@ -101,7 +103,7 @@ export default {
     }
   },
   computed:{
-    ...mapGetters(['getMakeDocument','getErrorMessage', 'getDocumentMakeWarning']),
+    ...mapGetters(['getMakeDocument','getErrorMessage', 'getDocumentMakeWarning', 'getTitleInput']),
     ...mapState(['api_url_v1']),
     BtnValid(){
       return this.btn_enabled = !!(this.getMakeDocument.type_id && this.getMakeDocument.title);

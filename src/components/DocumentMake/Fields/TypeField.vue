@@ -5,7 +5,7 @@
         <span>{{this.$store.getters.getLanguage.type_areas.signs.type}}</span>
 
         <div  class="type-selector">
-          <p @click="showTypesList = !showTypesList">
+          <p @click="showTypesList = !showTypesList" class="type-selector-frame selector-frame" :class="{'active-type-selector': showTypesList}">
             <span v-if="!getMakeDocument.type_id">Choose type</span>
             <span v-else>{{$store.getters.getLanguage.types[getTypes[getMakeDocument.type_id-1]?.name]}}</span>
             <svg v-if="!showTypesList" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#363636" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
@@ -20,8 +20,18 @@
         </div>
       </div>
 
-      <div>
-
+      <div class="left-side-cell">
+        <span>Приватність</span>
+        <div class="private-selector">
+          <p class="selector-frame" @click="isPublic = true" :class="{'active-type-privat': isPublic}">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            <span>Public</span>
+          </p>
+          <p class="selector-frame" @click="isPublic = false" :class="{'active-type-privat': !isPublic}">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            <span>Private</span>
+          </p>
+        </div>
       </div>
 
     </div>
@@ -48,7 +58,8 @@ export default {
 
   data(){
     return{
-      showTypesList:false
+      showTypesList:false,
+      isPublic: true
     }
   },
 
@@ -73,7 +84,8 @@ export default {
 
 <style scoped>
 .manual-item{
-  padding:10px 25px;
+  /*padding:10px 25px;*/
+  margin-left: 20px;
   text-decoration:none;
   background: none;
   /*   border:1px solid #999; */
@@ -81,17 +93,18 @@ export default {
   border: none;
   outline: none;
   overflow:hidden;
-  text-align: center;
+  /*text-align: center;*/
   color: #212121
 }
 .manual-item::after{
   content:'';
   position:absolute;
-  width:100%;
-  height:0.1rem;
-  left:0;
-  bottom:3px;
-  background: #B8EBFF;
+  width:9px;
+  height:7px;
+  border-radius: 999px;
+  left: 0;
+  bottom:calc(50% - 4px);
+  background: #222222;
 }
 .manual-item::after{
   transform:scale(0.8,1);
@@ -105,6 +118,7 @@ export default {
   min-height: 500px;
 }
 .document-types{
+  color: #333333;
   border-radius: 4px;
   display: flex;
   justify-content: space-around;
@@ -116,6 +130,9 @@ export default {
 }
 .type-description{
   /*box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;*/
+  border: 1px solid #D4DEE1;
+  color: #333333;
+  border-radius: 9px;
   background: #fcfcfc;
   display: flex;
   flex-flow: column;
@@ -123,32 +140,11 @@ export default {
   margin-left: 20px;
 }
 
-h3:after{
-  content:'';
-  position:absolute;
-  width:100%;
-  height:1px;
-  left:0;
-  bottom:0;
-  background: rgba(191, 191, 191, 0.46);
+.select-type-left-side > div{
+  margin-bottom: 20px;
 }
 
-/*h3{*/
-/*  background: #009FFF;*/
-/*  position: relative;*/
-/*  overflow:hidden;*/
-/*  outline: none;*/
-/*  padding: 10px 0;*/
-/*  border-top-right-radius: 4px;*/
-/*  border-top-left-radius: 4px;*/
-/*  !*height: 21px;*!*/
-/*  !*color: #24292F;*!*/
-/*  color: white;*/
-/*  font-size: 1.1em;*/
-/*  !*margin: 1rem 0;*!*/
-/*  !*color: #212121;*!*/
-/*  font-weight: normal;*/
-/*}*/
+
 .item-category-collection{
   display: inherit;
   flex-flow: column wrap;
@@ -166,7 +162,7 @@ h3:after{
   /*border-bottom: 1px dashed #bbb;*/
   list-style: none;
   cursor: default;
-  padding: 0.7rem;
+  padding: 0.8rem;
   width: 50%;
   font-size: 1em;
   align-self: center;
@@ -248,17 +244,23 @@ h3:after{
 .document-types h3{
   text-align: center;
   width: 100%;
+  padding: 12px;
   /*background-image: linear-gradient(to right, #e4e6e7 0%, #f1f2f3 51%, #e4e6e7 100%);*/
   /*color: #F1F1F1;*/
+
 }
 
-.document-type:hover{
-  border: 2px solid rgba(145, 150, 163, 0.5);
+.left-side-cell{
+  display: flex;
+  flex-flow: column;
+  min-width: 170px;
 }
 
 
-.alert-input{
-  border: 1px solid rgba(229, 50, 45, 0.74);
+
+.left-side-cell > span{
+  padding-bottom: 10px;
+  font-weight: bold;
 }
 
 .category-error{
@@ -266,25 +268,54 @@ h3:after{
   color: #cd2d2d;
 }
 
-.select-types-area{
-  min-width: 100px;
+
+.private-selector > p{
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.private-selector > p > span{
+  font-size: 1.1rem;
+  /*position: absolute;*/
+  margin-left: 10px;
 }
 
 .type-selector{
-  min-width: 150px;
+
 }
 
-.type-selector > p{
-  border: 1px solid #bbb;
+.type-selector-frame{
+  justify-content: space-between;
+}
+
+.selector-frame{
   padding: 8px 10px;
+  border: 1px solid #bbb;
   border-radius: 3px;
   color: #333333;
   cursor: pointer;
   display: flex;
-  justify-content: space-between;
+}
+
+.active-type-selector{
+  border: 1px solid #1f5361;
+  box-shadow: rgba(31, 83, 97, 0.1) 0px 4px 6px -1px, rgba(31, 83, 97, 0.06) 0px 2px 4px -1px;
+}
+
+.active-type-privat{
+  border: 1px solid #0969DA;
+  box-shadow: rgba(9, 105, 218, 0.04) 0px 3px 5px;
+  color: #0969DA;
+}
+.active-type-privat > svg{
+  stroke: #0969DA;
 }
 
 .files-tape{
+  position: absolute;
+  background: #ffffff;
+  min-width: 170px;
   border-radius: 6px;
   display: flex;
   flex-direction: column;
