@@ -8,7 +8,7 @@
       {{ this.$store.getters.getLanguage.document_make.signs.only_year }}
       <input type="radio" v-model="formatDate" ref="only_year" value="year">
     </span>
-    <span v-if="!getTypes.find(type => type.id === getMakeDocument.type_id)?.rules.publication_date.includes('required')" @click="this.$refs.none_date.click()" :class="{active_date_format:formatDate==='null'}">
+    <span v-if="!getTypes.find(type => type.id === getMakeDocument.type_id)?.rules?.publication_date.includes('required')" @click="this.$refs.none_date.click()" :class="{active_date_format:formatDate==='null'}">
       {{ this.$store.getters.getLanguage.document_make.signs.none_date }} <input type="radio" v-model="formatDate"
                                                                                  ref="none_date" value="null">
     </span>

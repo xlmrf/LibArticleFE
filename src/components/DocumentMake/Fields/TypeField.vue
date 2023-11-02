@@ -170,7 +170,7 @@ export default {
 
 .mid-title{
   justify-content: center;
-  align-content: center;
+  padding-top: calc(50% - 120px);
   font-size: 1.3rem;
 }
 
