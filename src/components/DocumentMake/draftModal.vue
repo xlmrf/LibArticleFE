@@ -2,7 +2,7 @@
   <div class="modal-component draft-modal">
     <div class="top-modal">
       <h3>{{$store.getters.getLanguage.document_make.draftModal.topTitle}}</h3>
-      <div>Записів:<span v-if="drafts.length > 0">{{drafts.length}}</span></div>
+      <div>{{$store.getters.getLanguage.document_make.draftModal.count}}:<span v-if="drafts.length > 0">{{drafts.length}}</span></div>
     </div>
     <div class="modal-component-body drafts-panel">
       <div v-for="(draft,idx) in drafts" v-if="drafts.length > 0">

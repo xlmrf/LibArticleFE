@@ -266,6 +266,7 @@ export default {
                     },
                     draftModal:{
                         'topTitle': 'Не закінчені документи',
+                        'count': 'Записів'
                     }
                 },
                 documents:{
@@ -569,6 +570,7 @@ export default {
                     },
                     draftModal:{
                         'topTitle': 'Unfinished documents',
+                        'count': 'Drafts count'
                     }
                 },
                 documents:{
