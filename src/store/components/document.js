@@ -6,6 +6,7 @@ export default {
         return {
             document: {},
             makeDocument: {},
+            forced:false,
 
             warnings: [],
             titleInputRef:null,
@@ -68,6 +69,10 @@ export default {
 
         },
 
+        updateForce(ctx, data){
+            ctx.forced = data
+        },
+
         updateStoreDocument(ctx, data) {
             data === {} ? ctx.makeDocument = {} : ctx.makeDocument = {...ctx.makeDocument, ...data}
         },
@@ -91,14 +96,16 @@ export default {
     },
     getters: {
 
-
-
         getDocumentMakeWarning(ctx){
             return ctx.warnings
         },
 
         getDocument(ctx) {
             return ctx.document
+        },
+
+        getForced(ctx) {
+            return ctx.forced
         },
 
         getMakeDocument(ctx){

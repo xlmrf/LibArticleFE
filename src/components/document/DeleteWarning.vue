@@ -13,7 +13,7 @@
 import axios from "axios";
 
 export default {
-  emits:['delete-cancel','delete-document'],
+  // emits:['delete-cancel','delete-document'],
 
   methods:{
     deleteDocument(){

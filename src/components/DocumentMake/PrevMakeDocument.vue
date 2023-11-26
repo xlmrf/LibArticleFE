@@ -68,7 +68,6 @@ export default {
       this.draftTumbler = !this.draftTumbler
     },
     createDocument(e){
-
       if (!this.getMakeDocument.title){
         this.getTitleInput.select()
         return this.titleError = 'empty_field'
@@ -76,8 +75,7 @@ export default {
       if (!this.getMakeDocument.type_id){
         return this.typeError = 'not_select'
       }
-      console.log("prev");
-      this.$emit('next', e)
+      this.$emit('next')
     },
     // showAllCites(){
     //   this.openModal = true

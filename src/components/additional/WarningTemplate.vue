@@ -9,11 +9,9 @@
         </svg>
       </small>
       <div class="modalWindow">
-        <component :is="theComponent[$route.name]" />
+        <component :is="theComponent[$route.name]"  />
       </div>
-
     </div>
-
   </div>
 </template>
 

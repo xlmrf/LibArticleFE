@@ -27,10 +27,10 @@ export default {
   },
 
   methods: {
-    ...mapMutations(['DocumentMutate','updateStoreDocument', 'catchError']),
+    ...mapMutations(['DocumentMutate','updateStoreDocument', 'catchError', 'updateForce']),
     ...mapActions(['requestDocumentMake']),
 
-    async next(forced = '') {
+    async next(forced = false) {
 
 
       const id = this.$route.params.id;
@@ -40,7 +40,7 @@ export default {
         keyParts.push('first-stage=true');
       }
 
-      if (forced === 'forced') {
+      if (forced) {
         keyParts.push('forced=true');
       }
 
@@ -77,7 +77,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getMakeDocument', 'getTypes']),
+    ...mapGetters(['getMakeDocument', 'getTypes', 'getForced']),
     ...mapState(['api_url_v1'])
   },
   watch: {
@@ -91,6 +91,14 @@ export default {
       },
       deep: true
     },
+
+    getForced(){
+      if (this.getForced){
+        this.next(true)
+        this.updateForce(false)
+      }
+    },
+
     'getMakeDocument':{
       handler(){
         this.titleError = false

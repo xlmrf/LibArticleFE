@@ -7,21 +7,29 @@
   </p>
   <div class="btn-panel">
     <button class="btn" @click="changeTitle()">{{ $store.getters.getLanguage.document_make.warnings.change_title}}</button>
-    <button class="btn" @click="$emit('create-to-despite', 'forced')">{{ $store.getters.getLanguage.document_make.warnings.create}}</button>
+    <button class="btn" @click="createToDespite">{{ $store.getters.getLanguage.document_make.warnings.create}}</button>
   </div>
 </template>
 
 <script>
-import {mapGetters, mapState} from "vuex";
+import {mapGetters, mapMutations, mapState} from "vuex";
 
 export default {
 
   methods:{
+
+    ...mapMutations(['updateForce']),
+
     closeWindow(e){
       if (e.target.className === 'title-modal')
       {
         this.$emit('close-modal')
       }
+    },
+
+    createToDespite(){
+      this.updateForce(true)
+      console.log(this.getForced);
     },
 
     changeTitle(){
@@ -36,7 +44,7 @@ export default {
 
   computed:{
     ...mapState(['api_url_v1']),
-    ...mapGetters(['getTitleInput','getDocumentMakeWarning', 'getMakeDocument'])
+    ...mapGetters(['getTitleInput','getDocumentMakeWarning', 'getMakeDocument', 'getForced'])
 
   },
 

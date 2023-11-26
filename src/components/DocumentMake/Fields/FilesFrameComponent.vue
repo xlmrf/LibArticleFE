@@ -742,6 +742,14 @@ li {
   padding-bottom: 10px;
 }
 
+h3{
+  color: #333;
+  font-weight: lighter;
+  letter-spacing: 2px;
+  position: relative;
+  left: 3px;
+}
+
 .signup-inactive a {
   cursor: pointer;
   color: rgba(255, 255, 255, .3);
