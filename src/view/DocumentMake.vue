@@ -9,8 +9,8 @@
 
 <script>
 import {mapGetters, mapActions, mapMutations, mapState} from "vuex"
-import FirstStage from "@/components/DocumentMake/PrevMakeDocument";
-import SecondStage from "@/components/DocumentMake/EditDocument";
+import FirstStage from "@/components/DocumentMake/FirstStage";
+import SecondStage from "@/components/DocumentMake/SecondStage";
 import axios from "axios";
 import router from "@/router";
 import Loader from "@/components/additional/loader";

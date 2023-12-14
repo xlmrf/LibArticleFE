@@ -17,7 +17,7 @@
 
 <script>
 import PulseLoader from "@/components/additional/pulseLoader";
-import draftModal from "@/components/DocumentMake/draftModal";
+import draftModal from "@/components/DocumentMake/Drafts/draftModal";
 import citesModal from "@/components/document/citesModal";
 import router from "@/router";
 import axios from "axios";

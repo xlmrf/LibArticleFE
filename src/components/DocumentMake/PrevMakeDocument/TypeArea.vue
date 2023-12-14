@@ -44,7 +44,7 @@
           {{ this.$store.getters.getLanguage.type_areas.areas[item] }}
         </li>
       </ul>
-      <span class="item-category-collection mid-title" :class="{'category-error':error}" v-else>{{this.$store.getters.getLanguage.type_areas.signs.category_tip}}</span>
+      <span class="mid-title" :class="{'category-error':error}" v-else>{{this.$store.getters.getLanguage.type_areas.signs.category_tip}}</span>
     </div>
   </div>
 </template>
@@ -169,8 +169,9 @@ export default {
 }
 
 .mid-title{
+  display: flex;
   justify-content: center;
-  padding-top: calc(50% - 120px);
+  padding-top: calc(50% - 140px);
   font-size: 1.3rem;
 }
 

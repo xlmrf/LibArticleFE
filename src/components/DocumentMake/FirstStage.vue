@@ -27,14 +27,14 @@
 
 <script>
 
-import TitleField from "@/components/DocumentMake/Fields/TitleField";
-import TypeField from "@/components/DocumentMake/Fields/TypeField";
+import TitleField from "@/components/DocumentMake/PrevMakeDocument/TitleField";
+import TypeField from "@/components/DocumentMake/PrevMakeDocument/TypeArea";
 import Loader from "@/components/additional/loader"
 import {mapGetters, mapState} from "vuex";
 import DocumentsList from "@/components/Documents/DocumentsList";
 import DocumentItem from "@/components/Documents/DocumentItem";
 import PulseLoader from "@/components/additional/pulseLoader";
-import DraftModal from "@/components/DocumentMake/draftModal";
+import DraftModal from "@/components/DocumentMake/Drafts/draftModal";
 import ModalWindow from "@/components/additional/modalWindow";
 import WarningTemplate from "@/components/additional/WarningTemplate";
 

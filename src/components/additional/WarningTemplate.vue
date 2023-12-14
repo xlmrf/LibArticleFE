@@ -17,7 +17,7 @@
 
 <script>
 import PulseLoader from "@/components/additional/pulseLoader";
-import TitleWarning from "@/components/DocumentMake/TitleWarning";
+import TitleWarning from "@/components/DocumentMake/PrevMakeDocument/TitleWarning";
 import DeleteWarning from "@/components/document/DeleteWarning";
 import router from "@/router";
 import axios from "axios";
