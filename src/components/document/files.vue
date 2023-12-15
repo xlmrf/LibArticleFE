@@ -15,7 +15,7 @@
   <div class="cites-modal" v-if="fileModal">
     <div class="modalActive">
       <div class="modal-view">
-        <iframe :src="files.main.url" frameborder="0"></iframe>
+        <iframe :src="loadingFileUrl" frameborder="0"></iframe>
       </div>
     </div>
     <small class="modalClose" title="Close" @click="openModalFile(false)">
@@ -35,16 +35,32 @@ import axios from "axios";
 import {mapState} from "vuex";
 export default {
 
+  data(){
+    return{
+      loadingFileUrl: ''
+    }
+  },
   emits:['close-modal-file'],
   props:['files'],
 
   methods:{
+    getFile(){
+      console.log('eventListener')
+      fetch(this.files.main.url)
+          .then(response => response.blob())
+          .then(blob => {
+            console.log('blob',blob)
+            this.loadingFileUrl = URL.createObjectURL(blob);
+          })
+          .catch(error => console.error("Помилка отримання PDF:", error));
+    },
     openModalFile(check){
 
       let query = Object.assign({}, this.$route.query);
       let obj = {}
       if (check) {
         obj = {file: true}
+        this.getFile()
       }
       else {
         delete query?.file
