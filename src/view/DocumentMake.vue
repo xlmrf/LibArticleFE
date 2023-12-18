@@ -1,8 +1,10 @@
 <template>
-  <div class="document-make-body">
+  <n-f-page v-if="this.$route.params.id !== '' && !this.getMakeDocument.id && !loader" />
+  <div class="document-make-body" v-else>
     <loader class="loader middle-spinner" width="3" radius="15" v-if="loader" />
     <second-stage @prev="prev" v-else-if="!prev_stage && this.$route.params.id"/>
     <first-stage v-else @next="next"/>
+
 <!--    {{this.getDocument.title}}-->
   </div>
 </template>
@@ -14,6 +16,7 @@ import SecondStage from "@/components/DocumentMake/SecondStage";
 import axios from "axios";
 import router from "@/router";
 import Loader from "@/components/additional/loader";
+import NFPage from "@/components/additional/NFPage";
 
 export default {
 
@@ -123,7 +126,7 @@ export default {
   },
 
   name: "DocumentMake",
-  components: {Loader, SecondStage, FirstStage}
+  components: {NFPage, Loader, SecondStage, FirstStage}
 }
 </script>
 
