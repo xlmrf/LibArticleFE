@@ -16,7 +16,8 @@
     "sass": "^1.66.1",
     "sass-loader": "^13.2.0",
     "vue": "^3.2.47",
-    "vuex": "^4.1.0"
+    "vuex": "^4.1.0",
+    "web3": "^4.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.21.3",

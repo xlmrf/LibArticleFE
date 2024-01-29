@@ -20,13 +20,13 @@
       Ввійти
       <loader v-if="loader" class="type-loader" :radius="8" :width="2"></loader>
     </button>
-    </div>
-    <div class="form-trip">
+  </div>
+  <div class="form-trip">
       <span class="text">
         Якщо немає акаунту,
         <router-link :to="{name:'registration'}" class="text-to">створіть його</router-link>
       </span>
-    </div>
+  </div>
 </template>
 
 <script>
@@ -82,15 +82,15 @@ export default {
     },
     login(){
       axios.post(this.api_url_v1 + '/login', this.data).then(res => {
-        axios.defaults.headers.common['Authorization'] = 'Bearer ' + res.data.api_token
-        localStorage.setItem('access_token', res.data.api_token);
-        this.$router.push('/')
-      },
-      err => {
-        this.loader = false
-        this.messages = err.response.data
-        console.log('auth error', err.response);
-      })
+            axios.defaults.headers.common['Authorization'] = 'Bearer ' + res.data.api_token
+            localStorage.setItem('access_token', res.data.api_token);
+            this.$router.push('/')
+          },
+          err => {
+            this.loader = false
+            this.messages = err.response.data
+            console.log('auth error', err.response);
+          })
     }
 
   },
