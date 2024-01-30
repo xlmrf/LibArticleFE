@@ -81,6 +81,7 @@ export default {
 
 
   beforeUnmount() {
+    this.DocumentsMutate({})
     this.updateSelectedRefs([])
     localStorage.removeItem('search')
   }

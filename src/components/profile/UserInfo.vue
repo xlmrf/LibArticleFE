@@ -25,10 +25,19 @@ export default {
   margin: 0 2rem;
 }
 
+.info-panel > div{
+  margin: 10px 0;
+  padding: 5px 0;
+}
+
+.info-panel > div > p{
+  margin-bottom: 10px;
+}
+
 .chapter-header{
   font-weight: bold;
   color: #222222;
-  margin: 10px;
+  margin: 0 10px;
 }
 
 </style>
