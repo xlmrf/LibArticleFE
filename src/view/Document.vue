@@ -98,14 +98,14 @@ export default {
     handleScroll() {
       const scrollBtn = this.$refs.scrollTopButton;
     },
+    deleteDocument(){
+      this.deleteConfirm = true
+    }
 
   },
   computed: {
     ...mapState(['TypesColor', 'api_url_v1']),
     ...mapGetters(['getDocument','getTypes', 'getUser']),
-    deleteDocument(){
-      // deleteConfirm = true
-    }
   },
   components:{
     WarningTemplate,

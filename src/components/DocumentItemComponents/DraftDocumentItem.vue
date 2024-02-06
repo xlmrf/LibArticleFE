@@ -30,18 +30,12 @@ export default {
   data(){
     return{
       pointDocument: null,
-      type: 'searcher'
+      type: 'draft'
     }
   },
 
   methods:{
-    viewsDocument(){
-      axios.get(this.api_url_v1 + '/report/document-views/' + this.documentItem.id).then(response => {
-        this.views = response.data
-      }, err => {
-        console.log('views error:',err);
-      })
-    },
+
 
   },
 

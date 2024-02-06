@@ -11,16 +11,22 @@
 
 <script>
 import axios from "axios";
+import {mapGetters, mapState} from "vuex";
 
 export default {
   // emits:['delete-cancel','delete-document'],
 
   methods:{
     deleteDocument(){
-      axios.delete(this.api_url_v1 + '/document/'+this.getDocument.id).then(res => {
+      console.log('delete link: ',this.api_url_v1 + '/document/make/'+this.getDocument.id)
+      axios.delete(this.api_url_v1 + '/document/make/'+this.getDocument.id).then(res => {
         console.log("The document has been delete:",res)
       })
     }
+  },
+  computed:{
+    ...mapState(['api_url_v1']),
+    ...mapGetters(['getDocument'])
   }
 }
 </script>

@@ -30,6 +30,8 @@ import Advanced from "./components/settings/Advanced"
 import DocumentMake from "@/view/DocumentMake";
 import UnknownPage from "@/view/UnknownPage"
 
+import LogMeta from "./components/auth/old/login-metamask"
+
 
 import confirmEmail from "./components/auth/old/ConfirmEmail";
 
@@ -49,6 +51,11 @@ const routes = [
                 path: '/login',
                 name: 'login',
                 component: login
+            },
+            {
+                path: '/login-metamask',
+                name: 'login-metamask',
+                component: LogMeta
             },
             {
                 path: '/recovery-password',

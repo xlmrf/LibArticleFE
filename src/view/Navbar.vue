@@ -45,8 +45,10 @@ export default {
       mistake: '',
     }
   },
+
   computed: {
     ...mapGetters(['getMakeDocument','getSelectedRefs']),
+
     addRefs(){
 
       let q = Object.assign({}, this.$route.query)
