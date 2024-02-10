@@ -2,7 +2,7 @@
   <div class="check-item">
     <label class="checkbox-item filter-checkbox select-type-checkbox">
       <input type="checkbox" v-model="checkItem" @click="checkItemM()">
-      <span class="label">{{$route.query}}</span>
+      <span class="label"></span>
     </label>
   </div>
 </template>
@@ -47,13 +47,15 @@ export default {
       }
     },
     checkItemM(){
+
+      console.log('route:', this.$route.query)
       let query = Object.assign({}, this.$route.query);
       // this.updateSelectedRefs(query.refs_doc_id !== undefined ? JSON.parse(query.refs_doc_id) : [])
+      // console.log('refs:', JSON.parse(this.$route.query.refs_doc_id))
 
       this.catchItem()
 
       const refs_idx = this.getSelectedRefs.map(item => item.id);
-
       this.$router.replace({
         name: 'documents',
         query: {...query, ...{refs_doc_id:JSON.stringify(refs_idx)}}

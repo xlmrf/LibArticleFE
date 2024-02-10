@@ -87,7 +87,7 @@ export default {
                     },
 
                     add_refs_btn:'Додати',
-                    back_to_doc_btn:'Назад'
+                    back_to_doc_btn:'Зберегти'
 
                 },
 
@@ -393,7 +393,7 @@ export default {
                     },
 
                     add_refs_btn:'Add',
-                    back_to_doc_btn:'Back'
+                    back_to_doc_btn:'Save'
                 },
 
                 actions:{

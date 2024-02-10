@@ -1,7 +1,7 @@
 <template>
   <div class="document-item" :class="{'document-draft': type === 'draft' || this.$route.query.refs_doc_id}" v-if="documentItem.title">
     <div class="context-document-item">
-      <box-selector :doc="documentItem"  v-if="this.$route.query.refs_doc_id" />
+      <box-selector :doc="documentItem" />
       <type-part :article="documentItem" :class="'type-border-color-'+this.$store.getters.getTypesColor[getTypes.find(item => item.id === documentItem?.type_id)?.name]" />
       <date-part :article="documentItem" />
     </div>

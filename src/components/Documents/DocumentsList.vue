@@ -36,7 +36,6 @@ export default {
   props: {
     documents: {
       type: Object
-
     }
   },
   computed: {
@@ -62,6 +61,8 @@ export default {
     pagination
   },
   mounted() {
+    console.log('parse:',JSON.parse(this.$route.query.refs_doc_id))
+    // this.updateSelectedRefs(JSON.parse(this.$route.query.refs_doc_id))
   }
 }
 </script>
