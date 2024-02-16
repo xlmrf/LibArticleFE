@@ -50,9 +50,7 @@ import email from "@/mixins/email";
 import axios from "axios";
 import {mapState} from "vuex";
 import AuthMessage from "@/components/auth/authMessage";
-import { ethers } from 'ethers'
 
-import Web3 from 'web3';
 
 export default {
 

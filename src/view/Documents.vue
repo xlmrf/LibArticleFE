@@ -59,14 +59,21 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['DocumentSearcher']),
-    ...mapMutations(['DocumentsMutate','updateSelectedRefs'])
+    ...mapActions(['DocumentSearcher','requestDocumentMake']),
+      ...mapMutations(['DocumentsMutate','updateSelectedRefs'])
   },
   computed: {
-    ...mapGetters(['getDocuments', 'getTypes', 'getSelectedRefs'])
+    ...mapGetters(['getDocuments', 'getTypes', 'getSelectedRefs','getMakeDocument'])
   },
   components: {Loader, DocumentsList, FilterOptions},
   mounted() {
+      if(this.$route.query.cites_document_id&&this.getMakeDocument.id==undefined){
+
+          this.requestDocumentMake(this.$route.query.cites_document_id)
+
+
+      }
+
 
     let q = '';
     if (this.$route.fullPath.split('?')[1]) {

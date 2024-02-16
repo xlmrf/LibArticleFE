@@ -6,7 +6,7 @@
     </div>
     <div class="not-found-document-panel" v-if="documents.total === 0">{{$store.getters.getLanguage.documents.other.documents_not_found}}</div>
     <div v-else>
-      <component :is="ItemComponent[ChooseItem]" class="document-list-item" :documentItem="document" v-for="document in documents.data"/>
+      <DocumentItemGeneral class="document-list-item" :documentItem="document" v-for="document in documents.data" :key="document.id"/>
       <pagination :paginate="paginate(documents)"/>
     </div>
   </div>
@@ -21,6 +21,7 @@ import ReferenceDocumentItem from "@/components/DocumentItemComponents/Reference
 import {mapGetters} from "vuex";
 import NavFiltration from "@/components/Documents/Filters/NavFiltration";
 import NavHeader from "@/components/Documents/Filters/NavHeader";
+import DocumentItemGeneral from "@/components/Documents/DocumentItemGeneral.vue";
 
 export default {
 
@@ -52,16 +53,17 @@ export default {
     }
   },
   components: {
+      DocumentItemGeneral,
     NavHeader,
     NavFiltration,
-    DocumentItem,
+    // DocumentItem,
     citation,
     ReferenceDocumentItem,
     DraftDocumentItem,
     pagination
   },
   mounted() {
-    console.log('parse:',JSON.parse(this.$route.query.refs_doc_id))
+    // console.log('parse:',JSON.parse(this.$route.query.refs_doc_id))
     // this.updateSelectedRefs(JSON.parse(this.$route.query.refs_doc_id))
   }
 }

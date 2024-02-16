@@ -6,10 +6,10 @@
     <range-year />
     <select-type />
 <!--    <select-keywords />-->
-    <div class="selected-refs-panel" style="flex-flow: row" v-if="$route.query.refs_doc_id && JSON.parse($route.query.refs_doc_id).length > 0">
-      <span>{{this.$store.getters.getLanguage.documents.sidebar.selected_refs }}: {{  JSON.parse($route.query.refs_doc_id).length  }}</span>
-      <span @click="clearRefs">{{this.$store.getters.getLanguage.documents.sidebar.clear_btn }}</span>
-    </div>
+<!--    <div class="selected-refs-panel" style="flex-flow: row" v-if="this.$route.query.cites_document_id">-->
+<!--      <span>{{this.$store.getters.getLanguage.documents.sidebar.selected_refs }}: {{  JSON.parse($route.query.refs_doc_id).length  }}</span>-->
+<!--      <span @click="clearRefs">{{this.$store.getters.getLanguage.documents.sidebar.clear_btn }}</span>-->
+<!--    </div>-->
   </div>
 </template>
 

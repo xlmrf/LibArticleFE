@@ -27,9 +27,9 @@ export default {
             })
         },
 
-        requestDocumentMake(ctx, id) {
+        async requestDocumentMake(ctx, id) {
 
-            axios.get(ctx.rootState.api_url_v1 + '/document/make/' + id).then(response => {
+            await axios.get(ctx.rootState.api_url_v1 + '/document/make/' + id).then(response => {
                 ctx.commit('DocumentMakeMutate', response.data)
             }, err => {
                 ctx.commit('catchError', err)

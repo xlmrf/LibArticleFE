@@ -19,7 +19,7 @@
       <!--      <button :class="['btn search-btn',{'valid-btn':keyword}]" >Пошук</button>-->
       <label v-if="mistake">{{ mistake }}</label>
 
-      <refs-control-btn v-if="$route.query.refs_doc_id" />
+      <refs-control-btn v-if="$route.query.cites_document_id" />
     </div>
     <div class="user-icon">
       <user-notices></user-notices>

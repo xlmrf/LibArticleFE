@@ -1,33 +1,13 @@
 <template>
-  <div class="document-item" :class="{'document-draft': type === 'draft' || this.$route.query.refs_doc_id}" v-if="documentItem.title">
-<!--    <box-selector :doc="documentItem"  v-if="this.$route.query.refs_doc_id" />-->
-    <div class="context-document-item">
-        <box-selector v-if="this.$route.query.cites_document_id" :doc="documentItem"/>
-      <type-part :article="documentItem" :class="'type-border-color-'+this.$store.getters.getTypesColor[getTypes.find(item => item.id === documentItem?.type_id)?.name]" />
-      <date-part :article="documentItem" />
-    </div>
-    <div class="first-piece">
-      <title-part :article="documentItem" :type="type" />
-      <authors-part :article="documentItem" :type="type" />
-    </div>
-    <div class="second-piece">
-      <download-part :article="documentItem" :type="type" v-if="documentItem.files.main?.user_id === getUser.id" />
-      <div v-else></div>
-      <views-part :article="documentItem" :type="type" />
-    </div>
+  <div>
+      <DocumentItem :documentItem="documentItem"/>
   </div>
 </template>
 
 <script>
-import viewsDocument from "@/components/document/viewsDocument";
-import {mapGetters, mapMutations, mapState} from "vuex";
-import BoxSelector from "@/components/DocumentItemComponents/parts/BoxSelector";
-import DownloadPart from "@/components/DocumentItemComponents/parts/DownloadPart";
-import TitlePart from "@/components/DocumentItemComponents/parts/TitlePart";
-import TypePart from "@/components/DocumentItemComponents/parts/TypePart";
-import DatePart from "@/components/DocumentItemComponents/parts/DatePart";
-import AuthorsPart from "@/components/DocumentItemComponents/parts/AuthorsPart";
-import ViewsPart from "@/components/DocumentItemComponents/parts/ViewsPart";
+
+import DocumentItem from "@/components/Documents/DocumentItem.vue";
+import BoxSelector from "@/components/DocumentItemComponents/parts/BoxSelector.vue";
 
 
 export default {
@@ -51,10 +31,10 @@ export default {
 
   },
 
-  computed:{
-    ...mapGetters(['getTypes','getMakeDocument','getSelectedRefs', 'getUser']),
-    ...mapState(['api_url_v1', 'TypesColor'])
-  },
+    components: {
+        BoxSelector,
+        DocumentItem
+    },
   beforeMount() {
     // if (this.$route.query.refs_doc_id){
     //   this.type = 'draft'
@@ -76,10 +56,7 @@ export default {
     //   )
     // }
 
-  },
-
-
-  components:{ViewsPart, AuthorsPart, DatePart, TypePart, TitlePart, DownloadPart, BoxSelector, viewsDocument}
+  }
 }
 </script>
 
