@@ -1,6 +1,5 @@
 <template>
     <div class="check-item">
-        
         <label class="checkbox-item filter-checkbox select-type-checkbox">
             <input type="checkbox" v-model="checkItem" @change="checkItemM()">
             <span class="label"></span>

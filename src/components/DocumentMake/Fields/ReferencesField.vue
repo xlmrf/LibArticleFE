@@ -17,63 +17,50 @@
     </span>
         <div class="complex-item-control reference-list" v-if="getMakeDocument.references.length > 0">
             <draggable
-                :list="getMakeDocument.references.filter(item=>!item.delete)"
+                :list="getMakeDocument.references"
                 :disabled="!enabled"
                 item-key="name"
                 class="list-group"
                 ghost-class="ghost"
                 @start="dragging = true"
                 @end="dragging = false"
-            >
+                handle=".handle">
                 <template #item="{element, index}">
-                    <div class="list-group-item reference-item" :class="{ 'not-draggable': !enabled }">
-                            <span class="" >
-                                <span :class="[{'italic':element.edit}, {'system-ref': element.reference_document_id}]">{{
-                                        element.bibliographic_description
-                                 }}</span>
-                            <small @click="editRef(element)" class="change-ref-title">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9A9A9A"
-                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon
-                            points="16 3 21 8 8 21 3 21 3 16 16 3"></polygon></svg>
-                      </small>
-                        <small @click="deleteKeyword(index,element)" class="delete-item">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-                               stroke="#9A9A9A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <line x1="18" y1="6" x2="6" y2="18"></line>
-                            <line x1="6" y1="6" x2="18" y2="18"></line>
-                          </svg>
-                        </small>
-                    </span>
+
+                    <div class="list-group-item reference-item" :class="{ 'not-draggable': !enabled }"
+                         v-if="!element.delete">
+
+                        <ReferencesFieldElement :element="element" :index="index"/>
                     </div>
                 </template>
             </draggable>
 
-<!--            <h3>Draggable {{ draggingInfo }}</h3>-->
+            <!--            <h3>Draggable {{ draggingInfo }}</h3>-->
 
 
-<!--            <draggable-->
-<!--                :list="getMakeDocument.references"-->
-<!--                :disabled="!enabled"-->
-<!--                item-key="name"-->
-<!--                class="list-group"-->
-<!--                ghost-class="ghost"-->
-<!--                @start="dragging = true"-->
-<!--                @end="dragging = false"-->
-<!--            >-->
-<!--                <template #item="{ element,idx}">-->
-<!--                    <div class="list-group-item" :class="{ 'not-draggable': !enabled }">-->
-<!--                        {{idx}}-->
-<!--                        {{ element.bibliographic_description }}-->
-<!--                    </div>-->
-<!--                </template>-->
-<!--            </draggable>-->
+            <!--            <draggable-->
+            <!--                :list="getMakeDocument.references"-->
+            <!--                :disabled="!enabled"-->
+            <!--                item-key="name"-->
+            <!--                class="list-group"-->
+            <!--                ghost-class="ghost"-->
+            <!--                @start="dragging = true"-->
+            <!--                @end="dragging = false"-->
+            <!--            >-->
+            <!--                <template #item="{ element,idx}">-->
+            <!--                    <div class="list-group-item" :class="{ 'not-draggable': !enabled }">-->
+            <!--                        {{idx}}-->
+            <!--                        {{ element.bibliographic_description }}-->
+            <!--                    </div>-->
+            <!--                </template>-->
+            <!--            </draggable>-->
 
 
         </div>
         <small class="local-error-text">{{ localError }}</small>
 
 
-<!--        {{ // getMakeDocument.references }}-->
+        <!--        {{ // getMakeDocument.references }}-->
 
 
         <!--    <ol>-->
@@ -95,6 +82,7 @@
 <script>
 import {mapGetters} from "vuex";
 import draggable from 'vuedraggable'
+import ReferencesFieldElement from "@/components/DocumentMake/Fields/ReferencesFieldElement.vue";
 
 
 export default {
@@ -103,6 +91,7 @@ export default {
     props: ['isReady', 'field'],
     emits: ['catchValidate'],
     components: {
+        ReferencesFieldElement,
         draggable,
     },
     data() {
@@ -159,6 +148,10 @@ export default {
             this.reference = '';
         },
 
+        changeText(e, index) {
+            this.getMakeDocument.references[index]['bibliographic_description'] = e.target.innerText;
+        },
+
         editRef(el) {
             this.getMakeDocument.references.find(item => {
                 delete item.edit
@@ -207,14 +200,6 @@ export default {
 
         },
 
-        deleteKeyword(idx, reference) {
-            console.log("item", idx);
-            if (reference.id) {
-                this.getMakeDocument.references[idx]['delete'] = true;
-            } else {
-                this.getMakeDocument.references.splice(idx, 1)
-            }
-        },
 
         handleEscKeyPress(event) {
             if (this.edit && event.key === "Escape") {
@@ -271,6 +256,11 @@ export default {
     position: absolute;
 }
 
+.handle {
+ border: 1px solid red;
+}
+
+
 .italic {
     hyphens: auto;
     font-style: italic;
@@ -290,13 +280,14 @@ li {
     cursor: pointer;
 }
 
+
 .change-ref-title:hover > svg {
     stroke: #1C75DD;
 }
 
-.delete-item {
+.draggable-icon {
     height: fit-content;
-    margin-left: 10px;
+    cursor: row-resize;
 }
 
 .search-in-system-btn {
