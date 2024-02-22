@@ -36,6 +36,7 @@
 <!--          <small class="text-error error-area-text" v-if="validationItems.includes(item)">Поле <span class="areas-name">{{ translateAreas(item) }}</span> не може бути пустим</small>-->
         </div>
         <div class="btn-control-panel">
+
           <button class="button conclusion-btn" :class="{'disable-btn': false}" @click="update()">
             {{ this.$store.getters.getLanguage.document_make.signs.publish_btn}}
           </button>
@@ -43,6 +44,10 @@
           <div class="loader-3 center"><span></span></div>
           <button class="button to-archive" @click="toArchive()">{{ this.$store.getters.getLanguage.document_make.signs.save_draft_btn}}</button><!--toArchive-->
           <small class="text-error save-error border-error" v-if="serverError">{{ serverError }}</small>
+
+          <span v-if="saveLoading" class="save-document-loader">
+            <loader />
+          </span>
         </div>
       </div>
     </div>
@@ -73,6 +78,7 @@ export default {
 
       fileEmpty:false,
 
+      saveLoading:false,
       validationItems:[],
       isReady: false,
     }
@@ -83,6 +89,14 @@ export default {
       handler() {
         console.log('getFiles',this.getFiles);
         this.fileEmpty = false
+      },
+      deep:true
+    },
+    getDocumentMakeWarning:{
+      handler() {
+        console.log('error: ',this.getDocumentMakeWarning);
+        this.serverError = this.getDocumentMakeWarning.flat();
+        this.saveLoading = false
       },
       deep:true
     }
@@ -110,7 +124,7 @@ export default {
       let document = this.getMakeDocument
 
       if (Object.keys(this.validationItems).length === 0 && !this.fileEmpty){
-        console.log('upd doc not work')
+        this.saveLoading = true
         document.files = this.getFiles
         document.ready = 1
         this.updateDocument(document)
@@ -118,6 +132,7 @@ export default {
     },
 
     toArchive(){
+      this.saveLoading = true
       this.serverError = null
       let document = this.getMakeDocument
       document.files = this.getFiles
@@ -144,7 +159,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(['getMakeDocument', 'getTypes','getFiles', 'getUser']),
+    ...mapGetters(['getMakeDocument', 'getTypes','getFiles', 'getUser', 'getDocumentMakeWarning']),
     ...mapState(['api_url_v1']),
 
     resetDocument() {

@@ -23,7 +23,7 @@ export default {
                 ctx.commit('uploadResult', response.data)
             }, err => {
                 console.log('error info -', err.message);
-                ctx.commit('setInfo', err)
+                ctx.commit('catchError', err)
             })
         },
 

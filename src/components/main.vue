@@ -33,6 +33,14 @@ export default {
       }
     }
   },
+
+  //
+  // AfterEach(to, from, next) {
+  //   this.scrollToTop();
+  //   console.log('route update 33')
+  //   next();
+  // },
+
   methods:{
     ...mapMutations(['updateTypes']),
     askTypes() {
@@ -42,6 +50,15 @@ export default {
     },
     // scrollToTop() {
     //   window.scrollTo({top: 0});
+    // },
+    // handleScroll() {
+    //   const scrollBtn = this.$refs.scrollTopButton;
+    // },
+    //
+    // scrollToTop() {
+    //
+    //   window.scrollTo({top: 0, behavior: "smooth"});
+    //
     // },
     // handleScroll() {
     //   const scrollBtn = this.$refs.scrollTopButton;

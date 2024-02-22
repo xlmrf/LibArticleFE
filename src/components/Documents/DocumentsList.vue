@@ -61,7 +61,7 @@ export default {
     pagination
   },
   mounted() {
-    console.log('parse:',JSON.parse(this.$route.query.refs_doc_id))
+    // console.log('parse:',JSON.parse(this.$route.query.refs_doc_id))
     // this.updateSelectedRefs(JSON.parse(this.$route.query.refs_doc_id))
   }
 }
