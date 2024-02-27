@@ -38,7 +38,7 @@ import confirmEmail from "./components/auth/old/ConfirmEmail";
 const routes = [
     {
         path: '/index',
-        redirect:'/login',
+        redirect: '/login',
         name: 'index',
         component: index
     },
@@ -46,7 +46,7 @@ const routes = [
         path: '/auth',
         name: 'auth',
         component: Auth,
-        children:[
+        children: [
             {
                 path: '/login',
                 name: 'login',
@@ -81,8 +81,8 @@ const routes = [
         ]
     },
     {
-        path:'/',
-        name:'main',
+        path: '/',
+        name: 'main',
         component: main,
         children: [
 
@@ -92,14 +92,14 @@ const routes = [
                 component: UnknownPage
             },
             {
-                path:'/',
-                name:'stat',
+                path: '/',
+                name: 'stat',
                 component: info
 
             },
             {
-                path:'/document/make/:id?',
-                name:'DocumentMake',
+                path: '/document/make/:id?',
+                name: 'DocumentMake',
                 component: DocumentMake
             },
             // {
@@ -108,23 +108,23 @@ const routes = [
             //     component: NewDocument
             // },
             {
-                path:'/documents',
-                name:'documents',
+                path: '/documents',
+                name: 'documents',
                 component: documents
             },
             {
-                path:'/my-documents',
-                name:'my-documents',
+                path: '/my-documents',
+                name: 'my-documents',
                 component: documents
             },
             {
-                path:'/document/:id',
-                name:'document',
+                path: '/document/:id',
+                name: 'document',
                 component: document
             },
             {
-                path:'/profile/:id',
-                name:'profile',
+                path: '/profile/:id',
+                name: 'profile',
                 component: profile,
                 // children:[
                 //     {
@@ -140,62 +140,62 @@ const routes = [
                 // ]
             },
             {
-                path:'/tutorial',
-                name:'tutorial',
+                path: '/tutorial',
+                name: 'tutorial',
                 component: tutorial
             },
             {
-                path:'/support',
-                name:'support',
+                path: '/support',
+                name: 'support',
                 component: support
             },
             {
-                path:'/rules',
-                name:'rules',
+                path: '/rules',
+                name: 'rules',
                 component: rules
             },
             {
-                path:'/actions',
-                name:'actions',
+                path: '/actions',
+                name: 'actions',
                 // redirect:{name:'actions.notices'},
                 component: actions,
-                children:[
+                children: [
                     {
-                        path:'notices',
-                        name:'actions.notices',
+                        path: 'notices',
+                        name: 'actions.notices',
                         component: notices
                     },
                     {
-                        path:'events',
-                        name:'actions.events',
+                        path: 'events',
+                        name: 'actions.events',
                         component: events
                     }
                 ]
             },
             {
-                path:'/settings',
-                name:'settings',
-                redirect:{name:'settings.profile'},
+                path: '/settings',
+                name: 'settings',
+                redirect: {name: 'settings.profile'},
                 component: settings,
-                children:[
+                children: [
                     {
-                        path:'profile',
-                        name:'settings.profile',
+                        path: 'profile',
+                        name: 'settings.profile',
                         component: ProfileSettings
                     },
                     {
-                        path:'privacy',
-                        name:'settings.privacy',
+                        path: 'privacy',
+                        name: 'settings.privacy',
                         component: Privacy
                     },
                     {
-                        path:'advanced',
-                        name:'settings.advanced',
+                        path: 'advanced',
+                        name: 'settings.advanced',
                         component: Advanced
                     },
                     {
-                        path:'security',
-                        name:'settings.security',
+                        path: 'security',
+                        name: 'settings.security',
                         component: Security
                     }
                 ]
@@ -217,21 +217,27 @@ const routes = [
 ];
 
 const router = createRouter({
-history:createWebHistory(),
-routes
+    history: createWebHistory(),
+    routes,
+    scrollBehavior(to, from, savedPosition) {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve({ left: 0, top: 0,behavior: 'smooth' })
+            }, 500)
+        })
+    }
 });
 
-router.beforeEach((to,from,next)=>{
+router.beforeEach((to, from, next) => {
 
 
-
-    if (to.name === 'actions'){
-        next({name:'actions.notices'})
+    if (to.name === 'actions') {
+        next({name: 'actions.notices'})
     }
     //
 
-    if (to.name === 'stat'){
-        next({name:'documents'})
+    if (to.name === 'stat') {
+        next({name: 'documents'})
     }
 
     let token = localStorage.getItem('access_token')
@@ -249,12 +255,15 @@ router.beforeEach((to,from,next)=>{
     //         return next({name:'stat'})
     //     }
     // }
-return next();
+    return next();
 })
 
 router.afterEach((to, from) => {
     // Цей код буде викликаний після кожного маршрутного переходу
-    window.scrollTo({top: 0, behavior: "smooth"});
+    // window.scrollTo({
+    //     top: 0,
+    //     behavior: "smooth",
+    // });
     console.log(`Перехід від ${from.path} до ${to.path}`);
 });
 export default router
