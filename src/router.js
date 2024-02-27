@@ -220,7 +220,9 @@ const router = createRouter({
 history:createWebHistory(),
 routes
 });
+
 router.beforeEach((to,from,next)=>{
+
 
 
     if (to.name === 'actions'){
@@ -249,4 +251,10 @@ router.beforeEach((to,from,next)=>{
     // }
 return next();
 })
+
+router.afterEach((to, from) => {
+    // Цей код буде викликаний після кожного маршрутного переходу
+    window.scrollTo({top: 0, behavior: "smooth"});
+    console.log(`Перехід від ${from.path} до ${to.path}`);
+});
 export default router
